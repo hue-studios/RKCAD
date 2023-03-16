@@ -34,11 +34,11 @@ export default defineNuxtConfig({
     domain: 'rkcad.com',
   },
   directus: {
-    url: 'https://192.241.158.208:8055',
+    url: 'https://admin.rkcad.com',
   },
   runtimeConfig: {
     public: {
-      directusUrl: 'https://192.241.158.208:8055',
+      directusUrl: 'https://admin.rkcad.com',
       plausible: {
         domain: 'rkcad.com',
       },

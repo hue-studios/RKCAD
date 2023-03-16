@@ -14,6 +14,6 @@ const props = defineProps({
   },
 })
 const { data: prevProject, pending } = await useLazyFetch(
-  `http://192.241.158.208:8055/items/projects?filter[sort][_lt]=${props.sort}&filter[status][_eq]=published&fields=url,sort,id&meta=*`
+  `https://admin.rkcad.com/items/projects?filter[sort][_lt]=${props.sort}&filter[status][_eq]=published&fields=url,sort,id&meta=*`
 )
 </script>
