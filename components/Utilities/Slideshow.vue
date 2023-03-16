@@ -86,7 +86,7 @@ const props = defineProps({
     default: [],
   },
 })
-const imageUrl = 'http://192.241.158.208:8055/assets/'
+const imageUrl = 'https://admin.rkcad.com/assets/'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
 // Import Swiper styles
