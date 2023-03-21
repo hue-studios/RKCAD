@@ -5,12 +5,12 @@
   --pink: #ff00cc;
   --red: #ff005c;
   --orange: #ffcc00;
-  --blue: #7b91a3;
+  --blue: rgb(123, 145, 163);
   --blue2: #627984;
   --cyan: #00bfff;
   --green: #bbd73f;
   --yellow: #e8fc00;
-  --grey: #a7a9ac;
+  --grey: rgb(167, 169, 172);
   --darkGrey: #454545;
   --lightGrey: #cccccc;
   --small: 640px;

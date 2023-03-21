@@ -8,6 +8,12 @@ export default defineNuxtConfig({
   //     '/posts/**': { static: true },
   //   },
   ssr: true,
+  app: {
+    pageTransition: {
+      name: 'page',
+      mode: 'out-in',
+    },
+  },
   css: [
     {
       src: '~/assets/css/main.css',
