@@ -6,7 +6,7 @@
   --red: #ff005c;
   --orange: #ffcc00;
   --blue: rgb(123, 145, 163);
-  --blue2: #627984;
+  --blue2: rgb(98, 121, 132);
   --cyan: #00bfff;
   --green: #bbd73f;
   --yellow: #e8fc00;
@@ -23,15 +23,15 @@
   --breakpoint-xlarge: 1280px;
   --bold-font: 'HelveticaNeueW01-65Medi', 'Helvetica Neue', Helvetica, Arial,
     sans-serif;
-  --body-font: 'HelveticaNeueW01-Thin', 'Helvetica Neue', Helvetica, Arial,
-    sans-serif;
-  /* --body-font: 'HelveticaNeueW01-55Roma', 'Helvetica Neue', Helvetica, Arial,
-    sans-serif; */
-  --light-font: 'HelveticaNeueW01-Thin', 'Helvetica Neue', Helvetica, Arial,
-    sans-serif;
+  --body-font: 'Helvetica Neue LT W05_25 Ult Lt', 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
+
+  --light-font: 'Helvetica Neue LT W05_25 Ult Lt', 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
   --bounce: cubic-bezier(0.205, 0.47, 0.36, 1.385);
   --curve: cubic-bezier(0.65, 0, 0.45, 1);
   --bounce2: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
   --returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  --max-width: 1400px;
 }

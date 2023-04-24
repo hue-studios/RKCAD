@@ -82,6 +82,7 @@
         </transition>
       </div>
     </swiper-slide>
+
     <div
       class="w-full flex items-center justify-between flex-row relative slideshowSwiper__nav"
     >
@@ -102,6 +103,8 @@
 </template>
 
 <script setup>
+// import { url } from 'inspector'
+
 const props = defineProps({
   slides: {
     type: Array,
@@ -118,7 +121,7 @@ import 'swiper/css/navigation'
 import { Navigation, Pagination, Parallax } from 'swiper'
 const modules = [Parallax, Pagination, Navigation]
 const onSwiper = (swiper) => {
-  console.log(swiper)
+  // console.log(swiper)
 }
 const onSlideChange = () => {
   console.log('slide change')

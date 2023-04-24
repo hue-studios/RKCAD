@@ -1,12 +1,4 @@
 export default defineNuxtConfig({
-  // https://v3.nuxtjs.org/guide/directory-structure/nuxt.config/
-
-  // As of RC12 Nuxt 3 supports Hybrid rendering mode
-  // https://v3.nuxtjs.org/guide/concepts/rendering#route-rules
-  //   routeRules: {
-  //     '/pages/**': { swr: true },
-  //     '/posts/**': { static: true },
-  //   },
   ssr: true,
   app: {
     pageTransition: {
@@ -32,7 +24,6 @@ export default defineNuxtConfig({
     '@formkit/nuxt',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
-    '@tailvue/nuxt',
     'nuxt-directus',
     'nuxt-icons',
   ],

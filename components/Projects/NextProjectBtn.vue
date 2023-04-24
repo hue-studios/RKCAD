@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
     v-if="!pending && nextProject.data.length"
-    :to="nextProject.data[0].url"
+    :to="nextProject.data[0].url + '?direction=next'"
     >Next Project <nuxt-icon name="arrow-right" class="ml-2 arrow-right-icon"
   /></nuxt-link>
   <a v-else class="opacity-40" href="#" @click.prevent

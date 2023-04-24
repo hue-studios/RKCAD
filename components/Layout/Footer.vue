@@ -1,40 +1,64 @@
 <template>
   <div
-    class="pt-0 pb-24 flex flex-col sm:flex-row flex-wrap items-center sm:items-start justify-center mx-auto footer"
+    class="w-full pt-0 pb-24 flex flex-col items-center justify-center mx-auto footer"
   >
-    <!-- <LayoutFollow
-      title="Follow Dana Blair Designs"
-      :links="about.social_links"
-      facebook="https://facebook.com/"
-      instagram="https://instagram.com"
-      linkedin="test"
-    /> -->
-    <div class="flex items-start justify-start flex-col footer__col">
-      <nuxt-link to="/shop/rings" class="mr-8">Ring Shop</nuxt-link>
-      <nuxt-link to="/shop/necklaces" class="mr-8">Necklace Shop</nuxt-link>
-      <nuxt-link to="/shop/earrings">Earrings Shop</nuxt-link>
-      <nuxt-link to="/shop/bracelets" class="mr-8">Bracelet Shop</nuxt-link>
-      <nuxt-link to="/collections" class="mr-8">Collections</nuxt-link>
+    <div
+      class="flex items-center justify-cetner text-center flex-col sm:flex-row footer__col"
+    >
+      <nuxt-link to="/" class="mx-4 p-2">Home</nuxt-link>
+      <nuxt-link to="/interior-design-architecture-portfolio/" class="mx-4 p-1"
+        >Work</nuxt-link
+      >
+      <nuxt-link to="/new-york-architecture-design-studio/" class="mx-4 p-1"
+        >About</nuxt-link
+      >
+      <nuxt-link
+        to="/rosen-kelly-conway-architecture-design-team/"
+        class="mx-4 p-1"
+        >Team</nuxt-link
+      >
+      <nuxt-link to="/architecture-design-press-awards/" class="mx-4 p-1"
+        >Press</nuxt-link
+      >
+      <nuxt-link to="/contact" class="mx-4 p-1">Contact</nuxt-link>
     </div>
-    <div class="flex items-start justify-start flex-col footer__col">
-      <nuxt-link to="/about" class="">About</nuxt-link>
-      <nuxt-link to="/gemstones" class="">Gemstone Guide</nuxt-link>
-      <nuxt-link to="/magazine" class="">Magazine</nuxt-link>
-      <nuxt-link to="/customize">Customize</nuxt-link>
+    <div class="flex items-center justify-center flex-row mt-6">
+      <a
+        href="https://www.instagram.com/rkcad/"
+        target="_blank"
+        class="mx-4 p-2"
+      >
+        <nuxt-icon name="instagram" class="" />
+      </a>
+      <a
+        href="https://www.houzz.com/professionals/architects-and-building-designers/rosen-kelly-conway-architecture-and-design-pfvwus-pf~1350653163?"
+        target="_blank"
+        class="mx-4 p-2"
+      >
+        <nuxt-icon name="houzz" class="" />
+      </a>
     </div>
-    <div class="flex items-start justify-start flex-col footer__col">
-      <nuxt-link to="/account" class="">Account</nuxt-link>
-
-      <nuxt-link to="/contact">Contact</nuxt-link>
+    <div
+      class="flex items-center justify-center text-center flex-col md:flex-row mt-6 footer__col"
+    >
+      <p class="mx-4 p-2">
+        Phone: <a href="tel:(908) 273-6565">908.273.6565</a>
+      </p>
+      <p>Studio: 16 Maple St Summit NJ</p>
+      <p class="mx-4 p-2">
+        Email: <a href="mailto:info@rkcad.com">Info@rkcad.com</a>
+      </p>
     </div>
-
-    <div class="flex w-full flex-col items-center justify-center mt-16">
+    <div class="flex w-full flex-col items-center justify-center mt-6">
+      <h5 class="tracking-widest uppercase body-font copyright">
+        &#169; {{ new Date().getFullYear() }} Rosen Kelly Conway
+      </h5>
       <h5 class="web-designer">
         <a
           href="https://huestudios.com"
           target="_blank"
           rel="noopener"
-          class="columns shrink body-font"
+          class="columns shrink body-font uppercase"
           >designed by
           <svg
             id="hue-logo"
@@ -59,9 +83,6 @@
             /></svg
         ></a>
       </h5>
-      <h5 class="tracking-widest uppercase body-font copyright">
-        &#169; {{ new Date().getFullYear() }} Rosen Kelly Conway
-      </h5>
     </div>
   </div>
 </template>
@@ -70,33 +91,39 @@
 <style scoped>
 .footer {
   position: relative;
-  z-index: 10;
+  max-width: var(--max-width);
+  margin-top: 100px;
   &__col {
-    text-align: center;
-    width: 200px;
-    @media (min-width: theme('screens.md')) {
-      width: 250px;
-    }
     a,
-    .logout-btn {
+    p {
       font-size: 10px;
-      color: var(--grey);
-      @apply uppercase tracking-widest py-1 mb-1 w-full;
+      @apply uppercase tracking-widest;
+    }
+  }
+  .nuxt-icon {
+    font-size: 24px;
+    svg {
+    }
+  }
+  .nuxt-icon:hover {
+    svg path {
+      fill: rgb(255, 0, 92) !important;
     }
   }
 }
 h5.web-designer {
   margin-top: 0px;
   margin-bottom: 0px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   a {
-    font-size: 10px;
-    color: var(--black);
+    font-size: 7px;
+    color: var(--blue);
+
     svg {
       width: 35px;
       height: auto;
       display: inline;
-      fill: rgba(0, 0, 0, 0.75);
+      fill: rgba(123, 145, 163, 0.75);
       stroke: none;
       margin-top: -11px;
       margin-left: 3px;
@@ -122,10 +149,9 @@ h5.web-designer {
 }
 h5.copyright {
   font-size: 9px;
-
-  color: var(--black);
-  margin-top: 0px;
-  margin-bottom: 50px;
-  letter-spacing: 0.3em;
+  color: var(--blue);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  letter-spacing: 0.2em;
 }
 </style>

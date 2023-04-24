@@ -15,12 +15,14 @@
           >
         </li>
         <li>
-          <nuxt-link to="/rosen-kelly-conway-architecture-design/"
+          <nuxt-link to="/new-york-architecture-design-studio/"
             >About</nuxt-link
           >
         </li>
         <li>
-          <nuxt-link to="/new-york-architecture-design-studio/">Team</nuxt-link>
+          <nuxt-link to="/rosen-kelly-conway-architecture-design-team/"
+            >Team</nuxt-link
+          >
         </li>
         <li>
           <nuxt-link to="/architecture-design-press-awards/">Press</nuxt-link>
@@ -67,7 +69,7 @@ onClickOutside(navDrawerRef, (event) => {
   z-index: 30;
   background: rgba(123, 145, 163, 0.75);
   transform: translateX(100%);
-  transition: 0.25s var(--curve);
+  transition: 0.35s var(--curve);
   @apply shadow-lg;
   .close-btn {
     /* right: 0px;
@@ -87,6 +89,9 @@ onClickOutside(navDrawerRef, (event) => {
         font-size: 13px;
         letter-spacing: 0.3em;
         @apply block uppercase  py-1;
+      }
+      a.router-link-exact-active {
+        color: var(--green);
       }
     }
     li:nth-of-type(2) {

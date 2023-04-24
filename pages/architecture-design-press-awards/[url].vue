@@ -2,7 +2,7 @@
   <div
     class="relative w-full flex items-center justify-center flex-col min-h-screen project"
   >
-    <div class="w-full project__slideshow" style="padding-top: 65px">
+    <div class="w-full project__slideshow">
       <UtilitiesSlideshow :slides="project.images" />
     </div>
     <div
@@ -96,7 +96,6 @@ const project = ref(data.value[0])
 .project {
   &__slideshow {
     max-height: 600px;
-    transition: all 0.5s var(--curve);
     @apply h-screen;
     @media (min-width: theme('screens.lg')) {
       /* max-height: 800px; */

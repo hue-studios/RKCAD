@@ -1,16 +1,7 @@
 <template>
   <div
     id="screen"
-    class="
-      fixed
-      h-screen
-      w-full
-      flex
-      items-center
-      justify-center
-      screen
-      cursor-pointer
-    "
+    class="fixed h-screen w-full flex items-center justify-center screen cursor-pointer"
   >
     <transition name="page">
       <svg
@@ -40,14 +31,14 @@ import { loader } from '~~/composables/useScreen'
 .screen {
   background-color: rgba(48, 54, 64, 0.4);
   opacity: 0.999999;
-  transition: 0.25s var(--curve);
+  transition: 0.35s var(--curve);
   top: 0px;
   left: 0px;
   backdrop-filter: blur(2px);
   z-index: 20;
   @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
     background-color: rgba(255, 255, 255, 0.5);
   }
 }

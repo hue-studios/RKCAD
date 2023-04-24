@@ -57,7 +57,7 @@ function sideMenuToggle() {
       position: absolute;
       height: 1px;
       width: 100%;
-      background: var(--blue);
+      background: var(--white);
       border-radius: 1px;
       opacity: 1;
       left: 0;

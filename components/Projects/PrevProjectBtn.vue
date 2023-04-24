@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
     v-if="!pending && prevProject.data.length"
-    :to="prevProject.data[0].url"
+    :to="prevProject.data[0].url + '?direction=prev'"
     ><nuxt-icon name="arrow-left" class="mr-2 arrow-left-icon" /> Prev
     Project</nuxt-link
   >

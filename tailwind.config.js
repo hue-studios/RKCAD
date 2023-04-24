@@ -42,7 +42,6 @@ module.exports = {
         ],
         body: [
           'HelveticaNeueW01-Thin',
-          'Avenir Next W01 Light',
           'Helvetica Neue',
           'Helvetica',
           'Arial',
@@ -58,7 +57,7 @@ module.exports = {
           'sans-serif',
         ],
         light: [
-          'HelveticaNeueW01-Thin', 
+          'Helvetica Neue LT W05_25 Ult Lt',
           'Helvetica Neue',
           'Helvetica',
           'Arial',
@@ -73,7 +72,6 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
-    require('@tailwindcss/line-clamp'),
     require('@tailwindcss/aspect-ratio'),
   ],
 }
