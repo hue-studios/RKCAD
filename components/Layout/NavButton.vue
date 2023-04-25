@@ -35,6 +35,8 @@ function sideMenuToggle() {
   transition: 0.4s var(--curve);
   max-width: 300px;
   @apply mr-4 lg:mr-6;
+  -webkit-backdrop-filter: blur(10px) invert(0.015);
+  backdrop-filter: blur(10px) invert(0.015);
   @media (min-width: theme('screens.xl')) {
     width: 50px;
     right: 0px;

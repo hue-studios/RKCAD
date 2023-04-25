@@ -68,9 +68,9 @@ const setThumbsSwiper = (swiper) => {
 </script>
 <style >
 .gallery-swiper {
-  height: calc(100% - 120px);
-  -webkit-backdrop-filter: blur(4px) invert(0.0015);
-  backdrop-filter: blur(4px) invert(0.0015);
+  height: calc(100vh - 205px);
+  /* -webkit-backdrop-filter: blur(4px) invert(0.015);
+  backdrop-filter: blur(4px) invert(0.015); */
   .swiper-slide {
     align-items: center;
     justify-content: center;

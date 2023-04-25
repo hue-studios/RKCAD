@@ -110,7 +110,7 @@ const project = ref(data.value[0])
 
   &__slideshow {
     transition: all 0.5s var(--curve);
-    height: calc(100vh - 65px);
+    height: calc(100vh - 135px);
 
     @apply max-w-7xl;
     @media (min-width: theme('screens.lg')) {
@@ -127,7 +127,7 @@ const project = ref(data.value[0])
     }
   }
   &__projects-nav {
-    bottom: 120px;
+    bottom: 200px;
     a {
       font-size: 10px;
       @apply uppercase tracking-wide;
