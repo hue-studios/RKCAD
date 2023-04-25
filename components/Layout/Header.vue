@@ -26,22 +26,19 @@ const pageStore = usePageStore()
   left: 0px;
   height: 65px;
   z-index: 10;
-  /* border-bottom: thin solid rgba(123, 145, 163, 0.01); */
-  /* max-width: var(--max-width); */
-
   @media (min-width: 1280px) {
     left: calc(50% - 640px);
   }
   .back-btn {
-    left: -200px;
+    left: calc(-50vw);
     transition: all 0.4s var(--curve);
-
+    opacity: 0;
     @apply absolute z-20;
   }
   .back-btn.on {
     left: 0px !important;
+    opacity: 1;
   }
-
   .rkc-icon {
     font-size: 64px;
     line-height: 65px;
