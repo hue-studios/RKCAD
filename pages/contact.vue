@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-cover bg-center bg-no-repeat relative w-full min-h-screen flex flex-col items-center justify-end contact"
+    class="bg-cover bg-center bg-no-repeat relative w-full h-screen flex flex-col items-center justify-end overflow-hidden contact"
   >
     <LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
     <div class="w-full text-left max-w-7xl contact__info">

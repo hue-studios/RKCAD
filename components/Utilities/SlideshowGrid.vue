@@ -25,7 +25,9 @@
           '?key=medium)'
         "
       ></div>
-      <h2>{{ slide.title }}</h2>
+      <nuxt-link :to="'/interior-design-architecture-portfolio/' + slide.url">
+        <h2>{{ slide.title }}</h2></nuxt-link
+      >
     </swiper-slide>
   </swiper>
 </template>
@@ -56,16 +58,19 @@ const modules = [Parallax, Grid]
       max-height: 100%;
       max-width: 100%;
     }
-    h2 {
-      color: var(--white);
+    a {
       bottom: 20px;
       left: 0px;
       padding-left: 20px;
       padding-right: 20px;
-      line-height: 16px;
-      font-size: 14px;
-      font-weight: 900 !important;
-      @apply w-full uppercase z-10 absolute tracking-wider font-body;
+      @apply w-full z-10 absolute;
+      h2 {
+        color: var(--white);
+        line-height: 16px;
+        font-size: 14px;
+        font-weight: 900 !important;
+        @apply uppercase tracking-wider font-body;
+      }
     }
   }
 }

@@ -20,7 +20,6 @@
         <nuxt-link to="/contact">Contact</nuxt-link>
       </div>
     </div>
-    <LayoutNewsletter />
   </div>
 </template>
 

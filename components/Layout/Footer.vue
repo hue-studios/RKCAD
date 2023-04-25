@@ -1,59 +1,73 @@
 <template>
   <div
-    class="w-full pt-0 pb-24 flex flex-col items-center justify-center mx-auto footer"
+    class="w-full pt-0 pb-24 px-6 xl:px-0 flex flex-col items-center justify-center mx-auto max-w-7xl footer"
   >
     <div
-      class="flex items-center justify-cetner text-center flex-col sm:flex-row footer__col"
+      class="w-full flex flex-col items-center justify-center lg:flex-row lg:items-end lg:justify-between"
     >
-      <nuxt-link to="/" class="mx-4 p-2">Home</nuxt-link>
-      <nuxt-link to="/interior-design-architecture-portfolio/" class="mx-4 p-1"
-        >Work</nuxt-link
+      <div
+        class="flex items-center justify-center text-center lg:text-left flex-col shrink-0 mb-8 lg:mb-0 footer__col footer__nav"
       >
-      <nuxt-link to="/new-york-architecture-design-studio/" class="mx-4 p-1"
-        >About</nuxt-link
+        <div
+          class="w-full flex items-center md:items-start justify-center flex-row mb-6"
+        >
+          <nuxt-link to="/" class="p-1 w-1/3">Home</nuxt-link>
+          <nuxt-link
+            to="/interior-design-architecture-portfolio/"
+            class="p-1 w-1/3"
+            >Work</nuxt-link
+          >
+          <nuxt-link
+            to="/new-york-architecture-design-studio/"
+            class="p-1 w-1/3"
+            >About</nuxt-link
+          >
+        </div>
+        <div class="w-full flex items-start justify-center flex-row">
+          <nuxt-link
+            to="/rosen-kelly-conway-architecture-design-team/"
+            class="p-1 w-1/3"
+            >Team</nuxt-link
+          >
+          <nuxt-link to="/architecture-design-press-awards/" class="p-1 w-1/3"
+            >Press</nuxt-link
+          >
+          <nuxt-link to="/contact" class="p-1 w-1/3">Contact</nuxt-link>
+        </div>
+      </div>
+      <div
+        class="flex items-center justify-center text-center flex-col lg:flex-row footer__col"
       >
-      <nuxt-link
-        to="/rosen-kelly-conway-architecture-design-team/"
-        class="mx-4 p-1"
-        >Team</nuxt-link
-      >
-      <nuxt-link to="/architecture-design-press-awards/" class="mx-4 p-1"
-        >Press</nuxt-link
-      >
-      <nuxt-link to="/contact" class="mx-4 p-1">Contact</nuxt-link>
-    </div>
-    <div class="flex items-center justify-center flex-row mt-6">
-      <a
-        href="https://www.instagram.com/rkcad/"
-        target="_blank"
-        class="mx-4 p-2"
-      >
-        <nuxt-icon name="instagram" class="" />
-      </a>
-      <a
-        href="https://www.houzz.com/professionals/architects-and-building-designers/rosen-kelly-conway-architecture-and-design-pfvwus-pf~1350653163?"
-        target="_blank"
-        class="mx-4 p-2"
-      >
-        <nuxt-icon name="houzz" class="" />
-      </a>
+        <p class="mr-5">Phone: <a href="tel:(908) 273-6565">908.273.6565</a></p>
+        <p class="mr-5">Studio: 16 Maple St Summit NJ</p>
+        <p class="mr-5">
+          Email: <a href="mailto:info@rkcad.com">Info@rkcad.com</a>
+        </p>
+        <div class="flex flex-row lg:flex-row mt-8 lg:mt-0">
+          <a
+            href="https://www.instagram.com/rkcad/"
+            target="_blank"
+            class="ml-5"
+          >
+            <nuxt-icon name="instagram" class="" />
+          </a>
+          <a
+            href="https://www.houzz.com/professionals/architects-and-building-designers/rosen-kelly-conway-architecture-and-design-pfvwus-pf~1350653163?"
+            target="_blank"
+            class="ml-5"
+          >
+            <nuxt-icon name="houzz" class="" />
+          </a>
+        </div>
+      </div>
     </div>
     <div
-      class="flex items-center justify-center text-center flex-col md:flex-row mt-6 footer__col"
+      class="flex w-full flex-col lg:flex-row items-center justify-center lg:items-end lg:justify-end mt-6 font-bold tracking-wide"
     >
-      <p class="mx-4 p-2">
-        Phone: <a href="tel:(908) 273-6565">908.273.6565</a>
-      </p>
-      <p>Studio: 16 Maple St Summit NJ</p>
-      <p class="mx-4 p-2">
-        Email: <a href="mailto:info@rkcad.com">Info@rkcad.com</a>
-      </p>
-    </div>
-    <div class="flex w-full flex-col items-center justify-center mt-6">
       <h5 class="tracking-widest uppercase body-font copyright">
         &#169; {{ new Date().getFullYear() }} Rosen Kelly Conway
       </h5>
-      <h5 class="web-designer">
+      <h5 class="lg:ml-12 web-designer">
         <a
           href="https://huestudios.com"
           target="_blank"
@@ -88,20 +102,32 @@
 </template>
 <script setup>
 </script>
-<style scoped>
+<style lang="postcss">
 .footer {
   position: relative;
-  max-width: var(--max-width);
+
   margin-top: 100px;
+  transition: all 0.4s var(--curve);
   &__col {
     a,
     p {
-      font-size: 10px;
-      @apply uppercase tracking-widest;
+      font-size: 9px;
+      @apply uppercase tracking-widest font-bold;
+    }
+    a.router-link-exact-active {
+      color: var(--green);
+    }
+  }
+  &__nav {
+    width: 300px;
+    a {
+      width: 100px;
     }
   }
   .nuxt-icon {
-    font-size: 24px;
+    font-size: 20px;
+    margin-top: -5px;
+    @apply inline-block;
     svg {
     }
   }
@@ -112,13 +138,11 @@
   }
 }
 h5.web-designer {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  letter-spacing: 0.1em;
+  margin-bottom: -2px;
   a {
-    font-size: 7px;
+    font-size: 9px;
     color: var(--blue);
-
+    display: inline-block;
     svg {
       width: 35px;
       height: auto;
@@ -150,8 +174,11 @@ h5.web-designer {
 h5.copyright {
   font-size: 9px;
   color: var(--blue);
-  margin-top: 10px;
-  margin-bottom: 10px;
   letter-spacing: 0.2em;
+}
+.page-contact {
+  .footer {
+    opacity: 0;
+  }
 }
 </style>

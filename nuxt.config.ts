@@ -12,18 +12,20 @@ export default defineNuxtConfig({
       lang: 'postcss',
     },
   ],
-
-  buildModules: [
-    // https://pinia.esm.dev
-    '@pinia/nuxt',
-    // https://vueuse.org/
-    '@vueuse/nuxt',
-  ],
+  imports: {
+    dirs: ['stores'],
+  },
+  buildModules: ['@vueuse/nuxt'],
 
   modules: [
     '@formkit/nuxt',
     '@nuxtjs/tailwindcss',
-    '@pinia/nuxt',
+    [
+      '@pinia/nuxt',
+      {
+        autoImports: ['defineStore', 'acceptHMRUpdate'],
+      },
+    ],
     'nuxt-directus',
     'nuxt-icons',
   ],

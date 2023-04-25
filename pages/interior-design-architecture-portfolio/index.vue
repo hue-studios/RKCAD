@@ -36,7 +36,6 @@
       <div v-if="interior.length" class="w-full">
         <UtilitiesSlideshowGrid :slides="interior" />
       </div>
-      <LayoutNewsletter />
     </div>
   </div>
 </template>

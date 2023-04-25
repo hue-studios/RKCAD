@@ -2,11 +2,8 @@
   <div
     class="relative w-full flex items-center justify-center flex-col min-h-screen project"
   >
-    <div class="w-full project__slideshow" style="padding-top: 65px">
-      <UtilitiesSlideshow :slides="project.images" />
-    </div>
     <div
-      class="w-full flex items-start lg:items-end flex-col lg:flex-row justify-between uppercase tracking-wide mt-20 px-4 project__header"
+      class="w-full flex items-start lg:items-end flex-col lg:flex-row justify-between uppercase tracking-wide mt-4 px-4 lg:px-0 project__header"
     >
       <h1 class="relative">
         {{ project.title }}
@@ -16,12 +13,6 @@
           }}</span>
           Project by Rosen Kelly Conway</span
         >
-        <div
-          class="absolute w-full flex items-center justify-between flex-row project__header-nav"
-        >
-          <ProjectsPrevProjectBtn :sort="project.sort" />
-          <ProjectsNextProjectBtn :sort="project.sort" />
-        </div>
       </h1>
 
       <div class="flex flex-row project__header-category">
@@ -36,20 +27,41 @@
         </h2>
       </div>
     </div>
+    <div class="w-full relative project__slideshow">
+      <UtilitiesSlideshowThumbs :slides="project.images" />
+      <div
+        class="absolute z-10 w-full flex items-center justify-between flex-row project__projects-nav"
+      >
+        <ProjectsPrevProjectBtn :sort="project.sort" />
+        <ProjectsNextProjectBtn :sort="project.sort" />
+      </div>
+    </div>
+
     <div
-      class="flex items-center flex-col lg:flex-row justify-start tracking-wide my-20 px-4 project__content"
+      class="flex items-center flex-col justify-start tracking-wide my-20 px-4 xl:px-0 project__content"
     >
-      <div v-if="project.challenge">
-        <h4 class="uppercase block tracking-wider mb-4">Challenge</h4>
-        <p class="text-sm leading-8">{{ project.challenge }}</p>
-      </div>
-      <div v-if="project.approach" class="py-6 lg:py-0 lg:px-6">
-        <h4 class="uppercase block tracking-wider mb-4">Approach</h4>
-        <p class="text-sm leading-8">{{ project.approach }}</p>
-      </div>
-      <div v-if="project.result">
-        <h4 class="uppercase block tracking-wider mb-4">Result</h4>
-        <p class="text-sm leading-8">{{ project.result }}</p>
+      <h1 class="w-full">
+        {{ project.title }}
+        <span class="hidden">
+          <span v-for="(category, index) in project.category" :key="index">{{
+            category
+          }}</span>
+          Project by Rosen Kelly Conway</span
+        >
+      </h1>
+      <div class="w-full flex items-center flex-col lg:flex-row mt-12">
+        <div v-if="project.challenge">
+          <h4 class="uppercase block tracking-wider mb-4">Challenge</h4>
+          <p class="text-sm leading-8">{{ project.challenge }}</p>
+        </div>
+        <div v-if="project.approach" class="py-6 lg:py-0 lg:px-6">
+          <h4 class="uppercase block tracking-wider mb-4">Approach</h4>
+          <p class="text-sm leading-8">{{ project.approach }}</p>
+        </div>
+        <div v-if="project.result">
+          <h4 class="uppercase block tracking-wider mb-4">Result</h4>
+          <p class="text-sm leading-8">{{ project.result }}</p>
+        </div>
       </div>
     </div>
     <div class="project__recognition">
@@ -94,15 +106,18 @@ const project = ref(data.value[0])
 </script>
 <style>
 .project {
+  margin-top: 65px;
+
   &__slideshow {
-    max-height: 600px;
     transition: all 0.5s var(--curve);
-    @apply h-screen;
+    height: calc(100vh - 65px);
+
+    @apply max-w-7xl;
     @media (min-width: theme('screens.lg')) {
       /* max-height: 800px; */
     }
     .swiper {
-      padding-bottom: 50px;
+      /* padding-bottom: 50px; */
     }
     .swiper-pagination {
       /* bottom: -25px; */
@@ -111,14 +126,20 @@ const project = ref(data.value[0])
       letter-spacing: 0.2em;
     }
   }
+  &__projects-nav {
+    bottom: 120px;
+    a {
+      font-size: 10px;
+      @apply uppercase tracking-wide;
+    }
+  }
   &__header {
-    max-width: var(--max-width);
-    @apply mt-10 lg:mt-14;
+    @apply max-w-7xl mb-4;
     h1 {
-      font-size: 44px;
+      font-size: 38px;
       line-height: 1em;
     }
-    &-nav {
+    /* &-nav {
       bottom: -35px;
       height: 12px;
       @media (min-width: theme('screens.lg')) {
@@ -129,32 +150,39 @@ const project = ref(data.value[0])
         font-size: 9px;
         line-height: 10px;
         .nuxt-icon {
-          height: 10px;
-          fill: black;
+          height: 30px;
           transition: 0.4s var(--curve);
+          color: var(--white);
+          @apply inline-block;
           svg {
-            height: 10px;
+            height: 30px;
             display: inline-block !important;
-            line {
-              stroke-width: 3px;
-              stroke: var(--blue) !important;
+            path {
+              stroke-width: 5px;
+              stroke: var(--white) !important;
             }
           }
         }
       }
-    }
+    } */
     &-category {
       height: 10px;
       font-size: 9px;
       line-height: 10px;
       margin-top: 5px;
-      @media (min-width: theme('screens.lg')) {
+      @apply font-bold;
+      /* @media (min-width: theme('screens.lg')) {
         margin-bottom: -10px;
-      }
+      } */
     }
   }
   &__content {
-    max-width: var(--max-width);
+    @apply max-w-7xl;
+    h1 {
+      font-size: 38px;
+      line-height: 1em;
+      @apply uppercase;
+    }
   }
 }
 </style>

@@ -34,11 +34,14 @@ function sideMenuToggle() {
   cursor: pointer;
   transition: 0.4s var(--curve);
   max-width: 300px;
-  @apply mr-4;
+  @apply mr-4 lg:mr-6;
   @media (min-width: theme('screens.xl')) {
     width: 50px;
     right: 0px;
     position: absolute;
+  }
+  @media (min-width: 1280px) {
+    margin-right: 0px;
   }
   #nav-icon {
     width: 45px;
