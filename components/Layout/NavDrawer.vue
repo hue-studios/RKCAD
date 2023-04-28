@@ -5,6 +5,7 @@
     class="flex items-center justify-center flex-col nav-drawer"
     ref="navDrawerRef"
   >
+  <div class="nav-drawer__bg"></div>
     <div class="w-full nav-drawer__menu-box p-4 relative">
       <!-- <XIcon class="cursor-pointer h-8 heroicon-sw-1.2 close-btn" /> -->
       <ul tabindex="0" class="w-full nav-drawer__menu text-center">
@@ -42,7 +43,7 @@ function closeNavDrawer() {
   element.checked = false
   const navBtn = document.getElementById('nav-btn')
   navBtn.classList.remove('open')
-  closeScreen()
+  // closeScreen()
 }
 function toggleNavDrawer() {
   const element = document.getElementById('nav-drawer-toggle')
@@ -51,7 +52,7 @@ function toggleNavDrawer() {
   } else {
     element.checked = true
   }
-  toggleScreen()
+  // toggleScreen()
 }
 onClickOutside(navDrawerRef, (event) => {
   console.log('outside')
@@ -76,13 +77,28 @@ onClickOutside(navDrawerRef, (event) => {
     top: 0px;
     @apply absolute; */
   }
+  &__bg {
+    /* background: rgba(255,255,255, 0.5); */
+    /* backdrop-filter: blur(2px); */
+    /* background-color: rgba(48, 54, 64, 0.4);
+    background: rgb(123,145,163);
+    background: linear-gradient(90deg, rgba(123,145,163,0) 0%, rgba(123,145,163,1) 90%); */
+    /* background: rgba(123, 145, 163, 0.75); */
+    /* filter: blur(4px); */
+    right: -10vw;
+    top: 0px;
+    width: 8vw;
+    transition: all 0.6s var(--curve);
+    display: none;
+    @apply fixed h-screen ;
+  }
   &__menu-box {
   }
   &__menu {
     li {
       transform: translateX(50px);
       opacity: 0;
-      transition: 0.35s var(--curve);
+      transition: 0.55s var(--curve);
       @apply my-1;
       a {
         color: var(--white);
@@ -94,25 +110,32 @@ onClickOutside(navDrawerRef, (event) => {
         color: var(--green);
       }
     }
+    a:hover {
+      letter-spacing: 0.6em;
+    }
     li:nth-of-type(2) {
-      transition-delay: 0.05s;
+      transition-delay: 0.075s;
     }
     li:nth-of-type(3) {
-      transition-delay: 0.1s;
+      transition-delay: 0.125s;
     }
     li:nth-of-type(4) {
-      transition-delay: 0.15s;
+      transition-delay: 0.175s;
     }
     li:nth-of-type(5) {
-      transition-delay: 0.2s;
+      transition-delay: 0.225s;
     }
     li:nth-of-type(6) {
-      transition-delay: 0.25s;
+      transition-delay: 0.275s;
     }
   }
 }
 #nav-drawer-toggle:checked ~ .nav-drawer {
   transform: translateX(0%);
+  .nav-drawer__bg {
+    right: 0px;
+    width: 110vw;
+  }
   .nav-drawer__menu {
     li {
       transform: translateX(0px);

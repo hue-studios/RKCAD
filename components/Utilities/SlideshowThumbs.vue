@@ -34,6 +34,10 @@
     :slidesPerView="auto"
     :centeredSlides="true"
     :centeredInsuficientSlides="true"
+    :navigation="{
+      nextEl: '#slideshowSwiperThumbs__next-btn',
+      prevEl: '#slideshowSwiperThumbs__prev-btn',
+    }"
   >
     <swiper-slide
       class="w-auto flex items-center justify-center"
@@ -43,6 +47,20 @@
         v-if="slide.directus_files_id.id"
         :src="imageUrl + slide.directus_files_id.id + '?key=small'"
     /></swiper-slide>
+   
+      <div
+        id="slideshowSwiperThumbs__prev-btn"
+        class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4   py-2 slideshowSwiperThumbs__nav"
+      >
+        <nuxt-icon name="arrow-left" class="mr-4 arrow-left-icon" />
+  </div>
+      <div
+        id="slideshowSwiperThumbs__next-btn"
+        class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 py-2 slideshowSwiperThumbs__nav"
+      >
+        <nuxt-icon name="arrow-right" class="ml-4 arrow-right-icon" />
+    
+    </div>
   </swiper>
 </template>
 <script setup>
@@ -68,7 +86,7 @@ const setThumbsSwiper = (swiper) => {
 </script>
 <style >
 .gallery-swiper {
-  height: calc(100vh - 205px);
+  height: calc(100% - 110px);
   /* -webkit-backdrop-filter: blur(4px) invert(0.015);
   backdrop-filter: blur(4px) invert(0.015); */
   .swiper-slide {
@@ -85,16 +103,22 @@ const setThumbsSwiper = (swiper) => {
 }
 .thumb-swiper {
   height: 100px;
-  margin: 10px 0;
-  align-items: center;
-  justify-content: center;
-  display: flex;
+  margin: 10px 50px;
+
   position: relative;
-  .swiper-wrapper {
-    align-items: center;
+  @media (min-width: theme('screens.lg')) {
+      align-items: center;
     justify-content: center;
     display: flex;
+    }
+  .swiper-wrapper {
+    
     position: relative;
+    @media (min-width: theme('screens.lg')) {
+      align-items: center;
+    justify-content: center;
+    display: flex;
+    }
   }
   .swiper-slide {
     width: auto !important;
@@ -105,4 +129,35 @@ const setThumbsSwiper = (swiper) => {
     }
   }
 }
+.slideshowSwiperThumbs__nav {
+  bottom: 0px;
+  z-index:10;
+  height: 100px;
+  background: rgba(255,255,255,0.5);
+  transition: all 0.4s var(--curve);
+  @apply absolute;
+    .nuxt-icon {
+        height: 50px;
+        fill: black;
+        transition: 0.4s var(--curve);
+        svg {
+          height: 50px;
+          display: inline-block !important;
+          path {
+          stroke-width: 5px;
+          stroke: var(--grey) !important;
+        }
+      }
+    }
+  }
+  #slideshowSwiperThumbs__prev-btn{
+    left: 0px;
+  }
+  #slideshowSwiperThumbs__next-btn{
+    right: 0px;
+  }
+  .swiper-button-disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
 </style>

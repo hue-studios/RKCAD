@@ -19,21 +19,29 @@
     <div
       class="flex flex-wrap flex-row items-center justify-center w-full page__body"
     >
-      <div class="max-w-7xl w-full uppercase px-4 page__body-header">
-        <h2>Featured Projects</h2>
-        <h3>Architecture</h3>
+      <div class="max-w-7xl w-full uppercase px-4 xl:px-0  page__body-header">
+        
+        <h3>Architecture <br/>Design</h3>
       </div>
-      <div class="w-full">
+      <div class="w-full max-w-7xl">
         <UtilitiesSlideshowGrid :slides="architecture" />
       </div>
       <div
         v-if="interior.length"
-        class="max-w-7xl w-full uppercase page__body-header px-4"
+        class="max-w-7xl w-full uppercase px-4 xl:px-0  page__body-header"
       >
-        <h2>Featured Projects</h2>
         <h3>Interior <br />Design</h3>
       </div>
-      <div v-if="interior.length" class="w-full">
+      <div v-if="interior.length" class="w-full max-w-7xl">
+        <UtilitiesSlideshowGrid :slides="interior" />
+      </div>
+      <div
+        v-if="commercial.length"
+        class="max-w-7xl w-full uppercase px-4 xl:px-0  page__body-header"
+      >
+        <h3>Interior <br />Design</h3>
+      </div>
+      <div v-if="interior.length" class="w-full max-w-7xl">
         <UtilitiesSlideshowGrid :slides="interior" />
       </div>
     </div>
@@ -54,18 +62,32 @@ const work = await getItems({
 const formattedTitle = computed(() => {
   return work.title.replace(/\n/g, '<br>')
 })
+// const architecture = computed(() => {
+//   return work.projects.filter((item) => {
+//     return (
+//       item.category.find((el) => el === 'Architecture') &&
+//       item.images.length > 0
+//     )
+//   })
+// })
 const architecture = computed(() => {
   return work.projects.filter((item) => {
     return (
-      item.category.find((el) => el === 'Architecture') &&
-      item.images.length > 0
+      item.category.find((el) => el === 'Architecture')
     )
   })
 })
 const interior = computed(() => {
   return work.projects.filter((item) => {
     return item.category.find(
-      (el) => el === 'Interior Design' && item.images.length > 0
+      (el) => el === 'Interior Design' 
+    )
+  })
+})
+const commercial = computed(() => {
+  return work.projects.filter((item) => {
+    return item.category.find(
+      (el) => el === 'Commercial' 
     )
   })
 })

@@ -1,13 +1,16 @@
 <template>
+  <div class="w-full relative">
   <swiper
+    :options="swiperOptions"
     :parallax="true"
-    :spaceBetween="5"
-    :slidesPerView="3"
-    :grid="{
-      rows: 2,
-      fill: 'rows',
+    :navigation="{
+      nextEl: '#slideshowSwiperGrid__next-btn',
+      prevEl: '#slideshowSwiperGrid__prev-btn',
     }"
+    :spaceBetween="10"
+   
     :modules="modules"
+    :breakpoints="{ 300:{ slidesPerView:1, grid:{ rows:1, fill:'rows'} }, 640:{ slidesPerView:2,grid:{ rows:1, fill:'rows'} }, 786:{ slidesPerView:3,grid:{ rows:2, fill:'rows'} },1024:{ slidesPerView:4,grid:{ rows:2, fill:'rows'} }}"
     class="slideshowSwiperGrid"
   >
     <swiper-slide
@@ -15,9 +18,10 @@
       v-for="(slide, index) in slides"
       :key="index"
     >
+    <nuxt-link :to="'/interior-design-architecture-portfolio/' + slide.url" class="work__card">
       <div
         v-if="slide.images.length > 0"
-        class="absolute w-full h-full bg-cover bg-center bg-no-repeat"
+        class="absolute w-full h-full bg-cover bg-center bg-no-repeat work__card-image"
         :style="
           'background-image: url(' +
           imageUrl +
@@ -25,11 +29,34 @@
           '?key=medium)'
         "
       ></div>
-      <nuxt-link :to="'/interior-design-architecture-portfolio/' + slide.url">
-        <h2>{{ slide.title }}</h2></nuxt-link
+      <div
+        v-else
+        class="absolute w-full h-full flex items-center justify-center work__card-image"
+        
+      ><LayoutRkc class="rkc-icon" /></div>
+        <h2 class="work__card-title">{{ slide.title }}</h2>
+        </nuxt-link
       >
     </swiper-slide>
+   
   </swiper>
+  <div
+      class="w-full flex items-center justify-between flex-row relative my-4 slideshowSwiperGrid__nav"
+    >
+      <h5
+        id="slideshowSwiperGrid__prev-btn"
+        class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 lg:pl-0 lg:pr-4  py-2"
+      >
+        <nuxt-icon name="arrow-left" class="mr-4 arrow-left-icon" />
+      </h5>
+      <h5
+        id="slideshowSwiperGrid__next-btn"
+        class="flex items-center justify-center flex-row cursor-pointer px-2 lg:pr-0 lg:pl-4 py-2"
+      >
+        <nuxt-icon name="arrow-right" class="ml-4 arrow-right-icon" />
+      </h5>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -45,33 +72,57 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/grid'
-import { Grid, Parallax } from 'swiper'
-const modules = [Parallax, Grid]
+import { Grid, Parallax, Navigation } from 'swiper'
+const modules = [Parallax, Grid, Navigation]
 </script>
 <style>
 .slideshowSwiperGrid {
-  height: 800px;
+  height: 410px;
+  @media (min-width: theme('screens.md')) {
+    height: 810px;
+  }
   .swiper-slide {
     height: 400px;
-
-    img {
-      max-height: 100%;
-      max-width: 100%;
+  }
+  
+}
+.slideshowSwiperGrid__nav {
+    .nuxt-icon {
+        height: 50px;
+        fill: black;
+        transition: 0.4s var(--curve);
+        svg {
+          height: 50px;
+          display: inline-block !important;
+          path {
+          stroke-width: 5px;
+          stroke: var(--grey) !important;
+        }
+      }
     }
-    a {
+  }
+.work__card {
+    height: 400px;
+    &-image {
+      height: 400px;
+      background-color: var(--grey);
+      /* max-height: 100%;
+      max-width: 100%; */
+      svg {
+        fill: var(--white);
+      }
+    }
+    &-title {
       bottom: 20px;
       left: 0px;
       padding-left: 20px;
       padding-right: 20px;
-      @apply w-full z-10 absolute;
-      h2 {
         color: var(--white);
         line-height: 16px;
         font-size: 14px;
         font-weight: 900 !important;
-        @apply uppercase tracking-wider font-body;
-      }
+        @apply w-full z-10 absolute uppercase tracking-wider font-body;
+     
     }
   }
-}
 </style>

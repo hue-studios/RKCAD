@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full px-4 xl:px-0 mx-auto max-w-7xl relative header">
+  <div class="w-full px-4 xl:px-0 mx-auto relative header">
     <LayoutBackButton
       page="Work"
       :class="{ on: pageStore.page === 'page-work-detail' }"
@@ -26,9 +26,9 @@ const pageStore = usePageStore()
   left: 0px;
   height: 65px;
   z-index: 10;
-  @media (min-width: 1280px) {
+  /* @media (min-width: 1280px) {
     left: calc(50% - 640px);
-  }
+  } */
   .back-btn {
     left: calc(-50vw);
     transition: all 0.4s var(--curve);

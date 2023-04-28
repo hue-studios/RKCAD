@@ -49,6 +49,7 @@
           Project by Rosen Kelly Conway</span
         >
       </h1>
+      <p v-if="project.intro" class="w-full font-bold mt-4">{{ project.intro }}</p>
       <div class="w-full flex items-center flex-col lg:flex-row mt-12">
         <div v-if="project.challenge">
           <h4 class="uppercase block tracking-wider mb-4">Challenge</h4>
@@ -110,7 +111,7 @@ const project = ref(data.value[0])
 
   &__slideshow {
     transition: all 0.5s var(--curve);
-    height: calc(100vh - 135px);
+    height: calc(100vh - 167px);
 
     @apply max-w-7xl;
     @media (min-width: theme('screens.lg')) {
@@ -134,11 +135,12 @@ const project = ref(data.value[0])
     }
   }
   &__header {
-    @apply max-w-7xl mb-4;
+    @apply max-w-7xl mb-4 mt-12;
     h1 {
       font-size: 38px;
       line-height: 1em;
     }
+    
     /* &-nav {
       bottom: -35px;
       height: 12px;
@@ -182,6 +184,9 @@ const project = ref(data.value[0])
       font-size: 38px;
       line-height: 1em;
       @apply uppercase;
+    }
+    p {
+      font-size: 14px;
     }
   }
 }

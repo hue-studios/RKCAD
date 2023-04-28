@@ -15,7 +15,7 @@ function sideMenuToggle() {
     console.log('nav btn add')
     element.classList.add('open')
     navToggle.checked = true
-    openScreen()
+    // openScreen()
   }
   // navToggle.checked = !navToggle.checked
   // toggleScreen()
@@ -32,7 +32,7 @@ function sideMenuToggle() {
   width: 50px;
   text-align: center;
   cursor: pointer;
-  transition: 0.4s var(--curve);
+  transition: 0.475s var(--curve);
   max-width: 300px;
   @apply mr-4 lg:mr-6;
   -webkit-backdrop-filter: blur(10px) invert(0.015);
@@ -42,9 +42,9 @@ function sideMenuToggle() {
     right: 0px;
     position: absolute;
   }
-  @media (min-width: 1280px) {
+  /* @media (min-width: 1280px) {
     margin-right: 0px;
-  }
+  } */
   #nav-icon {
     width: 45px;
     height: 30px;
@@ -94,7 +94,7 @@ function sideMenuToggle() {
   }
 }
 #nav-btn.open {
-  width: 290px;
+  width: 230px;
   top: 120px;
   right: 8px;
   transform: rotate(-360deg);
