@@ -20,9 +20,9 @@
       class="max-w-7xl flex flex-wrap flex-row items-center justify-between w-full page__body"
     >
       <div class="w-full uppercase page__body-header">
-        <h2>Recognition</h2>
-        <h3>Press</h3>
-        <div v-html="press.introduction" class="normal-case"></div>
+        <h2 class="page__body-header-subtitle">Recognition</h2>
+        <h3 class="page__body-header-title">Published/ <br />Press</h3>
+        <p class="normal-case max-w-2xl mb-20">{{ press.introduction }}</p>
       </div>
       <CardsArticleCard
         v-for="(article, index) in pressArticles"
@@ -30,8 +30,8 @@
         :article="article"
       />
       <div class="w-full uppercase page__body-header">
-        <h2>Recognition</h2>
-        <h3>Awards</h3>
+        <h2 class="page__body-header-subtitle">Recognition</h2>
+        <h3 class="page__body-header-title">Published/ <br />Awards</h3>
       </div>
       <CardsArticleCard
         v-for="(article, index) in awardArticles"

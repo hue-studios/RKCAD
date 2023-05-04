@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-cover bg-center bg-no-repeat relative w-full h-screen flex flex-col items-center justify-end overflow-hidden contact"
+    class="bg-cover bg-center bg-no-repeat relative w-full h-screen flex flex-row items-end justify-end overflow-hidden contact"
   >
     <LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
     <div class="w-full text-left max-w-7xl contact__info">
@@ -23,6 +23,7 @@
         </a>
       </div>
     </div>
+    <LayoutRkcName color="var(--white)"/>
   </div>
 </template>
 
@@ -58,6 +59,17 @@
     a {
       color: var(--white);
     }
+  }
+  .rkc-name {
+    width: 300px;
+    color: var(--white);
+    padding-right: 2rem;
+    margin-bottom: -80px;
+    @media (min-width: theme('screens.lg')) {
+      margin-bottom: -60px;
+      }
+    path {
+      fill: var(--white) !important;}
   }
 }
 </style>

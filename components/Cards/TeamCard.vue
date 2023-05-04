@@ -24,7 +24,7 @@
         </div>
         <h3 class="w-full uppercase">{{ person.name }}</h3>
         <h5 class="w-full uppercase">{{ person.title }} {{ person.status }}</h5>
-        <a @click.prevent class="w-full uppercase"
+        <a @click.prevent class="w-full uppercase rkc-link"
           >Bio <nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon"
         /></a>
       </div>
@@ -115,7 +115,7 @@ function handleView(el) {
       line-height: 1rem;
       @apply font-light;
     }
-    a {
+    /* a {
       font-size: 0.75rem;
       line-height: 1rem;
       margin-top: 10px;
@@ -129,13 +129,14 @@ function handleView(el) {
           margin-top: -2px;
           height: 12px;
           display: inline-block !important;
-          line {
-            stroke-width: 3px;
+          
+          path {
+            stroke-width: 10px;
             stroke: var(--blue) !important;
           }
         }
       }
-    }
+    } */
   }
   &__body {
     pointer-events: none;

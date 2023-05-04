@@ -62,8 +62,7 @@ const pageStore = usePageStore()
     margin-left: 80px;
   }
 }
-.page-work-detail,
-.page-home {
+.page-work-detail{
   .rkc-icon {
     color: var(--blue);
   }

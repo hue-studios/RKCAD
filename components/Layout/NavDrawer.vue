@@ -68,7 +68,7 @@ onClickOutside(navDrawerRef, (event) => {
   right: 0px;
   top: 0px;
   z-index: 30;
-  background: rgba(123, 145, 163, 0.75);
+  background: rgba(123, 145, 163, 0.85);
   transform: translateX(100%);
   transition: 0.35s var(--curve);
   @apply shadow-lg;

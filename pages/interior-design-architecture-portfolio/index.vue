@@ -19,18 +19,18 @@
     <div
       class="flex flex-wrap flex-row items-center justify-center w-full page__body"
     >
-      <div class="max-w-7xl w-full uppercase px-4 xl:px-0  page__body-header">
+      <div class="max-w-7xl w-full uppercase px-4 xl:px-0 mt-20 page__body-header">
         
-        <h3>Architecture <br/>Design</h3>
+        <h3 class="page__body-header-title">Architecture <br/>Design</h3>
       </div>
-      <div class="w-full max-w-7xl">
+      <div class="w-full max-w-7xl ">
         <UtilitiesSlideshowGrid :slides="architecture" />
       </div>
       <div
         v-if="interior.length"
-        class="max-w-7xl w-full uppercase px-4 xl:px-0  page__body-header"
+        class="max-w-7xl w-full uppercase px-4 xl:px-0 mt-20 page__body-header"
       >
-        <h3>Interior <br />Design</h3>
+        <h3 class="page__body-header-title">Interior <br />Design</h3>
       </div>
       <div v-if="interior.length" class="w-full max-w-7xl">
         <UtilitiesSlideshowGrid :slides="interior" />
@@ -39,10 +39,10 @@
         v-if="commercial.length"
         class="max-w-7xl w-full uppercase px-4 xl:px-0  page__body-header"
       >
-        <h3>Interior <br />Design</h3>
+        <h3 class="page__body-header-title">Commercial <br />Design</h3>
       </div>
-      <div v-if="interior.length" class="w-full max-w-7xl">
-        <UtilitiesSlideshowGrid :slides="interior" />
+      <div v-if="commercial.length" class="w-full max-w-7xl">
+        <UtilitiesSlideshowGrid :slides="commercial" />
       </div>
     </div>
   </div>

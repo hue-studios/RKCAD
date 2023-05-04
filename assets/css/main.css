@@ -5,7 +5,8 @@
 body,
 html {
   color: var(--blue2);
-  letter-spacing: 0.075em;
+  letter-spacing: 0.1em;
+  font-size: 15px;
 }
 a {
   transition: all 0.3s var(--curve);

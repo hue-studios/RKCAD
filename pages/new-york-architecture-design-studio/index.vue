@@ -20,16 +20,16 @@
         Embracing Design Heritage with a Modern Vision
       </h2>
       <div class="about__body-content">
-        <h2>Vision</h2>
-        <h3>Who<br />We Are</h3>
+        <h2 class="page__body-header-subtitle">Vision</h2>
+        <h3 class="page__body-header-title">Who<br />We Are</h3>
         <p v-html="about.who_we_are"></p>
 
-        <h2>Process</h2>
-        <h3>Our <br />Approach</h3>
+        <h2 class="page__body-header-subtitle">Process</h2>
+        <h3 class="page__body-header-title">Our <br />Approach</h3>
         <p v-html="about.our_approach"></p>
 
-        <h2>Expertise</h2>
-        <h3>What <br />We Do</h3>
+        <h2 class="page__body-header-subtitle">Expertise</h2>
+        <h3 class="page__body-header-title">What <br />We Do</h3>
         <p v-html="about.what_we_do"></p>
       </div>
       <div class="flex flex-row items-center justify-center about__body-image">
