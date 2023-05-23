@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div v-if="isImageLoaded"
     class="relative w-full min-h-screen flex flex-wrap flex-col justify-center items-center team"
   >
     <div
@@ -17,8 +17,9 @@
       ></h1>
     </div>
     <div
-      class="z-10 max-w-7xl w-full px-4 xl:px-0 mt-20 flex items-center justify-between flex-col lg:flex-row flex-wrap page__body-header"
+      class=" z-10 flex flex-wrap flex-col lg:flex-row lg:flex-wrap items-start justify-between w-full page__body relative"
     >
+  
       <div class="w-full uppercase mb-20 page__body-header">
         <h2 class="page__body-header-subtitle">Culture</h2>
         <h3 class="page__body-header-title">Meet <br />the Team</h3>
@@ -53,6 +54,7 @@
     </div>
    
   </div>
+  <div v-else>Loading</div>
 </template>
 
 <script setup>
@@ -65,6 +67,16 @@ const team = await getItems({
     ],
   },
 })
+const isImageLoaded = ref(false);
+onMounted(() => {
+  const image = new Image();
+  image.src = 'https://admin.rkcad.com/assets/' +
+    team.header_image + '?key=xlarge';
+
+  image.onload = () => {
+    isImageLoaded.value = true;
+  };
+});
 const formattedTitle = computed(() => {
   return team.title.replace(/\n/g, '<br>')
 })

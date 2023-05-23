@@ -52,12 +52,12 @@ import { screen } from '~~/composables/useScreen'
       width: 96vw;
       transition: all 0.35s var(--curve);
       /* fill: rgba(167, 169, 172, 0.075); */
-      fill: rgba(255, 255, 255, 0.1);
+      fill: rgba(255, 255, 255, 0.075);
       @apply fixed;
 
       path {
         /* fill: rgba(167, 169, 172, 0.1); */
-        fill: rgba(255, 255, 255, 0.1);
+        fill: rgba(255, 255, 255, 0.075);
       }
     }
 
@@ -68,8 +68,8 @@ import { screen } from '~~/composables/useScreen'
       margin-bottom: 50px;
       font-family: var(--light-font);
       transition: all 0.4s var(--curve) 0.1s;
-
-      @apply max-w-7xl w-full uppercase tracking-wide md:tracking-wider;
+      letter-spacing: 0.1em;
+      @apply max-w-8xl w-full uppercase;
 
       @media (min-width: theme('screens.md')) {
         font-size: 66px;
@@ -85,7 +85,7 @@ import { screen } from '~~/composables/useScreen'
 
   &__body {
     z-index: 10;
-    @apply px-4 xl:px-0;
+    @apply px-4 2xl:px-0 max-w-8xl;
 
     &-header {
       &-subtitle {
@@ -125,7 +125,7 @@ import { screen } from '~~/composables/useScreen'
   @apply fixed;
 
   path {
-    fill: rgba(167, 169, 172, 0.125);
+    fill: rgba(167, 169, 172, 0.075);
     animation: icon-animation 10s ease-in-out infinite;
   }
 
@@ -143,20 +143,20 @@ import { screen } from '~~/composables/useScreen'
 
 @keyframes icon-animation {
   0% {
-    fill: rgba(167, 169, 172, 0.125);
+    fill: rgba(167, 169, 172, 0.075);
   }
 
   50% {
-    fill: rgba(167, 169, 172, 0.05);
+    fill: rgba(167, 169, 172, 0.025);
   }
 
   100% {
-    fill: rgba(167, 169, 172, 0.125);
+    fill: rgba(167, 169, 172, 0.075);
   }
 }
 
 #rkc-bg-icon.colored {
-  fill: rgba(98, 121, 132, 0.25);
+  fill: rgba(98, 121, 132, 0.025);
 }
 
 .screen-enter-from {

@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div v-if="isImageLoaded"
     class="bg-cover bg-center bg-no-repeat relative w-full h-screen flex flex-row items-end justify-end overflow-hidden contact"
   >
     <LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
@@ -25,9 +25,18 @@
     </div>
     <LayoutRkcName color="var(--white)"/>
   </div>
+  <div v-else>Loading</div>
 </template>
 
 <script setup>
+const isImageLoaded = ref(false);
+onMounted(() => {
+  const image = new Image();
+  image.src = 'https://admin.rkcad.com/assets/73046284-e82d-4c2b-84b5-0246b56623bf?key=xlarge' 
+  image.onload = () => {
+    isImageLoaded.value = true;
+  };
+});
 </script>
 <style scoped>
 .contact {

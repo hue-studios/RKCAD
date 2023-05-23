@@ -107,7 +107,9 @@ onClickOutside(navDrawerRef, (event) => {
         @apply block uppercase  py-1;
       }
       a.router-link-exact-active {
-        color: var(--green);
+        color: var(--white);
+        letter-spacing: 0.6em;
+        @apply font-bold cursor-default;
       }
     }
     a:hover {

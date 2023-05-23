@@ -9,7 +9,7 @@
       class="inline-block rkc-logo"
       :class="{ on: pageStore.page === 'page-work-detail' }"
     >
-      <nuxt-icon name="rkc" class="rkc-icon" />
+      <nuxt-icon name="rkc" class="rkc-icon" /> 
     </nuxt-link>
     <LayoutNavButton class="lg:pr-6" />
   </div>

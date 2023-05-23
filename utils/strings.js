@@ -11,4 +11,12 @@ function truncateString(str, num) {
   return str.slice(0, num) + '...'
 }
 
-export { stripHTML, truncateString }
+function removeFirst(str) {
+  const arr = str.split(". ")
+  if(arr.length > 1) {
+    return arr[1]
+  }
+  return str
+}
+
+export { stripHTML, truncateString, removeFirst }

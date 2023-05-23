@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div v-if="isImageLoaded"
     class="relative w-full min-h-screen flex flex-wrap flex-col justify-center items-center about"
   >
     <div
@@ -14,7 +14,7 @@
       <h1 class="" v-html="formattedTitle"></h1>
     </div>
     <div
-      class="max-w-7xl flex flex-wrap flex-col lg:flex-row lg:flex-wrap items-start w-full page__body relative about__body"
+      class=" flex flex-wrap flex-col lg:flex-row lg:flex-wrap items-start justify-between w-full page__body relative about__body"
     >
       <h2 class="uppercase font-thin about__body-caption">
         Embracing Design Heritage with a Modern Vision
@@ -50,6 +50,7 @@
       </div>
     </div>
   </div>
+  <div v-else>Loading</div>
 </template>
 
 <script setup>
@@ -60,6 +61,17 @@ const about = await getItems({
     fields: ['*'],
   },
 })
+const isImageLoaded = ref(false);
+onMounted(() => {
+  const image = new Image();
+    image.src = 'https://admin.rkcad.com/assets/' +
+    about.header_image + 'key=xlarge';
+
+    image.onload = () => {
+      isImageLoaded.value = true;
+    };
+ 
+});
 const formattedTitle = computed(() => {
   return about.title.replace(/\n/g, '<br>')
 })
@@ -77,17 +89,18 @@ const formattedTitle = computed(() => {
         font-size: 66px;
         line-height: 66px;
       }
-      @media (min-width: theme('screens.lg')) {
+      @media (min-width: theme('screens.xl')) {
         margin-top: 100px;
         font-size: 78px;
         line-height: 88px;
       }
-      @media (min-width: theme('screens.xl')) {
+      @media (min-width: theme('screens.2xl')) {
         font-size: 96px;
         line-height: 106px;
       }
     }
     &-content {
+      max-width: 600px;
       @apply w-full lg:w-1/2 order-2 lg:order-1 lg:pr-2;
       h2 {
         font-size: 9px;

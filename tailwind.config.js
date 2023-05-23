@@ -16,6 +16,22 @@ module.exports = {
     // `./nuxt.config.ts`
   ],
   theme: {
+    screens: {
+      'sm': '640px',
+  
+
+      'md': '768px',
+     
+
+      'lg': '1024px',
+     
+
+      'xl': '1280px',
+    
+
+      '2xl': '1536px',
+      'xxl': '1600px',
+    },
     extend: {
       letterSpacing: {
         tightest: '-.075em',
@@ -25,6 +41,10 @@ module.exports = {
         wide: '.1em',
         wider: '.25em',
         widest: '.35em',
+      },
+      maxWidth: {
+        '2xl': '1536px',
+        '8xl': '1536px',
       },
       transformOrigin: {
         0: '0%',

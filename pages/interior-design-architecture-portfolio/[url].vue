@@ -6,7 +6,7 @@
       class="w-full flex items-start lg:items-end flex-col lg:flex-row justify-between uppercase tracking-wide mt-4 px-4 lg:px-0 project__header"
     >
       <h1 class="relative">
-        {{ project.title }}
+        {{ removeFirst(project.title) }}
         <span class="hidden">
           <span v-for="(category, index) in project.category" :key="index">{{
             category
@@ -72,6 +72,7 @@
 </template>
 
 <script setup>
+import {removeFirst} from '~~/utils/strings'
 const { params, path } = useRoute()
 const { getItems } = useDirectusItems()
 const { data, pending, error, refresh } = await useAsyncData('posts', () => {
@@ -82,6 +83,7 @@ const { data, pending, error, refresh } = await useAsyncData('posts', () => {
         url: {
           _eq: params.url,
         },
+        
       },
       fields: [
         'approach, before_after.directus_files_id,category,challenge,credits,id,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags,intro,result,sort,style,title,url,press_and_awards.press_id.category,press_and_awards.press_id.category,press_and_awards.press_id.title,press_and_awards.press_id.description,press_and_awards.press_id.url,press_and_awards.press_id.link,press_and_awards.press_id.images.directus_files_id.id,press_and_awards.press_id.images.directus_files_id.description,press_and_awards.press_id.images.directus_files_id.tags',

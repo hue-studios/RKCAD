@@ -1,5 +1,6 @@
 <template>
-  <div class="relative w-full min-h-screen flex items-center justify-center flex-col home">
+  <div v-if="isImageLoaded" class="relative w-full min-h-screen flex items-center justify-center flex-col home">
+    <LayoutLoader />
     <div class="page__header">
       <swiper :speed="2000" :effect="'fade'" :loop="true" :parallax="true" :modules="modules" :autoplay="true"
         class="h-full flex items-center justify-center flex-col slideshowSwiperHome">
@@ -22,7 +23,7 @@
     </div>
     <div class="flex flex-wrap flex-row items-center justify-center w-full page__body">
       <div
-        class="max-w-7xl w-full px-4 xl:px-0 mt-20 flex items-center justify-between flex-col lg:flex-row page__body-header">
+        class="max-w-8xl w-full px-4 2xl:px-0 mt-20 flex items-center justify-between flex-col lg:flex-row page__body-header">
         <div class="w-full lg:w-1/2">
           <h2 class="uppercase page__body-header-subtitle">Process</h2>
           <h3 class="uppercase page__body-header-title">Great Design Begins<br /> with Collaboration</h3>
@@ -34,23 +35,23 @@
         </div>
       </div>
 
-      <div class="max-w-7xl w-full mt-20 xl:mt-40 uppercase px-4 xl:px-0  page__body-header">
+      <div class="max-w-8xl w-full mt-20 2xl:mt-40 uppercase px-4 2xl:px-0  page__body-header">
         <h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
         <h3 class="mb-6 page__body-header-title">Architecture <br />Design</h3>
         <LayoutLinkBtn link="/interior-design-architecture-portfolio/">Work</LayoutLinkBtn>
       </div>
-      <div class="w-full max-w-7xl mt-3">
+      <div class="w-full max-w-8xl px-4 2xl:px-0 mt-3">
         <UtilitiesSlideshowGrid :slides="architecture" />
       </div>
-      <div v-if="interior.length" class="max-w-7xl w-full uppercase px-4 xl:px-0 mt-20 page__body-header">
+      <div v-if="interior.length" class="max-w-8xl w-full uppercase px-4 2xl:px-0 mt-20 page__body-header">
         <h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
         <h3 class="mb-6 page__body-header-title">Interior <br />Design</h3>
         <LayoutLinkBtn link="/interior-design-architecture-portfolio/">Work</LayoutLinkBtn>
       </div>
-      <div v-if="interior.length" class="w-full max-w-7xl  mt-3">
+      <div v-if="interior.length" class="w-full max-w-8xl px-4 2xl:px-0 mt-3">
         <UtilitiesSlideshowGrid :slides="interior" />
       </div>
-      <div class="max-w-7xl w-full px-4 xl:px-0 mt-20 xl:mt-40 page__body-header">
+      <div class="max-w-8xl w-full px-4 2xl:px-0 mt-20 xl:mt-40 page__body-header">
         <div class="w-full flex items-center justify-between flex-col lg:items-start lg:flex-row flex-wrap home-section">
           <div class="flex items-start flex-col">
             <h2 class="uppercase page__body-header-subtitle">Culture</h2>
@@ -70,24 +71,28 @@
                 <h5>"{{ home.featured_profile.quote }}"</h5>
                 <p>- {{ home.featured_profile.name }}</p>
               </div>
-              <img class="mr-4" :src="'https://admin.rkcad.com/assets/b042050e-f042-4cd8-bfb5-fc6eac001f17?key=small'"
+              <!-- <img class="mr-4" :src="'https://admin.rkcad.com/assets/b042050e-f042-4cd8-bfb5-fc6eac001f17?key=small'"
                 alt="RKC Team" />
               <img :src="'https://admin.rkcad.com/assets/2ee652e4-2dff-44b8-9971-17283684fe9b?key=small'" alt="RKC Team"
-                class="" />
+                class="" /> -->
 
 
             </div>
             <p v-html="home.featured_profile.bio" style="width: 375px"></p>
           </div>
         </div>
-        <div class="max-w-7xl w-full px-4 xl:px-0 mt-20 xl:mt-40 page__body-header">
+        <div class="max-w-8xl w-full px-4 2xl:px-0 mt-20 xl:mt-40 page__body-header">
           <div
             class="w-full flex items-center justify-between flex-col lg:items-start lg:flex-row flex-wrap home-section">
             <div class="flex items-start flex-col">
               <h2 class="uppercase page__body-header-subtitle">Featured</h2>
               <h3 class="uppercase page__body-header-title">Georgian
-<br /> Colonial</h3>
-              <p  style="width: 375px" class="mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac ex fringilla, congue lorem blandit, porttitor mi. Donec et lacus dapibus, lacinia nisl quis, euismod purus. Nulla est ante, egestas sit amet lacinia quis, pretium et lectus. Fusce ut condimentum leo, a interdum lorem. Cras vehi</p>
+                <br /> Colonial
+              </h3>
+              <p style="width: 375px" class="mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac
+                ex fringilla, congue lorem blandit, porttitor mi. Donec et lacus dapibus, lacinia nisl quis, euismod
+                purus. Nulla est ante, egestas sit amet lacinia quis, pretium et lectus. Fusce ut condimentum leo, a
+                interdum lorem. Cras vehi</p>
               <LayoutLinkBtn link="/">Project</LayoutLinkBtn>
             </div>
 
@@ -116,6 +121,7 @@
       </div>
     </div>
   </div>
+  <div v-else>Loading</div>
 </template>
 
 <script setup>
@@ -134,23 +140,43 @@ const home = await getItems({
     ],
   },
 })
+const isImageLoaded = ref(false);
+onMounted(() => {
+  const image = new Image();
+  if (home.featured_images.length > 0) {
+    image.src = 'https://admin.rkcad.com/assets/' +
+      home.featured_images[0].directus_files_id + 'key=xlarge';
+
+    image.onload = () => {
+      isImageLoaded.value = true;
+    };
+  } else {
+    isImageLoaded.value = true;
+  }
+});
 const work = await getItems({
-  collection: 'work',
+  collection: 'projects',
   params: {
     fields: [
-      'header_image,title,projects.title,projects.category,projects.style,projects.images.directus_files_id.id,projects.images.directus_files_id.title,projects.images.directus_files_id.tags,projects.images.directus_files_id.width,projects.images.directus_files_id.height,projects.url',
+      'status,title,category,style,images.directus_files_id.id,images.directus_files_id.title,images.directus_files_id.tags,images.directus_files_id.width,images.directus_files_id.height,url',
     ],
+    filter: {
+      status: {
+        _eq: 'published',
+      },
+    },
   },
 })
+
 const architecture = computed(() => {
-  return work.projects.filter((item) => {
-    return (
-      item.category.find((el) => el === 'Architecture')
-    )
+  return work.filter((item) => {
+    return item.category.find(
+      (el) => el === 'Architecture'
+    ) && item.status === 'published'
   })
 })
 const interior = computed(() => {
-  return work.projects.filter((item) => {
+  return work.filter((item) => {
     return item.category.find(
       (el) => el === 'Interior Design'
     )
@@ -213,4 +239,5 @@ const interior = computed(() => {
       }
     }
   }
-}</style>
+}
+</style>
