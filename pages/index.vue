@@ -1,26 +1,31 @@
 <template>
   <transition name="fade" mode="out-in">
     <div v-if="isImageLoaded" class="relative w-full min-h-screen flex items-center justify-center flex-col home">
-      <div class="page__header">
-        <swiper :speed="2000" :effect="'fade'" :loop="true" :parallax="true" :modules="modules" :autoplay="true"
-          class="h-full flex items-center justify-center flex-col slideshowSwiperHome">
+      <transition name="fade" mode="out-in">
+        <div v-if="showIntroAnimation && isImageLoaded" id="animation" class="w-full flex items-center justify-center flex-col"> 
+          <img src="/images/intro-animation.gif" alt="RKC Introduction"  />
+        </div>
+        <div v-else class="flex items-center justify-center flex-col page__header">
+          <swiper :speed="2000" :effect="'fade'" :loop="true" :parallax="true" :modules="modules" :autoplay="true"
+            class="h-full flex items-center justify-center flex-col slideshowSwiperHome">
 
-          <swiper-slide class="w-full flex items-center justify-center" v-for="(slide, index) in home.featured_images"
-            :key="index">
+            <swiper-slide class="w-full flex items-center justify-center" v-for="(slide, index) in home.featured_images"
+              :key="index">
 
-            <div class="relative w-full h-full flex items-center justify-center">
-              <div class="absolute w-full h-full bg-cover bg-center bg-no-repeat" :style="'background-image: url(' +
-                imageUrl +
-                slide.directus_files_id +
-                '?key=large)'
-                "></div>
+              <div class="relative w-full h-full flex items-center justify-center">
+                <div class="absolute w-full h-full bg-cover bg-center bg-no-repeat" :style="'background-image: url(' +
+                  imageUrl +
+                  slide.directus_files_id +
+                  '?key=large)'
+                  "></div>
 
-            </div>
-          </swiper-slide>
-        </swiper>
-        <LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
+              </div>
+            </swiper-slide>
+          </swiper>
+          <LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
+        </div>
+      </transition>
 
-      </div>
       <div class="flex flex-wrap flex-row items-center justify-center w-full page__body">
         <div
           class="max-w-8xl w-full px-4 2xl:px-0 mt-20 flex items-center justify-between flex-col lg:flex-row page__body-header">
@@ -145,6 +150,10 @@ const home = await getItems({
   },
 })
 const isImageLoaded = ref(false);
+const showIntroAnimation = ref(true);
+const hideIntroAnimation = () => {
+  showIntroAnimation.value = false;
+};
 onMounted(() => {
   const image = new Image();
   if (home.featured_images.length > 0) {
@@ -153,6 +162,7 @@ onMounted(() => {
 
     image.onload = () => {
       isImageLoaded.value = true;
+      setTimeout(hideIntroAnimation, 3500);
     };
   } else {
     isImageLoaded.value = true;
@@ -192,11 +202,33 @@ const interior = computed(() => {
   .page__header {
     padding-left: 0px;
     padding-right: 0px;
+
+  }
+
+  #animation {
+    position: absolute;
+    z-index: 10;
+    height: 500px;
+    margin-bottom: 50px;
+    overflow: hidden !important;
+    @apply bg-cover bg-center bg-no-repeat w-full flex items-center justify-center px-4 overflow-hidden relative;
+
+    @media (min-width: theme('screens.md')) {}
+
+    @media (min-width: theme('screens.lg')) {
+      height: calc(100vh);
+    }
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 400px;
+    }
   }
 
   .slideshowSwiperHome {
     height: 100vh;
     width: 100vw;
+
   }
 
   /* a {

@@ -70,7 +70,7 @@ onClickOutside(navDrawerRef, (event) => {
   z-index: 30;
   background: rgba(123, 145, 163, 0.85);
   transform: translateX(100%);
-  transition: 0.35s var(--curve);
+  transition: 0.55s var(--curve);
   @apply shadow-lg;
   .close-btn {
     /* right: 0px;
@@ -125,10 +125,10 @@ onClickOutside(navDrawerRef, (event) => {
       transition-delay: 0.175s;
     }
     li:nth-of-type(5) {
-      transition-delay: 0.225s;
+      transition-delay: 0.2s;
     }
     li:nth-of-type(6) {
-      transition-delay: 0.275s;
+      transition-delay: 0.215s;
     }
   }
 }

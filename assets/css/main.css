@@ -31,7 +31,7 @@ a {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.5s var(--curve);
+  transition: all 0.65s var(--curve);
 }
 .fade-enter,
 .fade-leave-to {

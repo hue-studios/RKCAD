@@ -32,13 +32,13 @@ import { screen } from '~~/composables/useScreen'
     position: relative;
   } */
   &__header {
-    padding-top: 65px;
+    /* padding-top: 65px; */
     height: 500px;
     background-color: rgba(0, 0, 0, 0.35);
     background-blend-mode: darken;
     margin-bottom: 50px;
     overflow: hidden !important;
-    @apply bg-cover bg-center bg-no-repeat w-full flex items-end justify-center px-4 overflow-hidden relative;
+    @apply bg-cover bg-center bg-no-repeat w-full flex items-center justify-center px-4 overflow-hidden relative;
 
     @media (min-width: theme('screens.md')) {}
 
@@ -85,6 +85,7 @@ import { screen } from '~~/composables/useScreen'
 
   &__body {
     z-index: 10;
+    /* background: var(--white); */
     @apply px-4 2xl:px-0 max-w-8xl;
 
     &-header {
@@ -111,6 +112,7 @@ import { screen } from '~~/composables/useScreen'
         }
       }
     }
+ 
   }
 }
 

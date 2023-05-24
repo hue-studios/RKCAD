@@ -25,7 +25,7 @@
     </div>
     <LayoutRkcName color="var(--white)"/>
   </div>
-  <div v-else>Loading</div>
+  <LayoutLoader v-else />
 </template>
 
 <script setup>

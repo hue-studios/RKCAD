@@ -60,7 +60,7 @@
             <ProjectsPressSlider :slides="project.press_and_awards" />
         </div>
     </div>
-    <div v-else>Loading</div>
+    <LayoutLoader v-else />
 </template>
 
 <script setup>
