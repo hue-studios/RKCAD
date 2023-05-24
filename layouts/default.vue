@@ -3,6 +3,7 @@
     class="min-h-screen w-full transition duration-150 bg-white dark:bg-slate-900 overflow-hidden lg:overflow-visible flex items-center justify-start flex-col relative">
     <LayoutRkc id="rkc-bg-icon" class="rkc-bg-icon" />
     <input id="nav-drawer-toggle" type="checkbox" class="hidden" />
+    <input id="profile-toggle" type="checkbox" class="hidden" />
     <div class="w-full flex items-center justify-center flex-col min-h-screen page__content">
       <LayoutHeader />
       <div class="w-full mx-auto min-h-screen relative">
@@ -14,6 +15,7 @@
       <LayoutScreen v-if="screen" />
     </transition>
     <LayoutNavDrawer />
+    <TeamProfile />
   </div>
 </template>
 <script>

@@ -122,13 +122,13 @@ onClickOutside(navDrawerRef, (event) => {
       transition-delay: 0.125s;
     }
     li:nth-of-type(4) {
-      transition-delay: 0.175s;
+      transition-delay: 0.150s;
     }
     li:nth-of-type(5) {
-      transition-delay: 0.2s;
+      transition-delay: 0.170s;
     }
     li:nth-of-type(6) {
-      transition-delay: 0.215s;
+      transition-delay: 0.180s;
     }
   }
 }
@@ -147,7 +147,7 @@ onClickOutside(navDrawerRef, (event) => {
   }
 }
 #nav-drawer-toggle:checked ~ .page-content {
-  /* transform: matrix(1, 0, 0, 1, 8, 0); */
+  transform: matrix(1, 0, 0, 1, 8, 0);
   transform: translateX(8px);
   filter: blur(2px);
 }

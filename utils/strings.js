@@ -12,11 +12,16 @@ function truncateString(str, num) {
 }
 
 function removeFirst(str) {
-  const arr = str.split(". ")
-  if(arr.length > 1) {
+  const arr = str.split('. ')
+  if (arr.length > 1) {
     return arr[1]
   }
   return str
 }
 
-export { stripHTML, truncateString, removeFirst }
+function replaceNewlinesWithBreaks(text) {
+  if(text) 
+  return text.replace(/\n/g, '<br/>')
+}
+
+export { stripHTML, truncateString, removeFirst, replaceNewlinesWithBreaks }

@@ -1,21 +1,6 @@
 <template>
     <div id="loader" class="fixed flex items-center justify-center flex-col w-full h-screen">
         <svg xmlns="http://www.w3.org/2000/svg" width="668.996" height="262.75" viewBox="0 0 668.996 262.75">
-            <!-- <defs>
-                <linearGradient id="skyGradient" x1="100%" y1="100%">
-                    <stop offset="0%" stop-color="lightblue" stop-opacity=".5">
-                        <animate attributeName="stop-color" values="var(--grey);var(--green);var(--blue);var(--blue);var(--black);var(--blue);var(--blue);var(--green);var(--grey)"
-                            dur="14s" repeatCount="indefinite" />
-                    </stop>
-                    <stop offset="100%" stop-color="lightblue" stop-opacity=".5">
-                        <animate attributeName="stop-color"
-                            values="var(--grey);var(--green);var(--blue);var(--blue);var(--black);var(--blue);var(--blue);var(--green);var(--grey)" dur="14s"
-                            repeatCount="indefinite" />
-                        <animate attributeName="offset" values=".95;.80;.60;.40;.20;0;.20;.40;.60;.80;.95" dur="14s"
-                            repeatCount="indefinite" />
-                    </stop>
-                </linearGradient>
-            </defs> -->
             <g transform="translate(11872.996 695.099)">
                 <path
                     d="M590.1,316.084H537.57c-8.342-9.816-115.863-116.3-119.1-118.6s-2.283-3.452-9.127-3.452H399.266l-.085,122.057H362.518l.295-256.741c24.088,0,40.931.121,55.115.121q36.206,0,58.883,6.723t36.674,22.021q14,15.3,14,36.578,0,24.823-18.289,42.367c-12.2,11.7-30.626,19.553-50.293,21.837C545.748,272.788,590.1,316.084,590.1,316.084ZM399.266,185.441q14-.373,28.929-1.119a107.881,107.881,0,0,0,25.942-4.105q11.01-3.361,17.823-9.8a44.124,44.124,0,0,0,10.732-16.89q3.92-10.451,3.917-25.757,0-26.688-13.342-42.736T415.13,68.981q-6.9,0-15.864.749Z"
@@ -31,9 +16,7 @@
         </svg>
     </div>
 </template>
-<script setup>
 
-</script>
 <style scoped>
 #loader {
     top: 0px;
@@ -45,7 +28,6 @@
         path {
             opacity: 0.4;
             fill: var(--grey);
-
             animation-duration: 3s;
             animation-timing-function: var(--curve);
             animation-iteration-count: infinite;

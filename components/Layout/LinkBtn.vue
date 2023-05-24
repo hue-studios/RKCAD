@@ -18,7 +18,8 @@ const props = defineProps({
     font-size: 0.75rem;
     line-height: 1rem;
     margin-top: 10px;
-    @apply inline-block tracking-wider font-bold;
+    font-weight: 900;
+    @apply inline-block tracking-wider;
     .nuxt-icon {
         height: 12px;
         fill: black;

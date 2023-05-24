@@ -82,6 +82,16 @@ const formattedTitle = computed(() => {
 })
 </script>
 <style scoped>
+.team {
+  .page__body {
+    @apply max-w-7xl;
+  }
+  &-detail {
+    position:fixed;
+    right: 0px;
+    height: 100vh;
+  }
+}
 .employment {
   h4 {
     font-size: 16px;

@@ -1,10 +1,8 @@
 <template>
-  <div class="team-card-wrapper">
+  <div class="team-card-wrapper" @click.prevent="showProfile">
     <!-- @click="handleView($event)" -->
     <div
       class="flex flex-col items-start team-card"
-      :class="{ expanded: showBody }"
-      :style="styleObject"
     >
       <div class="flex flex-col items-start justify-start team-card__header">
         <div
@@ -24,52 +22,27 @@
         </div>
         <h3 class="w-full uppercase">{{ person.name }}</h3>
         <h5 class="w-full uppercase">{{ person.title }} {{ person.status }}</h5>
-        <a @click.prevent class="w-full uppercase rkc-link"
+        <a  class="w-full uppercase rkc-link"
           >Bio <nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon"
         /></a>
-      </div>
-      <div class="hidden team-card__body">
-        <p>
-          {{ person.bio }}
-        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useProfileStore } from '~~/store/ProfileStore'
+const profileStore = useProfileStore()
 const props = defineProps({
   person: {
     type: Object,
     default: {},
   },
 })
-const styleObject = ref({
-  transform: 'translate(0px, 0px)',
-})
-const showBody = ref(false)
-function handleView(el) {
-  showBody.value = !showBody.value
-  let viewportOffset = el.target.getBoundingClientRect()
-  const icon = document.getElementById('rkc-bg-icon')
-  if (showBody.value) {
-    document.body.style.top = '-' + window.scrollY + 'px'
-    document.body.style.position = 'fixed'
-    styleObject.value.transform =
-      'translate(' +
-      viewportOffset.left * -1 +
-      'px, ' +
-      viewportOffset.top * -1 +
-      'px)'
-    console.log(icon)
-    icon.classList.add('colored')
-  } else {
-    styleObject.value = { transform: 'translate(0px, 0px)' }
-    let scrollY = document.body.style.top
-    document.body.style.position = ''
-    document.body.style.top = ''
-    icon.classList.remove('colored')
-  }
+function showProfile() {
+  profileStore.setProfile(props.person);
+  const element = document.getElementById('profile-toggle')
+  element.checked = true
 }
 </script>
 
@@ -142,6 +115,9 @@ function handleView(el) {
     pointer-events: none;
     width: 100%;
     max-width: 500px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
     p {
       font-size: 0.875rem;
       line-height: 1.5rem;

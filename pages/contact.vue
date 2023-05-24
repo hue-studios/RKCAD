@@ -3,7 +3,7 @@
     class="bg-cover bg-center bg-no-repeat relative w-full h-screen flex flex-row items-end justify-end overflow-hidden contact"
   >
     <LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
-    <div class="w-full text-left max-w-7xl contact__info">
+    <div class="w-full text-left contact__info">
       <h1 class="w-full uppercase white tracking-wider">Studio</h1>
       <p>16 Maple St Summit NJ</p>
       <p><a href="tel:(908) 273-6565" target="_blank">908.273.6565</a></p>
