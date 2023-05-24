@@ -14,9 +14,9 @@
       <div class="team-profile__content-body">
         <h1>{{ profileStore.profile.name }}</h1>
         <h5>{{ profileStore.profile.title }}</h5>
-        <p v-html="replaceNewlinesWithBreaks(profileStore.profile.bio)"></p>
-        <div v-html="profileStore.profile.quote"></div>
-        <h5>Education</h5>
+        <p v-if="profileStore.profile.bio" v-html="replaceNewlinesWithBreaks(profileStore.profile.bio)"></p>
+        <div v-if="profileStore.profile.quote" v-html="profileStore.profile.quote"></div>
+        <h5 v-if="profileStore.profile.education">Education</h5>
         <p v-html="replaceNewlinesWithBreaks(profileStore.profile.education)"></p>
       </div>
 
@@ -48,14 +48,14 @@ function closeProfile() {
   width: 100%;
   z-index: 50;
   transform: translateX(100%);
-  transition: 0.55s var(--curve);
+  transition: 0.65s var(--curve);
 
   &__content {
     &-image {
       width: 100%;
       height: 350px;
-      transition: 0.55s var(--curve);
-      transform: translateX(800px);
+      transition: 0.65s var(--curve);
+      transform: translateX(200px);
       z-index: 10;
       @apply bg-center bg-cover bg-no-repeat;
 
@@ -126,23 +126,15 @@ function closeProfile() {
         margin-top: 10px;
         margin-bottom: 10px;
 
-        transition: 0.55s var(--curve) 0.05s;
-        transform: translateX(200px);
+        transition: 0.65s var(--curve) 0.05s;
+        transform: translateX(100px);
         opacity: 0;
         @apply uppercase tracking-wider font-light;
       }
 
-
-
       h5 {
-        font-size: 0.75rem;
-        line-height: 1rem;
-        @apply font-light;
-      }
-
-      h5 {
-        transition: 0.55s var(--curve) 0.1s;
-        transform: translateX(200px);
+        transition: 0.65s var(--curve) 0.1s;
+        transform: translateX(100px);
         opacity: 0;
         font-size: 0.75rem;
         line-height: 1rem;
@@ -151,8 +143,8 @@ function closeProfile() {
 
       p {
         margin-bottom: 0.5rem;
-        transition: 0.55s var(--curve) 0.13s;
-        transform: translateX(200px);
+        transition: 0.65s var(--curve) 0.13s;
+        transform: translateX(100px);
         opacity: 0;
 
       }
