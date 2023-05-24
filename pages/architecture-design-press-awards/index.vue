@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div v-if="isImageLoaded"
     class="relative w-full min-h-screen flex flex-wrap flex-col justify-center items-center press"
   >
     <div
@@ -40,6 +40,7 @@
       />
     </div>
   </div>
+  <LayoutLoader v-else />
 </template>
 
 <script setup>
@@ -52,6 +53,17 @@ const press = await getItems({
     ],
   },
 })
+const isImageLoaded = ref(false);
+onMounted(() => {
+  const image = new Image();
+    image.src = 'https://admin.rkcad.com/assets/' +
+    press.header_image + 'key=xlarge';
+
+    image.onload = () => {
+      isImageLoaded.value = true;
+    };
+ 
+});
 const formattedTitle = computed(() => {
   return press.title.replace(/\n/g, '<br>')
 })

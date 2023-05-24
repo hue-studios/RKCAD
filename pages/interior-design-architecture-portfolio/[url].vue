@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div v-if="isImageLoaded"
     class="relative w-full flex items-center justify-center flex-col min-h-screen project"
   >
     <div
@@ -69,6 +69,7 @@
       <ProjectsPressSlider :slides="project.press_and_awards" />
     </div>
   </div>
+  <LayoutLoader v-else />
 </template>
 
 <script setup>
@@ -106,6 +107,21 @@ const { data, pending, error, refresh } = await useAsyncData('posts', () => {
 //   },
 // })
 const project = ref(data.value[0])
+const isImageLoaded = ref(true);
+onMounted(() => {
+  if(project.value.images.length > 0) {
+  const image = new Image();
+    image.src = 'https://admin.rkcad.com/assets/' +
+    project.value.images[0].directus_files_id.id + 'key=xlarge';
+
+    image.onload = () => {
+      isImageLoaded.value = true;
+    };
+  } else {
+    isImageLoaded.value = true;
+  }
+ 
+});
 </script>
 <style>
 .project {
