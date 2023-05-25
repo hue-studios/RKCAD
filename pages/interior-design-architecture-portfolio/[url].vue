@@ -41,7 +41,7 @@
       class="flex items-center flex-col justify-start tracking-wide my-20 px-4 xl:px-0 project__content"
     >
       <h1 class="w-full">
-        {{ project.title }}
+        {{ removeFirst(project.title) }}
         <span class="hidden">
           <span v-for="(category, index) in project.category" :key="index">{{
             category
@@ -107,7 +107,7 @@ const { data, pending, error, refresh } = await useAsyncData('posts', () => {
 //   },
 // })
 const project = ref(data.value[0])
-const isImageLoaded = ref(true);
+const isImageLoaded = ref(false);
 onMounted(() => {
   if(project.value.images.length > 0) {
   const image = new Image();
@@ -147,6 +147,7 @@ onMounted(() => {
   }
   &__projects-nav {
     bottom: 200px;
+    @apply hidden lg:flex;
     a {
       font-size: 10px;
       @apply uppercase tracking-wide;

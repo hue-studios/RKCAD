@@ -17,19 +17,19 @@
       ></h1>
     </div>
     <div
-      class="max-w-7xl flex flex-wrap flex-row items-center justify-between w-full page__body"
+      class="flex flex-wrap flex-row items-center justify-stretch w-full page__body"
     >
-      <div class="w-full uppercase page__body-header">
+      <div class="w-full uppercase mb-10 px-4 md:px-6 page__body-header">
         <h2 class="page__body-header-subtitle">Recognition</h2>
         <h3 class="page__body-header-title">Published/ <br />Press</h3>
-        <p class="normal-case max-w-2xl mb-20">{{ press.introduction }}</p>
+        <p class="normal-case mb-6 page__body-header-intro">{{ press.introduction }}</p>
       </div>
       <CardsArticleCard
         v-for="(article, index) in pressArticles"
         :key="index"
         :article="article"
       />
-      <div class="w-full uppercase page__body-header">
+      <div class="w-full uppercase mb-6 px-4 md:px-6 page__body-header">
         <h2 class="page__body-header-subtitle">Recognition</h2>
         <h3 class="page__body-header-title">Published/ <br />Awards</h3>
       </div>
@@ -78,5 +78,14 @@ const awardArticles = computed(() => {
   })
 })
 </script>
-<style scoped>
+<style >
+.press {
+  .page__body {
+
+    @apply max-w-7xl px-0;
+    &-header {
+     
+    }
+  }
+}
 </style>

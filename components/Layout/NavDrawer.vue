@@ -59,7 +59,7 @@ onClickOutside(navDrawerRef, (event) => {
   closeNavDrawer()
 })
 </script>
-<style scoped>
+<style>
 .nav-drawer {
   min-height: 100vh;
   max-height: 100vh;
@@ -68,7 +68,7 @@ onClickOutside(navDrawerRef, (event) => {
   right: 0px;
   top: 0px;
   z-index: 30;
-  background: rgba(123, 145, 163, 0.85);
+  background: rgba(123, 145, 163, 0.95);
   transform: translateX(100%);
   transition: 0.55s var(--curve);
   @apply shadow-lg;
@@ -146,9 +146,9 @@ onClickOutside(navDrawerRef, (event) => {
     }
   }
 }
-#nav-drawer-toggle:checked ~ .page-content {
-  transform: matrix(1, 0, 0, 1, 8, 0);
-  transform: translateX(8px);
+#nav-drawer-toggle:checked ~ .page__content {
+  /* transform: matrix(1, 0, 0, 1, 8, 0); */
+  transform: translateX(-10px);
   filter: blur(2px);
 }
 

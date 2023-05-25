@@ -4,10 +4,14 @@
       page="Work"
       :class="{ on: pageStore.page === 'page-work-detail' }"
     />
+    <LayoutBackButton
+      page="Press"
+      :class="{ on: pageStore.page === 'page-press-detail' }"
+    />
     <nuxt-link
       to="/"
       class="inline-block rkc-logo"
-      :class="{ on: pageStore.page === 'page-work-detail' }"
+      :class="{ on: pageStore.page === 'page-work-detail'  || pageStore.page === 'page-press-detail' }"
     >
       <nuxt-icon name="rkc" class="rkc-icon" /> 
     </nuxt-link>
@@ -62,7 +66,7 @@ const pageStore = usePageStore()
     margin-left: 80px;
   }
 }
-.page-work-detail{
+.page-work-detail, .page-press-detail {
   .rkc-icon {
     color: var(--blue);
   }

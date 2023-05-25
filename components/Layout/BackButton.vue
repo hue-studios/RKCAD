@@ -1,17 +1,11 @@
 <template>
-  <a
-    class="relative back-btn"
-    @click.prevent="goBack()"
-    @mouseenter="hover = true"
-    @mouseleave="hover = false"
-  >
+  <a class="relative back-btn" @click.prevent="goBack()" @mouseenter="hover = true" @mouseleave="hover = false">
     <span class="arrow" :class="{ hide: hover }">
       <nuxt-icon name="arrow-left" class="mr-2 arrow-left-icon" />
     </span>
-    <span class="absolute text" :class="{ show: hover }"
-      ><nuxt-icon name="arrow-left" class="mr-2 arrow-left-icon" />Back to
-      {{ page }}</span
-    >
+    <span class="absolute text" :class="{ show: hover }"><nuxt-icon name="arrow-left" class="mr-2 arrow-left-icon" />Back
+      to
+      {{ page }}</span>
   </a>
 </template>
 <script setup>
@@ -24,15 +18,20 @@ const props = defineProps({
 const hover = ref(false)
 const router = useRouter()
 function goBack() {
-  router.push({ path: '/interior-design-architecture-portfolio/' })
+  if (props.page === 'Work') {
+    router.push({ path: '/interior-design-architecture-portfolio/' });
+  } else if (props.page === 'Press') {
+    router.push({ path: '/architecture-design-press-awards/' });
+  }
 }
 </script>
 <style>
 .back-btn {
   transition: all 0.4s var(--curve);
   @apply w-auto flex items-center justify-center uppercase cursor-pointer;
-  @media (min-width: theme('screens.xl')) {
-  }
+
+  @media (min-width: theme('screens.xl')) {}
+
   .arrow {
     height: 65px;
     padding-left: 20px;
@@ -41,6 +40,7 @@ function goBack() {
     background: var(--blue);
     transition: all 0.4s var(--curve);
     @apply w-auto flex items-center justify-center uppercase;
+
     .arrow-left-icon {
       height: 30px;
 
@@ -48,9 +48,11 @@ function goBack() {
 
       color: var(--white);
       @apply inline-block;
+
       svg {
         height: 30px;
         display: inline-block !important;
+
         path {
           stroke-width: 5px;
           stroke: var(--white) !important;
@@ -58,14 +60,17 @@ function goBack() {
       }
     }
   }
+
   .arrow.hide {
     opacity: 0;
     transform: translateX(60px);
+
     .arrow-left-icon {
       opacity: 0;
       transform: translateX(120px);
     }
   }
+
   .text {
     opacity: 0;
     transform: translateX(-80px);
@@ -77,6 +82,7 @@ function goBack() {
     width: 160px;
     left: 0px;
     @apply block uppercase font-bold flex items-center justify-center uppercase;
+
     .arrow-left-icon {
       height: 30px;
 
@@ -84,9 +90,11 @@ function goBack() {
 
       color: var(--white);
       @apply inline-block;
+
       svg {
         height: 30px;
         display: inline-block !important;
+
         path {
           stroke-width: 5px;
           stroke: var(--white) !important;
@@ -94,6 +102,7 @@ function goBack() {
       }
     }
   }
+
   .text.show {
     opacity: 1;
     transform: translateX(0px);

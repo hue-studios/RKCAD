@@ -1,6 +1,7 @@
 <template>
     <nuxt-link :to="link" class="uppercase rkc-link">
-        <slot></slot> <nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon" />
+        <slot></slot>
+        <nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon" />
     </nuxt-link>
 </template>
 
@@ -20,14 +21,19 @@ const props = defineProps({
     margin-top: 10px;
     font-weight: 900;
     @apply inline-block tracking-wider;
+
     .nuxt-icon {
         height: 12px;
         fill: black;
         transition: 0.4s var(--curve);
+        display: inline-block !important;
+        transform: translateX(0px);
+
         svg {
             margin-top: -2px;
             height: 12px;
             display: inline-block !important;
+
             path {
                 stroke-width: 10px;
                 stroke: var(--blue) !important;
@@ -35,9 +41,10 @@ const props = defineProps({
         }
     }
 }
-.rkc-link:hover  {
+
+.rkc-link:hover {
     .nuxt-icon {
-        margin-left: 10px;
+        transform: translateX(10px)
     }
 }
 </style>

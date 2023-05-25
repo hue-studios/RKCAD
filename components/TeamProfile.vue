@@ -15,7 +15,7 @@
         <h1>{{ profileStore.profile.name }}</h1>
         <h5>{{ profileStore.profile.title }}</h5>
         <p v-if="profileStore.profile.bio" v-html="replaceNewlinesWithBreaks(profileStore.profile.bio)"></p>
-        <div v-if="profileStore.profile.quote" v-html="profileStore.profile.quote"></div>
+        <div v-if="profileStore.profile.quote" v-html="profileStore.profile.quote" class="team-profile__quote"></div>
         <h5 v-if="profileStore.profile.education">Education</h5>
         <p v-html="replaceNewlinesWithBreaks(profileStore.profile.education)"></p>
       </div>
@@ -41,21 +41,27 @@ function closeProfile() {
 .team-profile {
   height: 100vh;
   position: fixed;
-  right: 0px;
-  top: 0px;
+  bottom: 0px;
+  left: 0px;
   background: var(--blue);
   color: var(--white);
   width: 100%;
   z-index: 50;
-  transform: translateX(100%);
+  transform: translateY(100%);
   transition: 0.65s var(--curve);
+
+  @media (min-width: theme('screens.lg')) {
+    top: 0px;
+    bottom: auto;
+    transform: translateX(100%) translateY(0%);
+  }
 
   &__content {
     &-image {
       width: 100%;
       height: 350px;
       transition: 0.65s var(--curve);
-      transform: translateX(200px);
+      transform: translateY(200px);
       z-index: 10;
       @apply bg-center bg-cover bg-no-repeat;
 
@@ -64,6 +70,9 @@ function closeProfile() {
       @media (min-width: theme('screens.lg')) {
         width: 500px;
         height: 500px;
+
+        transform: translateX(200px) translateY(0px);
+
       }
 
       svg {
@@ -111,7 +120,7 @@ function closeProfile() {
       }
     }
 
-    &-body {
+    .team-profile__content-body {
       width: 100%;
       padding: 1rem;
 
@@ -127,35 +136,63 @@ function closeProfile() {
         margin-bottom: 10px;
 
         transition: 0.65s var(--curve) 0.05s;
-        transform: translateX(100px);
+        transform: translateY(100px);
         opacity: 0;
         @apply uppercase tracking-wider font-light;
+
+        @media (min-width: theme('screens.lg')) {
+
+          transform: translateX(100px) translateY(0px);
+        }
       }
 
       h5 {
         transition: 0.65s var(--curve) 0.1s;
-        transform: translateX(100px);
+        transform: translateY(100px);
         opacity: 0;
         font-size: 0.75rem;
         line-height: 1rem;
         @apply tracking-wider my-4 uppercase font-bold;
+
+        @media (min-width: theme('screens.lg')) {
+
+          transform: translateX(100px) translateY(0px);
+        }
       }
 
       p {
         margin-bottom: 0.5rem;
-        transition: 0.65s var(--curve) 0.13s;
-        transform: translateX(100px);
+        transition: 0.65s var(--curve) 0.12s;
+        transform: translateY(100px);
         opacity: 0;
 
+        @media (min-width: theme('screens.lg')) {
+
+          transform: translateX(100px) translateY(0px);
+        }
+      }
+
+      .team-profile__quote {
+        margin-bottom: 0.5rem;
+        transition: 0.65s var(--curve) 0.14s;
+        transform: translateY(100px);
+        opacity: 0;
+
+        @media (min-width: theme('screens.lg')) {
+
+          transform: translateX(100px) translateY(0px);
+        }
+      }
+
+      h5:nth-of-type(2) {
+        transition-delay: 0.16s;
       }
 
       p:nth-of-type(2) {
         transition-delay: 0.15s;
       }
 
-      h5:nth-of-type(2) {
-        transition-delay: 0.16s;
-      }
+
 
       p:nth-of-type(3) {
         transition-delay: 0.17s;
@@ -164,28 +201,70 @@ function closeProfile() {
   }
 }
 
+#profile-toggle:checked~.page__content {
+  /* transform: matrix(1, 0, 0, 1, -80, 0); */
+  transform: translateX(-80px);
+  filter: blur(2px) grayscale(1);
+}
+
 #profile-toggle:checked~.team-profile {
-  transform: translateX(0%);
+  transform: translateY(0%);
+
+  @media (min-width: theme('screens.lg')) {
+
+    transform: translateX(0%) translateY(0%);
+  }
 
   .team-profile__content-image {
-    transform: translateX(0px);
+    transform: translateY(0px);
+
+    @media (min-width: theme('screens.lg')) {
+
+      transform: translateX(0%) translateY(0%);
+    }
   }
 
   .team-profile__content-body {
     h1 {
-      transform: translateX(0px);
+      transform: translateY(0px);
       opacity: 1;
+
+      @media (min-width: theme('screens.lg')) {
+
+        transform: translateX(0%) translateY(0%);
+      }
     }
 
     h5 {
-      transform: translateX(0px);
+      transform: translateY(0px);
       opacity: 1;
+
+      @media (min-width: theme('screens.lg')) {
+
+        transform: translateX(0%) translateY(0%);
+      }
     }
 
     p {
-      transform: translateX(0px);
+      transform: translateY(0px);
       opacity: 1;
+
+      @media (min-width: theme('screens.lg')) {
+
+        transform: translateX(0%) translateY(0%);
+      }
+    }
+
+    .team-profile__quote {
+      transform: translateY(0px);
+      opacity: 1;
+
+      @media (min-width: theme('screens.lg')) {
+
+        transform: translateX(0%) translateY(0%);
+      }
     }
   }
 
-}</style>
+}
+</style>

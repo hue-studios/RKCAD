@@ -1,30 +1,17 @@
 <template>
-  <div class="article-card-wrapper">
-    <div class="flex flex-col items-start article-card">
-      <div class="flex flex-col items-start justify-start article-card__header">
-        <div
-          v-if="article.images.length > 0"
-          :style="
-            'background-image: url(https://admin.rkcad.com/assets/' +
-            article.images[0].directus_files_id +
-            'key=small)'
-          "
-          class="bg-repeat-none bg-center bg-contain article-card__header-image"
-        />
-        <div
-          v-else
-          class="flex items-center justify-center article-card__header-image"
-        >
-          <LayoutRkc class="rkc-icon" />
-        </div>
-        <h3 class="w-full uppercase">{{ article.title }}</h3>
-        <!-- <h5 class="w-full uppercase">{{ article.category }}</h5>
-        <a @click.prevent class="w-full uppercase"
-          >Bio <nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon"
-        /></a> -->
-      </div>
+  <div class="article-card__wrapper">
+  <nuxt-link :to="'/architecture-design-press-awards/' + article.url"
+    class="relative flex flex-col items-start article-card">
+    <div v-if="article.images.length > 0" :style="'background-image: url(https://admin.rkcad.com/assets/' +
+      article.images[0].directus_files_id +
+      'key=small)'
+      " class="bg-no-repeat bg-center bg-cover article-card__image" />
+    <div v-else class="flex items-center justify-center article-card__image">
+      <LayoutRkc class="rkc-icon" />
     </div>
-  </div>
+    <h3 class="w-full uppercase article-card__title">{{ article.title }}</h3>
+  </nuxt-link>
+</div>
 </template>
 
 <script setup>
@@ -36,90 +23,87 @@ const props = defineProps({
 })
 </script>
 
-<style >
-.article-card-wrapper {
-  margin-bottom: 20px;
+<style>
+.article-card__wrapper {
+
+  @apply mb-6 md:mb-12 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-5 md:px-6;
+
+
+  /* @media (min-width: 840px) {
+    width: 25%;
+  }
+  @media (min-width: theme('screens.lg')) {
+ 
+  } */
 }
 .article-card {
   margin-bottom: 1rem;
   position: relative;
-  width: 225px;
-  height: 300px;
-  overflow: hidden;
+  width: 100%;
+  height: 220px;
   cursor: pointer;
   z-index: 1;
-  transform-origin: center center;
   transition: all 0.35s var(--curve);
-  @apply overflow-hidden;
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    pointer-events: none;
-    @apply tracking-wide;
-    &-image {
-      width: 225px;
-      height: 300px;
-      background-color: var(--grey);
-      margin-bottom: 0.1rem;
-      svg {
-        fill: var(--white);
-      }
-    }
-    h3 {
-      font-size: 2rem;
-      line-height: 1.5rem;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      overflow-wrap: break-word;
-      @apply font-light break-words;
-    }
-    h5 {
-      font-size: 0.75rem;
-      line-height: 1rem;
-      overflow-wrap: break-word;
-      @apply font-light break-words;
-    }
-    a {
-      font-size: 0.75rem;
-      line-height: 1rem;
-      margin-top: 10px;
-      @apply inline-block;
-      .nuxt-icon {
-        height: 12px;
-        fill: black;
-        transition: 0.4s var(--curve);
 
-        svg {
-          margin-top: -2px;
-          height: 12px;
-          display: inline-block !important;
-          line {
-            stroke-width: 3px;
-            stroke: var(--blue) !important;
-          }
-        }
-      }
+  @media (min-width: theme('screens.sm')) {
+    height: 225px;
+  }
+
+  @media (min-width: theme('screens.md')) {
+    height: 250px;
+  }
+
+  @media (min-width: theme('screens.lg')) {
+    /* height: 300px; */
+    height: 250px;
+  }
+
+  @media (min-width: theme('screens.xl')) {
+    
+  }
+
+  @media (min-width: theme('screens.2xl')) {
+   
+  }
+  &__image {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(167, 169, 172, 0.45);
+    transform: scale(1.1);
+    transition: all 0.5s var(--curve);
+  
+    svg {
+      
+      padding: 0 20px;
+      fill: rgba(255, 255, 255, 0.5);
     }
   }
-  &__body {
-    pointer-events: none;
-    width: 100%;
-    max-width: 500px;
-    p {
-      font-size: 0.875rem;
-      line-height: 1.5rem;
-    }
+
+
+  &__title {
+    bottom: 20px;
+    left: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: var(--white);
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 900 !important;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s var(--curve);
+    @apply w-full z-10 absolute uppercase tracking-wider font-body;
+
   }
 }
 
-.expanded {
-  z-index: 9999;
-  width: 100vw;
-  height: 100vh;
-  color: var(--white);
-  background-color: var(--blue2);
-  @apply flex-row;
+.article-card:hover>.article-card__image {
+  transform: scale(1);
+  background-color: rgba(167, 169, 172, 1.0);
+}
+
+.article-card:hover>.article-card__title {
+  opacity: 1;
+  transform: translateY(0px);
 }
 </style>

@@ -25,7 +25,7 @@ import { screen } from '~~/composables/useScreen'
 <style>
 .page {
   &__content {
-    transition: all 0.35s var(--curve);
+    transition: all 0.55s var(--curve);
   }
 
   /* .nuxt-page {
@@ -93,7 +93,7 @@ import { screen } from '~~/composables/useScreen'
     &-header {
       &-subtitle {
         font-size: 10px;
-        line-height: 1.5rem;
+        line-height: 2rem;
         @apply font-bold tracking-wider;
       }
 
@@ -101,7 +101,7 @@ import { screen } from '~~/composables/useScreen'
         font-size: 2rem;
         line-height: 2rem;
         font-family: var(--light-font);
-        @apply font-light tracking-wide;
+        @apply font-light tracking-wide mb-8;
 
         @media (min-width: theme('screens.lg')) {
           font-size: 42px;
@@ -113,8 +113,12 @@ import { screen } from '~~/composables/useScreen'
           line-height: 58px;
         }
       }
+      &-intro {
+        width: 100%;
+        max-width:375px;
+      }
     }
- 
+
   }
 }
 
@@ -175,4 +179,5 @@ import { screen } from '~~/composables/useScreen'
 .screen-enter,
 .screen-leave-to {
   opacity: 0;
-}</style>
+}
+</style>

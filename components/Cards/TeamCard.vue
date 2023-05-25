@@ -1,30 +1,19 @@
 <template>
   <div class="team-card-wrapper" @click.prevent="showProfile">
     <!-- @click="handleView($event)" -->
-    <div
-      class="flex flex-col items-start team-card"
-    >
+    <div class="flex flex-col items-start team-card">
       <div class="flex flex-col items-start justify-start team-card__header">
-        <div
-          v-if="person.image"
-          :style="
-            'background-image: url(https://admin.rkcad.com/assets/' +
-            person.image +
-            'key=small)'
-          "
-          class="bg-repeat-none bg-center bg-cover team-card__header-image"
-        />
-        <div
-          v-else
-          class="flex items-center justify-center team-card__header-image"
-        >
+        <div v-if="person.image" :style="'background-image: url(https://admin.rkcad.com/assets/' +
+          person.image +
+          'key=small)'
+          " class="bg-repeat-none bg-center bg-cover team-card__header-image" />
+        <div v-else class="flex items-center justify-center team-card__header-image">
           <LayoutRkc class="rkc-icon" />
         </div>
         <h3 class="w-full uppercase">{{ person.name }}</h3>
         <h5 class="w-full uppercase">{{ person.title }} {{ person.status }}</h5>
-        <a  class="w-full uppercase rkc-link"
-          >Bio <nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon"
-        /></a>
+        <LayoutLinkBtn class="w-full">Bio</LayoutLinkBtn>
+        <!-- <a class="w-full uppercase rkc-link">Bio <nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon" /></a> -->
       </div>
     </div>
   </div>
@@ -50,6 +39,7 @@ function showProfile() {
 .team-card-wrapper {
   margin-bottom: 20px;
 }
+
 .team-card {
   margin-bottom: 1rem;
   position: relative;
@@ -60,6 +50,7 @@ function showProfile() {
   z-index: 1;
   transform-origin: center center;
   transition: all 0.35s var(--curve);
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -67,15 +58,18 @@ function showProfile() {
     margin-bottom: 1rem;
     pointer-events: none;
     @apply tracking-wide;
+
     &-image {
       width: 375px;
       height: 375px;
       background-color: var(--grey);
       margin-bottom: 0.1rem;
+
       svg {
         fill: var(--white);
       }
     }
+
     h3 {
       font-size: 2rem;
       line-height: 1.5rem;
@@ -83,11 +77,13 @@ function showProfile() {
       margin-bottom: 10px;
       @apply font-light;
     }
+
     h5 {
       font-size: 0.75rem;
       line-height: 1rem;
       @apply font-light;
     }
+
     /* a {
       font-size: 0.75rem;
       line-height: 1rem;
@@ -110,7 +106,9 @@ function showProfile() {
         }
       }
     } */
+
   }
+
   &__body {
     pointer-events: none;
     width: 100%;
@@ -118,6 +116,7 @@ function showProfile() {
     position: fixed;
     top: 0px;
     left: 0px;
+
     p {
       font-size: 0.875rem;
       line-height: 1.5rem;

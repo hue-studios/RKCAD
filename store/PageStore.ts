@@ -4,6 +4,7 @@ export const usePageStore = defineStore('PageStore', {
   }),
   actions: {
     addClass(route) {
+      console.log(route)
       this.page = route
     },
   },

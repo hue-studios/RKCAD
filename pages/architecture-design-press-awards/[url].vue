@@ -2,59 +2,26 @@
   <div v-if="isImageLoaded"
     class="relative w-full flex items-center justify-center flex-col min-h-screen project"
   >
-    <div class="w-full project__slideshow">
-      <UtilitiesSlideshow :slides="project.images" />
+  <div class="w-full relative project__slideshow">
+      <UtilitiesSlideshowThumbs v-if="article.images.length" :slides="article.images" />
+     
     </div>
     <div
       class="w-full flex items-start lg:items-end flex-col lg:flex-row justify-between uppercase tracking-wide mt-20 px-4 project__header"
     >
       <h1 class="relative">
-        {{ project.title }}
+        {{ article.title }}
         <span class="hidden">
-          <span v-for="(category, index) in project.category" :key="index">{{
-            category
+          <span>{{
+            article.category
           }}</span>
-          Project by Rosen Kelly Conway</span
+          Article for Rosen Kelly Conway</span
         >
-        <div
-          class="absolute w-full flex items-center justify-between flex-row project__header-nav"
-        >
-          <ProjectsPrevProjectBtn :sort="project.sort" />
-          <ProjectsNextProjectBtn :sort="project.sort" />
-        </div>
+       
       </h1>
 
-      <div class="flex flex-row project__header-category">
-        <h2 v-if="project.category" class="mr-4">
-          <span class="">Category: </span>
-          <span v-for="(category, index) in project.category" :key="index">{{
-            category
-          }}</span>
-        </h2>
-        <h2 v-if="project.style" class="ml-4">
-          <span class="">Style: </span> {{ project.style }}
-        </h2>
-      </div>
-    </div>
-    <div
-      class="flex items-center flex-col lg:flex-row justify-start tracking-wide my-20 px-4 project__content"
-    >
-      <div v-if="project.challenge">
-        <h4 class="uppercase block tracking-wider mb-4">Challenge</h4>
-        <p class="text-sm leading-8">{{ project.challenge }}</p>
-      </div>
-      <div v-if="project.approach" class="py-6 lg:py-0 lg:px-6">
-        <h4 class="uppercase block tracking-wider mb-4">Approach</h4>
-        <p class="text-sm leading-8">{{ project.approach }}</p>
-      </div>
-      <div v-if="project.result">
-        <h4 class="uppercase block tracking-wider mb-4">Result</h4>
-        <p class="text-sm leading-8">{{ project.result }}</p>
-      </div>
-    </div>
-    <div class="project__recognition">
-      <ProjectsPressSlider :slides="project.press_and_awards" />
-    </div>
+     </div>
+   
   </div>
   <LayoutLoader v-else />
 </template>
@@ -62,9 +29,9 @@
 <script setup>
 const { params, path } = useRoute()
 const { getItems } = useDirectusItems()
-const { data, pending, error, refresh } = await useAsyncData('posts', () => {
+const { data, pending, error, refresh } = await useAsyncData('articles', () => {
   return getItems({
-    collection: 'projects',
+    collection: 'articles',
     params: {
       filter: {
         url: {
@@ -72,36 +39,27 @@ const { data, pending, error, refresh } = await useAsyncData('posts', () => {
         },
       },
       fields: [
-        'approach, before_after.directus_files_id,category,challenge,credits,id,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags,intro,result,sort,style,title,url,press_and_awards.press_id.category,press_and_awards.press_id.category,press_and_awards.press_id.title,press_and_awards.press_id.description,press_and_awards.press_id.url,press_and_awards.press_id.link,press_and_awards.press_id.images.directus_files_id.id,press_and_awards.press_id.images.directus_files_id.description,press_and_awards.press_id.images.directus_files_id.tags',
+        'category,title,description,link,url,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags',
       ],
     },
   })
 })
-const isImageLoaded = ref(true);
-// onMounted(() => {
-//   const image = new Image();
-//     image.src = 'https://admin.rkcad.com/assets/' +
-//     press.header_image + 'key=xlarge';
+const article = ref(data.value[0])
+const isImageLoaded = ref(false);
+onMounted(() => {
+  if(article.value.images.length > 0) {
+  const image = new Image();
+    image.src = 'https://admin.rkcad.com/assets/' +
+    article.value.images[0].directus_files_id.id  + 'key=xlarge';
+    image.onload = () => {
+      isImageLoaded.value = true;
+    };
+  } else {
+    isImageLoaded.value = true;
+  }
+});
 
-//     image.onload = () => {
-//       isImageLoaded.value = true;
-//     };
- 
-// });
-// const { projectReq, pending } = await getItems({
-//   collection: 'projects',
-//   params: {
-//     filter: {
-//       url: {
-//         _eq: params.url,
-//       },
-//     },
-//     fields: [
-//       'approach, before_after.directus_files_id,category,challenge,credits,id,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags,intro,result,sort,style,title,url,press_and_awards.*',
-//     ],
-//   },
-// })
-const project = ref(data.value[0])
+
 </script>
 <style>
 .project {

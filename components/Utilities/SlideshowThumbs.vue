@@ -1,7 +1,7 @@
 <template>
-  <!-- Main Swiper -> pass thumbs swiper instance -->
   <swiper
-    :modules="[Thumbs, Pagination, Parallax, Navigation]"
+    
+    :modules="[Thumbs, Navigation]"
     :parallax="true"
     :thumbs="{ swiper: thumbsSwiper }"
     :centeredSlides="true"
@@ -27,12 +27,12 @@
   </swiper>
 
   <swiper
-    :modules="[Thumbs]"
+    :modules="[Thumbs, Navigation]"
     watch-slides-progress
+    watch-slides-visibility
     @swiper="setThumbsSwiper"
     class="thumb-swiper"
-    :slidesPerView="auto"
-    :centeredSlides="true"
+    :slidesPerView="'auto'"
     :centeredInsuficientSlides="true"
     :navigation="{
       nextEl: '#slideshowSwiperThumbs__next-btn',
@@ -75,14 +75,16 @@ const images = computed(() => {
     return item.directus_files_id.id
   })
 })
+
 const imageUrl = 'https://admin.rkcad.com/assets/'
-import { Navigation, Pagination, Parallax, Thumbs } from 'swiper'
+import { Navigation, Thumbs } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-const modules = [Parallax, Pagination, Navigation, Thumbs]
+const modules = [ Navigation, Thumbs]
 const thumbsSwiper = ref(null)
 const setThumbsSwiper = (swiper) => {
   thumbsSwiper.value = swiper
 }
+
 </script>
 <style >
 .gallery-swiper {
@@ -107,17 +109,17 @@ const setThumbsSwiper = (swiper) => {
 
   position: relative;
   @media (min-width: theme('screens.lg')) {
-      align-items: center;
+      /* align-items: center;
     justify-content: center;
-    display: flex;
+    display: flex; */
     }
   .swiper-wrapper {
     
     position: relative;
     @media (min-width: theme('screens.lg')) {
-      align-items: center;
+      /* align-items: center;
     justify-content: center;
-    display: flex;
+    display: flex; */
     }
   }
   .swiper-slide {

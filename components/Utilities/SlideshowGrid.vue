@@ -18,7 +18,7 @@
           <div v-else class="absolute w-full h-full flex items-center justify-center work__card-image">
             <LayoutRkc class="rkc-icon" />
           </div>
-          <h2 class="work__card-title">{{ removeOrder(slide.title) }}</h2>
+          <h2 class="work__card-title">{{ removeFirst(slide.title) }}</h2>
         </nuxt-link>
       </swiper-slide>
 
@@ -37,6 +37,7 @@
 </template>
 
 <script setup>
+import {removeFirst} from '~~/utils/strings'
 const props = defineProps({
   slides: {
     type: Array,
@@ -51,35 +52,29 @@ import 'swiper/css'
 import 'swiper/css/grid'
 import { Grid, Parallax, Navigation } from 'swiper'
 const modules = [Parallax, Grid, Navigation]
-function removeOrder(str) {
-  const arr = str.split(". ")
-  // if(arr.length > 1) {
-  //   return arr[1]
-  // }
-  return str
-}
+
 </script>
 <style>
 .slideshowSwiperGrid {
   height: 360px;
 
   @media (min-width: theme('screens.lg')) {
-    height: 810px;
+    height: 660px;
   }
 
   @media (min-width: theme('screens.xl')) {
+    height: 710px;
+  }
+
+  @media (min-width: theme('screens.2xl')) {
     height: 810px;
   }
 
-  /* @media (min-width: theme('screens.2xl')) {
-    height: 810px;
-  } */
-
   .swiper-slide {
     height: 350px;
-    @media (min-width: theme('screens.md')) {
+    /* @media (min-width: theme('screens.md')) {
       height: 350px;
-    }
+    } */
 
     @media (min-width: theme('screens.lg')) {
       height: 325px;
@@ -89,9 +84,9 @@ function removeOrder(str) {
       height: 350px;
     }
 
-    /* @media (min-width: theme('screens.2xl')) {
+    @media (min-width: theme('screens.2xl')) {
       height: 400px;
-    } */
+    }
 
 
   }
@@ -120,7 +115,7 @@ function removeOrder(str) {
 
   &-image {
     height: 350px;
-    background-color: var(--grey);
+    background-color: rgba(167, 169, 172, 0.45);
     transform: scale(1.1);
     transition: all 0.5s var(--curve);
     @media (min-width: theme('screens.md')) {
@@ -140,7 +135,8 @@ function removeOrder(str) {
     }
 
     svg {
-      fill: var(--white);
+      margin: 0 20px;
+      fill: rgba(255,255,255,0.5);
     }
   }
 
@@ -162,6 +158,7 @@ function removeOrder(str) {
 }
 .work__card:hover > .work__card-image {
   transform: scale(1);
+  background-color: rgba(167, 169, 172, 1.0);
 }
 .work__card:hover > .work__card-title {
   opacity: 1;

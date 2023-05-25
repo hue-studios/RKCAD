@@ -2,8 +2,9 @@
   <transition name="fade" mode="out-in">
     <div v-if="isImageLoaded" class="relative w-full min-h-screen flex items-center justify-center flex-col home">
       <transition name="fade" mode="out-in">
-        <div v-if="showIntroAnimation && isImageLoaded" id="animation" class="w-full flex items-center justify-center flex-col"> 
-          <img src="/images/intro-animation.gif" alt="RKC Introduction"  />
+        <div v-if="showIntroAnimation && isImageLoaded" id="animation"
+          class="w-full flex items-center justify-center flex-col">
+          <img src="/images/intro-animation.gif" alt="RKC Introduction" />
         </div>
         <div v-else class="flex items-center justify-center flex-col page__header">
           <swiper :speed="2000" :effect="'fade'" :loop="true" :parallax="true" :modules="modules" :autoplay="true"
@@ -28,16 +29,16 @@
 
       <div class="flex flex-wrap flex-row items-center justify-center w-full page__body">
         <div
-          class="max-w-8xl w-full px-4 2xl:px-0 mt-20 flex items-center justify-between flex-col lg:flex-row page__body-header">
+          class="max-w-8xl w-full px-4 2xl:px-0 mt-20 flex items-center justify-between flex-col lg:flex-row relative page__body-header">
           <div class="w-full lg:w-1/2">
             <h2 class="uppercase page__body-header-subtitle">Process</h2>
             <h3 class="uppercase page__body-header-title">Great Design Begins<br /> with Collaboration</h3>
             <p v-html="home.about_intro" class="my-12"></p>
             <LayoutLinkBtn link="/new-york-architecture-design-studio/">About</LayoutLinkBtn>
           </div>
-          <div class="">
-            <LayoutRkcName />
-          </div>
+
+          <LayoutRkcName />
+
         </div>
 
         <div class="max-w-8xl w-full mt-20 2xl:mt-40 uppercase px-4 2xl:px-0  page__body-header">
@@ -58,25 +59,24 @@
         </div>
         <div class="max-w-8xl w-full px-4 2xl:px-0 mt-20 xl:mt-40 page__body-header">
           <div
-            class="w-full flex items-center justify-between flex-col lg:items-start lg:flex-row flex-wrap home-section">
-            <div class="flex items-start flex-col">
+            class="w-full flex items-center justify-between flex-row flex-wrap lg:items-start lg:flex-row home-section">
+            <div class="w-full md:w-1/2 flex items-start flex-col">
               <h2 class="uppercase page__body-header-subtitle">Culture</h2>
               <h3 class="uppercase page__body-header-title">Meet<br /> the Team</h3>
               <p v-html="home.team_intro" style="width: 375px" class="mb-8"></p>
               <LayoutLinkBtn link="/rosen-kelly-conway-architecture-design-team/">Team</LayoutLinkBtn>
             </div>
 
-            <img src="/images/team-header.jpg" alt="RKC Team" class="w-1/2 h-auto mt-4 mb-8" />
-            <div class="w-full flex items-start flex-col ">
+            <img src="/images/team-header.jpg" alt="RKC Team" class="w-full md:w-1/2 h-auto mt-4 mb-8" />
+            <div class="w-full flex items-start flex-col mt-12 xl:-mt-4 2xl:-mt-20">
               <h2 class="uppercase page__body-header-subtitle">{{ home.featured_profile.name }}</h2>
               <h3 class="uppercase page__body-header-title">Designer<br /> Spotlight</h3>
-              <div class="w-full mt-4 mb-8 flex items-center justify-between flex-row home-section__images">
+              <div class="w-full mt-4 mb-8 flex items-start md:items-center justify-between flex-col md:flex-row home-section__images">
                 <img :src="'https://admin.rkcad.com/assets/' + home.featured_profile.image + '?key=small'" alt="RKC Team"
                   class="" />
-                <div class="mx-4 flex items-end justify-end flex-col home-section__quote">
-                  <h5>"{{ home.featured_profile.quote }}"</h5>
-                  <p>- {{ home.featured_profile.name }}</p>
-                </div>
+             
+                  <div class="mt-4 md:mt-0 md:mx-4 flex items-end justify-end flex-col home-section__quote" v-html="home.featured_profile.quote"> </div>
+              
                 <!-- <img class="mr-4" :src="'https://admin.rkcad.com/assets/b042050e-f042-4cd8-bfb5-fc6eac001f17?key=small'"
                 alt="RKC Team" />
               <img :src="'https://admin.rkcad.com/assets/2ee652e4-2dff-44b8-9971-17283684fe9b?key=small'" alt="RKC Team"
@@ -87,10 +87,10 @@
               <p v-html="home.featured_profile.bio" style="width: 375px"></p>
             </div>
           </div>
-          <div class="max-w-8xl w-full px-4 2xl:px-0 mt-20 xl:mt-40 page__body-header">
+          <div class="w-full mt-20 xl:mt-40 page__body-header">
             <div
-              class="w-full flex items-center justify-between flex-col lg:items-start lg:flex-row flex-wrap home-section">
-              <div class="flex items-start flex-col">
+              class="w-full flex items-center justify-between lg:items-start flex-row flex-wrap home-section">
+              <div class="w-full md:w-1/2 flex items-start flex-col">
                 <h2 class="uppercase page__body-header-subtitle">Featured</h2>
                 <h3 class="uppercase page__body-header-title">Georgian
                   <br /> Colonial
@@ -102,26 +102,8 @@
                 <LayoutLinkBtn link="/">Project</LayoutLinkBtn>
               </div>
 
-              <img src="/images/home-2.png" alt="RKC Team" class="w-1/2 h-auto mt-4 mb-8" />
-              <div class="w-full flex items-start flex-col hidden">
-                <h2 class="uppercase page__body-header-subtitle">{{ home.featured_profile.name }}</h2>
-                <h3 class="uppercase page__body-header-title">Designer<br /> Spotlight</h3>
-                <div class="w-full mt-4 mb-8 flex items-center justify-between flex-row home-section__images">
-                  <img :src="'https://admin.rkcad.com/assets/' + home.featured_profile.image + '?key=small'"
-                    alt="RKC Team" class="" />
-                  <div class="mx-4 flex items-end justify-end flex-col home-section__quote">
-                    <h5>"{{ home.featured_profile.quote }}"</h5>
-                    <p>- {{ home.featured_profile.name }}</p>
-                  </div>
-                  <img class="mr-4" :src="'https://admin.rkcad.com/assets/b042050e-f042-4cd8-bfb5-fc6eac001f17?key=small'"
-                    alt="RKC Team" />
-                  <img :src="'https://admin.rkcad.com/assets/2ee652e4-2dff-44b8-9971-17283684fe9b?key=small'"
-                    alt="RKC Team" class="" />
-
-
-                </div>
-                <p v-html="home.featured_profile.bio" style="width: 375px"></p>
-              </div>
+              <img src="/images/home-2.png" alt="RKC Team" class="w-full md:w-1/2 h-auto mt-4 mb-8" />
+        
             </div>
           </div>
         </div>
@@ -197,7 +179,7 @@ const interior = computed(() => {
   })
 })
 </script>
-<style scoped>
+<style>
 .home {
   .page__header {
     padding-left: 0px;
@@ -218,6 +200,7 @@ const interior = computed(() => {
     @media (min-width: theme('screens.lg')) {
       height: calc(100vh);
     }
+
     img {
       width: 100%;
       height: auto;
@@ -244,6 +227,17 @@ const interior = computed(() => {
   .rkc-name {
     max-width: 400px;
     opacity: 0.85;
+    position: absolute;
+    height: 100px;
+    bottom: -50px;
+    right: -100px;
+    @media (min-width: theme('screens.lg')) {
+      position: relative;
+      max-width: 400px;
+      height: auto;
+      right: auto;
+      bottom: auto;
+    }
   }
 
   &-section {
@@ -264,16 +258,25 @@ const interior = computed(() => {
     &__quote {
       background: var(--blue);
       height: 250px;
-      width: 250px;
       color: var(--white);
-      font-size: 20px;
-      @apply p-4 uppercase tracking-wide;
+      font-size: 14px;
+      font-weight: 400;
+      @apply p-4 uppercase tracking-wide flex-grow;
 
       p {
-        font-size: 10px;
-        @apply mt-4 font-bold;
+        
+        @apply mt-4;
       }
+      
     }
+    
   }
 }
+.home-section__quote
+    {
+      p:last-of-type {
+        font-size: 7px;
+        @apply italic;
+      }
+    }
 </style>

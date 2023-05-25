@@ -1,11 +1,12 @@
 <template>
   <nuxt-link
+  class="prev-project-btn"
     v-if="!pending && prevProject.data.length"
     :to="prevProject.data[0].url + '?direction=prev'"
     ><nuxt-icon name="arrow-left" class="mr-2 arrow-left-icon" /> Prev
     Project</nuxt-link
   >
-  <a v-else class="opacity-40" href="#" @click.prevent
+  <a v-else class="opacity-40 prev-project-btn" href="#" @click.prevent
     ><nuxt-icon name="arrow-left" class="mr-2 arrow-left-icon" /> Prev
     Project</a
   >
