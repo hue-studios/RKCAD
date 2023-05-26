@@ -2,9 +2,9 @@
   <div
     class="w-full  footer"
   >
-  <div class="w-full pt-0 pb-24 px-6 xl:px-0 flex flex-col items-center justify-center mx-auto max-w-7xl">
+  <div class="w-full pt-0 pb-24 px-6 2xl:px-0 flex flex-col items-center justify-center mx-auto max-w-8xl">
     <div
-      class="w-full flex flex-col items-start justify-center lg:flex-row lg:items-end lg:justify-between"
+      class="w-full flex flex-col items-start justify-center md:flex-row md:items-end md:justify-between"
     >
       <div
         class="flex items-start justify-center text-left lg:text-left flex-col shrink-0 mb-8 lg:mb-0 footer__col footer__nav"

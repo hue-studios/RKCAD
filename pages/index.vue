@@ -4,7 +4,7 @@
       <transition name="fade" mode="out-in">
         <div v-if="showIntroAnimation && isImageLoaded" id="animation"
           class="w-full flex items-center justify-center flex-col">
-          <img src="/images/intro-animation.gif" alt="RKC Introduction" />
+          <IntroAnimation />
         </div>
         <div v-else class="flex items-center justify-center flex-col page__header">
           <swiper :speed="2000" :effect="'fade'" :loop="true" :parallax="true" :modules="modules" :autoplay="true"
@@ -144,7 +144,7 @@ onMounted(() => {
 
     image.onload = () => {
       isImageLoaded.value = true;
-      setTimeout(hideIntroAnimation, 3500);
+      setTimeout(hideIntroAnimation, 4500);
     };
   } else {
     isImageLoaded.value = true;
