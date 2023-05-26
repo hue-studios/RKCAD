@@ -4,9 +4,11 @@
 
 body,
 html {
-  color: var(--blue2);
-  letter-spacing: 0.1em;
+  color: var(--blue);
+  letter-spacing: 0.15em;
   font-size: 15px;
+  font-weight: 900;
+
 }
 a {
   transition: all 0.3s var(--curve);

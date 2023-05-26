@@ -68,7 +68,7 @@ module.exports = {
           'sans-serif',
         ],
         bold: [
-          'HelveticaNeueW01-65Medi',
+          'HelveticaNeueW01-45Ligh',
           'Helvetica Neue',
           'Helvetica',
           '-apple-system',

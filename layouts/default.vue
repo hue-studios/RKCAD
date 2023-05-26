@@ -25,22 +25,15 @@ import { screen } from '~~/composables/useScreen'
 <style>
 .page {
   &__content {
-    transition: all 0.55s var(--curve);
+    transition: all 0.65s var(--curve);
   }
-
-  /* .nuxt-page {
-    min-height: calc(90vh - 100px);
-    z-index: 5;
-    position: relative;
-  } */
   &__header {
-    /* padding-top: 65px; */
     height: 500px;
     background-color: rgba(0, 0, 0, 0.35);
     background-blend-mode: darken;
     margin-bottom: 50px;
     overflow: hidden !important;
-    @apply bg-cover bg-center bg-no-repeat w-full flex items-center justify-center px-4 overflow-hidden relative;
+    @apply bg-cover bg-center bg-no-repeat w-full flex items-end justify-center px-4 overflow-hidden relative;
 
     @media (min-width: theme('screens.md')) {}
 
@@ -59,7 +52,10 @@ import { screen } from '~~/composables/useScreen'
 
       path {
         /* fill: rgba(167, 169, 172, 0.1); */
-        fill: rgba(255, 255, 255, 0.075);
+        fill: rgba(255, 255, 255, 0.05);
+        @media (min-width: theme('screens.lg')) {
+          fill: rgba(255, 255, 255, 0.025);
+      }
       }
     }
 
@@ -88,7 +84,7 @@ import { screen } from '~~/composables/useScreen'
   &__body {
     z-index: 10;
     /* background: var(--white); */
-    @apply px-4 2xl:px-0 max-w-8xl;
+    @apply px-4 max-w-8xl;
 
     &-header {
       &-subtitle {
@@ -133,8 +129,11 @@ import { screen } from '~~/composables/useScreen'
   @apply fixed;
 
   path {
-    fill: rgba(167, 169, 172, 0.075);
+    fill: rgba(167, 169, 172, 0.025);
     animation: icon-animation 10s ease-in-out infinite;
+    @media (min-width: theme('screens.lg')) {
+      fill: rgba(167, 169, 172, 0.05);
+        }
   }
 
   /* path:nth-of-type(1) {
@@ -151,15 +150,15 @@ import { screen } from '~~/composables/useScreen'
 
 @keyframes icon-animation {
   0% {
-    fill: rgba(167, 169, 172, 0.075);
+    fill: rgba(167, 169, 172, 0.05);
   }
 
   50% {
-    fill: rgba(167, 169, 172, 0.025);
+    fill: rgba(167, 169, 172, 0.015);
   }
 
   100% {
-    fill: rgba(167, 169, 172, 0.075);
+    fill: rgba(167, 169, 172, 0.05);
   }
 }
 

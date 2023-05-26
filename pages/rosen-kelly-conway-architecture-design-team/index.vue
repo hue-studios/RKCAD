@@ -17,10 +17,10 @@
       ></h1>
     </div>
     <div
-      class=" z-10 flex flex-wrap flex-col lg:flex-row lg:flex-wrap items-start justify-between w-full page__body relative"
+      class="z-10 flex flex-wrap flex-row lg:flex-wrap items-center justify-evenly w-full page__body relative"
     >
   
-      <div class="w-full uppercase mb-20 page__body-header">
+      <div class="w-full uppercase mb-10 px-4 md:px-6 page__body-header">
         <h2 class="page__body-header-subtitle">Culture</h2>
         <h3 class="page__body-header-title">Meet <br />the Team</h3>
       </div>
@@ -28,8 +28,9 @@
         v-for="(person, index) in team.people"
         :key="index"
         :person="person"
+        class="px-4 md:px-6 "
       />
-      <div class="w-full flex items-startjustify-center flex-col lg:flex-row flex-wrap mt-20 employment">
+      <div class="w-full flex items-startjustify-center flex-col lg:flex-row flex-wrap px-4 md:px-6 mt-20 employment">
         <div class="w-full uppercase page__body-header">
         <h2 class="page__body-header-subtitle">Opportunity</h2>
         <h3 class="page__body-header-title">Join <br />the Team</h3>
@@ -84,13 +85,14 @@ const formattedTitle = computed(() => {
 <style scoped>
 .team {
   .page__body {
-    @apply max-w-7xl;
+    @apply max-w-7xl px-0;
   }
   &-detail {
     position:fixed;
     right: 0px;
     height: 100vh;
   }
+ 
 }
 .employment {
   h4 {

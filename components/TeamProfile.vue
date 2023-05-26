@@ -1,6 +1,7 @@
 <template>
-  <div class="flex items-center justify-center flex-col team-profile" @click="closeProfile">
-    <div class="flex items-center justify-center flex-col md:flex-row team-profile__content">
+  <div id="team-profile" class="flex items-center justify-center md:justify-center flex-col overflow-y-scroll team-profile"
+    @click="closeProfile">
+    <div id="team-content" class="flex items-start justify-center flex-col md:flex-row team-profile__content">
       <transition name="fade" mode="out-in">
         <div v-if="profileStore.profile.image" class="team-profile__content-image" :style="'background-image: url(https://admin.rkcad.com/assets/' +
           profileStore.profile.image + '?key=medium'">
@@ -12,11 +13,11 @@
       </transition>
 
       <div class="team-profile__content-body">
-        <h1>{{ profileStore.profile.name }}</h1>
+        <h1>{{ replaceSpaceWithNewlines(profileStore.profile.name) }}</h1>
         <h5>{{ profileStore.profile.title }}</h5>
         <p v-if="profileStore.profile.bio" v-html="replaceNewlinesWithBreaks(profileStore.profile.bio)"></p>
         <div v-if="profileStore.profile.quote" v-html="profileStore.profile.quote" class="team-profile__quote"></div>
-        <h5 v-if="profileStore.profile.education">Education</h5>
+        <h5 v-if="profileStore.profile.education" :class="{ 'mt-10': !profileStore.profile.quote }">Education</h5>
         <p v-html="replaceNewlinesWithBreaks(profileStore.profile.education)"></p>
       </div>
 
@@ -26,13 +27,20 @@
 </template>
 
 <script setup>
-import { replaceNewlinesWithBreaks } from '~~/utils/strings'
+import { replaceNewlinesWithBreaks, replaceSpaceWithNewlines } from '~~/utils/strings'
 import { useProfileStore } from '~~/store/ProfileStore'
 const profileStore = useProfileStore()
 function closeProfile() {
   const element = document.getElementById('profile-toggle')
   element.checked = false
   // setTimeout(profileStore.clearProfile(), 3000);
+  const profile = document.getElementById('team-content');
+  // profile.scrollTop = 0;
+  console.log(profile)
+  profile.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
 }
 
 </script>
@@ -63,6 +71,7 @@ function closeProfile() {
       transition: 0.65s var(--curve);
       transform: translateY(200px);
       z-index: 10;
+      overflow: scroll;
       @apply bg-center bg-cover bg-no-repeat;
 
       @media (min-width: theme('screens.md')) {}
@@ -122,16 +131,16 @@ function closeProfile() {
 
     .team-profile__content-body {
       width: 100%;
-      padding: 1rem;
+      @apply p-6;
 
       @media (min-width: theme('screens.lg')) {
         width: 500px;
-
+        padding-top: 0px;
       }
 
       h1 {
         font-size: 2rem;
-        line-height: 1.5rem;
+        line-height: 2.2rem;
         margin-top: 10px;
         margin-bottom: 10px;
 
@@ -141,7 +150,7 @@ function closeProfile() {
         @apply uppercase tracking-wider font-light;
 
         @media (min-width: theme('screens.lg')) {
-
+          margin-top: 0px;
           transform: translateX(100px) translateY(0px);
         }
       }
@@ -151,8 +160,8 @@ function closeProfile() {
         transform: translateY(100px);
         opacity: 0;
         font-size: 0.75rem;
-        line-height: 1rem;
-        @apply tracking-wider my-4 uppercase font-bold;
+        line-height: 0.75rem;
+        @apply tracking-wider mb-8 uppercase font-bold;
 
         @media (min-width: theme('screens.lg')) {
 
@@ -165,6 +174,8 @@ function closeProfile() {
         transition: 0.65s var(--curve) 0.12s;
         transform: translateY(100px);
         opacity: 0;
+        font-size: 13px;
+        line-height: 24px;
 
         @media (min-width: theme('screens.lg')) {
 
@@ -177,15 +188,31 @@ function closeProfile() {
         transition: 0.65s var(--curve) 0.14s;
         transform: translateY(100px);
         opacity: 0;
+        @apply uppercase mt-4 p-10;
 
         @media (min-width: theme('screens.lg')) {
-
           transform: translateX(100px) translateY(0px);
+        }
+
+        p {
+
+          /* @media (min-width: theme('screens.lg')) {
+            font-size: 20px;
+          line-height: 30px;
+          } */
+        }
+
+        p:last-of-type {
+          text-align: right;
+          font-size: 10px;
+          @apply italic uppercase;
         }
       }
 
       h5:nth-of-type(2) {
         transition-delay: 0.16s;
+        border-top: thin solid var(--white);
+        @apply pt-4;
       }
 
       p:nth-of-type(2) {
@@ -203,8 +230,12 @@ function closeProfile() {
 
 #profile-toggle:checked~.page__content {
   /* transform: matrix(1, 0, 0, 1, -80, 0); */
-  transform: translateX(-80px);
+  transform: translateY(-80px);
   filter: blur(2px) grayscale(1);
+
+  @media (min-width: theme('screens.lg')) {
+    transform: translateX(-80px);
+  }
 }
 
 #profile-toggle:checked~.team-profile {
@@ -266,5 +297,4 @@ function closeProfile() {
     }
   }
 
-}
-</style>
+}</style>

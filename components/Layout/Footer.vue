@@ -4,10 +4,10 @@
   >
   <div class="w-full pt-0 pb-24 px-6 xl:px-0 flex flex-col items-center justify-center mx-auto max-w-7xl">
     <div
-      class="w-full flex flex-col items-center justify-center lg:flex-row lg:items-end lg:justify-between"
+      class="w-full flex flex-col items-start justify-center lg:flex-row lg:items-end lg:justify-between"
     >
       <div
-        class="flex items-center justify-center text-center lg:text-left flex-col shrink-0 mb-8 lg:mb-0 footer__col footer__nav"
+        class="flex items-start justify-center text-left lg:text-left flex-col shrink-0 mb-8 lg:mb-0 footer__col footer__nav"
       >
         <div
           class="w-full flex items-center md:items-start justify-center flex-row mb-6"
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div
-        class="flex items-center justify-center text-center flex-col lg:flex-row footer__col"
+        class="flex items-start justify-center text-left flex-col lg:flex-row footer__col"
       >
         <p class="mr-5">Phone: <a href="tel:(908) 273-6565">908.273.6565</a></p>
         <p class="mr-5">Studio: 16 Maple St Summit NJ</p>
@@ -87,10 +87,10 @@
 <style>
 .footer {
   position: relative;
-  /* background: var(--white); */
+  background: var(--white);
   padding-top: 100px;
   transition: all 0.4s var(--curve);
-  z-index: 1;
+  z-index: 10;
   &__col {
     a,
     p {

@@ -23,5 +23,8 @@ function replaceNewlinesWithBreaks(text) {
   if(text) 
   return text.replace(/\n/g, '<br/>')
 }
-
-export { stripHTML, truncateString, removeFirst, replaceNewlinesWithBreaks }
+function replaceSpaceWithNewlines(text) {
+  if(text) 
+  return text.replace(' ', '\n');
+}
+export { stripHTML, truncateString, removeFirst, replaceNewlinesWithBreaks, replaceSpaceWithNewlines }

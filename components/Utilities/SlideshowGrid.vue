@@ -1,12 +1,12 @@
 <template>
   <div class="w-full relative">
     <swiper :parallax="true" :navigation="{
-      nextEl: '#slideshowSwiperGrid__next-btn',
-      prevEl: '#slideshowSwiperGrid__prev-btn',
-    }" :spaceBetween="10" :modules="modules"
-      :breakpoints="{ 300: { slidesPerView: 1, grid: { rows: 1, fill: 'row' } }, 640: { slidesPerView: 2, grid: { rows: 1, fill: 'row' } }, 786: { slidesPerView: 3, grid: { rows: 2, fill: 'column' } }, 1024: { slidesPerView: 4, grid: { rows: 2, fill: 'column' } } }"
+      nextEl: '.slideshowSwiperGrid__next-btn',
+      prevEl: '.slideshowSwiperGrid__prev-btn',
+    }" :spaceBetween="35" :modules="modules"
+      :breakpoints="{ 300: { slidesPerView: 1, grid: { rows: 1, fill: 'row' } }, 640: { slidesPerView: 2, grid: { rows: 1, fill: 'row' } }, 768: { slidesPerView: 3, grid: { rows: 2, fill: 'column' } }, 1024: { slidesPerView: 4, grid: { rows: 2, fill: 'column' } } }"
       class="slideshowSwiperGrid">
-      <swiper-slide class="w-full flex flex-col items-end justify-end overflow-hidden" v-for="(slide, index) in slides"
+      <swiper-slide class="w-full flex flex-col items-end justify-end overflow-hidden w-fit" v-for="(slide, index) in slides"
         :key="index">
         <nuxt-link :to="'/interior-design-architecture-portfolio/' + slide.url" class="work__card">
           <div v-if="slide.images.length > 0"
@@ -25,11 +25,11 @@
     </swiper>
     <div class="w-full flex items-center justify-between flex-row relative my-4 slideshowSwiperGrid__nav">
       <h5 id="slideshowSwiperGrid__prev-btn"
-        class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 lg:pl-0 lg:pr-4  py-2">
+        class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 lg:pl-0 lg:pr-4  py-2 slideshowSwiperGrid__prev-btn">
         <nuxt-icon name="arrow-left" class="mr-4 arrow-left-icon" />
       </h5>
       <h5 id="slideshowSwiperGrid__next-btn"
-        class="flex items-center justify-center flex-row cursor-pointer px-2 lg:pr-0 lg:pl-4 py-2">
+        class="flex items-center justify-center flex-row cursor-pointer px-2 lg:pr-0 lg:pl-4 py-2 slideshowSwiperGrid__next-btn">
         <nuxt-icon name="arrow-right" class="ml-4 arrow-right-icon" />
       </h5>
     </div>
@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import {removeFirst} from '~~/utils/strings'
+import { removeFirst } from '~~/utils/strings'
 const props = defineProps({
   slides: {
     type: Array,
@@ -50,24 +50,27 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/grid'
-import { Grid, Parallax, Navigation } from 'swiper'
-const modules = [Parallax, Grid, Navigation]
+import { Grid, Navigation } from 'swiper'
+const modules = [Grid, Navigation]
 
 </script>
 <style>
 .slideshowSwiperGrid {
   height: 360px;
+  @media (min-width: theme('screens.md')) {
+    height: 740px;
+  }
 
   @media (min-width: theme('screens.lg')) {
-    height: 660px;
+    height: 690px;
   }
 
   @media (min-width: theme('screens.xl')) {
-    height: 710px;
+    height: 740px;
   }
 
   @media (min-width: theme('screens.2xl')) {
-    height: 810px;
+    height: 840px;
   }
 
   .swiper-slide {
@@ -75,7 +78,9 @@ const modules = [Parallax, Grid, Navigation]
     /* @media (min-width: theme('screens.md')) {
       height: 350px;
     } */
-
+    @media (min-width: theme('screens.md')) {
+      height: 300px;
+    }
     @media (min-width: theme('screens.lg')) {
       height: 325px;
     }
@@ -118,6 +123,8 @@ const modules = [Parallax, Grid, Navigation]
     background-color: rgba(167, 169, 172, 0.45);
     transform: scale(1.1);
     transition: all 0.5s var(--curve);
+
+    /* margin: 45px; */
     @media (min-width: theme('screens.md')) {
       height: 350px;
     }
@@ -136,7 +143,7 @@ const modules = [Parallax, Grid, Navigation]
 
     svg {
       margin: 0 20px;
-      fill: rgba(255,255,255,0.5);
+      fill: rgba(255, 255, 255, 0.5);
     }
   }
 
@@ -156,14 +163,14 @@ const modules = [Parallax, Grid, Navigation]
 
   }
 }
-.work__card:hover > .work__card-image {
+
+.work__card:hover>.work__card-image {
   transform: scale(1);
   background-color: rgba(167, 169, 172, 1.0);
 }
-.work__card:hover > .work__card-title {
+
+.work__card:hover>.work__card-title {
   opacity: 1;
   transform: translateY(0px);
 }
-
-
 </style>

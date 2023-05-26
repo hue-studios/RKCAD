@@ -2,7 +2,7 @@
   <div class="team-card-wrapper" @click.prevent="showProfile">
     <!-- @click="handleView($event)" -->
     <div class="flex flex-col items-start team-card">
-      <div class="flex flex-col items-start justify-start team-card__header">
+      <div class="w-full flex flex-col items-start justify-start team-card__header">
         <div v-if="person.image" :style="'background-image: url(https://admin.rkcad.com/assets/' +
           person.image +
           'key=small)'
@@ -38,13 +38,17 @@ function showProfile() {
 <style >
 .team-card-wrapper {
   margin-bottom: 20px;
+  width: 100%;
+  @media (min-width: 400px) {
+    width: 375px;
+      }
 }
 
 .team-card {
   margin-bottom: 1rem;
   position: relative;
-  width: 375px;
-  height: 480px;
+  width: 100%;
+  max-width: 375px;
   overflow: hidden;
   cursor: pointer;
   z-index: 1;
@@ -60,10 +64,15 @@ function showProfile() {
     @apply tracking-wide;
 
     &-image {
-      width: 375px;
-      height: 375px;
+      width: 100%;
+      max-width: 375px;
+      height: 350px;
       background-color: var(--grey);
       margin-bottom: 0.1rem;
+
+      @media (min-width: theme('screens.sm')) {
+        height: 375px;
+      }
 
       svg {
         fill: var(--white);
@@ -84,52 +93,7 @@ function showProfile() {
       @apply font-light;
     }
 
-    /* a {
-      font-size: 0.75rem;
-      line-height: 1rem;
-      margin-top: 10px;
-      @apply inline-block;
-      .nuxt-icon {
-        height: 12px;
-        fill: black;
-        transition: 0.4s var(--curve);
-
-        svg {
-          margin-top: -2px;
-          height: 12px;
-          display: inline-block !important;
-          
-          path {
-            stroke-width: 10px;
-            stroke: var(--blue) !important;
-          }
-        }
-      }
-    } */
-
   }
 
-  &__body {
-    pointer-events: none;
-    width: 100%;
-    max-width: 500px;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-
-    p {
-      font-size: 0.875rem;
-      line-height: 1.5rem;
-    }
-  }
-}
-
-.expanded {
-  z-index: 9999;
-  width: 100vw;
-  height: 100vh;
-  color: var(--white);
-  background-color: var(--blue2);
-  @apply flex-row;
 }
 </style>
