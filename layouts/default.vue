@@ -33,7 +33,7 @@ import { screen } from '~~/composables/useScreen'
     background-blend-mode: darken;
     margin-bottom: 50px;
     overflow: hidden !important;
-    @apply bg-cover bg-center bg-no-repeat w-full flex items-end justify-center px-4 overflow-hidden relative;
+    @apply bg-cover bg-center bg-no-repeat w-full flex items-end justify-center overflow-hidden relative;
 
     @media (min-width: theme('screens.md')) {}
 
@@ -43,6 +43,7 @@ import { screen } from '~~/composables/useScreen'
 
     #rkc-bg-icon-2 {
       top: 0px;
+      left: calc(50% - 48vw);
       height: 96vh;
       width: 96vw;
       transition: all 0.35s var(--curve);

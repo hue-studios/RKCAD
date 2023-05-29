@@ -1,17 +1,18 @@
 <template>
-  <div class="article-card__wrapper">
-  <nuxt-link :to="'/architecture-design-press-awards/' + article.url"
-    class="relative flex flex-col items-start article-card">
-    <div v-if="article.images.length > 0" :style="'background-image: url(https://admin.rkcad.com/assets/' +
-      article.images[0].directus_files_id +
-      'key=small)'
-      " class="bg-no-repeat bg-center bg-cover article-card__image" />
-    <div v-else class="flex items-center justify-center article-card__image">
-      <LayoutRkc class="rkc-icon" />
-    </div>
-    <h3 class="w-full uppercase article-card__title">{{ article.title }}</h3>
-  </nuxt-link>
-</div>
+  <div class="mb-6 md:mb-12 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-5 md:px-6 article-card__wrapper" :class="category">
+    <nuxt-link :to="'/architecture-design-press-awards/' + article.url"
+      class="relative flex flex-col items-start article-card">
+      <div v-if="article.images.length > 0" :style="'background-image: url(https://admin.rkcad.com/assets/' +
+        article.images[0].directus_files_id +
+        'key=small)'
+        " class="bg-no-repeat bg-center bg-cover article-card__image" />
+      <div v-else class="flex items-center justify-center article-card__image">
+        <LayoutRkc class="rkc-icon" />
+      </div>
+      <h3 class="w-full uppercase article-card__title">{{ article.title }}</h3>
+      <h5 v-if="article.project">{{ article.project.title }}</h5>
+    </nuxt-link>
+  </div>
 </template>
 
 <script setup>
@@ -20,13 +21,13 @@ const props = defineProps({
     type: Object,
     default: {},
   },
+
 })
+const category = props.article.category.toLowerCase()
 </script>
 
 <style>
 .article-card__wrapper {
-
-  @apply mb-6 md:mb-12 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-5 md:px-6;
 
 
   /* @media (min-width: 840px) {
@@ -36,6 +37,7 @@ const props = defineProps({
  
   } */
 }
+
 .article-card {
   margin-bottom: 1rem;
   position: relative;
@@ -58,22 +60,20 @@ const props = defineProps({
     height: 250px;
   }
 
-  @media (min-width: theme('screens.xl')) {
-    
-  }
+  @media (min-width: theme('screens.xl')) {}
 
-  @media (min-width: theme('screens.2xl')) {
-   
-  }
+  @media (min-width: theme('screens.2xl')) {}
+
   &__image {
     width: 100%;
     height: 100%;
     background-color: rgba(167, 169, 172, 0.45);
     transform: scale(1.1);
     transition: all 0.5s var(--curve);
-  
+    background-blend-mode: darken;
+
     svg {
-      
+
       padding: 0 20px;
       fill: rgba(255, 255, 255, 0.5);
     }
@@ -95,6 +95,17 @@ const props = defineProps({
     @apply w-full z-10 absolute uppercase tracking-wider font-body;
 
   }
+
+  h5 {
+    bottom: -20px;
+    left: 0px;
+    line-height: 16px;
+    font-size: 10px;
+    font-weight: 900 !important;
+    transform: translateY(20px);
+    transition: all 0.5s var(--curve);
+    @apply w-full z-10 absolute uppercase tracking-wider font-body;
+  }
 }
 
 .article-card:hover>.article-card__image {
@@ -106,4 +117,5 @@ const props = defineProps({
   opacity: 1;
   transform: translateY(0px);
 }
+
 </style>

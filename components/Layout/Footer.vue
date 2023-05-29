@@ -87,7 +87,7 @@
 <style>
 .footer {
   position: relative;
-  background: var(--white);
+
   padding-top: 100px;
   transition: all 0.4s var(--curve);
   z-index: 10;

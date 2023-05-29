@@ -19,6 +19,14 @@ function removeFirst(str) {
   return str
 }
 
+function getFirst(str) {
+  const arr = str.split(' ')
+  if (arr.length > 1) {
+    return arr[0]
+  }
+  return str
+}
+
 function replaceNewlinesWithBreaks(text) {
   if(text) 
   return text.replace(/\n/g, '<br/>')
@@ -27,4 +35,4 @@ function replaceSpaceWithNewlines(text) {
   if(text) 
   return text.replace(' ', '\n');
 }
-export { stripHTML, truncateString, removeFirst, replaceNewlinesWithBreaks, replaceSpaceWithNewlines }
+export { stripHTML, truncateString, removeFirst, replaceNewlinesWithBreaks, replaceSpaceWithNewlines, getFirst }

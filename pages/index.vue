@@ -67,20 +67,33 @@
               <LayoutLinkBtn link="/rosen-kelly-conway-architecture-design-team/">Team</LayoutLinkBtn>
             </div>
 
-            <img src="/images/team-header.jpg" alt="RKC Team" class="w-full md:w-1/2 h-auto mt-4 mb-8" />
-            <div class="w-full flex items-start flex-col mt-12 xl:-mt-4 2xl:-mt-20">
+            <img :src="'https://admin.rkcad.com/assets/' + home.team_image + '?key=medium'" alt="RKC Team"
+              class="w-full md:w-1/2 h-auto mt-4 mb-8" />
+            <div class="w-full flex items-start flex-col mt-12 xl:-mt-4 2xl:-mt-12">
               <h2 class="uppercase page__body-header-subtitle">{{ home.featured_profile.name }}</h2>
               <h3 class="uppercase page__body-header-title">Designer<br /> Spotlight</h3>
-              <div class="w-full mt-4 mb-8 flex items-start md:items-center justify-between flex-col md:flex-row home-section__images">
-                <img :src="'https://admin.rkcad.com/assets/' + home.featured_profile.image + '?key=small'" alt="RKC Team"
-                  class="" />
-             
-                  <div class="mt-4 md:mt-0 md:mx-4 flex items-end justify-end flex-col home-section__quote" v-html="home.featured_profile.quote"> </div>
-              
-                <!-- <img class="mr-4" :src="'https://admin.rkcad.com/assets/b042050e-f042-4cd8-bfb5-fc6eac001f17?key=small'"
-                alt="RKC Team" />
-              <img :src="'https://admin.rkcad.com/assets/2ee652e4-2dff-44b8-9971-17283684fe9b?key=small'" alt="RKC Team"
-                class="" /> -->
+              <div
+                class="w-full mt-4 mb-8 flex items-start md:items-center justify-between flex-col lg:flex-row home-section__images">
+                <div class="flex items-start justify-start flex-col lg:flex-row relative w-full "
+                  :class="{ 'lg:w-1/2': home.featured_profile.featured_projects.length }">
+                  <img :src="'https://admin.rkcad.com/assets/' + home.featured_profile.image + '?key=small'"
+                    alt="RKC Team" class="" />
+
+                  <div class="mt-4 md:mt-0 lg:ml-2 flex items-end justify-end flex-col home-section__quote"
+                    v-html="home.featured_profile.quote"> </div>
+                </div>
+                <div v-if="home.featured_profile.featured_projects.length"
+                  class="flex items-start justify-start flex-row relative w-full mt-12 lg:mt-0 lg:w-1/2 lg:ml-2 featured-projects">
+                  <p class="uppercase absolute left-0 -top-[20px] ">Some of {{ getFirst(home.featured_profile.name) }}'s
+                    favorite projects</p>
+                  <nuxt-link v-for="(project, index) in home.featured_profile.featured_projects" :key="index"
+                    class="inline-block " :to="'/interior-design-architecture-portfolio/' + project.project.url"
+                    :class="{ 'mr-2': (index + 1) < home.featured_profile.featured_projects.length }">
+                    <img :src="'https://admin.rkcad.com/assets/' + project.image + '?key=small'" alt="RKC Team"
+                      class="h-full w-auto " />
+                  </nuxt-link>
+                </div>
+
 
 
               </div>
@@ -88,8 +101,7 @@
             </div>
           </div>
           <div class="w-full mt-20 xl:mt-40 page__body-header">
-            <div
-              class="w-full flex items-center justify-between lg:items-start flex-row flex-wrap home-section">
+            <div class="w-full flex items-center justify-between lg:items-start flex-row flex-wrap home-section">
               <div class="w-full md:w-1/2 flex items-start flex-col">
                 <h2 class="uppercase page__body-header-subtitle">Featured</h2>
                 <h3 class="uppercase page__body-header-title">Georgian
@@ -103,7 +115,7 @@
               </div>
 
               <img src="/images/home-2.png" alt="RKC Team" class="w-full md:w-1/2 h-auto mt-4 mb-8" />
-        
+
             </div>
           </div>
         </div>
@@ -117,6 +129,7 @@
 
 <script setup>
 const imageUrl = 'https://admin.rkcad.com/assets/'
+import { getFirst } from '~~/utils/strings'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Parallax, EffectFade } from 'swiper'
 import 'swiper/css'
@@ -127,7 +140,7 @@ const home = await getItems({
   collection: 'home',
   params: {
     fields: [
-      'featured_images.directus_files_id,about_intro,team_intro,featured_project.*,featured_profile.*',
+      'featured_images.directus_files_id,about_intro,team_intro,team_image,featured_profile.*,featured_project.*,featured_profile.featured_projects.project.title,featured_profile.featured_projects.project.url,featured_profile.featured_projects.image',
     ],
   },
 })
@@ -231,6 +244,7 @@ const interior = computed(() => {
     height: 100px;
     bottom: -50px;
     right: -100px;
+
     @media (min-width: theme('screens.lg')) {
       position: relative;
       max-width: 400px;
@@ -261,22 +275,32 @@ const interior = computed(() => {
       color: var(--white);
       font-size: 14px;
       font-weight: 400;
+
       @apply p-4 uppercase tracking-wide flex-grow;
 
       p {
-        
+
         @apply mt-4;
       }
-      
+
     }
-    
+
+
+  }
+
+}
+
+.featured-projects {
+  p {
+    font-size: 10px;
+    @apply uppercase tracking-wider font-bold;
   }
 }
-.home-section__quote
-    {
-      p:last-of-type {
-        font-size: 7px;
-        @apply italic;
-      }
-    }
+
+.home-section__quote {
+  p:last-of-type {
+    font-size: 7px;
+    @apply italic;
+  }
+}
 </style>
