@@ -1,7 +1,8 @@
 <template>
-  <div id="team-profile" class="flex items-center justify-center md:justify-center flex-col overflow-y-scroll team-profile"
+  <div id="team-profile" class="flex items-center justify-center md:justify-center flex-col team-profile"
     @click="closeProfile">
-    <div id="team-content" class="flex items-start justify-center flex-col md:flex-row team-profile__content">
+    <div id="team-content"
+      class="flex items-start justify-center flex-col md:flex-row md:items-center team-profile__content">
       <transition name="fade" mode="out-in">
         <div v-if="profileStore.profile.image" class="team-profile__content-image" :style="'background-image: url(https://admin.rkcad.com/assets/' +
           profileStore.profile.image + '?key=medium'">
@@ -129,13 +130,28 @@ function closeProfile() {
       }
     }
 
+    .team-profile__content-body::-webkit-scrollbar {
+      display: none;
+      /* Safari and Chrome */
+    }
+
     .team-profile__content-body {
       width: 100%;
-      @apply p-6;
+      max-height: calc(100vh - 350px);
+      overflow-y: scroll;
+      -ms-overflow-style: none;
+      /* Internet Explorer 10+ */
+      scrollbar-width: none;
+      @apply p-6 mb-12 md:mb-0;
+
+      @media (min-width: theme('screens.md')) {
+        max-height: calc(100vh - 3rem);
+      }
 
       @media (min-width: theme('screens.lg')) {
         width: 500px;
         padding-top: 0px;
+
       }
 
       h1 {

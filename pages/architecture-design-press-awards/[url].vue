@@ -7,7 +7,7 @@
      
     </div>
     <div
-      class="w-full flex items-start lg:items-end flex-col lg:flex-row justify-between uppercase tracking-wide mt-20 px-4 project__header"
+      class="w-full flex items-start lg:items-end flex-col lg:flex-row justify-between uppercase tracking-wide mt-20 px-4  project__header mx-w-8xl"
     >
       <h1 class="relative">
         {{ article.title }}
@@ -80,8 +80,8 @@ onMounted(() => {
     }
   }
   &__header {
-    max-width: var(--max-width);
-    @apply mt-10 lg:mt-14;
+    /* max-width: var(--max-width); */
+    @apply mt-10 lg:mt-14 max-w-8xl;
     h1 {
       font-size: 44px;
       line-height: 1em;
@@ -122,7 +122,7 @@ onMounted(() => {
     }
   }
   &__content {
-    max-width: var(--max-width);
+    @apply max-w-8xl;
   }
 }
 </style>

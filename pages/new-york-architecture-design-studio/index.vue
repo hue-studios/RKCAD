@@ -1,9 +1,9 @@
 <template>
   <div v-if="isImageLoaded"
     class="relative w-full min-h-screen flex flex-wrap flex-col justify-center items-center about">
-    <div class="page__header" :style="'background-image: url(https://admin.rkcad.com/assets/' +
+    <div class="bg-cover bg-center page__header" :style="'background-image: url(https://admin.rkcad.com/assets/' +
       about.header_image +
-      ')'
+      '?key=xlarge)'
       ">
       <LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
       <h1 class="" v-html="formattedTitle"></h1>
@@ -72,7 +72,7 @@ const formattedTitle = computed(() => {
 <style>
 .about {
   .page__body {
-    @apply max-w-7xl;
+    @apply max-w-8xl;
   }
 
   &__body {
@@ -80,7 +80,7 @@ const formattedTitle = computed(() => {
       font-size: 36px;
       line-height: 46px;
       font-family: var(--light-font);
-      font-weight: 100;
+      font-weight: 400;
 
       @media (min-width: theme('screens.md')) {
         font-size: 66px;

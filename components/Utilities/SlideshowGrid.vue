@@ -58,7 +58,7 @@ const modules = [Grid, Navigation]
 .slideshowSwiperGrid {
   height: 360px;
   @media (min-width: theme('screens.md')) {
-    height: 740px;
+    height: 650px;
   }
 
   @media (min-width: theme('screens.lg')) {

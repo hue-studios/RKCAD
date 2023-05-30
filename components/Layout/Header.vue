@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full px-4 xl:px-0 mx-auto relative header">
+  <div class="w-full mx-auto relative max-w-8xl w-full header">
     <LayoutBackButton
       page="Work"
       :class="{ on: pageStore.page === 'page-work-detail' }"
@@ -33,6 +33,9 @@ const pageStore = usePageStore()
   /* @media (min-width: 1280px) {
     left: calc(50% - 640px);
   } */
+  @media (min-width: 1536px) {
+    left: calc(50% - 768px);
+  }
   .back-btn {
     left: calc(-50vw);
     transition: all 0.4s var(--curve);
@@ -59,8 +62,8 @@ const pageStore = usePageStore()
     }
   }
   .rkc-logo {
-    margin-left: 0px;
-    @apply lg:ml-6;
+    /* margin-left: 0px; */
+    @apply ml-4;
   }
   .rkc-logo.on {
     margin-left: 80px;

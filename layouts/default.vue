@@ -64,11 +64,11 @@ import { screen } from '~~/composables/useScreen'
       font-size: 36px;
       line-height: 46px;
       color: var(--white);
-      margin-bottom: 50px;
+      /* margin-bottom: 50px; */
       font-family: var(--light-font);
       transition: all 0.4s var(--curve) 0.1s;
       letter-spacing: 0.1em;
-      @apply max-w-8xl w-full uppercase;
+      @apply max-w-8xl w-full uppercase px-4 py-4;
 
       @media (min-width: theme('screens.md')) {
         font-size: 66px;

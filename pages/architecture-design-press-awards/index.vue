@@ -82,7 +82,7 @@ const awardArticles = computed(() => {
 .press {
   .page__body {
 
-    @apply max-w-7xl px-0;
+    @apply max-w-8xl px-0;
     &-header {
      
     }

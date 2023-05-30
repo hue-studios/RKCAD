@@ -12,19 +12,19 @@
 
         <h3 class="mb-10 page__body-header-title">Architecture <br />Design</h3>
       </div>
-      <div class="w-full max-w-8xl ">
+      <div class="w-full max-w-8xl px-4 2xl:px-0">
         <UtilitiesSlideshowGrid :slides="architecture" />
       </div>
       <div v-if="interior.length" class="max-w-8xl w-full uppercase px-4 2xl:px-0 mt-20 page__body-header">
         <h3 class="mb-10 page__body-header-title">Interior <br />Design</h3>
       </div>
-      <div v-if="interior.length" class="w-full max-w-8xl">
+      <div v-if="interior.length" class="w-full max-w-8xl  px-4 2xl:px-0">
         <UtilitiesSlideshowGrid :slides="interior" />
       </div>
       <div v-if="commercial.length" class="max-w-8xl w-full uppercase px-4 2xl:px-0  page__body-header">
         <h3 class="mb-10 page__body-header-title">Commercial <br />Design</h3>
       </div>
-      <div v-if="commercial.length" class="w-full max-w-8xl">
+      <div v-if="commercial.length" class="w-full max-w-8xl  px-4 2xl:px-0">
         <UtilitiesSlideshowGrid :slides="commercial" />
       </div>
     </div>

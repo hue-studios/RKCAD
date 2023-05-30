@@ -3,11 +3,11 @@
     class="relative w-full min-h-screen flex flex-wrap flex-col justify-center items-center team"
   >
     <div
-      class="page__header"
+      class="bg-center bg-cover page__header"
       :style="
         'background-image: url(https://admin.rkcad.com/assets/' +
         team.header_image +
-        ')'
+        '?key=xlarge)'
       "
     >
       <LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
@@ -30,7 +30,7 @@
         :person="person"
         class="px-4 md:px-6 "
       />
-      <div class="w-full flex items-startjustify-center flex-col lg:flex-row flex-wrap px-4 md:px-6 mt-20 employment">
+      <div class="w-full flex items-start justify-center flex-col lg:flex-row flex-wrap px-4 md:px-6 mt-20 employment">
         <div class="w-full uppercase page__body-header">
         <h2 class="page__body-header-subtitle">Opportunity</h2>
         <h3 class="page__body-header-title">Join <br />the Team</h3>
