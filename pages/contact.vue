@@ -40,7 +40,7 @@ onMounted(() => {
   };
 });
 </script>
-<style scoped>
+<style>
 .contact {
   background-color: rgba(0, 0, 0, 0.5);
   background-blend-mode: darken;
@@ -64,6 +64,7 @@ onMounted(() => {
     color: var(--white);
     transition: all 0.4s var(--curve) 0.1s;
     @apply mb-4;
+
     @media (min-width: theme('screens.lg')) {}
 
     h1 {
@@ -85,24 +86,104 @@ onMounted(() => {
     color: var(--white);
     margin-right: 4px;
     @apply mb-4;
+
     svg {
       height: 20px;
       fill: var(--white) !important;
-      @media (min-width: theme('screens.sm')) {
-    }
+      filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
+      @media (min-width: theme('screens.sm')) {}
 
-    @media (min-width: theme('screens.md')) {
-      height: 40px;
-    }
+      @media (min-width: theme('screens.md')) {
+        height: 40px;
+      }
 
-    @media (min-width: theme('screens.lg')) {
-    }
+      @media (min-width: theme('screens.lg')) {}
       path {
-        fill: var(--white) !important;
+        
+        animation: rkc-name-animation 6.2s var(--curve) infinite;
       }
     }
+
     svg:nth-of-type(2) {
       @apply my-4;
     }
+  }
+  #rosen {
+    path:nth-of-type(4) {
+      animation-delay: 0s;
+    }
+    path:nth-of-type(1) {
+      animation-delay: 0.2s;
+    }
+    path:nth-of-type(5) {
+      animation-delay: 0.4s;
+    }
+    path:nth-of-type(2) {
+      animation-delay: 0.6s;
+    }
+    path:nth-of-type(3) {
+      animation-delay: 0.8s;
+    } 
+  }
+  #kelly {
+    path:nth-of-type(5) {
+      animation-delay: 1s;
+    }
+    path:nth-of-type(4) {
+      animation-delay: 1.2s;
+    }
+    path:nth-of-type(3) {
+      animation-delay: 1.4s;
+    }
+    path:nth-of-type(2) {
+      animation-delay: 1.6s;
+    }
+    path:nth-of-type(1) {
+      animation-delay: 1.8s;
+    } 
+  }
+  #conway {
+    path:nth-of-type(6) {
+      animation-delay: 2s;
+    } 
+    path:nth-of-type(3) {
+      animation-delay: 2.2s;
+    }
+    path:nth-of-type(1) {
+      animation-delay: 2.4s;
+    }
+    path:nth-of-type(4) {
+      animation-delay: 2.6s;
+    }
+    path:nth-of-type(5) {
+      animation-delay: 2.8s;
+    }
+    path:nth-of-type(2) {
+      animation-delay: 3s;
+    } 
+  }
+}
+
+@keyframes rkc-name-animation {
+  0% {
+    opacity: 1;
+    fill: var(--white);
+  }
+
+  30% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: 0.85;
+    fill: var(--blue);
+  }
+  80% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 1;
+    fill: var(--white);
   }
 }</style>
