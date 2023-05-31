@@ -49,8 +49,9 @@ const press = await getItems({
   collection: 'press',
   params: {
     fields: [
-      'header_image,title,introduction,articles.category,articles.title,articles.link,articles.description,articles.images.directus_files_id,articles.url,articles.sort',
+      'header_image,title,introduction,articles.category,articles.title,articles.link,articles.description,articles.images.directus_files_id,articles.url,articles.sort,articles.status',
     ],
+    
   },
 })
 const isImageLoaded = ref(false);
@@ -69,12 +70,12 @@ const formattedTitle = computed(() => {
 })
 const pressArticles = computed(() => {
   return press.articles.filter((article) => {
-    return article.category === 'Press'
+    return article.category === 'Press' && article.status === 'published'
   })
 })
 const awardArticles = computed(() => {
   return press.articles.filter((article) => {
-    return article.category === 'Award'
+    return article.category === 'Award' && article.status === 'published'
   })
 })
 </script>

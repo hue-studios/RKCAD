@@ -1,13 +1,13 @@
 <template>
   <div class="w-full relative">
+    <!-- :breakpoints="{ 300: { slidesPerView: 1, grid: { rows: 1, fill: 'row' } }, 640: { slidesPerView: 2, grid: { rows: 1, fill: 'row' } }, 768: { slidesPerView: 3, grid: { rows: 2, fill: 'column' } }, 1024: { slidesPerView: 4, slidesPerGourp: 8, grid: { rows: 2, fill: 'column' } } }" -->
     <swiper :parallax="true" :navigation="{
       nextEl: '.slideshowSwiperGrid__next-btn',
       prevEl: '.slideshowSwiperGrid__prev-btn',
-    }" :spaceBetween="35" :modules="modules"
-      :breakpoints="{ 300: { slidesPerView: 1, grid: { rows: 1, fill: 'row' } }, 640: { slidesPerView: 2, grid: { rows: 1, fill: 'row' } }, 768: { slidesPerView: 3, grid: { rows: 2, fill: 'column' } }, 1024: { slidesPerView: 4, grid: { rows: 2, fill: 'column' } } }"
+    }" :spaceBetween="35" :modules="modules" :slidesPerView="4" :slidesPerGroup="4" :grid="{ rows: 2, fill: 'row' }"
       class="slideshowSwiperGrid">
-      <swiper-slide class="w-full flex flex-col items-end justify-end overflow-hidden w-fit" v-for="(slide, index) in slides"
-        :key="index">
+      <swiper-slide class="w-full flex flex-col items-end justify-end overflow-hidden w-fit"
+        v-for="(slide, index) in slides" :key="index">
         <nuxt-link :to="'/interior-design-architecture-portfolio/' + slide.url" class="work__card">
           <div v-if="slide.images.length > 0"
             class="absolute w-full h-full bg-cover bg-center bg-no-repeat work__card-image" :style="'background-image: url(' +
@@ -57,6 +57,7 @@ const modules = [Grid, Navigation]
 <style>
 .slideshowSwiperGrid {
   height: 360px;
+
   @media (min-width: theme('screens.md')) {
     height: 650px;
   }
@@ -75,12 +76,14 @@ const modules = [Grid, Navigation]
 
   .swiper-slide {
     height: 350px;
+
     /* @media (min-width: theme('screens.md')) {
       height: 350px;
     } */
     @media (min-width: theme('screens.md')) {
       height: 300px;
     }
+
     @media (min-width: theme('screens.lg')) {
       height: 325px;
     }

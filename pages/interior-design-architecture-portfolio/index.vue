@@ -21,7 +21,7 @@
       <div v-if="interior.length" class="w-full max-w-8xl  px-4 2xl:px-0">
         <UtilitiesSlideshowGrid :slides="interior" />
       </div>
-      <div v-if="commercial.length" class="max-w-8xl w-full uppercase px-4 2xl:px-0  page__body-header">
+      <div v-if="commercial.length" class="max-w-8xl w-full uppercase px-4 2xl:px-0 mt-20 page__body-header">
         <h3 class="mb-10 page__body-header-title">Commercial <br />Design</h3>
       </div>
       <div v-if="commercial.length" class="w-full max-w-8xl  px-4 2xl:px-0">
@@ -40,11 +40,6 @@ const work = await getItems({
     fields: [
       'header_image,title,projects.status,projects.title,projects.category,projects.style,projects.images.directus_files_id.id,projects.images.directus_files_id.title,projects.images.directus_files_id.tags,projects.images.directus_files_id.width,projects.images.directus_files_id.height,projects.url',
     ],
-    // filter: {
-    //   projects.status: {
-    //     _eq: 'published',
-    //   },
-    // },
   },
 })
 
