@@ -1,20 +1,24 @@
 export default defineNuxtConfig({
   ssr: true,
+
   app: {
     pageTransition: {
       name: 'page',
       mode: 'out-in',
     },
   },
+
   css: [
     {
       src: '~/assets/css/main.css',
       lang: 'postcss',
     },
   ],
+
   imports: {
     dirs: ['stores'],
   },
+
   buildModules: ['@vueuse/nuxt'],
 
   modules: [
@@ -29,12 +33,15 @@ export default defineNuxtConfig({
     'nuxt-directus',
     'nuxt-icons',
   ],
+
   plausible: {
     domain: 'rkcad.com',
   },
+
   directus: {
     url: 'https://admin.rkcad.com',
   },
+
   runtimeConfig: {
     public: {
       directusUrl: 'https://admin.rkcad.com',
@@ -62,4 +69,6 @@ export default defineNuxtConfig({
       include: ['vue', 'pinia'],
     },
   },
+
+  devtools: true
 })
