@@ -1,10 +1,9 @@
 <template>
   <div class="w-full relative">
-    <!-- :breakpoints="{ 300: { slidesPerView: 1, grid: { rows: 1, fill: 'row' } }, 640: { slidesPerView: 2, grid: { rows: 1, fill: 'row' } }, 768: { slidesPerView: 3, grid: { rows: 2, fill: 'column' } }, 1024: { slidesPerView: 4, slidesPerGourp: 8, grid: { rows: 2, fill: 'column' } } }" -->
     <swiper :parallax="true" :navigation="{
       nextEl: '.slideshowSwiperGrid__next-btn',
       prevEl: '.slideshowSwiperGrid__prev-btn',
-    }" :spaceBetween="35" :modules="modules" :slidesPerView="4" :slidesPerGroup="4" :grid="{ rows: 2, fill: 'row' }"
+    }" :spaceBetween="35" :modules="modules" :breakpoints="{ 300: { slidesPerView: 1, grid: { rows: 1, fill: 'row' } }, 640: { slidesPerView: 2, grid: { rows: 1, fill: 'row' } }, 768: { slidesPerView: 3, slidesPerGroup: 3, grid: { rows: 2, fill: 'row' } }, 1024: { slidesPerView: 4, slidesPerGroup: 4, grid: { rows: 2, fill: 'row' } } }" 
       class="slideshowSwiperGrid">
       <swiper-slide class="w-full flex flex-col items-end justify-end overflow-hidden w-fit"
         v-for="(slide, index) in slides" :key="index">
