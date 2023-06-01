@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isImageLoaded" class="relative w-full flex items-center justify-center flex-col min-h-screen article">
+  <div v-if="isImageLoaded" class="relative w-full flex items-center justify-center flex-col min-h-screen mx-auto article">
     <div class="w-full relative article__slideshow">
       <UtilitiesSlideshowThumbs v-if="article.images.length" :slides="article.images" />
 
