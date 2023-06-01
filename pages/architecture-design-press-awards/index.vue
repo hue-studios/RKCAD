@@ -19,7 +19,7 @@
     <div
       class="flex flex-wrap flex-row items-center justify-stretch w-full page__body"
     >
-      <div class="w-full uppercase mb-10 page__body-header">
+      <div class="w-full uppercase mt-20 mb-10 page__body-header">
         <h2 class="page__body-header-subtitle">Recognition</h2>
         <h3 class="page__body-header-title">Published/ <br />Press</h3>
         <p class="normal-case mb-6 page__body-header-intro">{{ press.introduction }}</p>

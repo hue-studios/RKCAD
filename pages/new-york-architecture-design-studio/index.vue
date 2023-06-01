@@ -9,7 +9,7 @@
       <h1 class="" v-html="formattedTitle"></h1>
     </div>
     <div
-      class=" flex flex-wrap flex-col lg:flex-row lg:flex-wrap items-start justify-between w-full page__body relative about__body">
+      class="mt-20 flex flex-wrap flex-col lg:flex-row lg:flex-wrap items-start justify-between w-full page__body relative about__body">
       <h2
         class="uppercase font-thin order-1 w-full lg:order-2 lg:w-1/2 text-right opacity-30 tracking-wide pl-8 md:pl-32 lg:pl-2 about__body-caption">
         Embracing Design Heritage with a Modern Vision

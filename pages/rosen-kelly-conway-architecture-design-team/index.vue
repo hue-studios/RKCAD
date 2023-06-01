@@ -9,7 +9,7 @@
     </div>
     <div class="z-10 flex flex-wrap flex-row lg:flex-wrap items-center justify-evenly w-full page__body relative">
 
-      <div class="w-full uppercase page__body-header">
+      <div class="w-full mt-20 uppercase page__body-header">
         <h2 class="page__body-header-subtitle">Culture</h2>
         <h3 class="page__body-header-title">Meet <br />the Team</h3>
       </div>
