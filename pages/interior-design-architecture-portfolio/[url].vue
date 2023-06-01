@@ -1,7 +1,7 @@
 <template>
   <div v-if="isImageLoaded" class="relative w-full flex items-center justify-center flex-col min-h-screen project">
     <div
-      class="w-full flex items-start lg:items-end flex-col lg:flex-row justify-between tracking-wide mt-4 px-4 lg:px-0 relative project__header">
+      class="w-full flex items-start lg:items-end flex-col lg:flex-row justify-between tracking-wide mt-4 relative project__header">
       <h1 class="uppercase relative">
         {{ removeFirst(project.title) }}
         <span class="hidden">
@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <div class="flex w-full items-center flex-col justify-start tracking-wide my-20 px-4 xl:px-0 project__content">
+    <div class="flex w-full items-center flex-col justify-start tracking-wide my-20 project__content">
       <h1 class="w-full">
         {{ removeFirst(project.title) }}
         <span class="hidden">
@@ -128,6 +128,10 @@ onMounted(() => {
 
     .swiper {
       /* padding-bottom: 50px; */
+      @apply py-4;
+      @media (min-width: theme('screens.lg')) {
+        padding: 0;
+      }
     }
 
     .swiper-pagination {

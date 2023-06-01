@@ -8,23 +8,23 @@
       <h1 class="w-full uppercase white tracking-wider" v-html="formattedTitle"></h1>
     </div>
     <div class="flex flex-wrap flex-row items-center justify-center w-full page__body">
-      <div class="max-w-8xl w-full uppercase px-4 2xl:px-0 mt-20 page__body-header">
+      <div class="w-full uppercase mt-20 page__body-header">
 
         <h3 class="mb-10 page__body-header-title">Architecture <br />Design</h3>
       </div>
-      <div class="w-full max-w-8xl px-4 2xl:px-0">
+      <div class="w-full">
         <UtilitiesSlideshowGrid :slides="architecture" />
       </div>
-      <div v-if="interior.length" class="max-w-8xl w-full uppercase px-4 2xl:px-0 mt-20 page__body-header">
+      <div v-if="interior.length" class="w-full uppercase mt-20 page__body-header">
         <h3 class="mb-10 page__body-header-title">Interior <br />Design</h3>
       </div>
-      <div v-if="interior.length" class="w-full max-w-8xl  px-4 2xl:px-0">
+      <div v-if="interior.length" class="w-full">
         <UtilitiesSlideshowGrid :slides="interior" />
       </div>
-      <div v-if="commercial.length" class="max-w-8xl w-full uppercase px-4 2xl:px-0 mt-20 page__body-header">
+      <div v-if="commercial.length" class="w-full uppercase mt-20 page__body-header">
         <h3 class="mb-10 page__body-header-title">Commercial <br />Design</h3>
       </div>
-      <div v-if="commercial.length" class="w-full max-w-8xl  px-4 2xl:px-0">
+      <div v-if="commercial.length" class="w-full">
         <UtilitiesSlideshowGrid :slides="commercial" />
       </div>
     </div>
@@ -87,9 +87,4 @@ const commercial = computed(() => {
 })
 </script>
 <style scoped>
-.work {
-  .page__body {
-    @apply px-0;
-  }
-}
 </style>

@@ -24,18 +24,29 @@ import { screen } from '~~/composables/useScreen'
 
 <style>
 .page {
+  overflow: hidden;
+  width: 100%;
+
   &__content {
     transition: all 0.65s var(--curve);
+
   }
+
   &__header {
-    height: 500px;
+    height: 550px;
     background-color: rgba(0, 0, 0, 0.35);
     background-blend-mode: darken;
     margin-bottom: 50px;
     overflow: hidden !important;
     @apply bg-cover bg-center bg-no-repeat w-full flex items-end justify-center overflow-hidden relative;
 
-    @media (min-width: theme('screens.md')) {}
+    @media (min-width: theme('screens.sm')) {
+      height: 550px;
+    }
+
+    @media (min-width: theme('screens.md')) {
+      height: 600px;
+    }
 
     @media (min-width: theme('screens.lg')) {
       height: calc(100vh);
@@ -54,9 +65,10 @@ import { screen } from '~~/composables/useScreen'
       path {
         /* fill: rgba(167, 169, 172, 0.1); */
         fill: rgba(255, 255, 255, 0.05);
+
         @media (min-width: theme('screens.lg')) {
           fill: rgba(255, 255, 255, 0.025);
-      }
+        }
       }
     }
 
@@ -68,7 +80,15 @@ import { screen } from '~~/composables/useScreen'
       font-family: var(--light-font);
       transition: all 0.4s var(--curve) 0.1s;
       letter-spacing: 0.1em;
-      @apply max-w-8xl w-full uppercase px-4 py-4;
+      padding-left: 15px;
+      padding-right: 15px;
+
+      @media (min-width: theme('screens.sm')) {
+        padding-left: 35px;
+        padding-right: 35px;
+      }
+
+      @apply max-w-7xl w-full uppercase py-4;
 
       @media (min-width: theme('screens.md')) {
         font-size: 66px;
@@ -85,7 +105,15 @@ import { screen } from '~~/composables/useScreen'
   &__body {
     z-index: 10;
     /* background: var(--white); */
-    @apply px-4 max-w-8xl;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    @media (min-width: theme('screens.sm')) {
+      padding-left: 35px;
+      padding-right: 35px;
+    }
+
+    @apply max-w-7xl;
 
     &-header {
       &-subtitle {
@@ -95,8 +123,9 @@ import { screen } from '~~/composables/useScreen'
       }
 
       &-title {
-        font-size: 2rem;
-        line-height: 2rem;
+
+        font-size: 36px;
+        line-height: 42px;
         font-family: var(--light-font);
         @apply font-light tracking-wide mb-8;
 
@@ -106,13 +135,14 @@ import { screen } from '~~/composables/useScreen'
         }
 
         @media (min-width: theme('screens.xl')) {
-          font-size: 50px;
-          line-height: 58px;
+          /* font-size: 50px;
+          line-height: 58px; */
         }
       }
+
       &-intro {
         width: 100%;
-        max-width:375px;
+        max-width: 375px;
       }
     }
 
@@ -132,9 +162,10 @@ import { screen } from '~~/composables/useScreen'
   path {
     fill: rgba(167, 169, 172, 0.025);
     animation: icon-animation 10s ease-in-out infinite;
+
     @media (min-width: theme('screens.lg')) {
       fill: rgba(167, 169, 172, 0.05);
-        }
+    }
   }
 
   /* path:nth-of-type(1) {

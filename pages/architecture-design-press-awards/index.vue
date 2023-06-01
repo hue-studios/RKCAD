@@ -1,6 +1,6 @@
 <template>
   <div v-if="isImageLoaded"
-    class="relative w-full min-h-screen flex flex-wrap flex-col justify-center items-center press"
+    class="relative w-full min-h-screen flex flex-wrap flex-col justify-center items-center overflow-hidden press"
   >
     <div
       class="page__header"
@@ -19,7 +19,7 @@
     <div
       class="flex flex-wrap flex-row items-center justify-stretch w-full page__body"
     >
-      <div class="w-full uppercase mb-10 px-4 md:px-6 page__body-header">
+      <div class="w-full uppercase mb-10 page__body-header">
         <h2 class="page__body-header-subtitle">Recognition</h2>
         <h3 class="page__body-header-title">Published/ <br />Press</h3>
         <p class="normal-case mb-6 page__body-header-intro">{{ press.introduction }}</p>
@@ -29,7 +29,7 @@
         :key="index"
         :article="article"
       />
-      <div class="w-full uppercase mb-6 px-4 md:px-6 page__body-header">
+      <div class="w-full uppercase mb-6 page__body-header">
         <h2 class="page__body-header-subtitle">Recognition</h2>
         <h3 class="page__body-header-title">Published/ <br />Awards</h3>
       </div>
@@ -51,7 +51,6 @@ const press = await getItems({
     fields: [
       'header_image,title,introduction,articles.category,articles.title,articles.link,articles.description,articles.images.directus_files_id,articles.url,articles.sort,articles.status',
     ],
-    
   },
 })
 const isImageLoaded = ref(false);
@@ -82,11 +81,7 @@ const awardArticles = computed(() => {
 <style >
 .press {
   .page__body {
-
-    @apply max-w-8xl px-0;
-    &-header {
-     
-    }
+    @apply px-0;
   }
 }
 </style>

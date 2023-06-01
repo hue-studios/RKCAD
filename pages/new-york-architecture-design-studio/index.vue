@@ -71,16 +71,14 @@ const formattedTitle = computed(() => {
 </script>
 <style>
 .about {
-  .page__body {
-    @apply max-w-8xl;
-  }
+
 
   &__body {
     &-caption {
       font-size: 36px;
       line-height: 46px;
       font-family: var(--light-font);
-      font-weight: 400;
+      font-weight: 500;
 
       @media (min-width: theme('screens.md')) {
         font-size: 66px;
@@ -88,12 +86,13 @@ const formattedTitle = computed(() => {
       }
 
       @media (min-width: theme('screens.lg')) {
-        margin-top: 100px;
-        font-size: 73px;
+        margin-top: 155px;
+        font-size: 66px;
         line-height: 80px;
+        padding-left: 60px;
       }
 
-      @media (min-width: theme('screens.xl')) {
+      /* @media (min-width: theme('screens.xl')) {
         margin-top: 100px;
         font-size: 78px;
         line-height: 88px;
@@ -102,7 +101,7 @@ const formattedTitle = computed(() => {
       @media (min-width: theme('screens.2xl')) {
         font-size: 96px;
         line-height: 106px;
-      }
+      } */
     }
 
     &-content {

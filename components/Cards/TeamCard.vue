@@ -39,16 +39,34 @@ function showProfile() {
 .team-card-wrapper {
   margin-bottom: 20px;
   width: 100%;
-  @media (min-width: 400px) {
-    width: 375px;
-      }
+  @media (min-width: theme('screens.sm')) {
+    padding-right: 35px;
+  }
+
+  @media (min-width: theme('screens.lg')) {
+    padding-right: 35px;
+  }
+  @apply w-full sm:w-1/2 lg:w-1/3;
+}
+.team-card-wrapper:nth-child(2n) {
+  @media (min-width: theme('screens.sm')) {
+    padding-right: 0px;
+  }
+  @media (min-width: theme('screens.lg')) {
+    padding-right: 35px;
+  }
+}
+.team-card-wrapper:nth-child(3n) {
+  @media (min-width: theme('screens.lg')) {
+    padding-right: 0px;
+  }
 }
 
 .team-card {
   margin-bottom: 1rem;
   position: relative;
   width: 100%;
-  max-width: 375px;
+  /* max-width: 375px; */
   overflow: hidden;
   cursor: pointer;
   z-index: 1;
@@ -65,7 +83,7 @@ function showProfile() {
 
     &-image {
       width: 100%;
-      max-width: 375px;
+      /* max-width: 375px; */
       height: 350px;
       background-color: var(--grey);
       margin-bottom: 0.1rem;
@@ -82,7 +100,7 @@ function showProfile() {
     h3 {
       font-size: 2rem;
       line-height: 1.5rem;
-      margin-top: 10px;
+      margin-top: 15px;
       margin-bottom: 10px;
       @apply font-light;
     }
@@ -95,5 +113,4 @@ function showProfile() {
 
   }
 
-}
-</style>
+}</style>

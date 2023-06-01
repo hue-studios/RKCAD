@@ -2,7 +2,7 @@
   <div v-if="isImageLoaded"
     class="bg-cover bg-center bg-no-repeat relative w-full h-screen flex flex-row items-end justify-center overflow-hidden contact">
     <LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
-    <div class="w-full max-w-8xl flex flex-row justify-between items-center px-4">
+    <div class="w-full max-w-7xl flex flex-row justify-between items-center px-4">
       <div class="text-left contact__info">
         <h1 class="w-full uppercase white tracking-wider">Studio</h1>
         <p>16 Maple St Summit NJ</p>
@@ -63,8 +63,11 @@ onMounted(() => {
 
     color: var(--white);
     transition: all 0.4s var(--curve) 0.1s;
+    margin-left: 15px;
     @apply mb-4;
-
+    @media (min-width: theme('screens.sm')) {
+      margin-left: 35px;
+    }
     @media (min-width: theme('screens.lg')) {}
 
     h1 {
@@ -73,8 +76,11 @@ onMounted(() => {
     }
 
     p {
-      font-size: 15px;
+      font-size: 13px;
       margin-bottom: 5px;
+      @media (min-width: theme('screens.sm')) {
+        font-size: 15px;
+      }
     }
 
     a {
@@ -84,14 +90,18 @@ onMounted(() => {
 
   .rkc-name {
     color: var(--white);
-    margin-right: 4px;
+    margin-right: 15px;
     @apply mb-4;
-
+    @media (min-width: theme('screens.sm')) {
+      margin-right: 35px;
+    }
     svg {
       height: 20px;
       fill: var(--white) !important;
       filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
-      @media (min-width: theme('screens.sm')) {}
+      @media (min-width: theme('screens.sm')) {
+        height: 20px;
+      }
 
       @media (min-width: theme('screens.md')) {
         height: 40px;

@@ -28,12 +28,11 @@
       </transition>
 
       <div class="flex flex-wrap flex-row items-center justify-center w-full page__body">
-        <div
-          class="max-w-8xl w-full px-4 2xl:px-0 mt-20 flex items-center justify-between flex-col lg:flex-row relative page__body-header">
+        <div class="w-full mt-20 flex items-center justify-between flex-col lg:flex-row relative page__body-header">
           <div class="w-full lg:w-1/2">
             <h2 class="uppercase page__body-header-subtitle">Process</h2>
             <h3 class="uppercase page__body-header-title">Great Design Begins<br /> with Collaboration</h3>
-            <p v-html="home.about_intro" class="my-12"></p>
+            <p v-html="home.about_intro" class="my-6"></p>
             <LayoutLinkBtn link="/new-york-architecture-design-studio/">About</LayoutLinkBtn>
           </div>
 
@@ -41,23 +40,23 @@
 
         </div>
 
-        <div class="max-w-8xl w-full mt-20 2xl:mt-40 uppercase px-4 2xl:px-0  page__body-header">
+        <div class="w-full mt-20 2xl:mt-40 uppercase page__body-header">
           <h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
           <h3 class="mb-6 page__body-header-title">Architecture <br />Design</h3>
           <LayoutLinkBtn link="/interior-design-architecture-portfolio/">Work</LayoutLinkBtn>
         </div>
-        <div class="w-full max-w-8xl px-4 2xl:px-0 mt-3">
+        <div class="w-full mt-3">
           <UtilitiesSlideshowGrid :slides="architecture" />
         </div>
-        <div v-if="interior.length" class="max-w-8xl w-full uppercase px-4 2xl:px-0 mt-20 page__body-header">
+        <div v-if="interior.length" class="w-full uppercase mt-20 page__body-header">
           <h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
           <h3 class="mb-6 page__body-header-title">Interior <br />Design</h3>
           <LayoutLinkBtn link="/interior-design-architecture-portfolio/">Work</LayoutLinkBtn>
         </div>
-        <div v-if="interior.length" class="w-full max-w-8xl px-4 2xl:px-0 mt-3">
+        <div v-if="interior.length" class="w-full mt-3">
           <UtilitiesSlideshowGrid :slides="interior" />
         </div>
-        <div class="max-w-8xl w-full px-4 2xl:px-0 mt-20 xl:mt-40 page__body-header">
+        <div class="w-full mt-20 xl:mt-40 page__body-header">
           <div
             class="w-full flex items-center justify-between flex-row flex-wrap lg:items-start lg:flex-row home-section">
             <div class="w-full md:w-1/2 flex items-start flex-col">
@@ -67,23 +66,32 @@
               <LayoutLinkBtn link="/rosen-kelly-conway-architecture-design-team/">Team</LayoutLinkBtn>
             </div>
 
-            <img :src="'https://admin.rkcad.com/assets/' + home.team_image + '?key=medium'" alt="RKC Team"
-              class="w-full md:w-1/2 h-auto mt-4 mb-8" />
+            <img v-if="home.team_image" alt="RKC Team" class="w-full md:w-1/2 h-auto mt-4 mb-8" :srcset="imageUrl +
+              home.team_image +
+              '?key=small 400w, ' +
+              imageUrl +
+              home.team_image +
+              '?key=medium 1024w, ' +
+              imageUrl +
+              home.team_image +
+              '?key=large 1920w'
+              " :src="imageUrl + home.team_image + '?key=large'" />
+
             <div class="w-full flex items-start flex-col mt-12 xl:-mt-4 2xl:-mt-12">
               <h2 class="uppercase page__body-header-subtitle">{{ home.featured_profile.name }}</h2>
               <h3 class="uppercase page__body-header-title">Designer<br /> Spotlight</h3>
               <div
-                class="w-full mt-4 mb-8 flex items-start md:items-center justify-between flex-col lg:flex-row home-section__images">
-                <div class="flex items-start justify-start flex-col lg:flex-row relative w-full "
-                  :class="{ 'lg:w-1/2': home.featured_profile.featured_projects.length }">
+                class="w-full mt-4 mb-8 flex items-start md:items-center justify-between flex-col xl:flex-row home-section__images">
+                <div class="flex items-start justify-start flex-col md:flex-row relative w-full "
+                  :class="{ 'xl:w-1/2': home.featured_profile.featured_projects.length }">
                   <img :src="'https://admin.rkcad.com/assets/' + home.featured_profile.image + '?key=small'"
-                    alt="RKC Team" class="" />
+                    alt="RKC Team" class="profile-pic" />
 
-                  <div class="mt-4 md:mt-0 lg:ml-2 flex items-end justify-end flex-col home-section__quote"
+                  <div class="mt-4 md:mt-0 md:ml-2 flex items-end justify-end flex-col home-section__quote"
                     v-html="home.featured_profile.quote"> </div>
                 </div>
                 <div v-if="home.featured_profile.featured_projects.length"
-                  class="flex items-start justify-start flex-row relative w-full mt-12 lg:mt-0 lg:w-1/2 lg:ml-2 featured-projects">
+                  class="flex items-start justify-start flex-row relative w-full mt-12 xl:mt-0 xl:w-1/2 xl:ml-2 featured-projects">
                   <p class="uppercase absolute left-0 -top-[20px] ">Some of {{ getFirst(home.featured_profile.name) }}'s
                     favorite projects</p>
                   <nuxt-link v-for="(project, index) in home.featured_profile.featured_projects" :key="index"
@@ -100,21 +108,33 @@
               <p v-html="home.featured_profile.bio" style="width: 375px"></p>
             </div>
           </div>
-          <div class="w-full mt-20 xl:mt-40 page__body-header">
+          <div v-if="home.featured_project" class="w-full mt-20 xl:mt-40 page__body-header">
             <div class="w-full flex items-center justify-between lg:items-start flex-row flex-wrap home-section">
               <div class="w-full md:w-1/2 flex items-start flex-col">
                 <h2 class="uppercase page__body-header-subtitle">Featured</h2>
-                <h3 class="uppercase page__body-header-title">Georgian
-                  <br /> Colonial
+                <h3 class="uppercase page__body-header-title">{{ removeFirst(home.featured_project.title) }}
                 </h3>
-                <p style="width: 375px" class="mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac
-                  ex fringilla, congue lorem blandit, porttitor mi. Donec et lacus dapibus, lacinia nisl quis, euismod
-                  purus. Nulla est ante, egestas sit amet lacinia quis, pretium et lectus. Fusce ut condimentum leo, a
-                  interdum lorem. Cras vehi</p>
-                <LayoutLinkBtn link="/">Project</LayoutLinkBtn>
+                <p v-if="home.featured_project.intro" style="width: 375px" class="mb-8">{{ home.featured_project.intro }}
+                </p>
+                <p v-else style="width: 375px" class="mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                  posuere, odio a mattis dapibus, nisi elit tempus urna, rutrum egestas ipsum quam vel erat. Nulla id
+                  ligula id nisl bibendum malesuada. Quisque volutpat a odio id dictum. Donec vehicula dolor mauris, sed
+                  condimentum enim auctor at.</p>
+                <LayoutLinkBtn :link="'/interior-design-architecture-portfolio/' + home.featured_project.url">Project
+                </LayoutLinkBtn>
               </div>
 
-              <img src="/images/home-2.png" alt="RKC Team" class="w-full md:w-1/2 h-auto mt-4 mb-8" />
+              <img v-if="home.featured_project.images.length" :alt="removeFirst(home.featured_project.title) + ' by RKC'"
+                class="w-full md:w-1/2 h-auto mt-4 mb-8" :srcset="imageUrl +
+                  home.featured_project.images[0].directus_files_id +
+                  '?key=small 400w, ' +
+                  imageUrl +
+                  home.featured_project.images[0].directus_files_id +
+                  '?key=medium 1024w, ' +
+                  imageUrl +
+                  home.featured_project.images[0].directus_files_id +
+                  '?key=large 1920w'
+                  " :src="imageUrl + home.featured_project.images[0].directus_files_id + '?key=large'" />
 
             </div>
           </div>
@@ -140,7 +160,7 @@ const home = await getItems({
   collection: 'home',
   params: {
     fields: [
-      'featured_images.directus_files_id,about_intro,team_intro,team_image,featured_profile.*,featured_project.*,featured_profile.featured_projects.project.title,featured_profile.featured_projects.project.url,featured_profile.featured_projects.image',
+      'featured_images.directus_files_id,about_intro,team_intro,team_image,featured_profile.*,featured_project.title,featured_project.intro,featured_project.url,featured_project.category,featured_project.images.directus_files_id,featured_profile.featured_projects.project.title,featured_profile.featured_projects.project.url,featured_profile.featured_projects.image',
     ],
   },
 })
@@ -241,10 +261,13 @@ const interior = computed(() => {
     max-width: 400px;
     opacity: 0.85;
     position: absolute;
-    height: 100px;
-    bottom: -50px;
-    right: -100px;
-
+    height: 80px;
+    bottom: -60px;
+    right: -120px;
+    @media (min-width: theme('screens.sm')) {
+      bottom: -100px;
+      height: 100px;
+    }
     @media (min-width: theme('screens.lg')) {
       position: relative;
       max-width: 400px;
@@ -266,6 +289,16 @@ const interior = computed(() => {
       img {
         height: 250px;
         width: auto;
+      }
+
+      img.profile-pic {
+        height: auto;
+        width: 100%;
+
+        @media (min-width: theme('screens.sm')) {
+          height: 250px;
+          width: auto;
+        }
       }
     }
 
@@ -302,5 +335,4 @@ const interior = computed(() => {
     font-size: 7px;
     @apply italic;
   }
-}
-</style>
+}</style>

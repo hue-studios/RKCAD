@@ -24,7 +24,7 @@ function sideMenuToggle() {
 <style scoped>
 #nav-btn {
   top: 16px;
-  right: 0;
+  right:15px;
   z-index: 90;
   display: block;
   position: fixed;
@@ -34,9 +34,11 @@ function sideMenuToggle() {
   cursor: pointer;
   transition: 0.475s var(--curve);
   max-width: 300px;
-  @apply mr-4;
-  -webkit-backdrop-filter: blur(10px) invert(0.015);
-  backdrop-filter: blur(10px) invert(0.015);
+  @media (min-width: theme('screens.sm')) {
+    right:35px;
+  }
+  /* -webkit-backdrop-filter: blur(10px) invert(0.015);
+  backdrop-filter: blur(10px) invert(0.015); */
   @media (min-width: theme('screens.xl')) {
     width: 50px;
     right: 0px;
@@ -94,10 +96,11 @@ function sideMenuToggle() {
   }
 }
 #nav-btn.open {
-  width: 230px;
-  top: 120px;
-  right: 8px;
-  transform: rotate(-360deg);
+  /* width: 230px; */
+  top: 200px;
+  right: -10px;
+  /* transform: rotate(-360deg); */
+  opacity: 0;
   @media (min-width: theme('screens.lg')) {
   }
 
@@ -108,7 +111,7 @@ function sideMenuToggle() {
       background: var(--white);
     }
 
-    span:nth-child(1) {
+    /* span:nth-child(1) {
       transform: rotate(40deg);
       top: 1px;
       left: 8px;
@@ -117,14 +120,14 @@ function sideMenuToggle() {
         top: 0;
         width: 100%;
       }
-    }
+    } */
 
     span:nth-child(2) {
       width: 0;
       opacity: 0;
     }
 
-    span:nth-child(3) {
+    /* span:nth-child(3) {
       transform: rotate(-40deg);
       top: 32px;
       left: 8px;
@@ -133,7 +136,7 @@ function sideMenuToggle() {
         top: 35px;
         width: 100%;
       }
-    }
+    } */
   }
 }
 </style>

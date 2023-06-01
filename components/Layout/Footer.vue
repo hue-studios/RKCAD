@@ -1,8 +1,8 @@
 <template>
   <div
-    class="w-full  footer"
+    class="w-full max-w-7xl footer"
   >
-  <div class="w-full pt-0 pb-24 px-6 2xl:px-0 flex flex-col items-center justify-center mx-auto max-w-8xl">
+  <div class="w-full pt-0 pb-24 flex flex-col items-center justify-center mx-auto ">
     <div
       class="w-full flex flex-col items-start justify-center md:flex-row md:items-end md:justify-between"
     >
@@ -91,6 +91,12 @@
   padding-top: 100px;
   transition: all 0.4s var(--curve);
   z-index: 10;
+  padding-left: 15px;
+    padding-right: 15px;
+    @media (min-width: theme('screens.sm')) {
+      padding-left: 35px;
+    padding-right: 35px;
+    }
   &__col {
     a,
     p {

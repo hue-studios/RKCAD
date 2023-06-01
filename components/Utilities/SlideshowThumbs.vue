@@ -1,5 +1,5 @@
 <template>
-  <swiper :modules="[Thumbs, Navigation]" :parallax="true" :thumbs="{ swiper: thumbsSwiper }" :centeredSlides="true"
+  <swiper :modules="[Thumbs, Navigation]"  :thumbs="{ swiper: thumbsSwiper }" :centeredSlides="true"
     :centeredInsuficientSlides="true" class="flex items-center justify-center flex-row gallery-swiper">
     <swiper-slide v-for="(slide, index) in slides" :key="index"><img v-if="slide.directus_files_id.id" :srcset="imageUrl +
       slide.directus_files_id.id +
@@ -10,11 +10,15 @@
       imageUrl +
       slide.directus_files_id.id +
       '?key=large 1920w'
-      " :src="imageUrl + slide.directus_files_id.id + '?key=large'" /></swiper-slide>
+      " :src="imageUrl + slide.directus_files_id.id + '?key=large'" class="shadow-lg" /></swiper-slide>
   </swiper>
 
   <swiper :modules="[Thumbs, Navigation]" watch-slides-progress watch-slides-visibility @swiper="setThumbsSwiper"
-    class="thumb-swiper" :slidesPerView="'auto'" :centeredInsuficientSlides="true" :navigation="{
+    class="thumb-swiper" 
+    :slidesPerView="5"
+    :centeredSlides="true" :centeredInsuficientSlides="true"
+    :slideToClickedSlide="true"
+    :navigation="{
       nextEl: '#slideshowSwiperThumbs__next-btn',
       prevEl: '#slideshowSwiperThumbs__prev-btn',
     }">
@@ -58,9 +62,12 @@ const setThumbsSwiper = (swiper) => {
 <style >
 .gallery-swiper {
   height: calc(100% - 110px);
-
+  background: rgba(0,0,0,0.05);
   /* -webkit-backdrop-filter: blur(4px) invert(0.015);
   backdrop-filter: blur(4px) invert(0.015); */
+  @media (min-width: theme('screens.lg')) {
+    background: none;
+  }
   .swiper-slide {
     align-items: center;
     justify-content: center;
@@ -70,14 +77,14 @@ const setThumbsSwiper = (swiper) => {
     img {
       max-height: 100%;
       max-width: 100%;
-      height: 100%;
+      width:auto;
     }
   }
 }
 
 .thumb-swiper {
   height: 100px;
-  margin: 10px 50px;
+  margin: 10px 0px;
 
   position: relative;
 

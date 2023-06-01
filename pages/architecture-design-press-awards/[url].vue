@@ -1,27 +1,27 @@
 <template>
-  <div v-if="isImageLoaded"
-    class="relative w-full flex items-center justify-center flex-col min-h-screen project"
-  >
-  <div class="w-full relative project__slideshow">
+  <div v-if="isImageLoaded" class="relative w-full flex items-center justify-center flex-col min-h-screen article">
+    <div class="w-full relative article__slideshow">
       <UtilitiesSlideshowThumbs v-if="article.images.length" :slides="article.images" />
-     
+
     </div>
     <div
-      class="w-full flex items-start lg:items-end flex-col lg:flex-row justify-between uppercase tracking-wide mt-20 px-4  project__header mx-w-8xl"
-    >
+      class="w-full flex items-start flex-col  justify-between uppercase tracking-wide mt-20 max-w-7xl article__header mx-w-7xl">
       <h1 class="relative">
         {{ article.title }}
         <span class="hidden">
           <span>{{
             article.category
           }}</span>
-          Article for Rosen Kelly Conway</span
-        >
-       
-      </h1>
+          Article for Rosen Kelly Conway</span>
 
-     </div>
-   
+      </h1>
+      <a v-if="article.link" :href="article.link" target="_blank">View Article <nuxt-icon name="arrow-right"
+          class="ml-1 arrow-right-icon" /></a>
+      <nuxt-link v-if="article.project" :to="'/interior-design-architecture-portfolio/' + article.project.url">View
+        Project <nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon" /></nuxt-link>
+
+    </div>
+
   </div>
   <LayoutLoader v-else />
 </template>
@@ -39,7 +39,7 @@ const { data, pending, error, refresh } = await useAsyncData('articles', () => {
         },
       },
       fields: [
-        'category,title,description,link,url,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags',
+        'category,title,description,link,url,project.title,project.url,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags',
       ],
     },
   })
@@ -47,10 +47,10 @@ const { data, pending, error, refresh } = await useAsyncData('articles', () => {
 const article = ref(data.value[0])
 const isImageLoaded = ref(false);
 onMounted(() => {
-  if(article.value.images.length > 0) {
-  const image = new Image();
+  if (article.value.images.length > 0) {
+    const image = new Image();
     image.src = 'https://admin.rkcad.com/assets/' +
-    article.value.images[0].directus_files_id.id  + 'key=xlarge';
+      article.value.images[0].directus_files_id.id + 'key=xlarge';
     image.onload = () => {
       isImageLoaded.value = true;
     };
@@ -62,67 +62,79 @@ onMounted(() => {
 
 </script>
 <style>
-.project {
+.article {
+  margin-top: 65px;
   &__slideshow {
-    max-height: 600px;
-    @apply h-screen;
+    transition: all 0.5s var(--curve);
+    height: calc(100vh - 167px);
+    @apply max-w-7xl;
     @media (min-width: theme('screens.lg')) {
-      /* max-height: 800px; */
     }
+
     .swiper {
-      padding-bottom: 50px;
+      @apply py-4
     }
+
     .swiper-pagination {
-      /* bottom: -25px; */
       font-size: 14px;
       line-height: 14px;
       letter-spacing: 0.2em;
     }
   }
+
+
   &__header {
     /* max-width: var(--max-width); */
     @apply mt-10 lg:mt-14 max-w-8xl;
+
     h1 {
-      font-size: 44px;
+      font-size: 30px;
+      letter-spacing: 0.1em;
       line-height: 1em;
+      @apply mb-4;
     }
-    &-nav {
-      bottom: -35px;
-      height: 12px;
-      @media (min-width: theme('screens.lg')) {
-        bottom: -12px;
-      }
-      a {
-        height: 10px;
-        font-size: 9px;
-        line-height: 10px;
-        .nuxt-icon {
-          height: 10px;
-          fill: black;
-          transition: 0.4s var(--curve);
-          svg {
-            height: 10px;
-            display: inline-block !important;
-            line {
-              stroke-width: 3px;
-              stroke: var(--blue) !important;
-            }
+
+    a {
+      font-size: 0.75rem;
+      line-height: 1rem;
+      margin-top: 10px;
+      font-weight: 900;
+      @apply inline-block tracking-wider my-4;
+
+      .nuxt-icon {
+        height: 12px;
+        fill: black;
+        transition: 0.4s var(--curve);
+        display: inline-block !important;
+        transform: translateX(0px);
+
+        svg {
+          margin-top: -2px;
+          height: 12px;
+          display: inline-block !important;
+
+          path {
+            stroke-width: 10px;
+            stroke: var(--blue) !important;
           }
         }
       }
     }
-    &-category {
+
+    /* &-category {
       height: 10px;
       font-size: 9px;
       line-height: 10px;
       margin-top: 5px;
+
       @media (min-width: theme('screens.lg')) {
         margin-bottom: -10px;
       }
-    }
+    } */
   }
-  &__content {
+
+  /* &__content {
     @apply max-w-8xl;
-  }
-}
-</style>
+
+  } */
+}</style>
