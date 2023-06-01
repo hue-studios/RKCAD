@@ -7,10 +7,10 @@
       class="w-full flex flex-col items-start justify-center md:flex-row md:items-end md:justify-between"
     >
       <div
-        class="flex items-start justify-center text-left lg:text-left flex-col shrink-0 mb-8 lg:mb-0 footer__col footer__nav"
+        class="flex items-start justify-center text-left lg:text-left w-full flex-col md:shrink-0 mb-8 md:mb-0 lg:mb-0 footer__col footer__nav"
       >
         <div
-          class="w-full flex items-center md:items-start justify-center flex-row mb-6"
+          class="w-full flex items-center md:items-start justify-center flex-row mb-6 "
         >
           <nuxt-link to="/" class="p-1 w-1/3">Home</nuxt-link>
           <nuxt-link
@@ -37,25 +37,25 @@
         </div>
       </div>
       <div
-        class="flex items-start justify-center text-left flex-col lg:flex-row footer__col"
+        class="mt-8 w-full flex items-start md:items-end lg:items-start justify-center lg:justify-end text-left flex-col lg:flex-row footer__col relative md:pr-8 lg:pr-0 "
       >
-        <p class="mr-5">Phone: <a href="tel:(908) 273-6565">908.273.6565</a></p>
-        <p class="mr-5">Studio: 16 Maple St Summit NJ</p>
+        <p class="mr-5"><span class="hidden">Phone: </span><a href="tel:(908) 273-6565">908.273.6565</a></p>
+        <p class="mr-5 my-2 lg:my-0"><span class="hidden">Studio: </span>16 Maple St Summit NJ</p>
         <p class="mr-5">
-          Email: <a href="mailto:info@rkcad.com">Info@rkcad.com</a>
+          <span class="hidden">Email: </span><a href="mailto:info@rkcad.com">Info@rkcad.com</a>
         </p>
-        <div class="flex flex-row lg:flex-row mt-8 lg:mt-0">
+        <div class="flex flex-row md:flex-col mt-8 lg:mt-0 absolute -bottom-[5px] right-0 lg:relative lg:flex-row lg:bottom-auto lg:right-auto">
           <a
             href="https://www.instagram.com/rkcad/"
             target="_blank"
-            class="ml-5"
+            class="lg:ml-5 md:mb-3 lg:mb-0"
           >
             <nuxt-icon name="instagram" class="" />
           </a>
           <a
             href="https://www.houzz.com/professionals/architects-and-building-designers/rosen-kelly-conway-architecture-and-design-pfvwus-pf~1350653163?"
             target="_blank"
-            class="ml-5"
+            class="ml-5 md:ml-0 lg:ml-5"
           >
             <nuxt-icon name="houzz" class="" />
           </a>
@@ -63,12 +63,12 @@
       </div>
     </div>
     <div
-      class="flex w-full flex-col lg:flex-row items-center justify-center lg:items-end lg:justify-end mt-6 font-bold tracking-wide"
+      class="flex w-full flex-col lg:flex-row items-start justify-start lg:items-end lg:justify-end mt-6 font-bold tracking-wide"
     >
-      <h5 class="tracking-widest uppercase body-font copyright">
+      <h5 class="mt-8 tracking-widest uppercase body-font copyright">
         &#169; {{ new Date().getFullYear() }} Rosen Kelly Conway
       </h5>
-      <h5 class="lg:ml-12 web-designer">
+      <h5 class="mt-2 lg:ml-12 web-designer">
         <a
           href="https://huestudios.com"
           target="_blank"
@@ -87,7 +87,6 @@
 <style>
 .footer {
   position: relative;
-
   padding-top: 100px;
   transition: all 0.4s var(--curve);
   z-index: 10;
@@ -101,16 +100,22 @@
     a,
     p {
       font-size: 9px;
-      @apply uppercase tracking-widest font-bold;
+      @apply uppercase tracking-widest font-bold ;
     }
     a.router-link-exact-active {
       color: var(--green);
     }
   }
   &__nav {
-    width: 300px;
+    
+    @media (min-width: theme('screens.md')) {
+      width: 300px;
+    }
     a {
-      width: 100px;
+      
+      @media (min-width: theme('screens.md')) {
+        width: 100px;
+      }
     }
   }
   .nuxt-icon {

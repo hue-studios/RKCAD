@@ -16,7 +16,7 @@
   <swiper :modules="[Thumbs, Navigation]" watch-slides-progress watch-slides-visibility @swiper="setThumbsSwiper"
     class="thumb-swiper" 
     :slidesPerView="5"
-    :centeredSlides="true" :centeredInsuficientSlides="true"
+    :centeredSlides="false" :centeredInsuficientSlides="true"
     :slideToClickedSlide="true"
     :navigation="{
       nextEl: '#slideshowSwiperThumbs__next-btn',
@@ -62,7 +62,7 @@ const setThumbsSwiper = (swiper) => {
 <style >
 .gallery-swiper {
   height: calc(100% - 110px);
-  background: rgba(0,0,0,0.05);
+  /* background: rgba(0,0,0,0.025); */
   /* -webkit-backdrop-filter: blur(4px) invert(0.015);
   backdrop-filter: blur(4px) invert(0.015); */
   @media (min-width: theme('screens.lg')) {

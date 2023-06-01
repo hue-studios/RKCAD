@@ -79,7 +79,10 @@ const pageStore = usePageStore()
   }
 
   .rkc-logo.on {
-    margin-left: 80px;
+    margin-left: 60px;
+    @media (min-width: theme('screens.sm')) {
+      margin-left: 40px;
+    }
   }
 }
 

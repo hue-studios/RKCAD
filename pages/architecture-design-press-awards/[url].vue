@@ -64,12 +64,19 @@ onMounted(() => {
 <style>
 .article {
   margin-top: 65px;
+  padding-left: 15px;
+    padding-right: 15px;
+    @apply max-w-7xl;
+    @media (min-width: theme('screens.sm')) {
+      padding-left: 35px;
+      padding-right: 35px;
+    }
   &__slideshow {
     transition: all 0.5s var(--curve);
     height: calc(100vh - 167px);
     @apply max-w-7xl;
-    @media (min-width: theme('screens.lg')) {
-    }
+
+    @media (min-width: theme('screens.lg')) {}
 
     .swiper {
       @apply py-4
@@ -137,4 +144,5 @@ onMounted(() => {
     @apply max-w-8xl;
 
   } */
-}</style>
+}
+</style>

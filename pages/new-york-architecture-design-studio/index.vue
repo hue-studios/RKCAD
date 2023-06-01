@@ -11,24 +11,27 @@
     <div
       class="mt-20 flex flex-wrap flex-col lg:flex-row lg:flex-wrap items-start justify-between w-full page__body relative about__body">
       <h2
-        class="uppercase font-thin order-1 w-full lg:order-2 lg:w-1/2 text-right opacity-30 tracking-wide pl-8 md:pl-32 lg:pl-2 about__body-caption">
+        class="uppercase font-thin hidden lg:inline-block w-full order-2 lg:w-1/2 text-right opacity-50 tracking-wide pl-8 md:pl-32 lg:pl-2 about__body-caption lg:sticky">
         Embracing Design Heritage with a Modern Vision
       </h2>
-      <div class="w-full lg:w-1/2 order-2 lg:order-1 lg:pr-2 about__body-content">
-        <h2 class="page__body-header-subtitle">Vision</h2>
+      <div class="w-full lg:w-1/2 order-1 lg:pr-2 about__body-content">
+        <h2 class="page__body-header-subtitle " style="margin-top: 0px;">Vision</h2>
         <h3 class="page__body-header-title">Who<br />We Are</h3>
         <p v-html="about.who_we_are"></p>
-
+        <h5
+          class="uppercase font-thin w-full lg:hidden text-right opacity-50 tracking-wide pl-8 md:pl-32 lg:pl-2 about-caption">
+          Embracing Design Heritage with a Modern Vision
+        </h5>
         <h2 class="page__body-header-subtitle">Process</h2>
         <h3 class="page__body-header-title">Our <br />Approach</h3>
         <p v-html="about.our_approach"></p>
 
         <h2 class="page__body-header-subtitle">Expertise</h2>
         <h3 class="page__body-header-title">What <br />We Do</h3>
-        <p v-html="about.what_we_do"></p>
+        <p v-html="about.what_we_do" class=""></p>
       </div>
       <div
-        class="flex flex-row items-center justify-center w-full relative order-3 lg:w-1/2 lg:absolute lg:right-0 flex flex-row items-center lg:px-4 about__body-image">
+        class="flex flex-row items-center justify-center mt-10 lg:mt-0 w-full relative order-3 lg:w-1/2 lg:absolute lg:right-0 flex flex-row items-center lg:px-4 about__body-image">
         <div class="w-5/6 flex flex-row items-center justify-between absolute">
           <h5>
             Architecture<br />
@@ -86,7 +89,7 @@ const formattedTitle = computed(() => {
       }
 
       @media (min-width: theme('screens.lg')) {
-        margin-top: 155px;
+        margin-top: 110px;
         font-size: 66px;
         line-height: 80px;
         padding-left: 60px;
@@ -109,6 +112,17 @@ const formattedTitle = computed(() => {
         max-width: 600px;
       }
 
+      .about-caption {
+        font-size: 36px;
+        line-height: 46px;
+        font-family: var(--light-font);
+        font-weight: 500;
+        @media (min-width: theme('screens.md')) {
+          font-size: 66px;
+          line-height: 66px;
+        }
+
+      }
 
       h2 {
         font-size: 9px;
@@ -129,6 +143,7 @@ const formattedTitle = computed(() => {
       p {
         padding-bottom: 50px;
         line-height: 30px;
+        @apply lg:pr-8;
       }
     }
 

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen w-full transition duration-150 bg-white dark:bg-slate-900 overflow-hidden lg:overflow-visible flex items-center justify-start flex-col relative">
+    class="min-h-screen w-full transition duration-150 bg-white overflow-hidden flex items-center justify-start flex-col relative">
     <LayoutRkc id="rkc-bg-icon" class="rkc-bg-icon" />
     <input id="nav-drawer-toggle" type="checkbox" class="hidden" />
     <input id="profile-toggle" type="checkbox" class="hidden" />
