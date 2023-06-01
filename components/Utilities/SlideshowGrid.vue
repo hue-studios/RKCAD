@@ -22,7 +22,7 @@
       </swiper-slide>
 
     </swiper>
-    <div class="w-full flex items-center justify-between flex-row relative my-4 slideshowSwiperGrid__nav">
+    <div class="w-full flex items-center justify-between flex-row relative mt-6 mb-4 slideshowSwiperGrid__nav">
       <h5 id="slideshowSwiperGrid__prev-btn"
         class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 lg:pl-0 lg:pr-4  py-2 slideshowSwiperGrid__prev-btn">
         <nuxt-icon name="arrow-left" class="mr-4 arrow-left-icon" />
@@ -62,16 +62,16 @@ const modules = [Grid, Navigation]
   }
 
   @media (min-width: theme('screens.lg')) {
-    height: 690px;
+    height: 650px;
   }
 
-  @media (min-width: theme('screens.xl')) {
+  /* @media (min-width: theme('screens.xl')) {
     height: 740px;
   }
 
   @media (min-width: theme('screens.2xl')) {
     height: 840px;
-  }
+  } */
 
   .swiper-slide {
     height: 350px;
@@ -80,20 +80,20 @@ const modules = [Grid, Navigation]
       height: 350px;
     } */
     @media (min-width: theme('screens.md')) {
-      height: 300px;
+      height: 310px;
     }
 
     @media (min-width: theme('screens.lg')) {
-      height: 325px;
+      /* height: 310px; */
     }
 
-    @media (min-width: theme('screens.xl')) {
+    /* @media (min-width: theme('screens.xl')) {
       height: 350px;
     }
 
     @media (min-width: theme('screens.2xl')) {
       height: 400px;
-    }
+    } */
 
 
   }
@@ -119,7 +119,8 @@ const modules = [Grid, Navigation]
 }
 
 .work__card {
-
+  height: 350px;
+  width: 100%;
   &-image {
     height: 350px;
     background-color: rgba(167, 169, 172, 0.45);
@@ -128,20 +129,20 @@ const modules = [Grid, Navigation]
 
     /* margin: 45px; */
     @media (min-width: theme('screens.md')) {
-      height: 350px;
+      height: 300px;
     }
 
     @media (min-width: theme('screens.lg')) {
-      height: 325px;
+      /* height: 325px; */
     }
 
-    @media (min-width: theme('screens.xl')) {
+    /* @media (min-width: theme('screens.xl')) {
       height: 350px;
     }
 
     @media (min-width: theme('screens.2xl')) {
       height: 400px;
-    }
+    } */
 
     svg {
       margin: 0 20px;
