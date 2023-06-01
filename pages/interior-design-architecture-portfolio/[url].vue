@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isImageLoaded" class="relative w-full flex items-center justify-center flex-col min-h-screen project">
+  <div v-if="isImageLoaded" class="relative w-full flex items-center justify-center flex-col min-h-screen mx-auto project">
     <div
       class="w-full flex items-start lg:items-end flex-col lg:flex-row justify-between tracking-wide mt-4 relative project__header">
       <h1 class="uppercase relative">
@@ -28,7 +28,8 @@
         @click.prevent="toggleCredits()">
         <span></span><span></span>
       </div>
-      <div v-if="project.credits" @click.prevent="toggleCredits()" class="credits__content" :class="{ 'open': showCredits }" v-html="project.credits">
+      <div v-if="project.credits" @click.prevent="toggleCredits()" class="credits__content"
+        :class="{ 'open': showCredits }" v-html="project.credits">
       </div>
       <UtilitiesSlideshowThumbs :slides="project.images" />
       <div class="absolute z-10 w-full flex items-center justify-between flex-row hidden lg:flex project__projects-nav">
@@ -61,6 +62,8 @@
           <p class="text-sm leading-8">{{ project.result }}</p>
         </div>
       </div>
+      <div v-if="project.credits && (!project.result || project.challenge || project.approach)" v-html="project.credits"
+        class="w-full project__content-credits"></div>
     </div>
     <div class="project__recognition">
       <ProjectsPressSlider :slides="project.press_and_awards" />
@@ -115,12 +118,18 @@ onMounted(() => {
 <style>
 .project {
   margin-top: 65px;
-
+  padding-left: 15px;
+    padding-right: 15px;
+    @apply max-w-7xl;
+    @media (min-width: theme('screens.sm')) {
+      padding-left: 35px;
+      padding-right: 35px;
+    }
   &__slideshow {
     transition: all 0.5s var(--curve);
     height: calc(100vh - 167px);
 
-    @apply max-w-7xl;
+   
 
     @media (min-width: theme('screens.lg')) {
       /* max-height: 800px; */
@@ -129,6 +138,7 @@ onMounted(() => {
     .swiper {
       /* padding-bottom: 50px; */
       @apply py-4;
+
       @media (min-width: theme('screens.lg')) {
         padding: 0;
       }
@@ -145,7 +155,6 @@ onMounted(() => {
   &__projects-nav {
     bottom: 110px;
 
-
     a {
       font-size: 10px;
       @apply uppercase tracking-wide;
@@ -155,7 +164,8 @@ onMounted(() => {
   &__header {
     margin-bottom: 5px;
     z-index: 10;
-    @apply max-w-7xl mt-12;
+    @apply  mt-12;
+   
 
     h1 {
       font-size: 30px;
@@ -213,7 +223,7 @@ onMounted(() => {
     z-index: 5;
     transition: all 0.6s var(--curve);
     @apply absolute top-0 right-0 flex items-center justify-center text-center;
-
+   
     span {
       height: 1px;
       background: var(--white);
@@ -233,6 +243,7 @@ onMounted(() => {
     opacity: 0;
     width: 200px;
     height: 100%;
+
     /* transition: all 0.4s 0.2s var(--curve); */
     span {
       transform: rotate(-90deg) translate(-5px, -10px);
@@ -249,27 +260,35 @@ onMounted(() => {
     color: var(--white);
     font-size: 12px;
     line-height: 1.2em;
-  
+
     z-index: 10;
     height: calc(100% - 110px);
     transition: all 0.5s 0.1s var(--curve);
     transform: translateX(100%);
     opacity: 0;
+
     h3 {
       font-size: 8px;
       font-weight: 700;
       @apply uppercase font-bold;
     }
+
     p {
       @apply mb-4;
     }
   }
+
   .credits__content.open {
-      transform: translateX(0px);
-      opacity: 1;
+    transform: translateX(0px);
+    opacity: 1;
   }
+
   &__content {
+   
+
     @apply max-w-7xl;
+
+
 
     h1 {
       font-size: 30px;
@@ -281,8 +300,21 @@ onMounted(() => {
     p {
       font-size: 14px;
     }
+
+    &-credits {
+      h3 {
+        font-size: 8px;
+        font-weight: 700;
+        @apply uppercase font-bold;
+      }
+
+      p {
+        @apply mb-4;
+      }
+    }
   }
 }
+
 /* 
 .credits-enter-from {
   opacity: 0;
@@ -297,5 +329,4 @@ onMounted(() => {
 .credits-enter,
 .credits-leave-to {
   opacity: 0;
-}*/
-</style> 
+}*/</style> 

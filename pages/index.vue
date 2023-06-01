@@ -223,12 +223,18 @@ const interior = computed(() => {
   #animation {
     position: absolute;
     z-index: 10;
-    height: 500px;
+    height: 550px;
     margin-bottom: 50px;
     overflow: hidden !important;
     @apply bg-cover bg-center bg-no-repeat w-full flex items-center justify-center px-4 overflow-hidden relative;
 
-    @media (min-width: theme('screens.md')) {}
+    @media (min-width: theme('screens.sm')) {
+      height: 550px;
+    }
+
+    @media (min-width: theme('screens.md')) {
+      height: 600px;
+    }
 
     @media (min-width: theme('screens.lg')) {
       height: calc(100vh);

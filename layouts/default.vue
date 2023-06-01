@@ -36,7 +36,7 @@ import { screen } from '~~/composables/useScreen'
     height: 550px;
     background-color: rgba(0, 0, 0, 0.35);
     background-blend-mode: darken;
-    margin-bottom: 50px;
+    margin-bottom: 0px;
     overflow: hidden !important;
     @apply bg-cover bg-center bg-no-repeat w-full flex items-end justify-center overflow-hidden relative;
 
@@ -50,6 +50,7 @@ import { screen } from '~~/composables/useScreen'
 
     @media (min-width: theme('screens.lg')) {
       height: calc(100vh);
+      margin-bottom: 50px;
     }
 
     #rkc-bg-icon-2 {

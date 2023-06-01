@@ -33,11 +33,13 @@
         <h2 class="page__body-header-subtitle">Recognition</h2>
         <h3 class="page__body-header-title">Published/ <br />Awards</h3>
       </div>
+      <div class="w-full flex items-center justify-between flex-row flex-wrap">
       <CardsArticleCard
         v-for="(article, index) in awardArticles"
         :key="index"
         :article="article"
       />
+      </div>
     </div>
   </div>
   <LayoutLoader v-else />
@@ -81,7 +83,7 @@ const awardArticles = computed(() => {
 <style >
 .press {
   .page__body {
-    @apply px-0;
+    padding-right: 0px;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-6 md:mb-12 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 2xl:w-1/6 px-5 md:px-6 article-card__wrapper" :class="category">
+  <div class="mb-6 md:mb-12 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 article-card-wrapper" :class="category">
     <nuxt-link :to="'/architecture-design-press-awards/' + article.url"
       class="relative flex flex-col items-start article-card">
       <div v-if="article.images.length > 0" :style="'background-image: url(https://admin.rkcad.com/assets/' +
@@ -27,21 +27,41 @@ const category = props.article.category.toLowerCase()
 </script>
 
 <style>
-.article-card__wrapper {
+.article-card-wrapper {
+  margin-bottom: 15px;
+  overflow: hidden;
+  padding-right: 15px;
+  @media (min-width: theme('screens.sm')) {
+    padding-right: 35px;margin-bottom: 35px;
+  }
 
-
-  /* @media (min-width: 840px) {
-    width: 25%;
+  @media (min-width: theme('screens.lg')) {
+    padding-right: 35px;
+  }
+}
+/* .article-card-wrapper:nth-child(3n) {
+  padding-right: 0px;
+  @media (min-width: theme('screens.sm')) {
+    
   }
   @media (min-width: theme('screens.lg')) {
- 
-  } */
-}
-
+    padding-right: 35px;
+  }
+} */
+/* .article-card__wrapper:nth-child(3n) {
+  @media (min-width: theme('screens.lg')) {
+    padding-right: 0px;
+  }
+} */
+/* .article-card-wrapper:nth-child(6n) {
+  @media (min-width: theme('screens.lg')) {
+    padding-right: 0px;
+  }
+} */
 .article-card {
-  margin-bottom: 1rem;
+
   position: relative;
-  width: 100%;
+  overflow: hidden;
   height: 220px;
   cursor: pointer;
   z-index: 1;
