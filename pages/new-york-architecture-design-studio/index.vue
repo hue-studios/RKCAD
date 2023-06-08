@@ -89,10 +89,10 @@ const formattedTitle = computed(() => {
       }
 
       @media (min-width: theme('screens.lg')) {
-        margin-top: 110px;
-        font-size: 66px;
-        line-height: 80px;
-        padding-left: 60px;
+        margin-top: 122px;
+        font-size: 52px;
+        line-height: 61px;
+        padding-left: 140px;
       }
 
       /* @media (min-width: theme('screens.xl')) {
