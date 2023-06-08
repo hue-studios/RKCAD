@@ -22,7 +22,6 @@ export default defineNuxtConfig({
   buildModules: ['@vueuse/nuxt'],
 
   modules: [
-    '@formkit/nuxt',
     '@nuxtjs/tailwindcss',
     [
       '@pinia/nuxt',

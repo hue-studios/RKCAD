@@ -23,27 +23,27 @@ function sideMenuToggle() {
 </script>
 <style scoped>
 #nav-btn {
-  top: 16px;
+  top: 18px;
   right:15px;
   z-index: 90;
   display: block;
-  position: fixed;
+  position: absolute;
   background: none;
   width: 50px;
   text-align: center;
   cursor: pointer;
-  transition: 0.475s var(--curve);
+  transition: 0.65s var(--curve);
   max-width: 300px;
-  @media (min-width: theme('screens.sm')) {
+  /* @media (min-width: theme('screens.sm')) {
     right:35px;
-  }
+  } */
   /* -webkit-backdrop-filter: blur(10px) invert(0.015);
   backdrop-filter: blur(10px) invert(0.015); */
-  @media (min-width: theme('screens.xl')) {
+  /* @media (min-width: theme('screens.xl')) {
     width: 50px;
     right: 0px;
     position: absolute;
-  }
+  } */
   /* @media (min-width: 1280px) {
     margin-right: 0px;
   } */
@@ -69,25 +69,25 @@ function sideMenuToggle() {
       opacity: 1;
       left: 0;
       transform: rotate(0deg);
-      transition: 0.25s var(--curve);
+      transition: 0.65s var(--curve);
     }
 
     span:nth-child(1) {
-      top: 11px;
+      top: 1px;
       transform-origin: left center;
-      @media (min-width: theme('screens.lg')) {
+      /* @media (min-width: theme('screens.lg')) {
         top: 9px;
-      }
+      } */
     }
 
     span:nth-child(2) {
-      top: 14px;
+      top: 12px;
       transform-origin: left center;
-      display: none;
+    
     }
 
     span:nth-child(3) {
-      top: 20px;
+      top: 24px;
       transform-origin: left center;
       @media (min-width: theme('screens.lg')) {
         top: 22px;
@@ -97,46 +97,46 @@ function sideMenuToggle() {
 }
 #nav-btn.open {
   /* width: 230px; */
-  top: 200px;
-  right: -10px;
+  /* top: calc(50vh - 15px); */
+  right: -200px;
   /* transform: rotate(-360deg); */
   opacity: 0;
   @media (min-width: theme('screens.lg')) {
   }
 
   #nav-icon {
-    width: 55px;
+    /* width: 55px; */
 
     span {
       background: var(--white);
     }
 
-    /* span:nth-child(1) {
-      transform: rotate(40deg);
-      top: 1px;
-      left: 8px;
-      width: 80%;
-      @media (min-width: theme('screens.lg')) {
+    span:nth-child(1) {
+      /* transform: rotate(40deg); */
+      top: 12px;
+      /* left: 8px;
+      width: 80%; */
+      /* @media (min-width: theme('screens.lg')) {
         top: 0;
         width: 100%;
-      }
-    } */
+      } */
+    }
 
     span:nth-child(2) {
-      width: 0;
+      /* width: 0; */
       opacity: 0;
     }
 
-    /* span:nth-child(3) {
-      transform: rotate(-40deg);
-      top: 32px;
-      left: 8px;
-      width: 80%;
-      @media (min-width: theme('screens.lg')) {
+    span:nth-child(3) {
+      /* transform: rotate(-40deg); */
+      top: 14px;
+      /* left: 8px;
+      width: 80%; */
+      /* @media (min-width: theme('screens.lg')) {
         top: 35px;
         width: 100%;
-      }
-    } */
+      } */
+    }
   }
 }
 </style>

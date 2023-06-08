@@ -125,11 +125,9 @@ const formattedTitle = computed(() => {
       }
 
       h2 {
-        font-size: 9px;
-        line-height: 10px;
+    
         margin-top: 50px;
-        margin-bottom: 10px;
-        @apply tracking-wide uppercase font-bold;
+        @apply uppercase ;
       }
 
       h3 {

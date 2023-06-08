@@ -9,4 +9,5 @@
 <script setup>
 import { usePageStore } from '~~/store/PageStore'
 const pageStore = usePageStore()
+
 </script>

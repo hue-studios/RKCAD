@@ -28,42 +28,44 @@
       </transition>
 
       <div class="flex flex-wrap flex-row items-center justify-center w-full page__body">
-        <div class="w-full mt-20 flex items-center justify-between flex-col lg:flex-row relative page__body-header">
+        <div class="w-full flex items-center justify-between flex-col lg:flex-row relative page__body-header">
           <div class="w-full lg:w-1/2">
             <h2 class="uppercase page__body-header-subtitle">Process</h2>
             <h3 class="uppercase page__body-header-title">Great Design Begins<br /> with Collaboration</h3>
-            <p v-html="home.about_intro" class="my-6"></p>
-            <LayoutLinkBtn link="/new-york-architecture-design-studio/">About</LayoutLinkBtn>
+            <p v-html="home.about_intro" class="mt-6 mb-3"></p>
+            <LayoutLinkBtn link="/new-york-architecture-design-studio/">Learn About Our Process</LayoutLinkBtn>
           </div>
 
           <LayoutRkcName />
 
         </div>
 
-        <div class="w-full mt-20 2xl:mt-40 uppercase page__body-header">
+        <div class="w-full uppercase page__body-header">
           <h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
-          <h3 class="mb-6 page__body-header-title">Architecture <br />Design</h3>
-          <LayoutLinkBtn link="/interior-design-architecture-portfolio/">Work</LayoutLinkBtn>
+          <h3 class="page__body-header-title">Architecture <br />Design</h3>
+          
         </div>
-        <div class="w-full mt-3">
-          <UtilitiesSlideshowGrid :slides="architecture" />
+        <div class="w-full">
+          <UtilitiesSlideshowGrid :slides="architecture" :navigation="false"/>
+          <LayoutLinkBtn class="mt-8" link="/interior-design-architecture-portfolio/">More of Our Architecture Work</LayoutLinkBtn>
         </div>
-        <div v-if="interior.length" class="w-full uppercase mt-20 page__body-header">
+        <div v-if="interior.length" class="w-full uppercase page__body-header">
           <h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
-          <h3 class="mb-6 page__body-header-title">Interior <br />Design</h3>
-          <LayoutLinkBtn link="/interior-design-architecture-portfolio/">Work</LayoutLinkBtn>
+          <h3 class="page__body-header-title">Interior <br />Design</h3>
+          
         </div>
-        <div v-if="interior.length" class="w-full mt-3">
-          <UtilitiesSlideshowGrid :slides="interior" />
+        <div v-if="interior.length" class="w-full">
+          <UtilitiesSlideshowGrid :slides="interior" :navigation="false"/>
+          <LayoutLinkBtn class="mt-8" link="/interior-design-architecture-portfolio/">See Our Interior Work</LayoutLinkBtn>
         </div>
-        <div class="w-full mt-20 xl:mt-40 page__body-header">
+        <div class="w-full page__body-header">
           <div
             class="w-full flex items-center justify-between flex-row flex-wrap lg:items-start lg:flex-row home-section">
             <div class="w-full md:w-1/2 flex items-start flex-col">
               <h2 class="uppercase page__body-header-subtitle">Culture</h2>
               <h3 class="uppercase page__body-header-title">Meet<br /> the Team</h3>
-              <p v-html="home.team_intro" style="width: 375px" class="mb-8"></p>
-              <LayoutLinkBtn link="/rosen-kelly-conway-architecture-design-team/">Team</LayoutLinkBtn>
+              <p v-html="home.team_intro" style="width: 375px" class="mb-4"></p>
+              <LayoutLinkBtn link="/rosen-kelly-conway-architecture-design-team/">Learn about the Talent</LayoutLinkBtn>
             </div>
 
             <img v-if="home.team_image" alt="RKC Team" class="w-full md:w-1/2 h-auto mt-4 mb-8" :srcset="imageUrl +
@@ -77,7 +79,7 @@
               '?key=large 1920w'
               " :src="imageUrl + home.team_image + '?key=large'" />
 
-            <div class="w-full flex items-start flex-col mt-12 xl:-mt-4 2xl:-mt-12">
+            <div class="w-full flex items-start flex-col mt-12 xl:-mt-2 2xl:-mt-10">
               <h2 class="uppercase page__body-header-subtitle">{{ home.featured_profile.name }}</h2>
               <h3 class="uppercase page__body-header-title">Designer<br /> Spotlight</h3>
               <div
@@ -108,19 +110,19 @@
               <p v-html="home.featured_profile.bio" style="width: 375px"></p>
             </div>
           </div>
-          <div v-if="home.featured_project" class="w-full mt-20 xl:mt-40 page__body-header">
+          <div v-if="home.featured_project" class="w-full page__body-header">
             <div class="w-full flex items-center justify-between lg:items-start flex-row flex-wrap home-section">
               <div class="w-full md:w-1/2 flex items-start flex-col">
-                <h2 class="uppercase page__body-header-subtitle">Featured</h2>
+                <h2 class="uppercase page__body-header-subtitle">Project Spotlight</h2>
                 <h3 class="uppercase page__body-header-title">{{ removeFirst(home.featured_project.title) }}
                 </h3>
-                <p v-if="home.featured_project.intro" style="width: 375px" class="mb-8">{{ home.featured_project.intro }}
+                <p v-if="home.featured_project.intro" style="width: 375px" class="mb-4">{{ home.featured_project.intro }}
                 </p>
-                <p v-else style="width: 375px" class="mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                <p v-else style="width: 375px" class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
                   posuere, odio a mattis dapibus, nisi elit tempus urna, rutrum egestas ipsum quam vel erat. Nulla id
                   ligula id nisl bibendum malesuada. Quisque volutpat a odio id dictum. Donec vehicula dolor mauris, sed
                   condimentum enim auctor at.</p>
-                <LayoutLinkBtn :link="'/interior-design-architecture-portfolio/' + home.featured_project.url">Project
+                <LayoutLinkBtn :link="'/interior-design-architecture-portfolio/' + home.featured_project.url">{{ removeFirst(home.featured_project.title) }} Details
                 </LayoutLinkBtn>
               </div>
 
@@ -148,7 +150,9 @@
 </template>
 
 <script setup>
+
 const imageUrl = 'https://admin.rkcad.com/assets/'
+
 import { getFirst } from '~~/utils/strings'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Parallax, EffectFade } from 'swiper'
@@ -169,6 +173,7 @@ const showIntroAnimation = ref(true);
 const hideIntroAnimation = () => {
   showIntroAnimation.value = false;
 };
+
 onMounted(() => {
   const image = new Image();
   if (home.featured_images.length > 0) {
@@ -183,6 +188,7 @@ onMounted(() => {
     isImageLoaded.value = true;
   }
 });
+
 const work = await getItems({
   collection: 'projects',
   params: {

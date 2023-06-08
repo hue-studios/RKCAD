@@ -18,7 +18,6 @@ const props = defineProps({
 .rkc-link {
     font-size: 0.75rem;
     line-height: 1rem;
-    margin-top: 10px;
     font-weight: 900;
     @apply inline-block tracking-wider;
 

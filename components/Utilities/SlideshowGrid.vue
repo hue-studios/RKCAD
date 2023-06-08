@@ -1,9 +1,12 @@
 <template>
   <div class="w-full relative">
-    <swiper :parallax="true" :navigation="{
-      nextEl: '.slideshowSwiperGrid__next-btn',
-      prevEl: '.slideshowSwiperGrid__prev-btn',
-    }" :spaceBetween="35" :modules="modules" :breakpoints="{ 300: { slidesPerView: 1, grid: { rows: 1, fill: 'row' } }, 640: { slidesPerView: 2, grid: { rows: 1, fill: 'row' } }, 768: { slidesPerView: 3, slidesPerGroup: 3, grid: { rows: 2, fill: 'row' } }, 1024: { slidesPerView: 4, slidesPerGroup: 4, grid: { rows: 2, fill: 'row' } } }" 
+    <swiper :modules="modules"
+    :navigation="{
+      nextEl: `.${nextBtn}`,
+      prevEl: `.${prevBtn}`,
+    }"
+      :spaceBetween="35" 
+      :breakpoints="{ 300: { slidesPerView: 1, grid: { rows: 1, fill: 'row' } }, 640: { slidesPerView: 2, grid: { rows: 1, fill: 'row' } }, 768: { slidesPerView: 3, slidesPerGroup: 3, grid: { rows: 2, fill: 'row' } }, 1024: { slidesPerView: 4, slidesPerGroup: 4, grid: { rows: 2, fill: 'row' } } }"
       class="slideshowSwiperGrid">
       <swiper-slide class="w-full flex flex-col items-end justify-end overflow-hidden w-fit"
         v-for="(slide, index) in slides" :key="index">
@@ -22,13 +25,14 @@
       </swiper-slide>
 
     </swiper>
-    <div class="w-full flex items-center justify-between flex-row relative mt-6 mb-4 slideshowSwiperGrid__nav">
-      <h5 id="slideshowSwiperGrid__prev-btn"
-        class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 lg:pl-0 lg:pr-4  py-2 slideshowSwiperGrid__prev-btn">
+    <div v-if="navigation"
+      class="w-full flex items-center justify-between flex-row relative mt-6 mb-4 slideshowSwiperGrid__nav" >
+      <h5
+        class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 lg:pl-0 lg:pr-4  py-2" :class="prevBtn">
         <nuxt-icon name="arrow-left" class="mr-4 arrow-left-icon" />
       </h5>
-      <h5 id="slideshowSwiperGrid__next-btn"
-        class="flex items-center justify-center flex-row cursor-pointer px-2 lg:pr-0 lg:pl-4 py-2 slideshowSwiperGrid__next-btn">
+      <h5
+        class="flex items-center justify-center flex-row cursor-pointer px-2 lg:pr-0 lg:pl-4 py-2 slideshowSwiperGrid__next-btn" :class="nextBtn">
         <nuxt-icon name="arrow-right" class="ml-4 arrow-right-icon" />
       </h5>
     </div>
@@ -36,22 +40,30 @@
 </template>
 
 <script setup>
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/vue'
+import 'swiper/css'
+import 'swiper/css/grid'
+import { Grid, Navigation } from 'swiper'
+const modules = [Grid, Navigation]
 import { removeFirst } from '~~/utils/strings'
 const props = defineProps({
   slides: {
     type: Array,
     default: [],
   },
+  navigation: {
+    type: Boolean,
+    default: true,
+  },
+  class: {
+    type: String,
+    default: '',
+  }
 })
 const imageUrl = 'https://admin.rkcad.com/assets/'
-import { Swiper, SwiperSlide } from 'swiper/vue'
 
-// Import Swiper styles
-import 'swiper/css'
-import 'swiper/css/grid'
-import { Grid, Navigation } from 'swiper'
-const modules = [Grid, Navigation]
-
+const prevBtn = 'prev-btn' + props.class
+const nextBtn = 'next-btn' + props.class
 </script>
 <style>
 .slideshowSwiperGrid {
@@ -121,6 +133,7 @@ const modules = [Grid, Navigation]
 .work__card {
   height: 350px;
   width: 100%;
+
   &-image {
     height: 350px;
     background-color: rgba(167, 169, 172, 0.45);
@@ -175,5 +188,4 @@ const modules = [Grid, Navigation]
 .work__card:hover>.work__card-title {
   opacity: 1;
   transform: translateY(0px);
-}
-</style>
+}</style>

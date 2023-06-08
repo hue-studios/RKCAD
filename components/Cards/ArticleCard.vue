@@ -89,8 +89,8 @@ const category = props.article.category.toLowerCase()
   &__image {
     width: 100%;
     height: 100%;
-    background-color: rgba(167, 169, 172, 0.45);
-    transform: scale(1.1);
+    background-color: rgba(167, 169, 172, 0.05);
+    transform: scale(1);
     transition: all 0.5s var(--curve);
     background-blend-mode: darken;
 
@@ -131,8 +131,8 @@ const category = props.article.category.toLowerCase()
 }
 
 .article-card:hover>.article-card__image {
-  transform: scale(1);
-  background-color: rgba(167, 169, 172, 1.0);
+  transform: scale(1.1);
+  background-color: rgba(0,0,0, 0.4);
 }
 
 .article-card:hover>.article-card__title {

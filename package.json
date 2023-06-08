@@ -7,7 +7,6 @@
         "allupdate": "yarn upgrade-interactive --latest"
     },
     "devDependencies": {
-        "@formkit/nuxt": "^0.16.1",
         "@nuxt/devtools": "^0.5.5",
         "@nuxtjs/tailwindcss": "^6.6.6",
         "@pinia/nuxt": "^0.4.8",

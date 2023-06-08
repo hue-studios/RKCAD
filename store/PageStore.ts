@@ -1,12 +1,16 @@
 export const usePageStore = defineStore('PageStore', {
   state: () => ({
     page: 'test',
+    internal: false
   }),
   actions: {
     addClass(route) {
-      console.log(route)
+      // console.log(route)
       this.page = route
     },
+    setInternal(bool) {
+      this.internal = bool
+    }
   },
 })
 if (import.meta.hot) {

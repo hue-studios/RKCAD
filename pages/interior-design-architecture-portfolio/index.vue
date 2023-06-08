@@ -13,19 +13,19 @@
         <h3 class="mb-10 page__body-header-title">Architecture <br />Design</h3>
       </div>
       <div class="w-full">
-        <UtilitiesSlideshowGrid :slides="architecture" />
+        <UtilitiesSlideshowGrid :slides="architecture" class="One"/>
       </div>
       <div v-if="interior.length" class="w-full uppercase mt-20 page__body-header">
         <h3 class="mb-10 page__body-header-title">Interior <br />Design</h3>
       </div>
       <div v-if="interior.length" class="w-full">
-        <UtilitiesSlideshowGrid :slides="interior" />
+        <UtilitiesSlideshowGrid :slides="interior" class="Two"/>
       </div>
       <div v-if="commercial.length" class="w-full uppercase mt-20 page__body-header">
         <h3 class="mb-10 page__body-header-title">Commercial <br />Design</h3>
       </div>
       <div v-if="commercial.length" class="w-full">
-        <UtilitiesSlideshowGrid :slides="commercial" />
+        <UtilitiesSlideshowGrid :slides="commercial" class="Three"/>
       </div>
     </div>
   </div>
@@ -48,7 +48,6 @@ onMounted(() => {
   const image = new Image();
   image.src = 'https://admin.rkcad.com/assets/' +
     work.header_image;
-
   image.onload = () => {
     isImageLoaded.value = true;
   };
@@ -56,14 +55,6 @@ onMounted(() => {
 const formattedTitle = computed(() => {
   return work.title.replace(/\n/g, '<br>')
 })
-// const architecture = computed(() => {
-//   return work.projects.filter((item) => {
-//     return (
-//       item.category.find((el) => el === 'Architecture') &&
-//       item.images.length > 0
-//     )
-//   })
-// })
 const architecture = computed(() => {
   return work.projects.filter((item) => {
     return (
@@ -86,5 +77,4 @@ const commercial = computed(() => {
   })
 })
 </script>
-<style scoped>
-</style>
+<style scoped></style>
