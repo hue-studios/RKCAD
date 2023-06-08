@@ -1,12 +1,9 @@
 import { usePageStore } from '~~/store/PageStore'
-const pageStore = usePageStore()
+
 export default defineNuxtRouteMiddleware((to, from) => {
   const getDepth = (path) => {
     return path.split('/').filter((seg) => seg.length > 0).length
   }
-
-  
- 
   const routeName = ref()
   if (to.name === 'index') {
     routeName.value = 'page-home'
@@ -27,7 +24,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
   } else {
     routeName.value = to.name
   }
-  
+  const pageStore = usePageStore()
   pageStore.addClass(routeName.value)
 
   const toDepth = getDepth(to.path)
