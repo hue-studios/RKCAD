@@ -168,10 +168,14 @@ const home = await getItems({
     ],
   },
 })
+import { usePageStore } from '~~/store/PageStore'
+const pageStore = usePageStore()
+console.log(pageStore.internal)
 const isImageLoaded = ref(false);
 const showIntroAnimation = ref(true);
 const hideIntroAnimation = () => {
   showIntroAnimation.value = false;
+  pageStore.setInternal(true)
 };
 
 onMounted(() => {
@@ -182,7 +186,11 @@ onMounted(() => {
 
     image.onload = () => {
       isImageLoaded.value = true;
+      if(!pageStore.internal) {
       setTimeout(hideIntroAnimation, 4500);
+      } else {
+        showIntroAnimation.value = false;
+      }
     };
   } else {
     isImageLoaded.value = true;
