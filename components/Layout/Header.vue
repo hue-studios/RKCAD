@@ -87,7 +87,7 @@ const pageStore = usePageStore()
 }
 
 .page-work-detail,
-.page-press-detail {
+.page-press-detail, .page-error {
   .rkc-icon {
     color: var(--blue);
   }

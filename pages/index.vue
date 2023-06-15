@@ -46,8 +46,8 @@
           
         </div>
         <div class="w-full">
-          <UtilitiesSlideshowGrid :slides="architecture" :navigation="false"/>
-          <LayoutLinkBtn class="mt-8" link="/interior-design-architecture-portfolio/">More of Our Architecture Work</LayoutLinkBtn>
+          <UtilitiesSlideshowGrid :slides="architecture"/>
+          <LayoutLinkBtn class="mt-8" link="/interior-design-architecture-portfolio/">More Architectural Work</LayoutLinkBtn>
         </div>
         <div v-if="interior.length" class="w-full uppercase page__body-header">
           <h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
@@ -55,8 +55,8 @@
           
         </div>
         <div v-if="interior.length" class="w-full">
-          <UtilitiesSlideshowGrid :slides="interior" :navigation="false"/>
-          <LayoutLinkBtn class="mt-8" link="/interior-design-architecture-portfolio/">See Our Interior Work</LayoutLinkBtn>
+          <UtilitiesSlideshowGrid :slides="interior"/>
+          <LayoutLinkBtn class="mt-8" link="/interior-design-architecture-portfolio/">More Interior Design Work</LayoutLinkBtn>
         </div>
         <div class="w-full page__body-header">
           <div
@@ -65,7 +65,7 @@
               <h2 class="uppercase page__body-header-subtitle">Culture</h2>
               <h3 class="uppercase page__body-header-title">Meet<br /> the Team</h3>
               <p v-html="home.team_intro" style="width: 375px" class="mb-4"></p>
-              <LayoutLinkBtn link="/rosen-kelly-conway-architecture-design-team/">Learn about the Talent</LayoutLinkBtn>
+              <LayoutLinkBtn link="/rosen-kelly-conway-architecture-design-team/">More About the Team</LayoutLinkBtn>
             </div>
 
             <img v-if="home.team_image" alt="RKC Team" class="w-full md:w-1/2 h-auto mt-4 mb-8" :srcset="imageUrl +
@@ -187,7 +187,7 @@ onMounted(() => {
     image.onload = () => {
       isImageLoaded.value = true;
       if(!pageStore.internal) {
-      setTimeout(hideIntroAnimation, 4500);
+      setTimeout(hideIntroAnimation, 6000);
       } else {
         showIntroAnimation.value = false;
       }

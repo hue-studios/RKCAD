@@ -28,7 +28,8 @@
     max-width: 525px;
     height: 275px;
     transform: scale(0.6);
-    animation: intro-animation 1s 4.5s var(--curve) forwards;
+    /* animation: intro-animation 1s 4.5s var(--curve) forwards; */
+    animation: intro-animation 1s 6s var(--curve) forwards;
     @media (min-width: 525px) {
         transform: scale(1);
     }
@@ -165,7 +166,6 @@
         opacity: 1;
   
     }
-
     100% {
         opacity: 0;
    

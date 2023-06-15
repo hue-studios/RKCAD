@@ -13,7 +13,7 @@
         <h2 class="page__body-header-subtitle">Culture</h2>
         <h3 class="page__body-header-title">Meet <br />the Team</h3>
       </div>
-      <div class="w-full flex items-center justify-between flex-row flex-wrap">
+      <div class="w-full flex items-center justify-start flex-row flex-wrap">
         <CardsTeamCard v-for="(person, index) in team.people" :key="index" :person="person"
           class="" />
       </div>
@@ -25,18 +25,18 @@
         <div v-if="team.architects" class="w-full flex flex-col items-end lg:w-1/3 lg:pr-6 py-6 lg:py-12">
           <h4 class="uppercase w-full">Architects</h4>
           <p v-html="team.architects" class="w-full"></p>
-          <LayoutLinkBtn link="#" @click.prevent class="cursor-pointer">Apply</LayoutLinkBtn>
+          <LayoutLinkBtn @click.prevent="showApplication()" class="cursor-pointer">Apply</LayoutLinkBtn>
         </div>
         <div v-if="team.interior_designers"
           class="w-full flex flex-col items-end  lg:w-1/3 lg:px-6 lg:border-r lg:border-l border-stone-300 py-6 lg:py-12">
           <h4 class="uppercase w-full">Interior Designers</h4>
           <p v-html="team.interior_designers" class="w-full"></p>
-          <LayoutLinkBtn link="#" @click.prevent class="cursor-pointer">Apply</LayoutLinkBtn>
+          <LayoutLinkBtn  @click.prevent="showApplication()" class="cursor-pointer">Apply</LayoutLinkBtn>
         </div>
         <div v-if="team.drafters" class="w-full flex flex-col items-end lg:w-1/3 lg:pl-6 py-6 lg:py-12 ">
           <h4 class="uppercase w-full">Drafters</h4>
           <p v-html="team.drafters" class="w-full"></p>
-          <LayoutLinkBtn link="#" @click.prevent class="cursor-pointer">Apply</LayoutLinkBtn>
+          <LayoutLinkBtn  @click.prevent="showApplication()" class="cursor-pointer">Apply</LayoutLinkBtn>
         </div>
 
       </div>
@@ -69,6 +69,11 @@ onMounted(() => {
 const formattedTitle = computed(() => {
   return team.title.replace(/\n/g, '<br>')
 })
+function showApplication() {
+  console.log("show application")
+  const element = document.getElementById('application-toggle')
+  element.checked = true
+}
 </script>
 <style scoped>
 .team {

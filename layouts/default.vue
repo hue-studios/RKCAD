@@ -4,6 +4,7 @@
     <LayoutRkc id="rkc-bg-icon" class="rkc-bg-icon" />
     <input id="nav-drawer-toggle" type="checkbox" class="hidden" />
     <input id="profile-toggle" type="checkbox" class="hidden" />
+    <input id="application-toggle" type="checkbox" class="hidden" />
     <div class="w-full flex items-center justify-center flex-col min-h-screen page__content">
       <LayoutHeader />
       <div class="w-full mx-auto min-h-screen relative">
@@ -16,6 +17,7 @@
     </transition>
     <LayoutNavDrawer />
     <TeamProfile />
+    <Application />
   </div>
 </template>
 <script>

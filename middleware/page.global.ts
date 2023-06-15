@@ -21,9 +21,12 @@ export default defineNuxtRouteMiddleware((to, from) => {
     routeName.value = 'page-team'
   } else if (to.name === 'contact') {
     routeName.value = 'page-contact overflow-hidden h-screen'
+  } else if(!to.name) {
+    routeName.value = 'page-error h-screen'
   } else {
     routeName.value = to.name
   }
+  console.log(to.name)
   const pageStore = usePageStore()
   pageStore.addClass(routeName.value)
 

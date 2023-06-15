@@ -1,8 +1,8 @@
 <template>
   <div class="w-full relative">
-    <swiper :observer="true" :observeParents="true" :modules="modules" :spaceBetween="35"
+    <swiper :observer="true" :observeParents="true" :modules="modules" navigation :spaceBetween="35"
       :breakpoints="{ 300: { slidesPerView: 1, grid: { rows: 1, fill: 'row' } }, 640: { slidesPerView: 2, grid: { rows: 1, fill: 'row' } }, 768: { slidesPerView: 3, slidesPerGroup: 3, grid: { rows: 2, fill: 'row' } }, 1024: { slidesPerView: 4, slidesPerGroup: 4, grid: { rows: 2, fill: 'row' } } }"
-      class="slideshowSwiperGrid withNav">
+      class="slideshowSwiperGridwithNav">
       <swiper-slide class="w-full flex flex-col items-end justify-end overflow-hidden w-fit"
         v-for="(slide, index) in slides" :key="index">
         <nuxt-link :to="'/interior-design-architecture-portfolio/' + slide.url" class="work__card">
@@ -26,8 +26,9 @@
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/grid'
-import { Grid } from 'swiper'
-const modules = [Grid]
+import 'swiper/css/navigation';
+import { Grid, Navigation } from 'swiper'
+const modules = [Grid, Navigation]
 import { removeFirst } from '~~/utils/strings'
 const props = defineProps({
   slides: {
@@ -44,7 +45,36 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 </script>
 <style>
 
-.slideshowSwiperGrid {
+.swiper-button-next, .swiper-button-prev {
+  top: auto !important;
+  bottom: 6px;
+}
+.swiper-button-next {
+  right:-3px;
+  font-family: 'icomoon' !important;
+  &:after {
+    content: '\e903' !important;
+  }
+}
+.swiper-button-prev {
+  left:-3px;
+  font-family: 'icomoon' !important;
+  &:after {
+    content: '\e902' !important;
+  }
+}
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-family: 'icomoon' !important;
+  font-size:52px;
+  line-height: 50px;
+  color: var(--grey) !important;
+  font-weight: bolder;
+}
+
+
+.slideshowSwiperGridwithNav {
+  padding-bottom: 85px;
+  margin-bottom: 0px;
   /* height: 360px;
 
   @media (min-width: theme('screens.md')) {

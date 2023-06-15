@@ -13,19 +13,19 @@
         <h3 class="mb-10 page__body-header-title">Architecture <br />Design</h3>
       </div>
       <div class="w-full">
-        <UtilitiesSlideshowGrid :slides="architecture" class="One"/>
+        <UtilitiesSlideshowGridNav :slides="architecture" class="One"/>
       </div>
       <div v-if="interior.length" class="w-full uppercase mt-20 page__body-header">
         <h3 class="mb-10 page__body-header-title">Interior <br />Design</h3>
       </div>
       <div v-if="interior.length" class="w-full">
-        <UtilitiesSlideshowGrid :slides="interior" class="Two"/>
+        <UtilitiesSlideshowGridNav :slides="interior" class="Two"/>
       </div>
       <div v-if="commercial.length" class="w-full uppercase mt-20 page__body-header">
         <h3 class="mb-10 page__body-header-title">Commercial <br />Design</h3>
       </div>
       <div v-if="commercial.length" class="w-full">
-        <UtilitiesSlideshowGrid :slides="commercial" class="Three"/>
+        <UtilitiesSlideshowGridNav :slides="commercial" class="Three"/>
       </div>
     </div>
   </div>

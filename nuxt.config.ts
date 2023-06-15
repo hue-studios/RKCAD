@@ -22,6 +22,7 @@ export default defineNuxtConfig({
   buildModules: ['@vueuse/nuxt'],
 
   modules: [
+    '@nuxt/devtools',
     '@nuxtjs/tailwindcss',
     [
       '@pinia/nuxt',
@@ -29,10 +30,32 @@ export default defineNuxtConfig({
         autoImports: ['defineStore', 'acceptHMRUpdate'],
       },
     ],
+    [
+      '@vee-validate/nuxt',
+      {
+        // disable or enable auto imports
+        autoImports: true,
+        // Use different names for components
+        componentNames: {
+          Form: 'VeeForm',
+          Field: 'VeeField',
+          ErrorMessage: 'VeeErrorMessage',
+        },
+      },
+    ],
+    
     'nuxt-directus',
     'nuxt-icons',
   ],
-
+  devtools: {
+    // Enable devtools (default: true)
+    enabled: true,
+    // VS Code Server options
+    vscode: {
+      
+    },
+    // ...other options
+  },
   plausible: {
     domain: 'rkcad.com',
   },

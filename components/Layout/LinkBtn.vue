@@ -1,15 +1,19 @@
 <template>
-    <nuxt-link :to="link" class="uppercase rkc-link">
+    <nuxt-link v-if="link" :to="link" class="uppercase rkc-link">
         <slot></slot>
         <nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon" />
     </nuxt-link>
+    <a v-else href="#" class="uppercase rkc-link">
+        <slot></slot>
+        <nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon" />
+    </a>
 </template>
 
 <script setup>
 const props = defineProps({
     link: {
         type: String,
-        default: '/',
+        default: null,
     },
 })
 
