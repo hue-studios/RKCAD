@@ -11,7 +11,7 @@
           <LayoutRkc class="rkc-icon" />
         </div>
         <h3 class="w-full uppercase">{{ person.name }}</h3>
-        <h5 class="w-full uppercase">{{ person.title }} {{ person.status }}</h5>
+        <h5 class="w-full uppercase">{{ person.title }}</h5>
         <LayoutLinkBtn class="w-full">Bio</LayoutLinkBtn>
         <!-- <a class="w-full uppercase rkc-link">Bio <nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon" /></a> -->
       </div>
