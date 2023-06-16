@@ -107,18 +107,18 @@
 
 
               </div>
-              <p v-html="home.featured_profile.bio" style="width: 375px"></p>
+              <p v-html="home.featured_profile.bio" class="home-section____intro"></p>
             </div>
           </div>
           <div v-if="home.featured_project" class="w-full page__body-header">
-            <div class="w-full flex items-center justify-between lg:items-start flex-row flex-wrap home-section">
+            <div class="w-full flex items-start justify-between lg:items-start flex-row flex-wrap home-section project-spotlight">
               <div class="w-full md:w-1/2 flex items-start flex-col">
                 <h2 class="uppercase page__body-header-subtitle">Project Spotlight</h2>
                 <h3 class="uppercase page__body-header-title">{{ removeFirst(home.featured_project.title) }}
                 </h3>
-                <p v-if="home.featured_project.intro" style="width: 375px" class="mb-4">{{ home.featured_project.intro }}
+                <p v-if="home.featured_project.intro" class="mb-4 md:pr-4 home-section____intro">{{ home.featured_project.intro }}
                 </p>
-                <p v-else style="width: 375px" class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                <p v-else class="mb-4 home-section____intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
                   posuere, odio a mattis dapibus, nisi elit tempus urna, rutrum egestas ipsum quam vel erat. Nulla id
                   ligula id nisl bibendum malesuada. Quisque volutpat a odio id dictum. Donec vehicula dolor mauris, sed
                   condimentum enim auctor at.</p>
@@ -127,7 +127,7 @@
               </div>
 
               <img v-if="home.featured_project.images.length" :alt="removeFirst(home.featured_project.title) + ' by RKC'"
-                class="w-full md:w-1/2 h-auto mt-4 mb-8" :srcset="imageUrl +
+                class="w-full md:w-1/2 h-auto mt-8 md:mt-4 mb-8" :srcset="imageUrl +
                   home.featured_project.images[0].directus_files_id +
                   '?key=small 400w, ' +
                   imageUrl +
@@ -355,9 +355,18 @@ const interior = computed(() => {
   }
 }
 
+
 .home-section__quote {
   p:last-of-type {
     font-size: 7px;
     @apply italic;
   }
-}</style>
+}
+
+.home-section____intro {
+  width: 100%;
+  @media (min-width: theme('screens.md')) {
+    max-width: 450px;
+  }
+}
+</style>
