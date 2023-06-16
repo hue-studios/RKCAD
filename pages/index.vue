@@ -1,152 +1,159 @@
 <template>
-  <transition name="fade" mode="out-in">
-    <div v-if="isImageLoaded" class="relative w-full min-h-screen flex items-center justify-center flex-col home">
+  <div class="relative w-full min-h-screen flex items-center justify-center flex-col home">
+    <div class="w-full min-h-screen">
       <transition name="fade" mode="out-in">
-        <div v-if="showIntroAnimation && isImageLoaded" id="animation"
-          class="w-full flex items-center justify-center flex-col">
-          <IntroAnimation />
+        <div v-if="isImageLoaded" class="w-full min-h-screen">
+          <transition name="fade" mode="out-in">
+            <div v-if="showIntroAnimation && isImageLoaded" id="animation"
+              class="w-full flex items-center justify-center flex-col">
+              <IntroAnimation />
+            </div>
+            <div v-else class="flex items-center justify-center flex-col page__header">
+              <swiper :speed="2000" :effect="'fade'" :loop="true" :parallax="true" :modules="modules" :autoplay="true"
+                class="h-full flex items-center justify-center flex-col slideshowSwiperHome">
+
+                <swiper-slide class="w-full flex items-center justify-center"
+                  v-for="(slide, index) in home.featured_images" :key="index">
+
+                  <div class="relative w-full h-full flex items-center justify-center">
+                    <div class="absolute w-full h-full bg-cover bg-center bg-no-repeat" :style="'background-image: url(' +
+                      imageUrl +
+                      slide.directus_files_id +
+                      '?key=large)'
+                      "></div>
+
+                  </div>
+                </swiper-slide>
+              </swiper>
+              <LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
+            </div>
+          </transition>
         </div>
-        <div v-else class="flex items-center justify-center flex-col page__header">
-          <swiper :speed="2000" :effect="'fade'" :loop="true" :parallax="true" :modules="modules" :autoplay="true"
-            class="h-full flex items-center justify-center flex-col slideshowSwiperHome">
-
-            <swiper-slide class="w-full flex items-center justify-center" v-for="(slide, index) in home.featured_images"
-              :key="index">
-
-              <div class="relative w-full h-full flex items-center justify-center">
-                <div class="absolute w-full h-full bg-cover bg-center bg-no-repeat" :style="'background-image: url(' +
-                  imageUrl +
-                  slide.directus_files_id +
-                  '?key=large)'
-                  "></div>
-
-              </div>
-            </swiper-slide>
-          </swiper>
-          <LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
+        <div v-else>
+          <LayoutLoader />
         </div>
       </transition>
+    </div>
+    <div class="flex flex-wrap flex-row items-center justify-center w-full page__body">
+      <div class="w-full flex items-center justify-between flex-col lg:flex-row relative page__body-header">
+        <div class="w-full lg:w-1/2">
+          <h2 class="uppercase page__body-header-subtitle">Process</h2>
+          <h3 class="uppercase page__body-header-title">Great Design Begins<br /> with Collaboration</h3>
+          <p v-html="home.about_intro" class="mt-6 mb-3"></p>
+          <LayoutLinkBtn link="/new-york-architecture-design-studio/">Learn About Our Process</LayoutLinkBtn>
+        </div>
 
-      <div class="flex flex-wrap flex-row items-center justify-center w-full page__body">
-        <div class="w-full flex items-center justify-between flex-col lg:flex-row relative page__body-header">
-          <div class="w-full lg:w-1/2">
-            <h2 class="uppercase page__body-header-subtitle">Process</h2>
-            <h3 class="uppercase page__body-header-title">Great Design Begins<br /> with Collaboration</h3>
-            <p v-html="home.about_intro" class="mt-6 mb-3"></p>
-            <LayoutLinkBtn link="/new-york-architecture-design-studio/">Learn About Our Process</LayoutLinkBtn>
+        <LayoutRkcName />
+
+      </div>
+
+      <div class="w-full uppercase page__body-header">
+        <h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
+        <h3 class="page__body-header-title">Architecture <br />Design</h3>
+
+      </div>
+      <div class="w-full">
+        <UtilitiesSlideshowGrid :slides="architecture" />
+        <LayoutLinkBtn class="mt-8" link="/interior-design-architecture-portfolio/">More Architectural Work
+        </LayoutLinkBtn>
+      </div>
+      <div v-if="interior.length" class="w-full uppercase page__body-header">
+        <h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
+        <h3 class="page__body-header-title">Interior <br />Design</h3>
+
+      </div>
+      <div v-if="interior.length" class="w-full">
+        <UtilitiesSlideshowGrid :slides="interior" />
+        <LayoutLinkBtn class="mt-8" link="/interior-design-architecture-portfolio/">More Interior Design Work
+        </LayoutLinkBtn>
+      </div>
+      <div class="w-full page__body-header">
+        <div class="w-full flex items-center justify-between flex-row flex-wrap lg:items-start lg:flex-row home-section">
+          <div class="w-full md:w-1/2 flex items-start flex-col">
+            <h2 class="uppercase page__body-header-subtitle">Culture</h2>
+            <h3 class="uppercase page__body-header-title">Meet<br /> the Team</h3>
+            <p v-html="home.team_intro" style="width: 375px" class="mb-4"></p>
+            <LayoutLinkBtn link="/rosen-kelly-conway-architecture-design-team/">More About the Team</LayoutLinkBtn>
           </div>
 
-          <LayoutRkcName />
+          <img v-if="home.team_image" alt="RKC Team" class="w-full md:w-1/2 h-auto mt-4 mb-8" :srcset="imageUrl +
+            home.team_image +
+            '?key=small 400w, ' +
+            imageUrl +
+            home.team_image +
+            '?key=medium 1024w, ' +
+            imageUrl +
+            home.team_image +
+            '?key=large 1920w'
+            " :src="imageUrl + home.team_image + '?key=large'" />
 
-        </div>
+          <div class="w-full flex items-start flex-col mt-12 xl:-mt-2 2xl:-mt-10">
+            <h2 class="uppercase page__body-header-subtitle">{{ home.featured_profile.name }}</h2>
+            <h3 class="uppercase page__body-header-title">Designer<br /> Spotlight</h3>
+            <div
+              class="w-full mt-4 mb-8 flex items-start md:items-center justify-between flex-col xl:flex-row home-section__images">
+              <div class="flex items-start justify-start flex-col md:flex-row relative w-full "
+                :class="{ 'xl:w-1/2': home.featured_profile.featured_projects.length }">
+                <img :src="'https://admin.rkcad.com/assets/' + home.featured_profile.image + '?key=small'" alt="RKC Team"
+                  class="profile-pic" />
 
-        <div class="w-full uppercase page__body-header">
-          <h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
-          <h3 class="page__body-header-title">Architecture <br />Design</h3>
-          
+                <div class="mt-4 md:mt-0 md:ml-2 flex items-end justify-end flex-col home-section__quote"
+                  v-html="home.featured_profile.quote"> </div>
+              </div>
+              <div v-if="home.featured_profile.featured_projects.length"
+                class="flex items-start justify-start flex-row relative w-full mt-12 xl:mt-0 xl:w-1/2 xl:ml-2 featured-projects">
+                <p class="uppercase absolute left-0 -top-[20px] ">Some of {{ getFirst(home.featured_profile.name) }}'s
+                  favorite projects</p>
+                <nuxt-link v-for="(project, index) in home.featured_profile.featured_projects" :key="index"
+                  class="inline-block " :to="'/interior-design-architecture-portfolio/' + project.project.url"
+                  :class="{ 'mr-2': (index + 1) < home.featured_profile.featured_projects.length }">
+                  <img :src="'https://admin.rkcad.com/assets/' + project.image + '?key=small'" alt="RKC Team"
+                    class="h-full w-auto " />
+                </nuxt-link>
+              </div>
+
+
+
+            </div>
+            <p v-html="home.featured_profile.bio" class="home-section____intro"></p>
+          </div>
         </div>
-        <div class="w-full">
-          <UtilitiesSlideshowGrid :slides="architecture"/>
-          <LayoutLinkBtn class="mt-8" link="/interior-design-architecture-portfolio/">More Architectural Work</LayoutLinkBtn>
-        </div>
-        <div v-if="interior.length" class="w-full uppercase page__body-header">
-          <h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
-          <h3 class="page__body-header-title">Interior <br />Design</h3>
-          
-        </div>
-        <div v-if="interior.length" class="w-full">
-          <UtilitiesSlideshowGrid :slides="interior"/>
-          <LayoutLinkBtn class="mt-8" link="/interior-design-architecture-portfolio/">More Interior Design Work</LayoutLinkBtn>
-        </div>
-        <div class="w-full page__body-header">
+        <div v-if="home.featured_project" class="w-full page__body-header">
           <div
-            class="w-full flex items-center justify-between flex-row flex-wrap lg:items-start lg:flex-row home-section">
+            class="w-full flex items-start justify-between lg:items-start flex-row flex-wrap home-section project-spotlight">
             <div class="w-full md:w-1/2 flex items-start flex-col">
-              <h2 class="uppercase page__body-header-subtitle">Culture</h2>
-              <h3 class="uppercase page__body-header-title">Meet<br /> the Team</h3>
-              <p v-html="home.team_intro" style="width: 375px" class="mb-4"></p>
-              <LayoutLinkBtn link="/rosen-kelly-conway-architecture-design-team/">More About the Team</LayoutLinkBtn>
+              <h2 class="uppercase page__body-header-subtitle">Project Spotlight</h2>
+              <h3 class="uppercase page__body-header-title">{{ removeFirst(home.featured_project.title) }}
+              </h3>
+              <p v-if="home.featured_project.intro" class="mb-4 md:pr-4 home-section____intro">{{
+                home.featured_project.intro }}
+              </p>
+              <p v-else class="mb-4 home-section____intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                posuere, odio a mattis dapibus, nisi elit tempus urna, rutrum egestas ipsum quam vel erat. Nulla id
+                ligula id nisl bibendum malesuada. Quisque volutpat a odio id dictum. Donec vehicula dolor mauris, sed
+                condimentum enim auctor at.</p>
+              <LayoutLinkBtn :link="'/interior-design-architecture-portfolio/' + home.featured_project.url">{{
+                removeFirst(home.featured_project.title) }} Details
+              </LayoutLinkBtn>
             </div>
 
-            <img v-if="home.team_image" alt="RKC Team" class="w-full md:w-1/2 h-auto mt-4 mb-8" :srcset="imageUrl +
-              home.team_image +
-              '?key=small 400w, ' +
-              imageUrl +
-              home.team_image +
-              '?key=medium 1024w, ' +
-              imageUrl +
-              home.team_image +
-              '?key=large 1920w'
-              " :src="imageUrl + home.team_image + '?key=large'" />
+            <img v-if="home.featured_project.images.length" :alt="removeFirst(home.featured_project.title) + ' by RKC'"
+              class="w-full md:w-1/2 h-auto mt-8 md:mt-4 mb-8" :srcset="imageUrl +
+                home.featured_project.images[0].directus_files_id +
+                '?key=small 400w, ' +
+                imageUrl +
+                home.featured_project.images[0].directus_files_id +
+                '?key=medium 1024w, ' +
+                imageUrl +
+                home.featured_project.images[0].directus_files_id +
+                '?key=large 1920w'
+                " :src="imageUrl + home.featured_project.images[0].directus_files_id + '?key=large'" />
 
-            <div class="w-full flex items-start flex-col mt-12 xl:-mt-2 2xl:-mt-10">
-              <h2 class="uppercase page__body-header-subtitle">{{ home.featured_profile.name }}</h2>
-              <h3 class="uppercase page__body-header-title">Designer<br /> Spotlight</h3>
-              <div
-                class="w-full mt-4 mb-8 flex items-start md:items-center justify-between flex-col xl:flex-row home-section__images">
-                <div class="flex items-start justify-start flex-col md:flex-row relative w-full "
-                  :class="{ 'xl:w-1/2': home.featured_profile.featured_projects.length }">
-                  <img :src="'https://admin.rkcad.com/assets/' + home.featured_profile.image + '?key=small'"
-                    alt="RKC Team" class="profile-pic" />
-
-                  <div class="mt-4 md:mt-0 md:ml-2 flex items-end justify-end flex-col home-section__quote"
-                    v-html="home.featured_profile.quote"> </div>
-                </div>
-                <div v-if="home.featured_profile.featured_projects.length"
-                  class="flex items-start justify-start flex-row relative w-full mt-12 xl:mt-0 xl:w-1/2 xl:ml-2 featured-projects">
-                  <p class="uppercase absolute left-0 -top-[20px] ">Some of {{ getFirst(home.featured_profile.name) }}'s
-                    favorite projects</p>
-                  <nuxt-link v-for="(project, index) in home.featured_profile.featured_projects" :key="index"
-                    class="inline-block " :to="'/interior-design-architecture-portfolio/' + project.project.url"
-                    :class="{ 'mr-2': (index + 1) < home.featured_profile.featured_projects.length }">
-                    <img :src="'https://admin.rkcad.com/assets/' + project.image + '?key=small'" alt="RKC Team"
-                      class="h-full w-auto " />
-                  </nuxt-link>
-                </div>
-
-
-
-              </div>
-              <p v-html="home.featured_profile.bio" class="home-section____intro"></p>
-            </div>
-          </div>
-          <div v-if="home.featured_project" class="w-full page__body-header">
-            <div class="w-full flex items-start justify-between lg:items-start flex-row flex-wrap home-section project-spotlight">
-              <div class="w-full md:w-1/2 flex items-start flex-col">
-                <h2 class="uppercase page__body-header-subtitle">Project Spotlight</h2>
-                <h3 class="uppercase page__body-header-title">{{ removeFirst(home.featured_project.title) }}
-                </h3>
-                <p v-if="home.featured_project.intro" class="mb-4 md:pr-4 home-section____intro">{{ home.featured_project.intro }}
-                </p>
-                <p v-else class="mb-4 home-section____intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                  posuere, odio a mattis dapibus, nisi elit tempus urna, rutrum egestas ipsum quam vel erat. Nulla id
-                  ligula id nisl bibendum malesuada. Quisque volutpat a odio id dictum. Donec vehicula dolor mauris, sed
-                  condimentum enim auctor at.</p>
-                <LayoutLinkBtn :link="'/interior-design-architecture-portfolio/' + home.featured_project.url">{{ removeFirst(home.featured_project.title) }} Details
-                </LayoutLinkBtn>
-              </div>
-
-              <img v-if="home.featured_project.images.length" :alt="removeFirst(home.featured_project.title) + ' by RKC'"
-                class="w-full md:w-1/2 h-auto mt-8 md:mt-4 mb-8" :srcset="imageUrl +
-                  home.featured_project.images[0].directus_files_id +
-                  '?key=small 400w, ' +
-                  imageUrl +
-                  home.featured_project.images[0].directus_files_id +
-                  '?key=medium 1024w, ' +
-                  imageUrl +
-                  home.featured_project.images[0].directus_files_id +
-                  '?key=large 1920w'
-                  " :src="imageUrl + home.featured_project.images[0].directus_files_id + '?key=large'" />
-
-            </div>
           </div>
         </div>
       </div>
     </div>
-    <div v-else>
-      <LayoutLoader />
-    </div>
-  </transition>
+  </div>
 </template>
 
 <script setup>
@@ -189,8 +196,8 @@ onMounted(() => {
 
     image.onload = () => {
       isImageLoaded.value = true;
-      if(!pageStore.internal) {
-      setTimeout(hideIntroAnimation, 6000);
+      if (!pageStore.internal) {
+        setTimeout(hideIntroAnimation, 6000);
       } else {
         showIntroAnimation.value = false;
       }
@@ -288,11 +295,13 @@ const interior = computed(() => {
     bottom: -60px;
     right: -120px;
     display: none;
+
     @media (min-width: theme('screens.sm')) {
       bottom: -100px;
       height: 100px;
       display: flex;
     }
+
     @media (min-width: theme('screens.lg')) {
       position: relative;
       max-width: 400px;
@@ -365,6 +374,7 @@ const interior = computed(() => {
 
 .home-section____intro {
   width: 100%;
+
   @media (min-width: theme('screens.md')) {
     max-width: 450px;
   }

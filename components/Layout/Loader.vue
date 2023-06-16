@@ -1,5 +1,5 @@
 <template>
-    <div id="loader" class="fixed flex items-center justify-center flex-col w-full h-screen">
+    <div id="loader" class="absolute flex items-center justify-center flex-col w-full h-screen">
         <svg xmlns="http://www.w3.org/2000/svg" width="668.996" height="262.75" viewBox="0 0 668.996 262.75">
             <g transform="translate(11872.996 695.099)">
                 <path
