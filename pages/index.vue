@@ -1,8 +1,8 @@
 <template>
   <div class="relative w-full min-h-screen flex items-center justify-center flex-col home">
-    <div class="w-full min-h-screen">
+    <div class="w-full page__header-placeholder">
       <transition name="fade" mode="out-in">
-        <div v-if="isImageLoaded" class="w-full min-h-screen">
+        <div v-if="isImageLoaded" class="w-full page__header-placeholder">
           <transition name="fade" mode="out-in">
             <div v-if="showIntroAnimation && isImageLoaded" id="animation"
               class="w-full flex items-center justify-center flex-col">

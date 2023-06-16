@@ -34,6 +34,25 @@ useSeoMeta({
 </script>
 
 <style>
+.page__header-placeholder {
+  height: 550px;
+   
+    overflow: hidden !important;
+    @apply  w-full flex items-end justify-center overflow-hidden relative;
+
+    @media (min-width: theme('screens.sm')) {
+      height: 550px;
+    }
+
+    @media (min-width: theme('screens.md')) {
+      height: 600px;
+    }
+
+    @media (min-width: theme('screens.lg')) {
+      height: calc(100vh);
+   
+    }
+}
 .page {
   overflow: hidden;
   width: 100%;
