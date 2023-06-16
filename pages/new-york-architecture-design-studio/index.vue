@@ -57,6 +57,14 @@ const about = await getItems({
     fields: ['*'],
   },
 })
+useSeoMeta({
+  title: 'About | Rosen Kelly Conway Architecture & Design Firm | Summit NJ',
+  ogTitle: 'About | Rosen Kelly Conway Architecture & Design Firm | Summit NJ',
+  description: 'At Rosen Kelly Conway Architecture & Design we approach our projects seeking a comprehensive understanding of context and challenges, while creating innovative solutions.',
+  ogDescription: 'At Rosen Kelly Conway Architecture & Design we approach our projects seeking a comprehensive understanding of context and challenges, while creating innovative solutions.',
+  ogImage: 'https://admin.rkcad.com/assets/' +
+    about.header_image + 'key=xlarge'
+})
 const isImageLoaded = ref(false);
 onMounted(() => {
   const image = new Image();

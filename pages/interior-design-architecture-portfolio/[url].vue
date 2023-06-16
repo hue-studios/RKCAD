@@ -92,14 +92,64 @@ const { data, pending, error, refresh } = await useAsyncData('posts', () => {
     },
   })
 })
-
+const project = ref(data.value[0])
+const isImageLoaded = ref(false);
+const category = ref('')
+const title = ref('')
+const description = ref('')
+const pageImage = ref('')
+if(project.value.category.length) {
+  category.value = project.value.category[0]
+} else {
+  category.value = 'Architecture'
+}
+if(project.value.intro) {
+  description.value = project.value.intro
+} else {
+  description.value = removeFirst(project.value.title) + ' is a ' + category.value + ' Project by Rosen Kelly Conway Architecture & Design, a full-service architecture and interior design firm based in Summit, NJ.'
+}
+if(project.value.images.length) {
+  pageImage.value = 'https://admin.rkcad.com/assets/' + project.value.images[0].directus_files_id.id + '?key=large'
+} else {
+  pageImage.value = 'https://rkcad.com/images/rkcad-logo.png'
+}
+title.value = removeFirst(project.value.title) + ' ' + category.value + ' Project | Rosen Kelly Conway Architecture & Design'
+useHead({
+  titleTemplate: title.value,
+  meta: [
+    {
+      hid: 'description',
+      name: 'description',
+      content: description.value,
+    },
+    {
+      hid: 'og:url',
+      property: 'og:url',
+      content: 'https://rkcad.com/interior-design-archtecture-portfolio/' + params.url,
+    },
+    {
+      hid: 'og:image',
+      property: 'og:image',
+      content: pageImage.value,
+    },
+    {
+      hid: 'og:title',
+      property: 'og:title',
+      content: title.value,
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: description.value,
+    },
+  ],
+})
 const showCredits = ref(false);
 function toggleCredits() {
   console.log("here")
   showCredits.value = !showCredits.value;
 }
-const project = ref(data.value[0])
-const isImageLoaded = ref(false);
+
 onMounted(() => {
   if (project.value.images.length > 0) {
     const image = new Image();

@@ -55,6 +55,36 @@ const press = await getItems({
     ],
   },
 })
+useHead({
+  titleTemplate: 'Press & Awards | Rosen Kelly Conway Architecture & Interior Design of Summit NJ',
+  meta: [
+    {
+      hid: 'description',
+      name: 'description',
+      content: 'Press and Awards for Rosen Kelly Conway Architecture & Design: Embracing design heritage with a modern vision.',
+    },
+    {
+      hid: 'og:url',
+      property: 'og:url',
+      content: 'https://rkcad.com/architecture-design-press-awards',
+    },
+    {
+      hid: 'og:image',
+      property: 'og:image',
+      content: 'https://admin.rkcad.com/assets/' + press.header_image + 'key=xlarge',
+    },
+    {
+      hid: 'og:title',
+      property: 'og:title',
+      content: 'Press & Awards | Rosen Kelly Conway Architecture & Interior Design of Summit NJ',
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: 'Press and Awards for Rosen Kelly Conway Architecture & Design: Embracing design heritage with a modern vision.',
+    },
+  ],
+})
 const isImageLoaded = ref(false);
 onMounted(() => {
   const image = new Image();

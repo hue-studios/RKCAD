@@ -73,7 +73,7 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 
 
 .slideshowSwiperGridwithNav {
-  padding-bottom: 85px;
+  padding-bottom: 85px !important;
   margin-bottom: 0px;
   /* height: 360px;
 

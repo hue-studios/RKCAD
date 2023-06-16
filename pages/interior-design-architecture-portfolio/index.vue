@@ -42,12 +42,41 @@ const work = await getItems({
     ],
   },
 })
-
+useHead({
+  titleTemplate: 'Architecture & Interior Design Portfolio | Rosen Kelly Conway of Summit NJ',
+  meta: [
+    {
+      hid: 'description',
+      name: 'description',
+      content: 'Rosen Kelly Conway Architecture & Design Portfolio: Embracing design heritage with a modern vision.',
+    },
+    {
+      hid: 'og:url',
+      property: 'og:url',
+      content: 'https://rkcad.com/interior-design-archtecture-portfolio',
+    },
+    {
+      hid: 'og:image',
+      property: 'og:image',
+      content: 'https://admin.rkcad.com/assets/' + work.header_image + '?key=xlarge',
+    },
+    {
+      hid: 'og:title',
+      property: 'og:title',
+      content: 'Architecture & Interior Design Portfolio | Rosen Kelly Conway of Summit NJ',
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: 'Rosen Kelly Conway Architecture & Design Portfolio: Embracing design heritage with a modern vision.',
+    },
+  ],
+})
 const isImageLoaded = ref(false);
 onMounted(() => {
   const image = new Image();
   image.src = 'https://admin.rkcad.com/assets/' +
-    work.header_image;
+    work.header_image + '?key=xlarge';
   image.onload = () => {
     isImageLoaded.value = true;
   };

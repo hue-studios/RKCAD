@@ -45,6 +45,49 @@ const { data, pending, error, refresh } = await useAsyncData('articles', () => {
   })
 })
 const article = ref(data.value[0])
+const category = ref('')
+const title = ref('')
+const description = ref('')
+const pageImage = ref('')
+title.value = article.value.title + ' ' + category.value + ' | Rosen Kelly Conway Architecture & Design'
+description.value = article.value.title + ': ' + category.value + ' for Rosen Kelly Conway Architecture & Design, a full-service architecture and interior design firm based in Summit, NJ.'
+
+if(article.value.images.length) {
+  pageImage.value = 'https://admin.rkcad.com/assets/' + article.value.images[0].directus_files_id.id + '?key=large'
+} else {
+  pageImage.value = 'https://rkcad.com/images/rkcad-logo.png'
+}
+
+useHead({
+  titleTemplate: title.value,
+  meta: [
+    {
+      hid: 'description',
+      name: 'description',
+      content: description.value,
+    },
+    {
+      hid: 'og:url',
+      property: 'og:url',
+      content: 'https://rkcad.com/architecture-design-press-awards/' + params.url,
+    },
+    {
+      hid: 'og:image',
+      property: 'og:image',
+      content: pageImage.value,
+    },
+    {
+      hid: 'og:title',
+      property: 'og:title',
+      content: title.value,
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: description.value,
+    },
+  ],
+})
 const isImageLoaded = ref(false);
 onMounted(() => {
   if (article.value.images.length > 0) {

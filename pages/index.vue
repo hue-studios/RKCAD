@@ -168,6 +168,7 @@ const home = await getItems({
     ],
   },
 })
+
 import { usePageStore } from '~~/store/PageStore'
 const pageStore = usePageStore()
 console.log(pageStore.internal)
@@ -177,7 +178,9 @@ const hideIntroAnimation = () => {
   showIntroAnimation.value = false;
   pageStore.setInternal(true)
 };
-
+useSeoMeta({
+  ogImage: 'https://admin.rkcad.com/assets/' + home.featured_images[0].directus_files_id + 'key=xlarge'
+})
 onMounted(() => {
   const image = new Image();
   if (home.featured_images.length > 0) {

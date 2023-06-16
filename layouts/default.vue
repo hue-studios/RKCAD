@@ -22,6 +22,15 @@
 </template>
 <script>
 import { screen } from '~~/composables/useScreen'
+useSeoMeta({
+  title: 'Rosen Kelly Conway Architecture & Design Firm | Residential / Commercial | Summit NJ',
+  ogTitle: 'Rosen Kelly Conway Architecture & Design Firm | Residential / Commercial | Summit NJ',
+  description: 'Rosen Kelly Conway Architecture & Design: Embracing design heritage with a modern vision.',
+  ogDescription: 'Rosen Kelly Conway Architecture & Design: Embracing design heritage with a modern vision.',
+  ogImage: 'https://rkcad.com/images/fb-image.jpg',
+  ogUrl: 'https://rkcad.com',
+  twitterCard: 'summary_large_image',
+})
 </script>
 
 <style>

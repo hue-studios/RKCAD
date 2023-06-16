@@ -39,6 +39,11 @@ onMounted(() => {
     isImageLoaded.value = true;
   };
 });
+useSeoMeta({
+  title: 'Contact | Rosen Kelly Conway Architecture & Design Firm | Summit NJ',
+  ogTitle: 'Contact | Rosen Kelly Conway Architecture & Design Firm | Summit NJ',
+  ogImage: 'https://admin.rkcad.com/assets/73046284-e82d-4c2b-84b5-0246b56623bf?key=xlarge'
+})
 </script>
 <style>
 .contact {
