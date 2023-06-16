@@ -1,5 +1,5 @@
 <template>
-  <swiper :modules="[Thumbs, Navigation]"  :thumbs="{ swiper: thumbsSwiper }" :centeredSlides="true"
+  <swiper :modules="[Thumbs, Navigation]"  :thumbs="{ swiper: thumbsSwiper }" :centeredSlides="true" :spaceBetween="20"
     :centeredInsuficientSlides="true" class="flex items-center justify-center flex-row gallery-swiper">
     <swiper-slide v-for="(slide, index) in slides" :key="index"><img v-if="slide.directus_files_id.id" :srcset="imageUrl +
       slide.directus_files_id.id +

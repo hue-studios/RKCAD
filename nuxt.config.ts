@@ -47,6 +47,7 @@ export default defineNuxtConfig({
     'nuxt-directus',
     'nuxt-icons',
   ],
+
   devtools: {
     // Enable devtools (default: true)
     enabled: true,
@@ -56,6 +57,7 @@ export default defineNuxtConfig({
     },
     // ...other options
   },
+
   plausible: {
     domain: 'rkcad.com',
   },
@@ -92,5 +94,6 @@ export default defineNuxtConfig({
     },
   },
 
-  devtools: true
+  devtools: true,
+  // plugins: ['~/plugins/socialShare.ts']
 })

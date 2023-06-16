@@ -284,9 +284,11 @@ const interior = computed(() => {
     height: 80px;
     bottom: -60px;
     right: -120px;
+    display: none;
     @media (min-width: theme('screens.sm')) {
       bottom: -100px;
       height: 100px;
+      display: flex;
     }
     @media (min-width: theme('screens.lg')) {
       position: relative;
