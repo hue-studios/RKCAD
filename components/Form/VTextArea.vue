@@ -1,6 +1,8 @@
 <template>
   <div class="relative w-full input-container">
+    <FormVLabel :label="label" :name="name" />
     <VeeField
+    v-slot="{ field }"
       :name="name"
       :id="name"
       class="
@@ -8,44 +10,22 @@
         py-2.5
         px-0
         w-full
-        text-sm text-white
+        text-sm text-gray-900
         bg-transparent
         border-0 border-b-2 border-gray-300
         appearance-none
-        dark:text-white dark:border-gray-600 dark:focus:border-gray-900
+       
         focus:outline-none focus:ring-0 focus:border-gray-900
         peer
       "
-      :type="type"
       :rules="required"
       placeholder=" "
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
-    />
-    <label
-      v-if="label"
-      :label="label"
-      :for="name"
-      class="
-        uppercase
-        tracking-wider
-        absolute
-        text-sm text-white-500
-        dark:text-gray-400
-        duration-300
-        transform
-        -translate-y-6
-        scale-75
-        top-3
-        origin-[0]
-        peer-focus:left-0
-        peer-focus:text-gray-100
-        peer-focus:dark:text-gray-500
-        peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0
-        peer-focus:scale-75 peer-focus:-translate-y-6
-      "
-      >{{ label }}</label
     >
+    <textarea v-bind="field" :name="name" class="bg-transparent border-white w-full focus:outline-none focus:ring-0 focus:border-gray-900"/>
+    </VeeField>
+
     <transition name="page">
       <VeeErrorMessage :name="name" as="div" class="error" />
     </transition>
@@ -57,10 +37,6 @@ const props = defineProps({
   modelValue: {
     type: [String, Number],
     default: '',
-  },
-  type: {
-    type: String,
-    default: 'text',
   },
   required: {
     type: Boolean,

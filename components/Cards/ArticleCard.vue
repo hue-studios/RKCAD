@@ -62,14 +62,19 @@ const category = props.article.category.toLowerCase()
 
   position: relative;
   overflow: hidden;
-  height: 220px;
+  height: 250px;
   cursor: pointer;
   z-index: 1;
   transition: all 0.35s var(--curve);
-
-  @media (min-width: theme('screens.sm')) {
-    height: 225px;
+  @media (min-width: 500px) {
+    height: 275px;
   }
+  @media (min-width: 575px) {
+    height: 325px;
+  }
+  /* @media (min-width: theme('screens.sm')) {
+    height: 225px;
+  } */
 
   @media (min-width: theme('screens.md')) {
     height: 250px;

@@ -4,18 +4,20 @@
   >
   <div class="w-full pt-0 pb-24 flex flex-col items-center justify-center mx-auto ">
     <div
-      class="w-full flex flex-col items-start justify-center md:flex-row md:items-end md:justify-between"
+      class="w-full flex flex-col items-start justify-center lg:flex-row lg:items-end lg:justify-between"
     >
      
       <div
-        class="mt-8 w-full flex items-center md:items-end lg:items-start justify-center text-left flex-col lg:flex-row footer__col relative md:pr-8 lg:pr-0 "
+        class="mt-8 w-full flex items-center lg:items-start justify-center  flex-col sm:flex-row footer__col relative"
       >
-        <p class="mr-5"><span class="hidden">Phone: </span><a href="tel:(908) 273-6565">908.273.6565</a></p>
-        <p class="mr-5 my-2 lg:my-0"><span class="hidden">Studio: </span>16 Maple St Summit NJ</p>
-        <p class="mr-5">
+      <div class="flex flex-col sm:flex-row">
+        <p class="text-center"><span class="hidden">Phone: </span><a href="tel:(908) 273-6565">908.273.6565</a></p>
+        <p class="text-center sm:mx-5 "><span class="hidden">Studio: </span>16 Maple St Summit NJ</p>
+        <p class="text-center sm:mr-5">
           <span class="hidden">Email: </span><a href="mailto:info@rkcad.com">Info@rkcad.com</a>
         </p>
-        <div class="flex flex-row mt-8 lg:mt-0 lg:relative lg:flex-row lg:bottom-auto lg:right-auto">
+      </div>
+        <div class="flex flex-row mt-8 sm:mt-2 lg:-mt-[4px]">
           <a
             href="https://www.instagram.com/rkcad/"
             target="_blank"
@@ -26,7 +28,7 @@
           <a
             href="https://www.houzz.com/professionals/architects-and-building-designers/rosen-kelly-conway-architecture-and-design-pfvwus-pf~1350653163?"
             target="_blank"
-            class="ml-5 md:ml-0 lg:ml-5"
+            class="ml-5"
           >
             <nuxt-icon name="houzz" class="" />
           </a>

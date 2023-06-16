@@ -1,8 +1,10 @@
 <template>
   <div id="team-profile" class="flex items-center justify-center md:justify-center flex-col team-profile"
     @click="closeProfile">
+    <div class="absolute close-btn cursor-pointer"><nuxt-icon name="close" /></div>
     <div id="team-content"
-      class="flex items-start justify-center flex-col md:flex-row md:items-center team-profile__content">
+      class="flex items-start justify-center relative flex-col md:flex-row md:items-center team-profile__content">
+
       <transition name="fade" mode="out-in">
         <div v-if="profileStore.profile.image" class="team-profile__content-image" :style="'background-image: url(https://admin.rkcad.com/assets/' +
           profileStore.profile.image + '?key=medium'">
@@ -65,7 +67,35 @@ function closeProfile() {
     transform: translateX(100%) translateY(0%);
   }
 
+  .close-btn {
+    top: 20px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    z-index: 100;
+
+    .nuxt-icon {
+      width: 40px;
+      height: 40px;
+      transition: 0.4s var(--curve);
+      transform: translateX(0px);
+      @apply block;
+
+      svg {
+        width: 25px;
+        height: 25px;
+        @apply block;
+
+        path {
+          stroke-width: 1px;
+          stroke: var(--white) !important;
+        }
+      }
+    }
+  }
+
   &__content {
+
     &-image {
       width: 100%;
       height: 350px;

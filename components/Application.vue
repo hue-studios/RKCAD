@@ -2,10 +2,10 @@
     <div class="flex items-center justify-center md:justify-center flex-col application">
         <div class="flex items-start justify-center flex-col md:flex-row md:items-center application__content">
             <div class="absolute close-btn" @click="closeApplication()"><nuxt-icon name="close" /></div>
-            <transition-group name="list" tag="div" class="w-full form-panels">
-                <div class="flex items-center justify-center flex-col login-panel" v-if="panel === 'one'" key="1">
-                    <h1 class="uppercase">Interested in <br />Joining our Team?</h1>
-                    <h4 class="mb-10">We are excited to learn a little bit about you.</h4>
+            <transition-group name="fade" tag="div" class="w-full form-panels">
+                <div class="flex items-center justify-center flex-col application-panel" v-if="panel === 'one'" key="1">
+                    <h1 class="w-full uppercase tracking-wide">Interested in <br />Joining our Team?</h1>
+                    <p class="w-full mb-6 md:mb-10 tracking-wide">We are excited to learn a little bit about you.</p>
                     <VeeForm class="w-full" @submit="submit()">
                         <div class="flex items-center justify-between flex-col md:flex-row">
                             <FormVInput name="name" type="text" :required="true" label="Name" v-model="name"
@@ -25,11 +25,17 @@
                             <FormVInput name="experience" type="text" label="Experience" v-model="experience"
                                 class="mb-6 mt-2" />
                         </div>
+                        <div class="flex items-center justify-between flex-col md:flex-row">
+
+                            <FormVTextArea name="inspiration" label="Inspiration" v-model="inspiration"
+                                class="bg-transparent mb-6 mt-2" />
+                        </div>
                         <FormVButton class="w-full mb-6" type="submit">Submit</FormVButton>
                     </VeeForm>
                 </div>
-                <div class="flex items-center justify-center flex-col login-panel" v-if="panel === 'two'" key="2">
-                    <h2>Thank you {{ name }}. Your interest has been submitted successfully.</h2>
+                <div class="flex items-center justify-center flex-col application-panel" v-if="panel === 'two'" key="2">
+                    <h1 class="w-full uppercase tracking-wide ">Thank you {{ name }}.</h1> 
+                    <p class="w-full mb-6 md:mb-10 tracking-wide">Your interest has been submitted successfully.</p>
                 </div>
 
             </transition-group>
@@ -37,7 +43,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { openScreen, loader, closeScreen } from '~/composables/useScreen'
 const { createItems } = useDirectusItems();
 const name = ref()
@@ -45,28 +51,40 @@ const email = ref()
 const education = ref()
 const experience = ref()
 const position = ref()
-// const inspiration = ref()
+const inspiration = ref()
 const panel = ref('one')
-const submit = async () => {
-
-    const createApplication = async () => {
-        try {
-            const application = [
-                {
-                    status: "published",
-                    name: name.value,
-                    email: email.value,
-                    education: education.value,
-                    experience: experience.value,
-                    position: position.value,
-                }
-            ];
-            await createItems({ collection: "applications", application });
-            panel.value = 'two'
-
-        } catch (e) { }
-    };
+interface Application {
+    id?: string | number;
+    name: string;
+    email: string;
+    education: string;
+    experience: string;
+    position: string;
+    inspiration: string;
+    status: string;
 }
+const submit: Application[] = async () => {
+    try {
+        const items: Application[] = [
+            {
+                status: "published",
+                name: name.value,
+                email: email.value,
+                education: education.value,
+                experience: experience.value,
+                position: position.value,
+                inspiration: inspiration.value,
+            }
+        ];
+        console.log(items)
+        await createItems({ collection: "applications", items }).then((res) => {
+            console.log(res)
+        });
+        panel.value = 'two'
+
+    } catch (e) { }
+};
+
 
 
 function closeApplication() {
@@ -95,17 +113,41 @@ function closeApplication() {
         transform: translateX(100%) translateY(0%);
     }
 
+    .form-panels,
+    .application-panel {
+        width: 100%;
+        max-width: 780px;
+        height: 600px;
+        @apply relative;
+        @media (min-width: theme('screens.lg')) {
+            height: 660px;
+        }
+        h1 {
+            font-size: 20px;
+            line-height: 1.2em;
+            @media (min-width: theme('screens.md')) {
+                font-size: 32px;
+            }
+            @media (min-width: theme('screens.lg')) {
+                font-size: 42px;
+            }
+        }
+        p {
+
+        }
+    }
+
     &__content {
         width: 100%;
         max-width: 780px;
         @apply relative px-6;
 
         .close-btn {
-            top: 10px;
-            right: 10px;
+            top: 0px;
+            right: 0px;
             width: 40px;
             height: 40px;
-
+            z-index: 10;
             .nuxt-icon {
                 width: 40px;
                 height: 40px;
@@ -143,5 +185,4 @@ function closeApplication() {
     @media (min-width: theme('screens.lg')) {
         transform: translateX(0%) translateY(0%);
     }
-}
-</style>
+}</style>

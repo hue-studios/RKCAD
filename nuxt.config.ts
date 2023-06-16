@@ -6,8 +6,94 @@ export default defineNuxtConfig({
       name: 'page',
       mode: 'out-in',
     },
+    head: {
+      link: [
+        {
+          rel: 'preconnect',
+          href: 'https://admin.rkcad.com',
+          crossorigin: 'true',
+        },
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: '/favicon.ico',
+        },
+        {
+          rel: 'apple-touch-icon',
+          sizes: '57x57',
+          href: '/images/icons/apple-icon-57x57.png',
+        },
+        {
+          rel: 'apple-touch-icon',
+          sizes: '60x60',
+          href: '/images/icons/apple-icon-60x60.png',
+        },
+        {
+          rel: 'apple-touch-icon',
+          sizes: '72x72',
+          href: '/images/icons/apple-icon-72x72.png',
+        },
+        {
+          rel: 'apple-touch-icon',
+          sizes: '76x76',
+          href: '/images/icons/apple-icon-76x76.png',
+        },
+        {
+          rel: 'apple-touch-icon',
+          sizes: '114x114',
+          href: '/images/icons/apple-icon-114x114.png',
+        },
+        {
+          rel: 'apple-touch-icon',
+          sizes: '120x120',
+          href: '/images/icons/apple-icon-120x120.png',
+        },
+        {
+          rel: 'apple-touch-icon',
+          sizes: '144x144',
+          href: '/images/icons/apple-icon-144x144.png',
+        },
+        {
+          rel: 'apple-touch-icon',
+          sizes: '152x152',
+          href: '/images/icons/apple-icon-152x152.png',
+        },
+        {
+          rel: 'apple-touch-icon',
+          sizes: '180x180',
+          href: '/images/icons/apple-icon-180x180.png',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '192x192',
+          href: '/images/icons/android-icon-192x192.png',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '32x32',
+          href: '/images/icons/favicon-32x32.png',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '96x96',
+          href: '/icons/favicon-96x96.png',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '16x16',
+          href: '/images/icons/favicon-16x16.png',
+        },
+        {
+          rel: 'manifest',
+          href: '/images/icons/manifest.json',
+        },
+      ],
+    },
   },
-
   css: [
     {
       src: '~/assets/css/main.css',
@@ -43,7 +129,6 @@ export default defineNuxtConfig({
         },
       },
     ],
-    "@vite-pwa/nuxt",
     'nuxt-directus',
     'nuxt-icons',
   ],
@@ -56,48 +141,6 @@ export default defineNuxtConfig({
       
     },
     // ...other options
-  },
-  pwa: {
-    registerType: 'autoUpdate',
-    manifest: {
-      name: 'Nuxt Vite PWA',
-      short_name: 'NuxtVitePWA',
-      theme_color: '#ffffff',
-      icons: [
-        {
-          src: 'pwa-192x192.png',
-          sizes: '192x192',
-          type: 'image/png',
-        },
-        {
-          src: 'pwa-512x512.png',
-          sizes: '512x512',
-          type: 'image/png',
-        },
-        {
-          src: 'pwa-512x512.png',
-          sizes: '512x512',
-          type: 'image/png',
-          purpose: 'any maskable',
-        },
-      ],
-    },
-    workbox: {
-      navigateFallback: '/',
-      globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
-    },
-    client: {
-      installPrompt: true,
-      // you don't need to include this: only for testing purposes
-      // if enabling periodic sync for update use 1 hour or so (periodicSyncForUpdates: 3600)
-      periodicSyncForUpdates: 20,
-    },
-    devOptions: {
-      enabled: true,
-      suppressWarnings: true,
-      navigateFallbackAllowlist: [/^\/$/],
-      type: 'module',
-    },
   },
   plausible: {
     domain: 'rkcad.com',
