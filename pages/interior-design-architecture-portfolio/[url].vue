@@ -47,8 +47,8 @@
           }}</span>
           Project by Rosen Kelly Conway</span>
       </h1>
-      <p v-if="project.intro" class="w-full font-bold mt-4">{{ project.intro }}</p>
-      <div class="w-full flex items-center flex-col lg:flex-row mt-12">
+      <p v-if="project.intro" class="w-full text-sm leading-8 mt-4">{{ project.intro }}</p>
+      <div class="w-full flex items-center flex-col lg:flex-row my-12">
         <div v-if="project.challenge">
           <h4 class="uppercase block tracking-wider mb-4">Challenge</h4>
           <p class="text-sm leading-8">{{ project.challenge }}</p>
@@ -62,6 +62,7 @@
           <p class="text-sm leading-8">{{ project.result }}</p>
         </div>
       </div>
+      <h4 class="w-full uppercase block tracking-wider mb-4">Credits</h4>
       <div v-if="project.credits && (!project.result || project.challenge || project.approach)" v-html="project.credits"
         class="w-full project__content-credits"></div>
     </div>
