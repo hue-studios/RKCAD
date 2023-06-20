@@ -8,7 +8,7 @@
     >
      
       <div
-        class="mt-8 w-full flex items-center lg:items-start justify-center  flex-col sm:flex-row footer__col relative"
+        class="mt-8 w-full flex items-center lg:items-start justify-center flex-col sm:flex-row footer__col relative"
       >
       <div class="flex flex-col sm:flex-row">
         <p class="text-center"><span class="hidden">Phone: </span><a href="tel:(908) 273-6565">908.273.6565</a></p>
@@ -17,7 +17,7 @@
           <span class="hidden">Email: </span><a href="mailto:info@rkcad.com">Info@rkcad.com</a>
         </p>
       </div>
-        <div class="flex flex-row mt-8 sm:mt-2 lg:-mt-[4px]">
+        <div class="flex flex-row mt-8 sm:mt-0 lg:-mt-[4px]">
           <a
             href="https://www.instagram.com/rkcad/"
             target="_blank"

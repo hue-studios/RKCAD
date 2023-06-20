@@ -38,8 +38,22 @@ const work = await getItems({
   collection: 'work',
   params: {
     fields: [
-      'header_image,title,projects.status,projects.title,projects.category,projects.style,projects.images.directus_files_id.id,projects.images.directus_files_id.title,projects.images.directus_files_id.tags,projects.images.directus_files_id.width,projects.images.directus_files_id.height,projects.url',
+      'header_image,title',
     ],
+  },
+})
+// 'header_image,title,projects.status,projects.title,projects.category,projects.style,projects.images.directus_files_id.id,projects.images.directus_files_id.title,projects.images.directus_files_id.tags,projects.images.directus_files_id.width,projects.images.directus_files_id.height,projects.url',
+const projects = await getItems({
+  collection: 'projects',
+  params: {
+    fields: [
+      'status,title,category,style,images.directus_files_id.id,images.directus_files_id.title,images.directus_files_id.tags,images.directus_files_id.width,images.directus_files_id.height,url',
+    ],
+    filter: {
+      status: {
+        _eq: 'published',
+      },
+    },
   },
 })
 useHead({
@@ -85,24 +99,25 @@ const formattedTitle = computed(() => {
   return work.title.replace(/\n/g, '<br>')
 })
 const architecture = computed(() => {
-  return work.projects.filter((item) => {
-    return (
-      item.category.find((el) => el === 'Architecture')
-    )
+  return projects.filter((item) => {
+    return item.category.find(
+      (el) => el === 'Architecture'
+    ) && item.status === 'published'
   })
 })
 const interior = computed(() => {
-  return work.projects.filter((item) => {
+  return projects.filter((item) => {
     return item.category.find(
       (el) => el === 'Interior Design'
-    )
+    ) && item.status === 'published'
   })
 })
+
 const commercial = computed(() => {
-  return work.projects.filter((item) => {
+  return projects.filter((item) => {
     return item.category.find(
       (el) => el === 'Commercial'
-    )
+    ) && item.status === 'published'
   })
 })
 </script>
