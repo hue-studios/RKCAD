@@ -102,7 +102,7 @@ function closeProfile() {
       transition: 0.65s var(--curve);
       transform: translateY(200px);
       z-index: 10;
-      overflow: scroll;
+      overflow: hidden;
       @apply bg-center bg-cover bg-no-repeat;
 
       @media (min-width: theme('screens.md')) {}
