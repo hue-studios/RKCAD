@@ -157,24 +157,21 @@
 </template>
 
 <script setup>
-
 const imageUrl = 'https://admin.rkcad.com/assets/'
-
 import { getFirst } from '~~/utils/strings'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Parallax, EffectFade } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 const modules = [Parallax, Autoplay, EffectFade]
-const { getItems } = useDirectusItems()
-const home = await getItems({
-  collection: 'home',
-  params: {
+const { $directus } = useNuxtApp();
+const { data: home, pending, error } = await useAsyncData('home', () => {
+  return $directus.items('home').readOne(1, {
     fields: [
-      'featured_images.directus_files_id,about_intro,team_intro,team_image,featured_profile.*,featured_project.title,featured_project.intro,featured_project.url,featured_project.category,featured_project.images.directus_files_id,featured_profile.featured_projects.project.title,featured_profile.featured_projects.project.url,featured_profile.featured_projects.image',
+      'featured_images.directus_files_id,about_intro,team_intro,team_image,featured_profile.*,featured_project.title,featured_project.intro,featured_project.url,featured_project.category,featured_project.images.directus_files_id,featured_profile.featured_projects.project.title,featured_profile.featured_projects.project.url,featured_profile.featured_projects.image,featured_projects.title,featured_projects.category,featured_projects.style,featured_projects.url,featured_projects.images.directus_files_id.id,featured_projects.sort,featured_projects.status',
     ],
-  },
-})
+  });
+});
 
 import { usePageStore } from '~~/store/PageStore'
 const pageStore = usePageStore()
@@ -186,13 +183,13 @@ const hideIntroAnimation = () => {
   pageStore.setInternal(true)
 };
 useSeoMeta({
-  ogImage: 'https://admin.rkcad.com/assets/' + home.featured_images[0].directus_files_id + 'key=xlarge'
+  ogImage: 'https://admin.rkcad.com/assets/' + home.value.featured_images[0].directus_files_id + 'key=xlarge'
 })
 onMounted(() => {
   const image = new Image();
-  if (home.featured_images.length > 0) {
+  if (home.value.featured_images.length > 0) {
     image.src = 'https://admin.rkcad.com/assets/' +
-      home.featured_images[0].directus_files_id + 'key=xlarge';
+      home.value.featured_images[0].directus_files_id + 'key=xlarge';
 
     image.onload = () => {
       isImageLoaded.value = true;
@@ -207,33 +204,32 @@ onMounted(() => {
   }
 });
 
-const work = await getItems({
-  collection: 'projects',
-  params: {
-    fields: [
-      'status,title,category,style,images.directus_files_id.id,images.directus_files_id.title,images.directus_files_id.tags,images.directus_files_id.width,images.directus_files_id.height,url',
-    ],
-    filter: {
-      status: {
-        _eq: 'published',
-      },
-    },
-  },
-})
+
+const work = [...home.value.featured_projects]
 
 const architecture = computed(() => {
-  return work.filter((item) => {
-    return item.category.find(
-      (el) => el === 'Architecture'
-    ) && item.status === 'published'
-  })
+  if (!pending.value && !error.value) {
+    return work.filter((item) => {
+      return item.category.find(
+        (el) => el === 'Architecture'
+      ) && item.status === 'published'
+    })
+  } else {
+    return false
+  }
 })
 const interior = computed(() => {
-  return work.filter((item) => {
-    return item.category.find(
-      (el) => el === 'Interior Design'
-    )
-  })
+  if (!pending.value && !error.value) {
+    return work.filter((item) => {
+      return item.category.find(
+        (el) => el === 'Interior Design'
+          && item.status === 'published'
+      )
+    })
+  } else {
+    return false
+  }
+
 })
 </script>
 <style>

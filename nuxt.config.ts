@@ -94,6 +94,7 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   css: [
     {
       src: '~/assets/css/main.css',
@@ -142,6 +143,7 @@ export default defineNuxtConfig({
     },
     // ...other options
   },
+
   plausible: {
     domain: 'rkcad.com',
   },
@@ -178,6 +180,12 @@ export default defineNuxtConfig({
     },
   },
 
-  devtools: true,
   // plugins: ['~/plugins/socialShare.ts']
+  devtools: true,
+
+  plugins: [
+    '~/plugins/preview.js',
+    '~/plugins/socialShare.ts',
+    '~/plugins/directus.js'
+  ]
 })
