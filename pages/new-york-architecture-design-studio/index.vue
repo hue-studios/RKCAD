@@ -50,26 +50,37 @@
 </template>
 
 <script setup>
-const { getItems } = useDirectusItems()
-const about = await getItems({
-  collection: 'about',
-  params: {
-    fields: ['*'],
-  },
-})
+const { $directus, $preview } = useNuxtApp();
+if ($preview) {
+  const { data: about, pending, error } = await useAsyncData('about', () => {
+    return $directus.items('about').readOne(1, {
+      fields: [
+        'header_image,title,who_we_are,our_approach,what_we_do',
+      ],
+    });
+  });
+}
+const { data: about, pending, error } = await useAsyncData('about', () => {
+  return $directus.items('about').readOne(1, {
+    fields: [
+      'header_image,title,who_we_are,our_approach,what_we_do',
+    ],
+  });
+});
+
 useSeoMeta({
   title: 'About | Rosen Kelly Conway Architecture & Design Firm | Summit NJ',
   ogTitle: 'About | Rosen Kelly Conway Architecture & Design Firm | Summit NJ',
   description: 'At Rosen Kelly Conway Architecture & Design we approach our projects seeking a comprehensive understanding of context and challenges, while creating innovative solutions.',
   ogDescription: 'At Rosen Kelly Conway Architecture & Design we approach our projects seeking a comprehensive understanding of context and challenges, while creating innovative solutions.',
   ogImage: 'https://admin.rkcad.com/assets/' +
-    about.header_image + 'key=xlarge'
+    about.value.header_image + 'key=xlarge'
 })
 const isImageLoaded = ref(false);
 onMounted(() => {
   const image = new Image();
   image.src = 'https://admin.rkcad.com/assets/' +
-    about.header_image + 'key=xlarge';
+    about.value.header_image + 'key=xlarge';
 
   image.onload = () => {
     isImageLoaded.value = true;
@@ -77,7 +88,7 @@ onMounted(() => {
 
 });
 const formattedTitle = computed(() => {
-  return about.title.replace(/\n/g, '<br>')
+  return about.value.title.replace(/\n/g, '<br>')
 })
 </script>
 <style>
@@ -125,6 +136,7 @@ const formattedTitle = computed(() => {
         line-height: 46px;
         font-family: var(--light-font);
         font-weight: 500;
+
         @media (min-width: theme('screens.md')) {
           font-size: 66px;
           line-height: 66px;
@@ -133,9 +145,9 @@ const formattedTitle = computed(() => {
       }
 
       h2 {
-    
+
         margin-top: 50px;
-        @apply uppercase ;
+        @apply uppercase;
       }
 
       h3 {

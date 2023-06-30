@@ -39,7 +39,7 @@
     </div>
 
     <div class="flex w-full items-center flex-col justify-start tracking-wide my-20 project__content">
-      <h1 class="w-full">
+      <h1 class="w-full mb-12">
         {{ removeFirst(project.title) }}
         <span class="hidden">
           <span v-for="(category, index) in project.category" :key="index">{{
@@ -47,8 +47,8 @@
           }}</span>
           Project by Rosen Kelly Conway</span>
       </h1>
-      <p v-if="project.intro" class="w-full text-sm leading-8 mt-4">{{ project.intro }}</p>
-      <div class="w-full flex items-center flex-col lg:flex-row my-12">
+      <p v-if="project.intro" class="w-full text-sm leading-8 mb-12">{{ project.intro }}</p>
+      <div v-if="project.challenge || project.approach || project.result" class="w-full flex items-center flex-col lg:flex-row mb-12">
         <div v-if="project.challenge">
           <h4 class="uppercase block tracking-wider mb-4">Challenge</h4>
           <p class="text-sm leading-8">{{ project.challenge }}</p>
@@ -62,13 +62,13 @@
           <p class="text-sm leading-8">{{ project.result }}</p>
         </div>
       </div>
-      <h4 class="w-full uppercase block tracking-wider mb-4">Credits</h4>
+      <h4 v-if="project.credits && (!project.result || project.challenge || project.approach)" class="w-full uppercase block tracking-wider mb-4">Credits</h4>
       <div v-if="project.credits && (!project.result || project.challenge || project.approach)" v-html="project.credits"
         class="w-full project__content-credits"></div>
     </div>
-    <div class="project__recognition">
+    <!-- <div v-if="project.press_and_awards.length" class="project__recognition">
       <ProjectsPressSlider :slides="project.press_and_awards" />
-    </div>
+    </div> -->
   </div>
   <LayoutLoader v-else />
 </template>
@@ -76,24 +76,34 @@
 <script setup>
 import { removeFirst } from '~~/utils/strings'
 const { params, path } = useRoute()
-const { getItems } = useDirectusItems()
-const { data, pending, error, refresh } = await useAsyncData('posts', () => {
-  return getItems({
-    collection: 'projects',
-    params: {
+const { $directus, $preview } = useNuxtApp();
+if ($preview) {
+  const { data, pending, error } = await useAsyncData('data', () => {
+    return $directus.items('projects').readByQuery({
       filter: {
         url: {
           _eq: params.url,
         },
-
       },
       fields: [
-        'approach, before_after.directus_files_id,category,challenge,credits,id,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags,intro,result,sort,style,title,url,press_and_awards.press_id.category,press_and_awards.press_id.category,press_and_awards.press_id.title,press_and_awards.press_id.description,press_and_awards.press_id.url,press_and_awards.press_id.link,press_and_awards.press_id.images.directus_files_id.id,press_and_awards.press_id.images.directus_files_id.description,press_and_awards.press_id.images.directus_files_id.tags',
+      'approach, before_after.directus_files_id,category,challenge,credits,id,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags,intro,result,sort,style,title,url,press_and_awards.press_id.category,press_and_awards.press_id.category,press_and_awards.press_id.title,press_and_awards.press_id.description,press_and_awards.press_id.url,press_and_awards.press_id.link,press_and_awards.press_id.images.directus_files_id.id,press_and_awards.press_id.images.directus_files_id.description,press_and_awards.press_id.images.directus_files_id.tags',
       ],
+    });
+  });
+}
+const { data, pending, error } = await useAsyncData('data', () => {
+  return $directus.items('projects').readByQuery({
+    filter: {
+      url: {
+        _eq: params.url,
+      },
     },
-  })
-})
-const project = ref(data.value[0])
+    fields: [
+    'approach, before_after.directus_files_id,category,challenge,credits,id,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags,intro,result,sort,style,title,url,press_and_awards.press_id.category,press_and_awards.press_id.category,press_and_awards.press_id.title,press_and_awards.press_id.description,press_and_awards.press_id.url,press_and_awards.press_id.link,press_and_awards.press_id.images.directus_files_id.id,press_and_awards.press_id.images.directus_files_id.description,press_and_awards.press_id.images.directus_files_id.tags',
+    ],
+  });
+});
+const project = ref(data.value.data[0])
 const isImageLoaded = ref(false);
 const category = ref('')
 const title = ref('')

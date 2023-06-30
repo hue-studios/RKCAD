@@ -135,13 +135,9 @@ export default defineNuxtConfig({
   ],
 
   devtools: {
-    // Enable devtools (default: true)
     enabled: true,
-    // VS Code Server options
     vscode: {
-      
     },
-    // ...other options
   },
 
   plausible: {
@@ -180,7 +176,6 @@ export default defineNuxtConfig({
     },
   },
 
-  // plugins: ['~/plugins/socialShare.ts']
   devtools: true,
 
   plugins: [

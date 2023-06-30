@@ -1,12 +1,12 @@
 <template>
-  <div class="team-card-wrapper" @click.prevent="showProfile">
+  <div class="team-card-wrapper " @click.prevent="showProfile">
     <!-- @click="handleView($event)" -->
     <div class="flex flex-col items-start team-card">
       <div class="w-full flex flex-col items-start justify-start team-card__header">
         <div v-if="person.image" :style="'background-image: url(https://admin.rkcad.com/assets/' +
           person.image +
           'key=small)'
-          " class="bg-repeat-none bg-center bg-cover team-card__header-image" />
+          " class="bg-repeat-none bg-center bg-cover team-card__header-image shadow-xl" />
         <div v-else class="flex items-center justify-center team-card__header-image">
           <LayoutRkc class="rkc-icon" />
         </div>
@@ -37,33 +37,13 @@ function showProfile() {
 
 <style >
 .team-card-wrapper {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   width: 100%;
   @media (min-width: theme('screens.sm')) {
-    padding-right: 35px;
   }
-
-  @media (min-width: theme('screens.lg')) {
-    padding-right: 35px;
-  }
-  @apply w-full sm:w-1/2 lg:w-1/3;
-}
-.team-card-wrapper:nth-child(2n) {
-  @media (min-width: theme('screens.sm')) {
-    padding-right: 0px;
-  }
-  @media (min-width: theme('screens.lg')) {
-    padding-right: 35px;
-  }
-}
-.team-card-wrapper:nth-child(3n) {
-  @media (min-width: theme('screens.lg')) {
-    padding-right: 0px;
-  }
-}
+} 
 
 .team-card {
-  margin-bottom: 1rem;
   position: relative;
   width: 100%;
   /* max-width: 375px; */
@@ -77,7 +57,6 @@ function showProfile() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
     pointer-events: none;
     @apply tracking-wide;
 

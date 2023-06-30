@@ -34,7 +34,7 @@
                     </VeeForm>
                 </div>
                 <div class="flex items-center justify-center flex-col application-panel" v-if="panel === 'two'" key="2">
-                    <h1 class="w-full uppercase tracking-wide ">Thank you {{ name }}.</h1> 
+                    <h1 class="w-full uppercase tracking-wide ">Thank you {{ name }}.</h1>
                     <p class="w-full mb-6 md:mb-10 tracking-wide">Your interest has been submitted successfully.</p>
                 </div>
 
@@ -88,6 +88,13 @@ const submit: Application[] = async () => {
 
 
 function closeApplication() {
+    name.value = ''
+    email.value  = ''
+    education.value  = ''
+    experience.value  = ''
+    position.value  = ''
+    inspiration.value  = ''
+    panel.value = 'one'
     const element = document.getElementById('application-toggle')
     element.checked = false
 }
@@ -119,22 +126,25 @@ function closeApplication() {
         max-width: 780px;
         height: 600px;
         @apply relative;
+
         @media (min-width: theme('screens.lg')) {
             height: 660px;
         }
+
         h1 {
             font-size: 20px;
             line-height: 1.2em;
+
             @media (min-width: theme('screens.md')) {
                 font-size: 32px;
             }
+
             @media (min-width: theme('screens.lg')) {
                 font-size: 42px;
             }
         }
-        p {
 
-        }
+        p {}
     }
 
     &__content {
@@ -148,6 +158,7 @@ function closeApplication() {
             width: 40px;
             height: 40px;
             z-index: 10;
+
             .nuxt-icon {
                 width: 40px;
                 height: 40px;

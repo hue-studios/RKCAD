@@ -16,7 +16,7 @@
                   v-for="(slide, index) in home.featured_images" :key="index">
 
                   <div class="relative w-full h-full flex items-center justify-center">
-                    <div class="absolute w-full h-full bg-cover bg-center bg-no-repeat" :style="'background-image: url(' +
+                    <div class="w-full h-full bg-cover bg-center bg-no-repeat lg:bg-fixed" :style="'background-image: url(' +
                       imageUrl +
                       slide.directus_files_id +
                       '?key=large)'
@@ -76,7 +76,7 @@
             <LayoutLinkBtn link="/rosen-kelly-conway-architecture-design-team/">More About the Team</LayoutLinkBtn>
           </div>
 
-          <img v-if="home.team_image" alt="RKC Team" class="w-full md:w-1/2 h-auto mt-4 mb-8" :srcset="imageUrl +
+          <img v-if="home.team_image" alt="RKC Team" class="w-full md:w-1/2 h-auto mt-4 mb-8 shadow-xl" :srcset="imageUrl +
             home.team_image +
             '?key=small 400w, ' +
             imageUrl +
@@ -95,7 +95,7 @@
               <div class="flex items-start justify-start flex-col md:flex-row relative w-full "
                 :class="{ 'xl:w-1/2': home.featured_profile.featured_projects.length }">
                 <img :src="'https://admin.rkcad.com/assets/' + home.featured_profile.image + '?key=small'" alt="RKC Team"
-                  class="profile-pic" />
+                  class="profile-pic shadow-xl" />
 
                 <div class="mt-4 md:mt-0 md:ml-2 flex items-end justify-end flex-col home-section__quote"
                   v-html="home.featured_profile.quote"> </div>
@@ -108,7 +108,7 @@
                   class="inline-block " :to="'/interior-design-architecture-portfolio/' + project.project.url"
                   :class="{ 'mr-2': (index + 1) < home.featured_profile.featured_projects.length }">
                   <img :src="'https://admin.rkcad.com/assets/' + project.image + '?key=small'" alt="RKC Team"
-                    class="h-full w-auto " />
+                    class="h-full w-auto shadow-xl" />
                 </nuxt-link>
               </div>
 
@@ -138,7 +138,7 @@
             </div>
 
             <img v-if="home.featured_project.images.length" :alt="removeFirst(home.featured_project.title) + ' by RKC'"
-              class="w-full md:w-1/2 h-auto mt-8 md:mt-4 mb-8" :srcset="imageUrl +
+              class="w-full md:w-1/2 h-auto mt-8 md:mt-4 mb-8 shadow-xl" :srcset="imageUrl +
                 home.featured_project.images[0].directus_files_id +
                 '?key=small 400w, ' +
                 imageUrl +

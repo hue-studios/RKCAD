@@ -1,11 +1,12 @@
 <template>
-  <div v-if="isImageLoaded" class="relative w-full flex items-center justify-center flex-col min-h-screen mx-auto article">
+  <div v-if="isImageLoaded"
+    class="relative w-full flex items-center justify-center flex-col min-h-screen mx-auto article">
     <div class="w-full relative article__slideshow">
       <UtilitiesSlideshowThumbs v-if="article.images.length" :slides="article.images" />
 
     </div>
     <div
-      class="w-full flex items-start flex-col  justify-between uppercase tracking-wide mt-20 max-w-7xl article__header mx-w-7xl">
+      class="w-full flex items-start flex-col  justify-between uppercase tracking-wide mt-20 max-w-7xl article__header mx-w-7xl mt-10 lg:mt-14">
       <h1 class="relative">
         {{ article.title }}
         <span class="hidden">
@@ -28,11 +29,10 @@
 
 <script setup>
 const { params, path } = useRoute()
-const { getItems } = useDirectusItems()
-const { data, pending, error, refresh } = await useAsyncData('articles', () => {
-  return getItems({
-    collection: 'articles',
-    params: {
+const { $directus, $preview } = useNuxtApp();
+if ($preview) {
+  const { data, pending, error } = await useAsyncData('data', () => {
+    return $directus.items('articles').readByQuery({
       filter: {
         url: {
           _eq: params.url,
@@ -41,10 +41,22 @@ const { data, pending, error, refresh } = await useAsyncData('articles', () => {
       fields: [
         'category,title,description,link,url,project.title,project.url,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags',
       ],
+    });
+  });
+}
+const { data, pending, error } = await useAsyncData('data', () => {
+  return $directus.items('articles').readByQuery({
+    filter: {
+      url: {
+        _eq: params.url,
+      },
     },
-  })
-})
-const article = ref(data.value[0])
+    fields: [
+      'category,title,description,link,url,project.title,project.url,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags',
+    ],
+  });
+});
+const article = ref(data.value.data[0])
 const category = ref('')
 const title = ref('')
 const description = ref('')
@@ -52,7 +64,7 @@ const pageImage = ref('')
 title.value = article.value.title + ' ' + category.value + ' | Rosen Kelly Conway Architecture & Design'
 description.value = article.value.title + ': ' + category.value + ' for Rosen Kelly Conway Architecture & Design, a full-service architecture and interior design firm based in Summit, NJ.'
 
-if(article.value.images.length) {
+if (article.value.images.length) {
   pageImage.value = 'https://admin.rkcad.com/assets/' + article.value.images[0].directus_files_id.id + '?key=large'
 } else {
   pageImage.value = 'https://rkcad.com/images/rkcad-logo.png'
@@ -108,12 +120,14 @@ onMounted(() => {
 .article {
   margin-top: 65px;
   padding-left: 15px;
-    padding-right: 15px;
-    @apply max-w-7xl;
-    @media (min-width: theme('screens.sm')) {
-      padding-left: 35px;
-      padding-right: 35px;
-    }
+  padding-right: 15px;
+  @apply max-w-7xl;
+
+  @media (min-width: theme('screens.sm')) {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
   &__slideshow {
     transition: all 0.5s var(--curve);
     height: calc(100vh - 167px);
@@ -135,7 +149,7 @@ onMounted(() => {
 
   &__header {
     /* max-width: var(--max-width); */
-    @apply mt-10 lg:mt-14 max-w-8xl;
+    @apply max-w-8xl;
 
     h1 {
       font-size: 30px;

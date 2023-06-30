@@ -3,7 +3,7 @@
     <swiper :observer="true" :observeParents="true" :modules="modules" navigation :spaceBetween="35"
       :breakpoints="{ 300: { slidesPerView: 1, grid: { rows: 1, fill: 'row' } }, 640: { slidesPerView: 2, grid: { rows: 1, fill: 'row' } }, 768: { slidesPerView: 3, slidesPerGroup: 3, grid: { rows: 2, fill: 'row' } }, 1024: { slidesPerView: 4, slidesPerGroup: 4, grid: { rows: 2, fill: 'row' } } }"
       class="slideshowSwiperGridwithNav">
-      <swiper-slide class="w-full flex flex-col items-end justify-end overflow-hidden w-fit"
+      <swiper-slide class="w-full flex flex-col items-end justify-end overflow-hidden w-fit shadow-xl"
         v-for="(slide, index) in slides" :key="index">
         <nuxt-link :to="'/interior-design-architecture-portfolio/' + slide.url" class="work__card">
           <div v-if="slide.images.length > 0"

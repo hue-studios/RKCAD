@@ -6,7 +6,7 @@
       class="flex items-start justify-center relative flex-col md:flex-row md:items-center team-profile__content">
 
       <transition name="fade" mode="out-in">
-        <div v-if="profileStore.profile.image" class="team-profile__content-image" :style="'background-image: url(https://admin.rkcad.com/assets/' +
+        <div v-if="profileStore.profile.image" class="team-profile__content-image shadow-xl" :style="'background-image: url(https://admin.rkcad.com/assets/' +
           profileStore.profile.image + '?key=medium'">
 
         </div>

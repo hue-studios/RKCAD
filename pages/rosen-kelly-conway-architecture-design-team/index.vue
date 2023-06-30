@@ -13,31 +13,24 @@
         <h2 class="page__body-header-subtitle">Culture</h2>
         <h3 class="page__body-header-title">Meet <br />the Team</h3>
       </div>
-      <div class="w-full flex items-center justify-start flex-row flex-wrap">
-        <CardsTeamCard v-for="(person, index) in team.people" :key="index" :person="person"
-          class="" />
+      <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-9">
+        <CardsTeamCard v-for="(person, index) in team.people" :key="index" :person="person" class="" />
       </div>
       <div class="w-full flex items-start justify-center flex-col lg:flex-row flex-wrap mt-20 employment">
         <div class="w-full uppercase page__body-header">
           <h2 class="page__body-header-subtitle">Opportunity</h2>
           <h3 class="page__body-header-title">Join <br />the Team</h3>
         </div>
-        <div v-if="team.architects" class="w-full flex flex-col items-end lg:w-1/3 lg:pr-6 py-6 lg:py-12">
-          <h4 class="uppercase w-full">Architects</h4>
-          <p v-html="team.architects" class="w-full"></p>
-          <LayoutLinkBtn @click.prevent="showApplication()" class="cursor-pointer">Apply</LayoutLinkBtn>
+        <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-9">
+          <div v-for="(position, index) in positions" :key="index"
+            class="w-full flex flex-col items-end py-6 lg:pb-12">
+            <h4 class="uppercase w-full">{{ position.title }}</h4>
+            <p v-if="position.description" v-html="position.description" class="w-full"></p>
+            <p v-else class="w-full">Description coming soon.</p>
+            <LayoutLinkBtn @click.prevent="showApplication()" class="cursor-pointer">Apply</LayoutLinkBtn>
+          </div>
         </div>
-        <div v-if="team.interior_designers"
-          class="w-full flex flex-col items-end  lg:w-1/3 lg:px-6 lg:border-r lg:border-l border-stone-300 py-6 lg:py-12">
-          <h4 class="uppercase w-full">Interior Designers</h4>
-          <p v-html="team.interior_designers" class="w-full"></p>
-          <LayoutLinkBtn  @click.prevent="showApplication()" class="cursor-pointer">Apply</LayoutLinkBtn>
-        </div>
-        <div v-if="team.drafters" class="w-full flex flex-col items-end lg:w-1/3 lg:pl-6 py-6 lg:py-12 ">
-          <h4 class="uppercase w-full">Drafters</h4>
-          <p v-html="team.drafters" class="w-full"></p>
-          <LayoutLinkBtn  @click.prevent="showApplication()" class="cursor-pointer">Apply</LayoutLinkBtn>
-        </div>
+
 
       </div>
     </div>
@@ -47,35 +40,48 @@
 </template>
 
 <script setup>
-const { getItems } = useDirectusItems()
-const team = await getItems({
-  collection: 'team',
-  params: {
+const { $directus, $preview } = useNuxtApp();
+if ($preview) {
+  const { data: team, pending, error } = await useAsyncData('team', () => {
+    return $directus.items('team').readOne(1, {
+      fields: [
+        'header_image,title,people.sort,people.name,people.title,people.bio,people.image,people.education,people.status,people.email,people.quote,positions.title,positions.status,positions.description',
+      ],
+    });
+  });
+}
+const { data: team, pending, error } = await useAsyncData('team', () => {
+  return $directus.items('team').readOne(1, {
     fields: [
-      'header_image,title,people.sort,people.name,people.title,people.bio,people.image,people.education,people.status,people.email,people.quote,architects,interior_designers,drafters',
+      'header_image,title,people.sort,people.name,people.title,people.bio,people.image,people.education,people.status,people.email,people.quote,positions.title,positions.status,positions.description',
     ],
-  },
-})
+  });
+});
 useSeoMeta({
   title: 'Team | Rosen Kelly Conway Architecture & Design Firm | Summit NJ',
   ogTitle: 'Team | Rosen Kelly Conway Architecture & Design Firm | Summit NJ',
   description: 'At RKC we seek to work with the most talented, visionary designers from different generations, backgrounds, and points of views. This creates a dynamic, yet relaxed forward-thinking culture.',
   ogDescription: 'At RKC we seek to work with the most talented, visionary designers from different generations, backgrounds, and points of views. This creates a dynamic, yet relaxed forward-thinking culture.',
   ogImage: 'https://admin.rkcad.com/assets/' +
-    team.header_image + 'key=xlarge'
+    team.value.header_image + 'key=xlarge'
 })
 const isImageLoaded = ref(false);
 onMounted(() => {
   const image = new Image();
   image.src = 'https://admin.rkcad.com/assets/' +
-    team.header_image + '?key=xlarge';
+    team.value.header_image + '?key=xlarge';
 
   image.onload = () => {
     isImageLoaded.value = true;
   };
 });
 const formattedTitle = computed(() => {
-  return team.title.replace(/\n/g, '<br>')
+  return team.value.title.replace(/\n/g, '<br>')
+})
+const positions = computed(() => {
+  return team.value.positions.filter((item) => {
+    return item.status === 'published'
+  })
 })
 function showApplication() {
   console.log("show application")
@@ -85,13 +91,11 @@ function showApplication() {
 </script>
 <style scoped>
 .team {
-
   &-detail {
     position: fixed;
     right: 0px;
     height: 100vh;
   }
-
 }
 
 .employment {

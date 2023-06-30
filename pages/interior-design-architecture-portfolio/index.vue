@@ -13,19 +13,19 @@
         <h3 class="mb-10 page__body-header-title">Architecture <br />Design</h3>
       </div>
       <div class="w-full">
-        <UtilitiesSlideshowGridNav :slides="architecture" class="One"/>
+        <UtilitiesSlideshowGridNav :slides="architecture" class="One" />
       </div>
       <div v-if="interior.length" class="w-full uppercase mt-20 page__body-header">
         <h3 class="mb-10 page__body-header-title">Interior <br />Design</h3>
       </div>
       <div v-if="interior.length" class="w-full">
-        <UtilitiesSlideshowGridNav :slides="interior" class="Two"/>
+        <UtilitiesSlideshowGridNav :slides="interior" class="Two" />
       </div>
       <div v-if="commercial.length" class="w-full uppercase mt-20 page__body-header">
-        <h3 class="mb-10 page__body-header-title">Commercial <br />Design</h3>
+        <h3 class="mb-10 page__body-header-title">Commercial / Institutional <br />Design</h3>
       </div>
       <div v-if="commercial.length" class="w-full">
-        <UtilitiesSlideshowGridNav :slides="commercial" class="Three"/>
+        <UtilitiesSlideshowGridNav :slides="commercial" class="Three" />
       </div>
     </div>
   </div>
@@ -33,29 +33,48 @@
 </template>
 
 <script setup>
-const { getItems } = useDirectusItems()
-const work = await getItems({
-  collection: 'work',
-  params: {
+const { $directus, $preview } = useNuxtApp();
+if ($preview) {
+  const { data: work, pending, error } = await useAsyncData('work', () => {
+    return $directus.items('work').readOne(1, {
+      fields: [
+        'header_image,title',
+      ],
+    });
+  });
+  const { data: projects, pending2, error2 } = await useAsyncData('projects', () => {
+    return $directus.items('projects').readByQuery({
+      filter: {
+        status: {
+          _eq: 'published',
+        },
+      },
+      fields: [
+        'status,title,category,style,images.directus_files_id.id,images.directus_files_id.title,images.directus_files_id.tags,images.directus_files_id.width,images.directus_files_id.height,url',
+      ],
+    });
+  });
+}
+const { data: work, pending, error } = await useAsyncData('work', () => {
+  return $directus.items('work').readOne(1, {
     fields: [
       'header_image,title',
     ],
-  },
-})
-// 'header_image,title,projects.status,projects.title,projects.category,projects.style,projects.images.directus_files_id.id,projects.images.directus_files_id.title,projects.images.directus_files_id.tags,projects.images.directus_files_id.width,projects.images.directus_files_id.height,projects.url',
-const projects = await getItems({
-  collection: 'projects',
-  params: {
-    fields: [
-      'status,title,category,style,images.directus_files_id.id,images.directus_files_id.title,images.directus_files_id.tags,images.directus_files_id.width,images.directus_files_id.height,url',
-    ],
+  });
+});
+const { data: projectsReq, pending2, error2 } = await useAsyncData('projectsReq', () => {
+  return $directus.items('projects').readByQuery({
     filter: {
       status: {
         _eq: 'published',
       },
     },
-  },
-})
+    fields: [
+      'status,title,category,style,images.directus_files_id.id,images.directus_files_id.title,images.directus_files_id.tags,images.directus_files_id.width,images.directus_files_id.height,url',
+    ],
+  });
+});
+
 useHead({
   titleTemplate: 'Architecture & Interior Design Portfolio | Rosen Kelly Conway of Summit NJ',
   meta: [
@@ -72,7 +91,7 @@ useHead({
     {
       hid: 'og:image',
       property: 'og:image',
-      content: 'https://admin.rkcad.com/assets/' + work.header_image + '?key=xlarge',
+      content: 'https://admin.rkcad.com/assets/' + work.value.header_image + '?key=xlarge',
     },
     {
       hid: 'og:title',
@@ -90,14 +109,15 @@ const isImageLoaded = ref(false);
 onMounted(() => {
   const image = new Image();
   image.src = 'https://admin.rkcad.com/assets/' +
-    work.header_image + '?key=xlarge';
+    work.value.header_image + '?key=xlarge';
   image.onload = () => {
     isImageLoaded.value = true;
   };
 });
 const formattedTitle = computed(() => {
-  return work.title.replace(/\n/g, '<br>')
+  return work.value.title.replace(/\n/g, '<br>')
 })
+const projects = [...projectsReq.value.data]
 const architecture = computed(() => {
   return projects.filter((item) => {
     return item.category.find(

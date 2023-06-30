@@ -12,7 +12,7 @@
       >
       <div class="flex flex-col sm:flex-row">
         <p class="text-center"><span class="hidden">Phone: </span><a href="tel:(908) 273-6565">908.273.6565</a></p>
-        <p class="text-center sm:mx-5 "><span class="hidden">Studio: </span>16 Maple St Summit NJ</p>
+        <p class="text-center sm:mx-5 "><span class="hidden">Studio: </span>16 Maple St. Summit, NJ 07901</p>
         <p class="text-center sm:mr-5">
           <span class="hidden">Email: </span><a href="mailto:info@rkcad.com">Info@rkcad.com</a>
         </p>

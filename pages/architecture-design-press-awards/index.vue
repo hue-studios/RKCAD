@@ -1,44 +1,28 @@
 <template>
   <div v-if="isImageLoaded"
-    class="relative w-full min-h-screen flex flex-wrap flex-col justify-center items-center overflow-hidden press"
-  >
-    <div
-      class="page__header"
-      :style="
-        'background-image: url(https://admin.rkcad.com/assets/' +
-        press.header_image +
-        ')'
-      "
-    >
+    class="relative w-full min-h-screen flex flex-wrap flex-col justify-center items-center overflow-hidden press">
+    <div class="page__header" :style="'background-image: url(https://admin.rkcad.com/assets/' +
+      press.header_image +
+      ')'
+      ">
       <LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
-      <h1
-        class="w-full uppercase white tracking-wider"
-        v-html="formattedTitle"
-      ></h1>
+      <h1 class="w-full uppercase white tracking-wider" v-html="formattedTitle"></h1>
     </div>
-    <div
-      class="flex flex-wrap flex-row items-center justify-stretch w-full page__body"
-    >
+    <div class="flex flex-wrap flex-row items-center justify-stretch w-full page__body">
       <div class="w-full uppercase mt-20 mb-10 page__body-header">
         <h2 class="page__body-header-subtitle">Recognition</h2>
         <h3 class="page__body-header-title">Published/ <br />Press</h3>
-        <p class="normal-case mb-6 page__body-header-intro">{{ press.introduction }}</p>
+        <p v-if="press.introduction" class="normal-case mb-6 page__body-header-intro">{{ press.introduction }}</p>
       </div>
-      <CardsArticleCard
-        v-for="(article, index) in pressArticles"
-        :key="index"
-        :article="article"
-      />
+      <div class="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-9">
+      <CardsArticleCard v-for="(article, index) in pressArticles" :key="index" :article="article" />
+    </div>
       <div class="w-full uppercase mb-6 page__body-header">
         <h2 class="page__body-header-subtitle">Recognition</h2>
         <h3 class="page__body-header-title">Published/ <br />Awards</h3>
       </div>
-      <div class="w-full flex items-center justify-between flex-row flex-wrap">
-      <CardsArticleCard
-        v-for="(article, index) in awardArticles"
-        :key="index"
-        :article="article"
-      />
+      <div class="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-9">
+        <CardsArticleCard v-for="(article, index) in awardArticles" :key="index" :article="article" />
       </div>
     </div>
   </div>
@@ -46,15 +30,23 @@
 </template>
 
 <script setup>
-const { getItems } = useDirectusItems()
-const press = await getItems({
-  collection: 'press',
-  params: {
+const { $directus, $preview } = useNuxtApp();
+if ($preview) {
+  const { data: press, pending, error } = await useAsyncData('press', () => {
+    return $directus.items('press').readOne(1, {
+      fields: [
+        'header_image,title,introduction,articles.category,articles.title,articles.link,articles.description,articles.images.directus_files_id,articles.url,articles.sort,articles.status',
+      ],
+    });
+  });
+}
+const { data: press, pending, error } = await useAsyncData('press', () => {
+  return $directus.items('press').readOne(1, {
     fields: [
       'header_image,title,introduction,articles.category,articles.title,articles.link,articles.description,articles.images.directus_files_id,articles.url,articles.sort,articles.status',
     ],
-  },
-})
+  });
+});
 useHead({
   titleTemplate: 'Press & Awards | Rosen Kelly Conway Architecture & Interior Design of Summit NJ',
   meta: [
@@ -71,7 +63,7 @@ useHead({
     {
       hid: 'og:image',
       property: 'og:image',
-      content: 'https://admin.rkcad.com/assets/' + press.header_image + 'key=xlarge',
+      content: 'https://admin.rkcad.com/assets/' + press.value.header_image + 'key=xlarge',
     },
     {
       hid: 'og:title',
@@ -88,32 +80,25 @@ useHead({
 const isImageLoaded = ref(false);
 onMounted(() => {
   const image = new Image();
-    image.src = 'https://admin.rkcad.com/assets/' +
-    press.header_image + 'key=xlarge';
+  image.src = 'https://admin.rkcad.com/assets/' +
+    press.value.header_image + 'key=xlarge';
 
-    image.onload = () => {
-      isImageLoaded.value = true;
-    };
- 
+  image.onload = () => {
+    isImageLoaded.value = true;
+  };
+
 });
 const formattedTitle = computed(() => {
-  return press.title.replace(/\n/g, '<br>')
+  return press.value.title.replace(/\n/g, '<br>')
 })
 const pressArticles = computed(() => {
-  return press.articles.filter((article) => {
+  return press.value.articles.filter((article) => {
     return article.category === 'Press' && article.status === 'published'
   })
 })
 const awardArticles = computed(() => {
-  return press.articles.filter((article) => {
+  return press.value.articles.filter((article) => {
     return article.category === 'Award' && article.status === 'published'
   })
 })
 </script>
-<style >
-.press {
-  .page__body {
-    padding-right: 0px;
-  }
-}
-</style>
