@@ -91,29 +91,16 @@
             <h2 class="uppercase page__body-header-subtitle">{{ home.featured_profile.name }}</h2>
             <h3 class="uppercase page__body-header-title">Designer<br /> Spotlight</h3>
             <div
-              class="w-full mt-4 mb-8 flex items-start md:items-center justify-between flex-col xl:flex-row home-section__images">
+              class="w-full mt-4 mb-8 flex items-start md:items-center justify-between flex-col lg:flex-row home-section__images">
               <div class="flex items-start justify-start flex-col md:flex-row relative w-full "
-                :class="{ 'xl:w-1/2': home.featured_profile.featured_projects.length }">
+                :class="{ 'lg:w-1/2': home.featured_profile.featured_projects.length }">
                 <img :src="'https://admin.rkcad.com/assets/' + home.featured_profile.image + '?key=small'" alt="RKC Team"
                   class="profile-pic shadow-xl" />
 
                 <div class="mt-4 md:mt-0 md:ml-2 flex items-end justify-end flex-col home-section__quote"
                   v-html="home.featured_profile.quote"> </div>
               </div>
-              <div v-if="home.featured_profile.featured_projects.length"
-                class="flex items-start justify-start flex-row relative w-full mt-12 xl:mt-0 xl:w-1/2 xl:ml-2 featured-projects">
-                <p class="uppercase absolute left-0 -top-[20px] ">Some of {{ getFirst(home.featured_profile.name) }}'s
-                  favorite projects</p>
-                <nuxt-link v-for="(project, index) in home.featured_profile.featured_projects" :key="index"
-                  class="inline-block " :to="'/interior-design-architecture-portfolio/' + project.project.url"
-                  :class="{ 'mr-2': (index + 1) < home.featured_profile.featured_projects.length }">
-                  <img :src="'https://admin.rkcad.com/assets/' + project.image + '?key=small'" alt="RKC Team"
-                    class="h-full w-auto shadow-xl" />
-                </nuxt-link>
-              </div>
-
-
-
+              <UtilitiesDesignerProjects v-if="home.featured_profile.featured_projects.length" :name="home.featured_profile.name" :projects="home.featured_profile.featured_projects"/>
             </div>
             <p v-html="home.featured_profile.bio" class="home-section____intro"></p>
           </div>
@@ -158,7 +145,6 @@
 
 <script setup>
 const imageUrl = 'https://admin.rkcad.com/assets/'
-import { getFirst } from '~~/utils/strings'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Parallax, EffectFade } from 'swiper'
 import 'swiper/css'
@@ -349,10 +335,12 @@ const interior = computed(() => {
       font-weight: 400;
 
       @apply p-4 uppercase tracking-wide flex-grow;
-
+      @media (min-width: theme('screens.lg')) {
+        font-size: 12px;
+      }
       p {
 
-        @apply mt-4;
+        @apply mt-4 w-full;
       }
 
     }
@@ -362,18 +350,12 @@ const interior = computed(() => {
 
 }
 
-.featured-projects {
-  p {
-    font-size: 10px;
-    @apply uppercase tracking-wider font-bold;
-  }
-}
 
 
 .home-section__quote {
   p:last-of-type {
     font-size: 7px;
-    @apply italic;
+    @apply italic text-right;
   }
 }
 

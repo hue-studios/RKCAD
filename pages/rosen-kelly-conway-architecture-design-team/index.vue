@@ -13,7 +13,7 @@
         <h2 class="page__body-header-subtitle">Culture</h2>
         <h3 class="page__body-header-title">Meet <br />the Team</h3>
       </div>
-      <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-9">
+      <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-9">
         <CardsTeamCard v-for="(person, index) in team.people" :key="index" :person="person" class="" />
       </div>
       <div class="w-full flex items-start justify-center flex-col lg:flex-row flex-wrap mt-20 employment">

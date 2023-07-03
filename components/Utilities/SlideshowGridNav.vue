@@ -193,7 +193,7 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 }
 
 .work__card:hover>.work__card-image {
-  transform: scale(1);
+  transform: scale(1.2);
   background-color: rgba(167, 169, 172, 1.0);
 }
 

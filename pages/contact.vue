@@ -5,7 +5,7 @@
     <div class="w-full max-w-7xl flex flex-row justify-between items-center px-4">
       <div class="text-left contact__info">
         <h1 class="w-full uppercase white tracking-wider">Studio</h1>
-        <p>16 Maple St Summit NJ</p>
+        <p>16 Maple St. Summit, NJ 07901</p>
         <p><a href="tel:(908) 273-6565" target="_blank">908.273.6565</a></p>
         <p>
           <a href="mailto:info@rkcad.com" target="_blank">info@rkcad.com</a>

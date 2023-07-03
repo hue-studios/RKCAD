@@ -14,7 +14,11 @@ function truncateString(str, num) {
 function removeFirst(str) {
   const arr = str.split('. ')
   if (arr.length > 1) {
-    return arr[1]
+    const delimiter = ". ";
+    const firstDelimiterIndex = str.indexOf(delimiter);
+    const firstPart = str.substring(0, firstDelimiterIndex);
+    const remainingPart = str.substring(firstDelimiterIndex + delimiter.length);
+    return remainingPart
   }
   return str
 }

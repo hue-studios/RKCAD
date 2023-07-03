@@ -167,7 +167,7 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: ['swiper', '@sendgrid/mail'],
+    transpile: ['swiper', '@sendgrid/mail', 'gsap'],
   },
 
   vite: {
