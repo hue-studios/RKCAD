@@ -2,7 +2,7 @@
     <div class="w-full mt-12 lg:mt-0 lg:w-1/2 lg:ml-2 relative featured-projects">
         <p class="uppercase absolute z-50 -top-[20px] left-0">Some of {{ getFirst(name) }}'s
             favorite projects</p>
-        <div class="w-full flex items-start justify-start flex-row gap-2 snap-x snap-mandatory overflow-x-auto scrollbar-none">
+        <div class="w-full flex items-start justify-start flex-row gap-2 snap-x snap-mandatory overflow-x-auto scrollbar-none featured-projects__container">
             <nuxt-link v-for="(project, index) in projects" :key="index"
                 class="inline-block relative snap-start scroll-mx-6 shrink-0 shadow featured-projects__project"
                 :to="'/interior-design-architecture-portfolio/' + project.project.url">
@@ -39,7 +39,10 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
         @apply uppercase tracking-wider font-bold;
     }
 
-
+    &__container {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
     &__project {
         @apply overflow-hidden;
 
@@ -63,7 +66,9 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
         }
     }
 }
-
+.featured-projects__container::-webkit-scrollbar {
+  display: none;
+}
 .featured-projects__project:hover>.featured-projects__project-title {
     opacity: 1;
     transform: translateY(0px);
