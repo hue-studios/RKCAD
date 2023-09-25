@@ -112,6 +112,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/devtools',
+    '@nuxtjs/plausible',
     '@nuxtjs/tailwindcss',
     [
       '@pinia/nuxt',
@@ -134,6 +135,7 @@ export default defineNuxtConfig({
     ],
     'nuxt-directus',
     'nuxt-icons',
+   
   ],
 
   devtools: {
