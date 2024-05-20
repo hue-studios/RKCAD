@@ -1,194 +1,156 @@
+<template>
+  <swiper :modules="[Thumbs, Navigation]"  :thumbs="{ swiper: thumbsSwiper }" :centeredSlides="true" :spaceBetween="20"
+    :centeredInsuficientSlides="true" class="flex items-center justify-center flex-row gallery-swiper">
+    <swiper-slide v-for="(slide, index) in slides" :key="index"><img v-if="slide.directus_files_id.id" :srcset="imageUrl +
+      slide.directus_files_id.id +
+      '?key=small 400w, ' +
+      imageUrl +
+      slide.directus_files_id.id +
+      '?key=medium 1024w, ' +
+      imageUrl +
+      slide.directus_files_id.id +
+      '?key=large 1920w'
+      " :src="imageUrl + slide.directus_files_id.id + '?key=large'" class="shadow-lg" /></swiper-slide>
+  </swiper>
+
+  <swiper :modules="[Thumbs, Navigation]" watch-slides-progress watch-slides-visibility @swiper="setThumbsSwiper"
+    class="thumb-swiper" 
+    :slidesPerView="5"
+    :centeredSlides="false" :centeredInsuficientSlides="true"
+    :slideToClickedSlide="true"
+    :navigation="{
+      nextEl: '#slideshowSwiperThumbs__next-btn',
+      prevEl: '#slideshowSwiperThumbs__prev-btn',
+    }">
+    <swiper-slide class="w-auto flex items-center justify-center" v-for="(slide, index) in slides" :key="index"><img
+        v-if="slide.directus_files_id.id" :src="imageUrl + slide.directus_files_id.id + '?key=small'" /></swiper-slide>
+
+    <div id="slideshowSwiperThumbs__prev-btn"
+      class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4   py-2 slideshowSwiperThumbs__nav">
+      <nuxt-icon name="arrow-left" class="mr-4 arrow-left-icon" />
+    </div>
+    <div id="slideshowSwiperThumbs__next-btn"
+      class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 py-2 slideshowSwiperThumbs__nav">
+      <nuxt-icon name="arrow-right" class="ml-4 arrow-right-icon" />
+
+    </div>
+  </swiper>
+</template>
 <script setup>
-// import { Navigation, Thumbs } from 'swiper/modules'
-// import { Swiper, SwiperSlide } from 'swiper/vue'
-
-import { register } from 'swiper/element/bundle'
-
-register()
-
 const props = defineProps({
-	slides: {
-		type: Array,
-		default: () => {
-			return []
-		},
-	},
+  slides: {
+    type: Array,
+    default: [],
+  },
 })
-
 const images = computed(() => {
-	return props.slides.filter((item) => {
-		return item.directus_files_id.id
-	})
+  return props.slides.filter((item) => {
+    return item.directus_files_id.id
+  })
 })
 
 const imageUrl = 'https://admin.rkcad.com/assets/'
+import { Navigation, Thumbs } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+const modules = [Navigation, Thumbs]
+const thumbsSwiper = ref(null)
+const setThumbsSwiper = (swiper) => {
+  thumbsSwiper.value = swiper
+}
 
-// const thumbsSwiper = ref(null)
-
-// const setThumbsSwiper = (swiper) => {
-// 	thumbsSwiper.value = swiper
-// }
 </script>
-<template>
-	<swiper-container
-		thumbs-swiper=".thumb-swiper"
-		:centered-slides="true"
-		:space-between="20"
-		:centered-insuficient-slides="true"
-		class="flex items-center justify-center flex-row gallery-swiper"
-	>
-		<swiper-slide
-			v-for="(slide, index) in images"
-			:key="index"
-			class="swiper-slide"
-			><img
-				v-if="slide.directus_files_id.id"
-				:srcset="
-					imageUrl +
-					slide.directus_files_id.id +
-					'?key=small 400w, ' +
-					imageUrl +
-					slide.directus_files_id.id +
-					'?key=medium 1024w, ' +
-					imageUrl +
-					slide.directus_files_id.id +
-					'?key=large 1920w'
-				"
-				:src="imageUrl + slide.directus_files_id.id + '?key=large'"
-				class="shadow-lg"
-		/></swiper-slide>
-	</swiper-container>
-
-	<swiper-container
-		:navigation="{
-			enabled: true,
-			nextEl: '#slideshowSwiperThumbs__next-btn',
-			prevEl: '#slideshowSwiperThumbs__prev-btn',
-		}"
-		watch-slides-progress
-		watch-slides-visibility
-		class="relative thumb-swiper"
-		:slides-per-view="5"
-		:centered-slides="false"
-		:centered-insuficient-slides="true"
-		:slide-to-clicked-slide="true"
-		@swiper="setThumbsSwiper"
-	>
-		<swiper-slide
-			v-for="(slide, index) in images"
-			:key="index"
-			class="w-auto flex items-center justify-center swiper-slide"
-			><img
-				v-if="slide.directus_files_id.id"
-				:src="imageUrl + slide.directus_files_id.id + '?key=small'"
-		/></swiper-slide>
-	</swiper-container>
-
-	<div
-		id="slideshowSwiperThumbs__prev-btn"
-		class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 py-2 slideshowSwiperThumbs__nav"
-	>
-		<nuxt-icon name="arrow-left" class="mr-4 arrow-left-icon" />
-	</div>
-	<div
-		id="slideshowSwiperThumbs__next-btn"
-		class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 py-2 slideshowSwiperThumbs__nav"
-	>
-		<nuxt-icon name="arrow-right" class="ml-4 arrow-right-icon" />
-	</div>
-</template>
-
-<style>
+<style >
 .gallery-swiper {
-	height: calc(100% - 110px);
-	/* background: rgba(0,0,0,0.025); */
-	/* -webkit-backdrop-filter: blur(4px) invert(0.015);
+  height: calc(100% - 110px);
+  /* background: rgba(0,0,0,0.025); */
+  /* -webkit-backdrop-filter: blur(4px) invert(0.015);
   backdrop-filter: blur(4px) invert(0.015); */
-	@media (min-width: theme('screens.lg')) {
-		background: none;
-	}
-	.swiper-slide {
-		align-items: center;
-		justify-content: center;
-		display: flex;
-		position: relative;
+  @media (min-width: theme('screens.lg')) {
+    background: none;
+  }
+  .swiper-slide {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    position: relative;
 
-		img {
-			max-height: 100%;
-			max-width: 100%;
-			width: auto;
-		}
-	}
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      width:auto;
+    }
+  }
 }
 
 .thumb-swiper {
-	height: 100px;
-	margin: 10px 0px;
+  height: 100px;
+  margin: 10px 0px;
 
-	position: relative;
+  position: relative;
 
-	@media (min-width: theme('screens.lg')) {
-		/* align-items: center;
+  @media (min-width: theme('screens.lg')) {
+    /* align-items: center;
     justify-content: center;
     display: flex; */
-	}
+  }
 
-	.swiper-wrapper {
-		position: relative;
+  .swiper-wrapper {
 
-		@media (min-width: theme('screens.lg')) {
-			/* align-items: center;
+    position: relative;
+
+    @media (min-width: theme('screens.lg')) {
+      /* align-items: center;
     justify-content: center;
     display: flex; */
-		}
-	}
+    }
+  }
 
-	.swiper-slide {
-		width: auto !important;
-		@apply px-2;
+  .swiper-slide {
+    width: auto !important;
+    @apply px-2;
 
-		img {
-			height: 100px;
-			width: auto;
-		}
-	}
+    img {
+      height: 100px;
+      width: auto;
+    }
+  }
 }
 
 .slideshowSwiperThumbs__nav {
-	bottom: 0px;
-	z-index: 10;
-	height: 100px;
-	background: rgba(255, 255, 255, 0.75);
-	transition: all 0.4s var(--curve);
-	@apply absolute;
+  bottom: 0px;
+  z-index: 10;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.4s var(--curve);
+  @apply absolute;
 
-	.nuxt-icon {
-		height: 50px;
-		fill: black;
-		transition: 0.4s var(--curve);
+  .nuxt-icon {
+    height: 50px;
+    fill: black;
+    transition: 0.4s var(--curve);
 
-		svg {
-			height: 50px;
-			display: inline-block !important;
+    svg {
+      height: 50px;
+      display: inline-block !important;
 
-			path {
-				stroke-width: 5px;
-				stroke: var(--grey) !important;
-			}
-		}
-	}
+      path {
+        stroke-width: 5px;
+        stroke: var(--grey) !important;
+      }
+    }
+  }
 }
 
 #slideshowSwiperThumbs__prev-btn {
-	left: 0px;
+  left: 0px;
 }
 
 #slideshowSwiperThumbs__next-btn {
-	right: 0px;
+  right: 0px;
 }
 
 .swiper-button-disabled {
-	opacity: 0.2;
-	cursor: not-allowed;
+  opacity: 0.2;
+  cursor: not-allowed;
 }
 </style>
