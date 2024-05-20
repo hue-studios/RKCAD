@@ -1,3 +1,5 @@
+import type { Config } from 'tailwindcss';
+import tailwindcssForms from '@tailwindcss/forms';
 // const defaultTheme = require('tailwindcss/defaultTheme')
 // const colors = require('tailwindcss/colors')
 
@@ -94,4 +96,4 @@ module.exports = {
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
   ],
-}
+} satisfies Config;

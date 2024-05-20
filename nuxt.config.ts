@@ -1,8 +1,6 @@
 export default defineNuxtConfig({
   ssr: true,
-  nitro: {
-    preset: "vercel",
-  },
+
   app: {
     pageTransition: {
       name: 'page',
@@ -97,23 +95,20 @@ export default defineNuxtConfig({
     },
   },
 
-  css: [
-    {
-      src: '~/assets/css/main.css',
-      lang: 'postcss',
-    },
-  ],
+  css: ['~/assets/css/main.css'],
 
   imports: {
     dirs: ['stores'],
   },
 
-  buildModules: ['@vueuse/nuxt'],
-
   modules: [
     '@nuxt/devtools',
+    '@nuxt/image',
+    '@nuxt/ui',
+    '@vueuse/nuxt',
     '@nuxtjs/plausible',
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/seo',
     [
       '@pinia/nuxt',
       {
@@ -133,9 +128,9 @@ export default defineNuxtConfig({
         },
       },
     ],
-    'nuxt-directus',
+    'nuxt-directus-next',
+    'nuxt-icon',
     'nuxt-icons',
-   
   ],
 
   devtools: {
@@ -149,12 +144,16 @@ export default defineNuxtConfig({
   },
 
   directus: {
-    url: 'https://admin.rkcad.com',
-  },
+		url: 'https://admin.rkcad.com',
+    staticToken: '_TPaidTNn0j4p2GtUCUncNdqW8R8o11n'
+	},
 
   runtimeConfig: {
     public: {
-      directusUrl: 'https://admin.rkcad.com',
+      assetsUrl: process.env.DIRECTUS_ASSETS_URL || 'https://admin.rkcad.com/assets/',
+			websocketUrl: process.env.DIRECTUS_WEBSOCKET_URL || 'wss://admin.rkcad.com/websocket',
+			staticToken: process.env.DIRECTUS_SERVER_TOKEN || '_TPaidTNn0j4p2GtUCUncNdqW8R8o11n',
+      adminUrl: process.env.DIRECTUS_URL || 'https://admin.rkcad.com',
       plausible: {
         domain: 'rkcad.com',
       },
@@ -170,6 +169,17 @@ export default defineNuxtConfig({
     },
   },
 
+  ui: {
+		icons: ['heroicons'],
+	},
+
+  image: {
+		provider: 'directus',
+		directus: {
+			baseURL: `https://admin.rkcad.com/assets/`,
+		},
+	},
+
   build: {
     transpile: ['swiper', '@sendgrid/mail', 'gsap'],
   },
@@ -179,12 +189,4 @@ export default defineNuxtConfig({
       include: ['vue', 'pinia'],
     },
   },
-
-  devtools: true,
-
-  plugins: [
-    '~/plugins/preview.js',
-    '~/plugins/socialShare.ts',
-    '~/plugins/directus.js'
-  ]
 })
