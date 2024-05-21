@@ -1,15 +1,14 @@
 <script setup>
+import { usePageStore } from '~~/store/PageStore'
 import { screen } from '~~/composables/useScreen'
 
+const pageStore = usePageStore()
+
 useSeoMeta({
-	title:
-		'Rosen Kelly Conway Architecture & Design Firm | Residential / Commercial | Summit NJ',
-	ogTitle:
-		'Rosen Kelly Conway Architecture & Design Firm | Residential / Commercial | Summit NJ',
-	description:
-		'Rosen Kelly Conway Architecture & Design: Embracing design heritage with a modern vision.',
-	ogDescription:
-		'Rosen Kelly Conway Architecture & Design: Embracing design heritage with a modern vision.',
+	title: 'Rosen Kelly Conway Architecture & Design Firm | Residential / Commercial | Summit NJ',
+	ogTitle: 'Rosen Kelly Conway Architecture & Design Firm | Residential / Commercial | Summit NJ',
+	description: 'Rosen Kelly Conway Architecture & Design: Embracing design heritage with a modern vision.',
+	ogDescription: 'Rosen Kelly Conway Architecture & Design: Embracing design heritage with a modern vision.',
 	ogImage: 'https://rkcad.com/images/fb-image.jpg',
 	ogUrl: 'https://rkcad.com',
 	twitterCard: 'summary_large_image',
@@ -23,9 +22,7 @@ useSeoMeta({
 		<input id="nav-drawer-toggle" type="checkbox" class="hidden" />
 		<input id="profile-toggle" type="checkbox" class="hidden" />
 		<input id="application-toggle" type="checkbox" class="hidden" />
-		<div
-			class="w-full flex items-center justify-center flex-col min-h-screen page__content"
-		>
+		<div class="w-full flex items-center justify-center flex-col min-h-screen page__content">
 			<LayoutHeader />
 			<div class="w-full mx-auto min-h-screen relative">
 				<slot />
@@ -36,8 +33,8 @@ useSeoMeta({
 			<LayoutScreen v-if="screen" />
 		</transition>
 		<LayoutNavDrawer />
-		<TeamProfile />
-		<Application />
+		<TeamProfile v-if="pageStore.page === 'page-team'" />
+		<Application v-if="pageStore.page === 'page-team'" />
 	</div>
 </template>
 <style>

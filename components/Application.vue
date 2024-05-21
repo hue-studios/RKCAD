@@ -1,7 +1,9 @@
+<!-- eslint-disable no-console -->
 <script setup lang="ts">
 import { openScreen, loader, closeScreen } from '~/composables/useScreen'
 
-const { createItems } = useDirectusItems()
+const { createItem } = useDirectusItems()
+
 const name = ref()
 const email = ref()
 const education = ref()
@@ -20,26 +22,32 @@ interface Application {
 	status: string
 }
 
-const submit: Application[] = async () => {
+async function submit() {
 	try {
-		const items: Application[] = [
-			{
-				status: 'published',
-				name: name.value,
-				email: email.value,
-				education: education.value,
-				experience: experience.value,
-				position: position.value,
-				inspiration: inspiration.value,
-			},
-		]
+		openScreen()
+		loader.value = true
 
-		await createItems({ collection: 'applications', items }).then((res) => {
-			console.log(res)
-		})
+		const item: Application = {
+			status: 'published',
+			name: name.value,
+			email: email.value,
+			education: education.value,
+			experience: experience.value,
+			position: position.value,
+			inspiration: inspiration.value,
+		}
 
+		const res = await createItem('applications', item)
+		console.log(res)
+
+		closeScreen()
+		loader.value = false
 		panel.value = 'two'
-	} catch (e) {}
+	} catch (e) {
+		console.error(e)
+		closeScreen()
+		loader.value = false
+	}
 }
 
 function closeApplication() {
@@ -94,7 +102,12 @@ function closeApplication() {
 							<FormVInput v-model="experience" name="experience" type="text" label="Experience" class="mb-6 mt-2" />
 						</div>
 						<div class="flex items-center justify-between flex-col md:flex-row">
-							<FormVTextArea name="inspiration" label="Inspiration" class="bg-transparent mb-6 mt-2" />
+							<FormVTextArea
+								v-model="inspiration"
+								name="inspiration"
+								label="Inspiration"
+								class="bg-transparent mb-6 mt-2"
+							/>
 						</div>
 						<FormVButton class="w-full mb-6" type="submit">Submit</FormVButton>
 					</VeeForm>
