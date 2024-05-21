@@ -11,10 +11,12 @@
 				<h2 class="uppercase tracking-wide font-bold mb-12">Oops...looks like there was an error.</h2>
 
 				<p v-if="error.statusCode === 404" class="uppercase font-bold">
-					Error code: {{ error.statusCode }}<br /><br />
-                    Page not found
+					Error code: {{ error.statusCode }}
+					<br />
+					<br />
+					Page not found
 				</p>
-                <p v-else class="uppercase font-bold">Error code: {{ error.statusCode }}</p>
+				<p v-else class="uppercase font-bold">Error code: {{ error.statusCode }}</p>
 
 				<nuxt-link to="/" class="uppercase font-bold tracking-wide mt-12">
 					<span class="underline">Click here</span>
@@ -29,16 +31,15 @@
 </template>
 
 <script setup lang="ts">
-import { usePageStore } from '~~/store/PageStore'
-import type { NuxtError } from '#app'
-
-const pageStore = usePageStore()
-
-const props = defineProps({
-	error: Object as () => NuxtError,
+definePageMeta({
+	middleware: ['page'],
 })
 
-// const handleError = () => clearError({ redirect: '/' })
+import { usePageStore } from '~~/store/PageStore'
+import { useError } from '#app'
+
+const error = useError()
+const pageStore = usePageStore()
 </script>
 
 <style>

@@ -146,10 +146,9 @@ export default defineNuxtConfig({
 
 	runtimeConfig: {
 		public: {
-			assetsUrl: process.env.DIRECTUS_ASSETS_URL || 'https://admin.rkcad.com/assets/',
-			websocketUrl: process.env.DIRECTUS_WEBSOCKET_URL || 'wss://admin.rkcad.com/websocket',
-			staticToken: process.env.DIRECTUS_SERVER_TOKEN || '_TPaidTNn0j4p2GtUCUncNdqW8R8o11n',
-			adminUrl: process.env.DIRECTUS_URL || 'https://admin.rkcad.com',
+			assetsUrl: 'https://admin.rkcad.com/assets/',
+			staticToken: '_TPaidTNn0j4p2GtUCUncNdqW8R8o11n',
+			adminUrl: 'https://admin.rkcad.com',
 			plausible: {
 				domain: 'rkcad.com',
 			},

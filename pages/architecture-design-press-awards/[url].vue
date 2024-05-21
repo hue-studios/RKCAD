@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+	middleware: ['page'],
+})
+
 const { params } = useRoute()
 const { readItems } = useDirectusItems()
 

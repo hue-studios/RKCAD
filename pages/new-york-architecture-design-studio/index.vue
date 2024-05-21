@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+	middleware: ['page'],
+})
+
 const { readItem } = useDirectusItems()
 
 const about = await readItem('about', 1, {
@@ -12,8 +16,7 @@ useSeoMeta({
 		'At Rosen Kelly Conway Architecture & Design we approach our projects seeking a comprehensive understanding of context and challenges, while creating innovative solutions.',
 	ogDescription:
 		'At Rosen Kelly Conway Architecture & Design we approach our projects seeking a comprehensive understanding of context and challenges, while creating innovative solutions.',
-	ogImage:
-		'https://admin.rkcad.com/assets/' + about.header_image + 'key=xlarge',
+	ogImage: 'https://admin.rkcad.com/assets/' + about.header_image + 'key=xlarge',
 })
 
 const isImageLoaded = ref(false)
@@ -21,8 +24,7 @@ const isImageLoaded = ref(false)
 onMounted(() => {
 	const image = new Image()
 
-	image.src =
-		'https://admin.rkcad.com/assets/' + about.header_image + 'key=xlarge'
+	image.src = 'https://admin.rkcad.com/assets/' + about.header_image + 'key=xlarge'
 
 	image.onload = () => {
 		isImageLoaded.value = true
@@ -40,11 +42,7 @@ const formattedTitle = computed(() => {
 	>
 		<div
 			class="bg-cover bg-center page__header"
-			:style="
-				'background-image: url(https://admin.rkcad.com/assets/' +
-				about.header_image +
-				'?key=xlarge)'
-			"
+			:style="'background-image: url(https://admin.rkcad.com/assets/' + about.header_image + '?key=xlarge)'"
 		>
 			<LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
 			<h1 class="" v-html="formattedTitle"></h1>
@@ -58,10 +56,12 @@ const formattedTitle = computed(() => {
 				Embracing Design Heritage with a Modern Vision
 			</h2>
 			<div class="w-full lg:w-1/2 order-1 lg:pr-2 about__body-content">
-				<h2 class="page__body-header-subtitle" style="margin-top: 0px">
-					Vision
-				</h2>
-				<h3 class="page__body-header-title">Who<br />We Are</h3>
+				<h2 class="page__body-header-subtitle" style="margin-top: 0px">Vision</h2>
+				<h3 class="page__body-header-title">
+					Who
+					<br />
+					We Are
+				</h3>
 				<p v-html="about.who_we_are"></p>
 				<h5
 					class="uppercase font-thin w-full lg:hidden text-right opacity-50 tracking-wide pl-8 md:pl-32 lg:pl-2 about-caption"
@@ -69,11 +69,19 @@ const formattedTitle = computed(() => {
 					Embracing Design Heritage with a Modern Vision
 				</h5>
 				<h2 class="page__body-header-subtitle">Process</h2>
-				<h3 class="page__body-header-title">Our <br />Approach</h3>
+				<h3 class="page__body-header-title">
+					Our
+					<br />
+					Approach
+				</h3>
 				<p v-html="about.our_approach"></p>
 
 				<h2 class="page__body-header-subtitle">Expertise</h2>
-				<h3 class="page__body-header-title">What <br />We Do</h3>
+				<h3 class="page__body-header-title">
+					What
+					<br />
+					We Do
+				</h3>
 				<p class="" v-html="about.what_we_do"></p>
 			</div>
 			<div
@@ -81,18 +89,17 @@ const formattedTitle = computed(() => {
 			>
 				<div class="w-5/6 flex flex-row items-center justify-between absolute">
 					<h5>
-						Architecture<br />
+						Architecture
+						<br />
 						Design
 					</h5>
 					<h5 class="-ml-[120px]">
-						Interior<br />
+						Interior
+						<br />
 						Design
 					</h5>
 				</div>
-				<img
-					src="/images/about/about-2.jpg"
-					alt="Architecture and Interior Design"
-				/>
+				<img src="/images/about/about-2.jpg" alt="Architecture and Interior Design" />
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,9 @@
 <!-- eslint-disable vue/no-v-html -->
 <script setup>
+definePageMeta({
+	middleware: ['page'],
+})
+
 import { removeFirst } from '~~/utils/strings'
 
 const { params } = useRoute()
