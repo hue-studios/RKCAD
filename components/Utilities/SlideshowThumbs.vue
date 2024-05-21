@@ -77,7 +77,18 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 			<NuxtImg
 				v-if="slide.directus_files_id.id"
 				format="webp"
-				:src="slide.directus_files_id.id + '?key=small'"
+				:srcset="
+					imageUrl +
+					slide.directus_files_id.id +
+					'?key=small 400w, ' +
+					imageUrl +
+					slide.directus_files_id.id +
+					'?key=small 1024w, ' +
+					imageUrl +
+					slide.directus_files_id.id +
+					'?key=small 1920w'
+				"
+				:src="imageUrl + slide.directus_files_id.id + '?key=small'"
 				:alt="title + ' Image ' + (index + 1)"
 			/>
 		</swiper-slide>
