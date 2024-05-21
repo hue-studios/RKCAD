@@ -43,8 +43,9 @@ const modules = [Parallax, Pagination, Navigation]
 		<swiper-slide v-for="(slide, index) in slides" :key="index" class="w-full flex items-center justify-center">
 			<div class="relative w-full h-full flex items-center justify-center">
 				<transition name="fade">
-					<img
+					<NuxtImg
 						v-if="slide.directus_files_id.id"
+						format="webp"
 						class="absolute"
 						data-swiper-parallax="-250"
 						:srcset="

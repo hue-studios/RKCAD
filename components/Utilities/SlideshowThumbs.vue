@@ -42,8 +42,9 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 		class="flex items-center justify-center flex-row gallery-swiper"
 	>
 		<swiper-slide v-for="(slide, index) in images" :key="index" class="swiper-slide">
-			<img
+			<NuxtImg
 				v-if="slide.directus_files_id.id"
+				format="webp"
 				:srcset="
 					imageUrl +
 					slide.directus_files_id.id +
@@ -82,7 +83,8 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 			:key="index"
 			class="w-auto flex items-center justify-center swiper-slide"
 		>
-			<img
+			<NuxtImg
+				format="webp"
 				v-if="slide.directus_files_id.id"
 				:src="imageUrl + slide.directus_files_id.id + '?key=small'"
 				:alt="title + ' Image ' + (index + 1)"
