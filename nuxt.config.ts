@@ -13,7 +13,6 @@ export default defineNuxtConfig({
 				{
 					rel: 'preconnect',
 					href: 'https://admin.rkcad.com',
-					crossorigin: 'true',
 				},
 				{
 					rel: 'icon',
@@ -181,7 +180,7 @@ export default defineNuxtConfig({
 	},
 
 	build: {
-		transpile: ['swiper', '@sendgrid/mail', 'gsap'],
+		transpile: ['swiper', 'gsap'],
 	},
 
 	vite: {

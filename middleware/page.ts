@@ -5,20 +5,29 @@ export default defineNuxtRouteMiddleware((to, from) => {
 		return path.split('/').filter((seg) => seg.length > 0).length
 	}
 
-	const routeName = ref('')
+	const routeName = ref()
 
-	const routeMapping = {
-		index: 'page-home',
-		'architecture-design-press-awards': 'page-press',
-		'architecture-design-press-awards-url': 'page-press-detail',
-		'interior-design-architecture-portfolio': 'page-work',
-		'interior-design-architecture-portfolio-url': 'page-work-detail',
-		'new-york-architecture-design-studio': 'page-about',
-		'rosen-kelly-conway-architecture-design-team': 'page-team',
-		contact: 'page-contact overflow-hidden h-screen',
+	if (to.name === 'index') {
+		routeName.value = 'page-home'
+	} else if (to.name === 'architecture-design-press-awards') {
+		routeName.value = 'page-press'
+	} else if (to.name === 'architecture-design-press-awards-url') {
+		routeName.value = 'page-press-detail'
+	} else if (to.name === 'interior-design-architecture-portfolio') {
+		routeName.value = 'page-work'
+	} else if (to.name === 'interior-design-architecture-portfolio-url') {
+		routeName.value = 'page-work-detail'
+	} else if (to.name === 'new-york-architecture-design-studio') {
+		routeName.value = 'page-about'
+	} else if (to.name === 'rosen-kelly-conway-architecture-design-team') {
+		routeName.value = 'page-team'
+	} else if (to.name === 'contact') {
+		routeName.value = 'page-contact overflow-hidden h-screen'
+	} else if (!to.name) {
+		routeName.value = 'page-error h-screen'
+	} else {
+		routeName.value = to.name
 	}
-
-	routeName.value = routeMapping[to.name] || (to.name ? to.name : 'page-error h-screen')
 
 	const pageStore = usePageStore()
 	pageStore.addClass(routeName.value)
@@ -26,8 +35,17 @@ export default defineNuxtRouteMiddleware((to, from) => {
 	const toDepth = getDepth(to.path)
 	const fromDepth = getDepth(from.path)
 
-	const transitionName = to.query.direction ? 'fade' : toDepth > fromDepth ? 'fade' : 'fade'
-
-	to.meta.pageTransition = { name: transitionName }
-	from.meta.pageTransition = { name: transitionName }
+	if (to.query.direction === 'next') {
+		to.meta.pageTransition = { name: 'fade' }
+		from.meta.pageTransition = { name: 'fade' }
+	} else if (to.query.direction === 'prev') {
+		to.meta.pageTransition = { name: 'fade' }
+		from.meta.pageTransition = { name: 'fade' }
+	} else if (toDepth > fromDepth) {
+		to.meta.pageTransition = { name: 'fade' }
+		from.meta.pageTransition = { name: 'fade' }
+	} else {
+		to.meta.pageTransition = { name: 'fade' }
+		from.meta.pageTransition = { name: 'fade' }
+	}
 })
