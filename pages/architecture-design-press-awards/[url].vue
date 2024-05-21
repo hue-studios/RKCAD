@@ -90,7 +90,11 @@ onMounted(() => {
 		class="relative w-full flex items-center justify-center flex-col min-h-screen mx-auto article"
 	>
 		<div class="w-full relative article__slideshow">
-			<UtilitiesSlideshowThumbs v-if="article.images.length" :slides="article.images" />
+			<UtilitiesSlideshowThumbs
+				v-if="article.images.length"
+				:slides="article.images"
+				:title="'RKC ' + article.category + ': ' + article.title"
+			/>
 		</div>
 		<div
 			class="w-full flex items-start flex-col justify-between uppercase tracking-wide mt-20 max-w-7xl article__header mx-w-7xl mt-10 lg:mt-14"

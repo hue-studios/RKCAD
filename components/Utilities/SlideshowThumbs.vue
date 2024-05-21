@@ -7,6 +7,10 @@ import { register } from 'swiper/element/bundle'
 register()
 
 const props = defineProps({
+	title: {
+		type: String,
+		default: '',
+	},
 	slides: {
 		type: Array,
 		default: () => {
@@ -52,6 +56,7 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 					'?key=large 1920w'
 				"
 				:src="imageUrl + slide.directus_files_id.id + '?key=large'"
+				:alt="title + ' Image ' + (index + 1)"
 				class="shadow-lg"
 			/>
 		</swiper-slide>
@@ -77,7 +82,11 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 			:key="index"
 			class="w-auto flex items-center justify-center swiper-slide"
 		>
-			<img v-if="slide.directus_files_id.id" :src="imageUrl + slide.directus_files_id.id + '?key=small'" />
+			<img
+				v-if="slide.directus_files_id.id"
+				:src="imageUrl + slide.directus_files_id.id + '?key=small'"
+				:alt="title + ' Image ' + (index + 1)"
+			/>
 		</swiper-slide>
 	</swiper-container>
 
