@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+	middleware: ['page'],
+})
+
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Parallax, EffectFade } from 'swiper/modules'
 import 'swiper/css'
@@ -24,20 +28,14 @@ const hideIntroAnimation = () => {
 }
 
 useSeoMeta({
-	ogImage:
-		'https://admin.rkcad.com/assets/' +
-		home.featured_images[0].directus_files_id +
-		'key=xlarge',
+	ogImage: 'https://admin.rkcad.com/assets/' + home.featured_images[0].directus_files_id + 'key=xlarge',
 })
 
 onMounted(() => {
 	const image = new Image()
 
 	if (home.featured_images.length > 0) {
-		image.src =
-			'https://admin.rkcad.com/assets/' +
-			home.featured_images[0].directus_files_id +
-			'key=xlarge'
+		image.src = 'https://admin.rkcad.com/assets/' + home.featured_images[0].directus_files_id + 'key=xlarge'
 
 		image.onload = () => {
 			isImageLoaded.value = true
@@ -58,10 +56,7 @@ const work = [...home.featured_projects]
 const architecture = computed(() => {
 	if (home.featured_images.length > 0) {
 		return work.filter((item) => {
-			return (
-				item.category.find((el) => el === 'Architecture') &&
-				item.status === 'published'
-			)
+			return item.category.find((el) => el === 'Architecture') && item.status === 'published'
 		})
 	} else {
 		return false
@@ -71,9 +66,7 @@ const architecture = computed(() => {
 const interior = computed(() => {
 	if (home.featured_images.length > 0) {
 		return work.filter((item) => {
-			return item.category.find(
-				(el) => el === 'Interior Design' && item.status === 'published',
-			)
+			return item.category.find((el) => el === 'Interior Design' && item.status === 'published')
 		})
 	} else {
 		return false
@@ -81,10 +74,8 @@ const interior = computed(() => {
 })
 </script>
 <template>
-	<div
-		class="relative w-full min-h-screen flex items-center justify-center flex-col home"
-	>
-		 <div class="w-full page__header-placeholder">
+	<div class="relative w-full min-h-screen flex items-center justify-center flex-col home">
+		<div class="w-full page__header-placeholder">
 			<transition name="fade" mode="out-in">
 				<div v-if="isImageLoaded" class="w-full page__header-placeholder">
 					<transition name="fade" mode="out-in">
@@ -95,10 +86,7 @@ const interior = computed(() => {
 						>
 							<IntroAnimation />
 						</div>
-						<div
-							v-else
-							class="flex items-center justify-center flex-col page__header"
-						>
+						<div v-else class="flex items-center justify-center flex-col page__header">
 							<swiper
 								:speed="2000"
 								:effect="'fade'"
@@ -113,17 +101,10 @@ const interior = computed(() => {
 									:key="index"
 									class="w-full flex items-center justify-center"
 								>
-									<div
-										class="relative w-full h-full flex items-center justify-center"
-									>
+									<div class="relative w-full h-full flex items-center justify-center">
 										<div
 											class="w-full h-full bg-cover bg-center bg-no-repeat lg:bg-fixed"
-											:style="
-												'background-image: url(' +
-												imageUrl +
-												slide.directus_files_id +
-												'?key=large)'
-											"
+											:style="'background-image: url(' + imageUrl + slide.directus_files_id + '?key=large)'"
 										></div>
 									</div>
 								</swiper-slide>
@@ -137,22 +118,17 @@ const interior = computed(() => {
 				</div>
 			</transition>
 		</div>
-		<div
-			class="flex flex-wrap flex-row items-center justify-center w-full page__body"
-		>
-			<div
-				class="w-full flex items-center justify-between flex-col lg:flex-row relative page__body-header"
-			>
+		<div class="flex flex-wrap flex-row items-center justify-center w-full page__body">
+			<div class="w-full flex items-center justify-between flex-col lg:flex-row relative page__body-header">
 				<div class="w-full lg:w-1/2">
 					<h2 class="uppercase page__body-header-subtitle">Process</h2>
 					<h3 class="uppercase page__body-header-title">
-						Great Design Begins<br />
+						Great Design Begins
+						<br />
 						with Collaboration
 					</h3>
 					<p class="mt-6 mb-3" v-html="home.about_intro"></p>
-					<LayoutLinkBtn link="/new-york-architecture-design-studio/"
-						>Learn About Our Process</LayoutLinkBtn
-					>
+					<LayoutLinkBtn link="/new-york-architecture-design-studio/">Learn About Our Process</LayoutLinkBtn>
 				</div>
 
 				<LayoutRkcName />
@@ -160,26 +136,30 @@ const interior = computed(() => {
 
 			<div class="w-full uppercase page__body-header">
 				<h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
-				<h3 class="page__body-header-title">Architecture <br />Design</h3>
+				<h3 class="page__body-header-title">
+					Architecture
+					<br />
+					Design
+				</h3>
 			</div>
 			<div class="w-full">
 				<UtilitiesSlideshowGrid :slides="architecture" />
-				<LayoutLinkBtn
-					class="mt-8"
-					link="/interior-design-architecture-portfolio/"
-					>More Architectural Work
+				<LayoutLinkBtn class="mt-8" link="/interior-design-architecture-portfolio/">
+					More Architectural Work
 				</LayoutLinkBtn>
 			</div>
 			<div v-if="interior.length" class="w-full uppercase page__body-header">
 				<h2 class="uppercase page__body-header-subtitle">Featured Projects</h2>
-				<h3 class="page__body-header-title">Interior <br />Design</h3>
+				<h3 class="page__body-header-title">
+					Interior
+					<br />
+					Design
+				</h3>
 			</div>
 			<div v-if="interior.length" class="w-full">
 				<UtilitiesSlideshowGrid :slides="interior" />
-				<LayoutLinkBtn
-					class="mt-8"
-					link="/interior-design-architecture-portfolio/"
-					>More Interior Design Work
+				<LayoutLinkBtn class="mt-8" link="/interior-design-architecture-portfolio/">
+					More Interior Design Work
 				</LayoutLinkBtn>
 			</div>
 			<div class="w-full page__body-header">
@@ -189,13 +169,12 @@ const interior = computed(() => {
 					<div class="w-full md:w-1/2 flex items-start flex-col">
 						<h2 class="uppercase page__body-header-subtitle">Culture</h2>
 						<h3 class="uppercase page__body-header-title">
-							Meet<br />
+							Meet
+							<br />
 							the Team
 						</h3>
 						<p style="width: 375px" class="mb-4" v-html="home.team_intro"></p>
-						<LayoutLinkBtn link="/rosen-kelly-conway-architecture-design-team/"
-							>More About the Team</LayoutLinkBtn
-						>
+						<LayoutLinkBtn link="/rosen-kelly-conway-architecture-design-team/">More About the Team</LayoutLinkBtn>
 					</div>
 
 					<img
@@ -216,14 +195,13 @@ const interior = computed(() => {
 						:src="imageUrl + home.team_image + '?key=large'"
 					/>
 
-					<div
-						class="w-full flex items-start flex-col mt-12 xl:-mt-2 2xl:-mt-10"
-					>
+					<div class="w-full flex items-start flex-col mt-12 xl:-mt-2 2xl:-mt-10">
 						<h2 class="uppercase page__body-header-subtitle">
 							{{ home.featured_profile.name }}
 						</h2>
 						<h3 class="uppercase page__body-header-title">
-							Designer<br />
+							Designer
+							<br />
 							Spotlight
 						</h3>
 						<div
@@ -236,11 +214,7 @@ const interior = computed(() => {
 								}"
 							>
 								<img
-									:src="
-										'https://admin.rkcad.com/assets/' +
-										home.featured_profile.image +
-										'?key=small'
-									"
+									:src="'https://admin.rkcad.com/assets/' + home.featured_profile.image + '?key=small'"
 									alt="RKC Team"
 									class="profile-pic shadow-xl"
 								/>
@@ -256,10 +230,7 @@ const interior = computed(() => {
 								:projects="home.featured_profile.featured_projects"
 							/>
 						</div>
-						<p
-							class="home-section____intro"
-							v-html="home.featured_profile.bio"
-						></p>
+						<p class="home-section____intro" v-html="home.featured_profile.bio"></p>
 					</div>
 				</div>
 				<div v-if="home.featured_project" class="w-full page__body-header">
@@ -267,31 +238,20 @@ const interior = computed(() => {
 						class="w-full flex items-start justify-between lg:items-start flex-row flex-wrap home-section project-spotlight"
 					>
 						<div class="w-full md:w-1/2 flex items-start flex-col">
-							<h2 class="uppercase page__body-header-subtitle">
-								Project Spotlight
-							</h2>
+							<h2 class="uppercase page__body-header-subtitle">Project Spotlight</h2>
 							<h3 class="uppercase page__body-header-title">
 								{{ removeFirst(home.featured_project.title) }}
 							</h3>
-							<p
-								v-if="home.featured_project.intro"
-								class="mb-4 md:pr-4 home-section____intro"
-							>
+							<p v-if="home.featured_project.intro" class="mb-4 md:pr-4 home-section____intro">
 								{{ home.featured_project.intro }}
 							</p>
 							<p v-else class="mb-4 home-section____intro">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-								posuere, odio a mattis dapibus, nisi elit tempus urna, rutrum
-								egestas ipsum quam vel erat. Nulla id ligula id nisl bibendum
-								malesuada. Quisque volutpat a odio id dictum. Donec vehicula
-								dolor mauris, sed condimentum enim auctor at.
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere, odio a mattis dapibus, nisi elit
+								tempus urna, rutrum egestas ipsum quam vel erat. Nulla id ligula id nisl bibendum malesuada. Quisque
+								volutpat a odio id dictum. Donec vehicula dolor mauris, sed condimentum enim auctor at.
 							</p>
-							<LayoutLinkBtn
-								:link="
-									'/interior-design-architecture-portfolio/' +
-									home.featured_project.url
-								"
-								>{{ removeFirst(home.featured_project.title) }} Details
+							<LayoutLinkBtn :link="'/interior-design-architecture-portfolio/' + home.featured_project.url">
+								{{ removeFirst(home.featured_project.title) }} Details
 							</LayoutLinkBtn>
 						</div>
 
@@ -310,16 +270,12 @@ const interior = computed(() => {
 								home.featured_project.images[0].directus_files_id +
 								'?key=large 1920w'
 							"
-							:src="
-								imageUrl +
-								home.featured_project.images[0].directus_files_id +
-								'?key=large'
-							"
+							:src="imageUrl + home.featured_project.images[0].directus_files_id + '?key=large'"
 						/>
 					</div>
 				</div>
 			</div>
-		</div> 
+		</div>
 	</div>
 </template>
 

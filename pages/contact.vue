@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+	middleware: ['page'],
+})
+
 const isImageLoaded = ref(false)
 
 onMounted(() => {
