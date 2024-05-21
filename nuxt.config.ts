@@ -1,6 +1,8 @@
 export default defineNuxtConfig({
 	ssr: true,
 
+	middleware: ['page'],
+
 	app: {
 		pageTransition: {
 			name: 'page',
