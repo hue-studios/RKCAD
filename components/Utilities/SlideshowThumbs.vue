@@ -1,7 +1,4 @@
 <script setup>
-// import { Navigation, Thumbs } from 'swiper/modules'
-// import { Swiper, SwiperSlide } from 'swiper/vue'
-
 import { register } from 'swiper/element/bundle'
 
 register()
@@ -26,12 +23,6 @@ const images = computed(() => {
 })
 
 const imageUrl = 'https://admin.rkcad.com/assets/'
-
-// const thumbsSwiper = ref(null)
-
-// const setThumbsSwiper = (swiper) => {
-// 	thumbsSwiper.value = swiper
-// }
 </script>
 <template>
 	<swiper-container
@@ -84,9 +75,9 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 			class="w-auto flex items-center justify-center swiper-slide"
 		>
 			<NuxtImg
-				format="webp"
 				v-if="slide.directus_files_id.id"
-				:src="imageUrl + slide.directus_files_id.id + '?key=small'"
+				format="webp"
+				:src="slide.directus_files_id.id + '?key=small'"
 				:alt="title + ' Image ' + (index + 1)"
 			/>
 		</swiper-slide>
