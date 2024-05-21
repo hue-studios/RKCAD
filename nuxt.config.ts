@@ -12,6 +12,10 @@ export default defineNuxtConfig({
 					href: 'https://admin.rkcad.com',
 				},
 				{
+					rel: 'preconnect',
+					href: 'https://plausible.io',
+				},
+				{
 					rel: 'icon',
 					type: 'image/x-icon',
 					href: '/favicon.ico',

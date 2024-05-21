@@ -57,14 +57,24 @@ const pageStore = usePageStore()
 		line-height: 65px;
 		color: var(--white);
 		margin-top: 3px;
-
 		transition: all 0.4s var(--curve);
-
 		mix-blend-mode: difference;
 		@apply inline-block;
 
 		path {
+			transition: all 0.4s var(--curve);
 			mix-blend-mode: difference;
+		}
+		path:nth-of-type(1) {
+			transition-delay: 0.1s;
+		}
+		path:nth-of-type(2) {
+			transition-delay: 0.2s;
+		}
+	}
+	.rkc-icon:hover {
+		path {
+			fill: var(--grey);
 		}
 	}
 

@@ -18,7 +18,7 @@ function goBack() {
 }
 </script>
 <template>
-	<a class="relative back-btn" @click.prevent="goBack()" @mouseenter="hover = true" @mouseleave="hover = false">
+	<span class="relative back-btn" @click.prevent="goBack()" @mouseenter="hover = true" @mouseleave="hover = false">
 		<span class="arrow" :class="{ hide: hover }">
 			<Icon name="ArrowLeft" class="mr-2 arrow-left-icon" />
 		</span>
@@ -27,7 +27,7 @@ function goBack() {
 			Back to
 			{{ page }}
 		</span>
-	</a>
+	</span>
 </template>
 
 <style>

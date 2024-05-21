@@ -85,6 +85,7 @@
 		margin-top: -5px;
 		@apply inline-block;
 		path {
+			transition: all 0.3s linear;
 			fill: var(--blue);
 		}
 	}
