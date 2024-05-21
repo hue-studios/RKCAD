@@ -1,4 +1,5 @@
 <script setup>
+import { SpeedInsights } from '@vercel/speed-insights/nuxt'
 import { usePageStore } from '~~/store/PageStore'
 import { screen } from '~~/composables/useScreen'
 
@@ -35,6 +36,7 @@ useSeoMeta({
 		<LayoutNavDrawer />
 		<TeamProfile v-if="pageStore.page === 'page-team'" />
 		<Application v-if="pageStore.page === 'page-team'" />
+		<SpeedInsights />
 	</div>
 </template>
 <style>
