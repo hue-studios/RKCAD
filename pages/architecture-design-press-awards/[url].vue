@@ -19,11 +19,7 @@ const title = ref('')
 const description = ref('')
 const pageImage = ref('')
 
-title.value =
-	article.value.title +
-	' ' +
-	category.value +
-	' | Rosen Kelly Conway Architecture & Design'
+title.value = article.value.title + ' ' + category.value + ' | Rosen Kelly Conway Architecture & Design'
 
 description.value =
 	article.value.title +
@@ -32,10 +28,7 @@ description.value =
 	' for Rosen Kelly Conway Architecture & Design, a full-service architecture and interior design firm based in Summit, NJ.'
 
 if (article.value.images.length) {
-	pageImage.value =
-		'https://admin.rkcad.com/assets/' +
-		article.value.images[0].directus_files_id.id +
-		'?key=large'
+	pageImage.value = 'https://admin.rkcad.com/assets/' + article.value.images[0].directus_files_id.id + '?key=large'
 } else {
 	pageImage.value = 'https://rkcad.com/images/rkcad-logo.png'
 }
@@ -51,8 +44,7 @@ useHead({
 		{
 			hid: 'og:url',
 			property: 'og:url',
-			content:
-				'https://rkcad.com/architecture-design-press-awards/' + params.url,
+			content: 'https://rkcad.com/architecture-design-press-awards/' + params.url,
 		},
 		{
 			hid: 'og:image',
@@ -78,10 +70,7 @@ onMounted(() => {
 	if (article.value.images.length > 0) {
 		const image = new Image()
 
-		image.src =
-			'https://admin.rkcad.com/assets/' +
-			article.value.images[0].directus_files_id.id +
-			'key=xlarge'
+		image.src = 'https://admin.rkcad.com/assets/' + article.value.images[0].directus_files_id.id + 'key=xlarge'
 
 		image.onload = () => {
 			isImageLoaded.value = true
@@ -97,10 +86,7 @@ onMounted(() => {
 		class="relative w-full flex items-center justify-center flex-col min-h-screen mx-auto article"
 	>
 		<div class="w-full relative article__slideshow">
-			<UtilitiesSlideshowThumbs
-				v-if="article.images.length"
-				:slides="article.images"
-			/>
+			<UtilitiesSlideshowThumbs v-if="article.images.length" :slides="article.images" />
 		</div>
 		<div
 			class="w-full flex items-start flex-col justify-between uppercase tracking-wide mt-20 max-w-7xl article__header mx-w-7xl mt-10 lg:mt-14"
@@ -109,19 +95,17 @@ onMounted(() => {
 				{{ article.title }}
 				<span class="hidden">
 					<span>{{ article.category }}</span>
-					Article for Rosen Kelly Conway</span
-				>
+					Article for Rosen Kelly Conway
+				</span>
 			</h1>
-			<a v-if="article.link" :href="article.link" target="_blank"
-				>View Article
-				<nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon"
-			/></a>
-			<nuxt-link
-				v-if="article.project"
-				:to="'/interior-design-architecture-portfolio/' + article.project.url"
-				>View Project
-				<nuxt-icon name="arrow-right" class="ml-1 arrow-right-icon"
-			/></nuxt-link>
+			<a v-if="article.link" :href="article.link" target="_blank">
+				View Article
+				<Icon name="ArrowRight" class="ml-1 arrow-right-icon" />
+			</a>
+			<nuxt-link v-if="article.project" :to="'/interior-design-architecture-portfolio/' + article.project.url">
+				View Project
+				<Icon name="ArrowRight" class="ml-1 arrow-right-icon" />
+			</nuxt-link>
 		</div>
 	</div>
 	<LayoutLoader v-else />
@@ -176,22 +160,20 @@ onMounted(() => {
 			font-weight: 900;
 			@apply inline-block tracking-wider my-4;
 
-			.nuxt-icon {
+			.icon {
 				height: 12px;
 				fill: black;
 				transition: 0.4s var(--curve);
 				display: inline-block !important;
 				transform: translateX(0px);
 
-				svg {
-					margin-top: -2px;
-					height: 12px;
-					display: inline-block !important;
+				margin-top: -2px;
+				height: 12px;
+				display: inline-block !important;
 
-					path {
-						stroke-width: 10px;
-						stroke: var(--blue) !important;
-					}
+				path {
+					stroke-width: 10px;
+					stroke: var(--blue) !important;
 				}
 			}
 		}

@@ -55,24 +55,13 @@ const filteredSlides = computed(() => {
 				:key="index"
 				class="w-full flex flex-col items-end justify-end overflow-hidden shadow-xl"
 			>
-				<nuxt-link
-					:to="'/interior-design-architecture-portfolio/' + slide.url"
-					class="work__card"
-				>
+				<nuxt-link :to="'/interior-design-architecture-portfolio/' + slide.url" class="work__card">
 					<div
 						v-if="slide.images.length > 0"
 						class="absolute w-full h-full bg-cover bg-center bg-no-repeat work__card-image"
-						:style="
-							'background-image: url(' +
-							imageUrl +
-							slide.images[0].directus_files_id.id +
-							'?key=medium)'
-						"
+						:style="'background-image: url(' + imageUrl + slide.images[0].directus_files_id.id + '?key=medium)'"
 					></div>
-					<div
-						v-else
-						class="absolute w-full h-full flex items-center justify-center work__card-image"
-					>
+					<div v-else class="absolute w-full h-full flex items-center justify-center work__card-image">
 						<LayoutRkc class="rkc-icon" />
 					</div>
 					<h2 class="work__card-title">{{ removeFirst(slide.title) }}</h2>
@@ -126,19 +115,17 @@ const filteredSlides = computed(() => {
 	.nav-btn {
 		@apply flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 lg:pl-0 lg:pr-4 py-2;
 
-		.nuxt-icon {
+		.icon {
 			height: 50px;
 			fill: black;
 			transition: 0.4s var(--curve);
 
-			svg {
-				height: 50px;
-				display: inline-block !important;
+			height: 50px;
+			display: inline-block !important;
 
-				path {
-					stroke-width: 5px;
-					stroke: var(--grey) !important;
-				}
+			path {
+				stroke-width: 5px;
+				stroke: var(--grey) !important;
 			}
 		}
 	}

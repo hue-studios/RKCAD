@@ -31,7 +31,6 @@
         "nuxt": "^3.11.1",
         "nuxt-directus-next": "^0.0.15",
         "nuxt-icon": "^0.6.10",
-        "nuxt-icons": "^3.1.0",
         "prettier": "^3.2.5",
         "typescript": "^5.4.3",
         "uuid": "^9.0.1",
@@ -39,6 +38,7 @@
         "vue-tsc": "^2.0.7"
     },
     "dependencies": {
+        "@nuxt/image": "^1.4.0",
         "@nuxtjs/plausible": "^0.2.0",
         "@pinia/nuxt": "^0.5.1",
         "@sendgrid/mail": "^7.7.0",

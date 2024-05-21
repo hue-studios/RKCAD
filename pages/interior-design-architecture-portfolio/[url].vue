@@ -41,19 +41,13 @@ if (project.value.intro) {
 }
 
 if (project.value.images.length) {
-	pageImage.value =
-		'https://admin.rkcad.com/assets/' +
-		project.value.images[0].directus_files_id.id +
-		'?key=large'
+	pageImage.value = 'https://admin.rkcad.com/assets/' + project.value.images[0].directus_files_id.id + '?key=large'
 } else {
 	pageImage.value = 'https://rkcad.com/images/rkcad-logo.png'
 }
 
 title.value =
-	removeFirst(project.value.title) +
-	' ' +
-	category.value +
-	' Project | Rosen Kelly Conway Architecture & Design'
+	removeFirst(project.value.title) + ' ' + category.value + ' Project | Rosen Kelly Conway Architecture & Design'
 
 useHead({
 	titleTemplate: title.value,
@@ -66,8 +60,7 @@ useHead({
 		{
 			hid: 'og:url',
 			property: 'og:url',
-			content:
-				'https://rkcad.com/interior-design-archtecture-portfolio/' + params.url,
+			content: 'https://rkcad.com/interior-design-archtecture-portfolio/' + params.url,
 		},
 		{
 			hid: 'og:image',
@@ -97,10 +90,7 @@ onMounted(() => {
 	if (project.value.images.length > 0) {
 		const image = new Image()
 
-		image.src =
-			'https://admin.rkcad.com/assets/' +
-			project.value.images[0].directus_files_id.id +
-			'key=xlarge'
+		image.src = 'https://admin.rkcad.com/assets/' + project.value.images[0].directus_files_id.id + 'key=xlarge'
 
 		image.onload = () => {
 			isImageLoaded.value = true
@@ -121,22 +111,19 @@ onMounted(() => {
 			<h1 class="uppercase relative">
 				{{ removeFirst(project.title) }}
 				<span class="hidden">
-					<span v-for="(type, index) in project.category" :key="index">{{
-						type
-					}}</span>
-					Project by Rosen Kelly Conway</span
-				>
+					<span v-for="(type, index) in project.category" :key="index">{{ type }}</span>
+					Project by Rosen Kelly Conway
+				</span>
 			</h1>
 
 			<div class="uppercase flex flex-row relative project__header-category">
 				<h2 v-if="project.category" :class="{ 'mr-4': project.style }">
-					<span class="">Category: </span>
-					<span v-for="(category2, index) in project.category" :key="index">{{
-						category2
-					}}</span>
+					<span class="">Category:</span>
+					<span v-for="(category2, index) in project.category" :key="index">{{ category2 }}</span>
 				</h2>
 				<h2 v-if="project.style" class="ml-4">
-					<span class="">Style: </span> {{ project.style }}
+					<span class="">Style:</span>
+					{{ project.style }}
 				</h2>
 			</div>
 		</div>
@@ -147,7 +134,8 @@ onMounted(() => {
 				class="cursor-pointer credits__button"
 				@click.prevent="toggleCredits()"
 			>
-				<span></span><span></span>
+				<span></span>
+				<span></span>
 			</div>
 			<div
 				v-if="project.credits"
@@ -157,25 +145,19 @@ onMounted(() => {
 				v-html="project.credits"
 			></div>
 			<UtilitiesSlideshowThumbs :slides="project.images" />
-			<div
-				class="absolute z-10 w-full flex items-center justify-between flex-row hidden lg:flex project__projects-nav"
-			>
+			<div class="absolute z-10 w-full flex items-center justify-between flex-row hidden lg:flex project__projects-nav">
 				<ProjectsPrevProjectBtn :sort="project.sort" />
 				<ProjectsNextProjectBtn :sort="project.sort" />
 			</div>
 		</div>
 
-		<div
-			class="flex w-full items-center flex-col justify-start tracking-wide my-20 project__content"
-		>
+		<div class="flex w-full items-center flex-col justify-start tracking-wide my-20 project__content">
 			<h1 class="w-full mb-12">
 				{{ removeFirst(project.title) }}
 				<span class="hidden">
-					<span v-for="(category, index) in project.category" :key="index">{{
-						category
-					}}</span>
-					Project by Rosen Kelly Conway</span
-				>
+					<span v-for="(category, index) in project.category" :key="index">{{ category }}</span>
+					Project by Rosen Kelly Conway
+				</span>
 			</h1>
 			<p v-if="project.intro" class="w-full text-sm leading-8 mb-12">
 				{{ project.intro }}
@@ -198,19 +180,13 @@ onMounted(() => {
 				</div>
 			</div>
 			<h4
-				v-if="
-					project.credits &&
-					(!project.result || project.challenge || project.approach)
-				"
+				v-if="project.credits && (!project.result || project.challenge || project.approach)"
 				class="w-full uppercase block tracking-wider mb-4"
 			>
 				Credits
 			</h4>
 			<div
-				v-if="
-					project.credits &&
-					(!project.result || project.challenge || project.approach)
-				"
+				v-if="project.credits && (!project.result || project.challenge || project.approach)"
 				class="w-full project__content-credits"
 				v-html="project.credits"
 			></div>

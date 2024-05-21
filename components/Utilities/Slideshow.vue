@@ -40,14 +40,8 @@ const modules = [Parallax, Pagination, Navigation]
 		@swiper="onSwiper"
 		@slide-change="onSlideChange"
 	>
-		<swiper-slide
-			v-for="(slide, index) in slides"
-			:key="index"
-			class="w-full flex items-center justify-center"
-		>
-	
+		<swiper-slide v-for="(slide, index) in slides" :key="index" class="w-full flex items-center justify-center">
 			<div class="relative w-full h-full flex items-center justify-center">
-			
 				<transition name="fade">
 					<img
 						v-if="slide.directus_files_id.id"
@@ -70,20 +64,20 @@ const modules = [Parallax, Pagination, Navigation]
 			</div>
 		</swiper-slide>
 
-		<div
-			class="w-full flex items-center justify-between flex-row relative slideshowSwiper__nav"
-		>
+		<div class="w-full flex items-center justify-between flex-row relative slideshowSwiper__nav">
 			<h5
 				id="slideshowSwiper__prev-btn"
 				class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 py-2"
 			>
-				<nuxt-icon name="arrow-left" class="mr-4 arrow-left-icon" /> PREV
+				<Icon name="arrow-left" class="mr-4 arrow-left-icon" />
+				PREV
 			</h5>
 			<h5
 				id="slideshowSwiper__next-btn"
 				class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 py-2"
 			>
-				NEXT <nuxt-icon name="arrow-right" class="ml-4 arrow-right-icon" />
+				NEXT
+				<Icon name="arrow-right" class="ml-4 arrow-right-icon" />
 			</h5>
 		</div>
 	</swiper>
@@ -111,17 +105,16 @@ const modules = [Parallax, Pagination, Navigation]
 			line-height: 14px;
 			letter-spacing: 0.2em;
 			transition: 0.4s var(--curve);
-			.nuxt-icon {
+			.icon {
 				height: 16px;
 				fill: black;
 				transition: 0.4s var(--curve);
-				svg {
-					height: 16px;
-					display: inline-block !important;
-					line {
-						stroke-width: 3px;
-						stroke: var(--blue) !important;
-					}
+
+				height: 16px;
+				display: inline-block !important;
+				line {
+					stroke-width: 3px;
+					stroke: var(--blue) !important;
 				}
 			}
 		}
@@ -129,12 +122,12 @@ const modules = [Parallax, Pagination, Navigation]
 			opacity: 0.25;
 		}
 		#slideshowSwiper__next-btn:hover {
-			.nuxt-icon {
+			.icon {
 				@apply ml-2 -mr-2;
 			}
 		}
 		#slideshowSwiper__prev-btn:hover {
-			.nuxt-icon {
+			.icon {
 				@apply mr-2 -ml-2;
 			}
 		}

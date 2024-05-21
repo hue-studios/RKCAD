@@ -1,9 +1,8 @@
 { 
-    "nuxt.isNuxtApp": false, 
     "css.lint.unknownAtRules": "ignore", 
     "[css]": 
     { 
         "editor.defaultFormatter": "bradlc.vscode-tailwindcss" 
     },
-    "editor.formatOnSave": false
+    "editor.formatOnSave": true
 }

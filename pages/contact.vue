@@ -3,8 +3,7 @@ const isImageLoaded = ref(false)
 
 onMounted(() => {
 	const image = new Image()
-	image.src =
-		'https://admin.rkcad.com/assets/73046284-e82d-4c2b-84b5-0246b56623bf?key=xlarge'
+	image.src = 'https://admin.rkcad.com/assets/73046284-e82d-4c2b-84b5-0246b56623bf?key=xlarge'
 
 	image.onload = () => {
 		isImageLoaded.value = true
@@ -13,10 +12,8 @@ onMounted(() => {
 
 useSeoMeta({
 	title: 'Contact | Rosen Kelly Conway Architecture & Design Firm | Summit NJ',
-	ogTitle:
-		'Contact | Rosen Kelly Conway Architecture & Design Firm | Summit NJ',
-	ogImage:
-		'https://admin.rkcad.com/assets/73046284-e82d-4c2b-84b5-0246b56623bf?key=xlarge',
+	ogTitle: 'Contact | Rosen Kelly Conway Architecture & Design Firm | Summit NJ',
+	ogImage: 'https://admin.rkcad.com/assets/73046284-e82d-4c2b-84b5-0246b56623bf?key=xlarge',
 })
 </script>
 <template>
@@ -25,9 +22,7 @@ useSeoMeta({
 		class="bg-cover bg-center bg-no-repeat relative w-full h-screen flex flex-row items-end justify-center overflow-hidden contact"
 	>
 		<LayoutRkc id="rkc-bg-icon-2" class="rkc-bg-icon" />
-		<div
-			class="w-full max-w-7xl flex flex-row justify-between items-center px-4"
-		>
+		<div class="w-full max-w-7xl flex flex-row justify-between items-center px-4">
 			<div class="text-left contact__info">
 				<h1 class="w-full uppercase white tracking-wider">Studio</h1>
 				<p>16 Maple St. Summit, NJ 07901</p>
@@ -36,19 +31,15 @@ useSeoMeta({
 					<a href="mailto:info@rkcad.com" target="_blank">info@rkcad.com</a>
 				</p>
 				<div class="flex items-start justify-start flex-row mt-6">
-					<a
-						href="https://www.instagram.com/rkcad/"
-						target="_blank"
-						class="mr-6"
-					>
-						<nuxt-icon name="instagram" class="" />
+					<a href="https://www.instagram.com/rkcad/" target="_blank" class="mr-6">
+						<Icon name="Instagram" class="" />
 					</a>
 					<a
 						href="https://www.houzz.com/professionals/architects-and-building-designers/rosen-kelly-conway-architecture-and-design-pfvwus-pf~1350653163?"
 						target="_blank"
 						class=""
 					>
-						<nuxt-icon name="houzz" class="" />
+						<Icon name="Houzz" class="blue" />
 					</a>
 				</div>
 			</div>
@@ -106,6 +97,11 @@ useSeoMeta({
 
 		a {
 			color: var(--white);
+		}
+		.icon {
+			path {
+				fill: white;
+			}
 		}
 	}
 

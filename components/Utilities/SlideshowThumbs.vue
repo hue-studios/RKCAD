@@ -37,11 +37,8 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 		:centered-insuficient-slides="true"
 		class="flex items-center justify-center flex-row gallery-swiper"
 	>
-		<swiper-slide
-			v-for="(slide, index) in images"
-			:key="index"
-			class="swiper-slide"
-			><img
+		<swiper-slide v-for="(slide, index) in images" :key="index" class="swiper-slide">
+			<img
 				v-if="slide.directus_files_id.id"
 				:srcset="
 					imageUrl +
@@ -56,7 +53,8 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 				"
 				:src="imageUrl + slide.directus_files_id.id + '?key=large'"
 				class="shadow-lg"
-		/></swiper-slide>
+			/>
+		</swiper-slide>
 	</swiper-container>
 
 	<swiper-container
@@ -78,23 +76,22 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 			v-for="(slide, index) in images"
 			:key="index"
 			class="w-auto flex items-center justify-center swiper-slide"
-			><img
-				v-if="slide.directus_files_id.id"
-				:src="imageUrl + slide.directus_files_id.id + '?key=small'"
-		/></swiper-slide>
+		>
+			<img v-if="slide.directus_files_id.id" :src="imageUrl + slide.directus_files_id.id + '?key=small'" />
+		</swiper-slide>
 	</swiper-container>
 
 	<div
 		id="slideshowSwiperThumbs__prev-btn"
 		class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 py-2 slideshowSwiperThumbs__nav"
 	>
-		<nuxt-icon name="arrow-left" class="mr-4 arrow-left-icon" />
+		<Icon name="ArrowLeft" class="mr-4 arrow-left-icon" />
 	</div>
 	<div
 		id="slideshowSwiperThumbs__next-btn"
 		class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 py-2 slideshowSwiperThumbs__nav"
 	>
-		<nuxt-icon name="arrow-right" class="ml-4 arrow-right-icon" />
+		<Icon name="ArrowRight" class="mr-4 arrow-right-icon" />
 	</div>
 </template>
 
@@ -162,19 +159,17 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 	transition: all 0.4s var(--curve);
 	@apply absolute;
 
-	.nuxt-icon {
+	.icon {
 		height: 50px;
 		fill: black;
 		transition: 0.4s var(--curve);
 
-		svg {
-			height: 50px;
-			display: inline-block !important;
+		height: 50px;
+		display: inline-block !important;
 
-			path {
-				stroke-width: 5px;
-				stroke: var(--grey) !important;
-			}
+		path {
+			stroke-width: 5px;
+			stroke: var(--grey) !important;
 		}
 	}
 }

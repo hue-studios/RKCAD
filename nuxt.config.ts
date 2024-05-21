@@ -89,7 +89,7 @@ export default defineNuxtConfig({
 				},
 				{
 					rel: 'manifest',
-					href: '/images/icons/manifest.json',
+					href: '/manifest.json',
 				},
 			],
 		},
@@ -103,7 +103,7 @@ export default defineNuxtConfig({
 
 	modules: [
 		'@nuxt/devtools',
-		// '@nuxt/image',
+		'@nuxt/image',
 		'@nuxt/ui',
 		'@vueuse/nuxt',
 		'@nuxtjs/plausible',
@@ -130,7 +130,6 @@ export default defineNuxtConfig({
 		],
 		'nuxt-directus-next',
 		'nuxt-icon',
-		'nuxt-icons',
 	],
 
 	devtools: {
@@ -172,12 +171,12 @@ export default defineNuxtConfig({
 		icons: ['heroicons'],
 	},
 
-	// image: {
-	// 	provider: 'directus',
-	// 	directus: {
-	// 		baseURL: `https://admin.rkcad.com/assets/`,
-	// 	},
-	// },
+	image: {
+		provider: 'directus',
+		directus: {
+			baseURL: `https://admin.rkcad.com/assets/`,
+		},
+	},
 
 	build: {
 		transpile: ['swiper', '@sendgrid/mail', 'gsap'],
