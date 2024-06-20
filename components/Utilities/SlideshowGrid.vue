@@ -1,10 +1,7 @@
 <script setup>
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/css'
-import 'swiper/css/grid'
-import { Grid } from 'swiper/modules'
+import { register } from 'swiper/element/bundle'
 
-const modules = [Grid]
+register()
 
 import { removeFirst } from '~~/utils/strings'
 
@@ -29,10 +26,9 @@ const filteredSlides = computed(() => {
 </script>
 <template>
 	<div class="w-full relative">
-		<swiper
+		<swiper-container
 			:observer="true"
 			:observe-parents="true"
-			:modules="modules"
 			:space-between="35"
 			:breakpoints="{
 				300: { slidesPerView: 1, grid: { rows: 1, fill: 'row' } },
@@ -48,7 +44,7 @@ const filteredSlides = computed(() => {
 					grid: { rows: 2, fill: 'row' },
 				},
 			}"
-			class="slideshowSwiperGrid withNav"
+			class="slideshowSwiperGrid"
 		>
 			<swiper-slide
 				v-for="(slide, index) in filteredSlides"
@@ -74,7 +70,7 @@ const filteredSlides = computed(() => {
 					</h5>
 				</nuxt-link>
 			</swiper-slide>
-		</swiper>
+		</swiper-container>
 	</div>
 </template>
 
@@ -115,26 +111,6 @@ const filteredSlides = computed(() => {
     @media (min-width: theme('screens.2xl')) {
       height: 400px;
     } */
-	}
-}
-
-.slideshowSwiperGrid__nav {
-	.nav-btn {
-		@apply flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 lg:pl-0 lg:pr-4 py-2;
-
-		.icon {
-			height: 50px;
-			fill: black;
-			transition: 0.4s var(--curve);
-
-			height: 50px;
-			display: inline-block !important;
-
-			path {
-				stroke-width: 5px;
-				stroke: var(--grey) !important;
-			}
-		}
 	}
 }
 

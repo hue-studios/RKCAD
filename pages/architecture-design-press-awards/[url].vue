@@ -134,6 +134,7 @@ onMounted(() => {
 	&__slideshow {
 		transition: all 0.5s var(--curve);
 		height: calc(100vh - 167px);
+		padding-bottom: 20px;
 		@apply max-w-7xl;
 
 		@media (min-width: theme('screens.lg')) {

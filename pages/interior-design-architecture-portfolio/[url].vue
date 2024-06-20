@@ -162,13 +162,14 @@ onMounted(() => {
 		</div>
 
 		<div class="flex w-full items-center flex-col justify-start tracking-wide my-20 project__content">
-			<h1 class="w-full mb-12">
-				{{ removeFirst(project.title) }}
+			<h2 class="w-full mb-12">
 				<span class="hidden">
 					<span v-for="(category, index) in project.category" :key="index">{{ category }}</span>
-					Project by Rosen Kelly Conway
+					Project
 				</span>
-			</h1>
+				{{ removeFirst(project.title) }}
+				<span class="hidden">by Rosen Kelly Conway</span>
+			</h2>
 			<p v-if="project.intro" class="w-full text-sm leading-8 mb-12">
 				{{ project.intro }}
 			</p>
@@ -356,7 +357,7 @@ onMounted(() => {
 	&__content {
 		@apply max-w-7xl;
 
-		h1 {
+		h2 {
 			font-size: 30px;
 			letter-spacing: 0.1em;
 			line-height: 1em;

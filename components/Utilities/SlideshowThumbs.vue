@@ -49,6 +49,8 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 			<NuxtImg
 				v-if="slide.directus_files_id.id"
 				format="webp"
+				loading="lazy"
+				:title="title + ' - Rosen Kelly Conway Project'"
 				:srcset="
 					imageUrl +
 					slide.directus_files_id.id +
@@ -69,10 +71,11 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 
 	<swiper-container
 		class="thumbSwiper"
-		loop="true"
+		:loop="false"
 		slides-per-view="auto"
-		free-mode="true"
-		watch-slides-progress="true"
+		:free-mode="true"
+		:watch-slides-progress="true"
+		:center-insufficient-slides="true"
 		:navigation="{
 			enabled: true,
 			nextEl: '#slideshowSwiperThumbs__next-btn',
@@ -87,6 +90,8 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 			<NuxtImg
 				v-if="slide.directus_files_id.id"
 				format="webp"
+				loading="lazy"
+				:title="title + ' - Rosen Kelly Conway Project'"
 				:srcset="
 					imageUrl +
 					slide.directus_files_id.id +
@@ -119,8 +124,6 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 </template>
 
 <style>
-:root {
-}
 .gallerySwiper {
 	height: calc(100% - 110px);
 	@media (min-width: theme('screens.lg')) {
