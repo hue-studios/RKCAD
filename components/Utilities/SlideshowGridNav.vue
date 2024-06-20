@@ -1,11 +1,7 @@
 <script setup>
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/css'
-import 'swiper/css/grid'
-import 'swiper/css/navigation'
-import { Grid, Navigation } from 'swiper/modules'
+import { register } from 'swiper/element/bundle'
 
-const modules = [Grid, Navigation]
+register()
 
 import { removeFirst } from '~~/utils/strings'
 
@@ -21,16 +17,17 @@ const props = defineProps({
 		default: '',
 	},
 })
-
+const nextBtn = `slideshowSwiperGrid__next-btn${props.class}`
+const prevBtn = `slideshowSwiperGrid__prev-btn${props.class}`
 const imageUrl = 'https://admin.rkcad.com/assets/'
 </script>
 <template>
 	<div class="w-full relative">
-		<swiper
+		<swiper-container
+			style="--swiper-navigation-color: var(--grey); --swiper-navigation-top-offset: 600px"
 			:observer="true"
 			:observe-parents="true"
 			:modules="modules"
-			navigation
 			:space-between="35"
 			:breakpoints="{
 				300: { slidesPerView: 1, grid: { rows: 1, fill: 'row' } },
@@ -46,12 +43,13 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 					grid: { rows: 2, fill: 'row' },
 				},
 			}"
+			:navigation="{ enabled: true, nextEl: '.' + nextBtn, prevEl: '.' + prevBtn }"
 			class="slideshowSwiperGridwithNav"
 		>
 			<swiper-slide
 				v-for="(slide, index) in slides"
 				:key="index"
-				class="w-full flex flex-col items-end justify-end overflow-hidden w-fit shadow-xl"
+				class="flex flex-col items-end justify-end overflow-hidden w-fit shadow-xl"
 			>
 				<nuxt-link :to="'/interior-design-architecture-portfolio/' + slide.url" class="work__card">
 					<div
@@ -63,45 +61,37 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 						<LayoutRkc class="rkc-icon" />
 					</div>
 					<h2 class="work__card-title">{{ removeFirst(slide.title) }}</h2>
+					<h5 v-if="slide.location" class="hidden">
+						{{ slide.location }}
+						<span v-if="slide.category.length">
+							<span v-for="(category, index) in slide.category" :key="index">{{ category }}</span>
+						</span>
+						Project
+					</h5>
 				</nuxt-link>
 			</swiper-slide>
-		</swiper>
+		</swiper-container>
+		<div
+			:id="prevBtn"
+			class="flex items-center justify-start flex-row cursor-pointer left-0 slideshowSwiperGrid__nav"
+			:class="prevBtn"
+		>
+			<Icon name="ArrowLeft" class="arrow-left-icon" />
+		</div>
+		<div
+			:id="nextBtn"
+			class="flex items-center justify-end flex-row cursor-pointer right-0 slideshowSwiperGrid__nav"
+			:class="nextBtn"
+		>
+			<Icon name="ArrowRight" class="arrow-right-icon" />
+		</div>
 	</div>
 </template>
 
 <style>
-.swiper-button-next,
-.swiper-button-prev {
-	top: auto !important;
-	bottom: 6px;
-}
-.swiper-button-next {
-	right: -3px;
-	font-family: 'icomoon' !important;
-	&:after {
-		content: '\e903' !important;
-	}
-}
-.swiper-button-prev {
-	left: -3px;
-	font-family: 'icomoon' !important;
-	&:after {
-		content: '\e902' !important;
-	}
-}
-.swiper-button-next:after,
-.swiper-button-prev:after {
-	font-family: 'icomoon' !important;
-	font-size: 52px;
-	line-height: 50px;
-	color: var(--grey) !important;
-	font-weight: bolder;
-}
-
 .slideshowSwiperGridwithNav {
 	padding-bottom: 85px !important;
 	margin-bottom: 0px;
-	/* height: 360px; */
 
 	@media (min-width: theme('screens.md')) {
 		height: 650px;
@@ -111,50 +101,30 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 		height: 740px;
 	}
 
-	/* @media (min-width: theme('screens.2xl')) {
-    height: 840px;
-  } */
-
 	.swiper-slide {
 		height: 350px;
-
-		/* @media (min-width: theme('screens.md')) {
-      height: 350px;
-    } */
 		@media (min-width: theme('screens.md')) {
 			height: 310px;
 		}
-
-		@media (min-width: theme('screens.lg')) {
-			/* height: 310px; */
-		}
-
-		/* @media (min-width: theme('screens.xl')) {
-      height: 350px;
-    }
-
-    @media (min-width: theme('screens.2xl')) {
-      height: 400px;
-    } */
 	}
 }
 
 .slideshowSwiperGrid__nav {
-	.nav-btn {
-		@apply flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 lg:pl-0 lg:pr-4 py-2;
+	bottom: 6px;
+	z-index: 10;
+	height: 50px;
 
-		.icon {
-			height: 50px;
-			fill: black;
-			transition: 0.4s var(--curve);
+	transition: all 0.4s var(--curve);
+	@apply absolute px-1;
+	.icon {
+		fill: black;
+		transition: 0.4s var(--curve);
+		height: 50px;
+		display: inline-block !important;
 
-			height: 50px;
-			display: inline-block !important;
-
-			path {
-				stroke-width: 5px;
-				stroke: var(--grey) !important;
-			}
+		path {
+			stroke-width: 5px;
+			stroke: var(--grey) !important;
 		}
 	}
 }
@@ -168,23 +138,6 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 		background-color: rgba(167, 169, 172, 0.45);
 		transform: scale(1.1);
 		transition: all 0.5s var(--curve);
-
-		/* margin: 45px; */
-		@media (min-width: theme('screens.md')) {
-			/* height: 300px; */
-		}
-
-		@media (min-width: theme('screens.lg')) {
-			/* height: 325px; */
-		}
-
-		/* @media (min-width: theme('screens.xl')) {
-      height: 350px;
-    }
-
-    @media (min-width: theme('screens.2xl')) {
-      height: 400px;
-    } */
 
 		svg {
 			margin: 0 20px;

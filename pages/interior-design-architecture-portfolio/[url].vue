@@ -154,7 +154,7 @@ onMounted(() => {
 				@click.prevent="toggleCredits()"
 				v-html="project.credits"
 			></div>
-			<UtilitiesSlideshowThumbs :slides="project.images" :title="'RKC Project: ' + project.title" />
+			<UtilitiesSlideshowThumbs :slides="project.images" :title="project.title" />
 			<div class="absolute z-10 w-full flex items-center justify-between flex-row hidden lg:flex project__projects-nav">
 				<ProjectsPrevProjectBtn :sort="project.sort" />
 				<ProjectsNextProjectBtn :sort="project.sort" />

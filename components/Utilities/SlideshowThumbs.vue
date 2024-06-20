@@ -44,13 +44,26 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 			dynamicBullets: true,
 			clickable: true,
 		}"
+		effect="creative"
+		:creativeEffect="{
+			prev: {
+				scale: 0,
+				opacity: 0.6,
+				translate: ['-20%', 0, -1],
+			},
+			next: {
+				scale: 0.7,
+				opacity: 1,
+				translate: ['100%', 0, 0],
+			},
+		}"
 	>
 		<swiper-slide v-for="(slide, index) in images" :key="index" class="swiper-slide">
 			<NuxtImg
 				v-if="slide.directus_files_id.id"
 				format="webp"
 				loading="lazy"
-				:title="title + ' - Rosen Kelly Conway Project'"
+				:title="'RKC Project: ' + title + ' Image ' + (index + 1)"
 				:srcset="
 					imageUrl +
 					slide.directus_files_id.id +
