@@ -17,7 +17,7 @@ const data = await readItems('projects', {
 		},
 	},
 	fields: [
-		'approach,before_after.directus_files_id,category,challenge,credits,id,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags,intro,result,sort,style,title,url,press_and_awards.press_id.category,press_and_awards.press_id.category,press_and_awards.press_id.title,press_and_awards.press_id.description,press_and_awards.press_id.url,press_and_awards.press_id.link,press_and_awards.press_id.images.directus_files_id.id,press_and_awards.press_id.images.directus_files_id.description,press_and_awards.press_id.images.directus_files_id.tags',
+		'approach,location,before_after.directus_files_id,category,challenge,credits,id,images.directus_files_id.id,images.directus_files_id.description,images.directus_files_id.tags,intro,result,sort,style,title,url,press_and_awards.press_id.category,press_and_awards.press_id.category,press_and_awards.press_id.title,press_and_awards.press_id.description,press_and_awards.press_id.url,press_and_awards.press_id.link,press_and_awards.press_id.images.directus_files_id.id,press_and_awards.press_id.images.directus_files_id.description,press_and_awards.press_id.images.directus_files_id.tags',
 	],
 })
 
@@ -119,7 +119,13 @@ onMounted(() => {
 					Project by Rosen Kelly Conway
 				</span>
 			</h1>
-
+			<h5 v-if="project.location" class="hidden">
+				{{ project.location }}
+				<span v-if="project.category.length">
+					<span v-for="(category, index) in project.category" :key="index">{{ category }}</span>
+				</span>
+				Portfolio Project
+			</h5>
 			<div class="uppercase flex flex-row relative project__header-category">
 				<h2 v-if="project.category" :class="{ 'mr-4': project.style }">
 					<span class="">Category:</span>
@@ -215,30 +221,14 @@ onMounted(() => {
 	&__slideshow {
 		transition: all 0.5s var(--curve);
 		height: calc(100vh - 167px);
-
+		padding-bottom: 20px;
 		@media (min-width: theme('screens.lg')) {
 			/* max-height: 800px; */
-		}
-
-		.swiper {
-			/* padding-bottom: 50px; */
-			@apply py-4;
-
-			@media (min-width: theme('screens.lg')) {
-				padding: 0;
-			}
-		}
-
-		.swiper-pagination {
-			/* bottom: -25px; */
-			font-size: 14px;
-			line-height: 14px;
-			letter-spacing: 0.2em;
 		}
 	}
 
 	&__projects-nav {
-		bottom: 110px;
+		bottom: 0px;
 
 		a {
 			font-size: 10px;
@@ -301,7 +291,7 @@ onMounted(() => {
 		width: 55px;
 		height: 50px;
 		background: rgba(123, 145, 163, 0.75);
-		z-index: 5;
+		z-index: 55;
 		transition: all 0.6s var(--curve);
 		@apply absolute top-0 right-0 flex items-center justify-center text-center;
 
@@ -341,8 +331,8 @@ onMounted(() => {
 		font-size: 12px;
 		line-height: 1.2em;
 
-		z-index: 10;
-		height: calc(100% - 110px);
+		z-index: 60;
+		height: calc(100% - 130px);
 		transition: all 0.5s 0.1s var(--curve);
 		transform: translateX(100%);
 		opacity: 0;

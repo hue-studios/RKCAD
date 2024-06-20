@@ -180,7 +180,7 @@ export default defineNuxtConfig({
 	},
 
 	build: {
-		transpile: ['swiper', 'gsap'],
+		transpile: ['swiper'],
 	},
 
 	vite: {

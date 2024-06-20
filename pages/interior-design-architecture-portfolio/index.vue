@@ -16,10 +16,10 @@ const projectsReq = await readItems('projects', {
 		},
 	},
 	fields: [
-		'status,title,category,style,images.directus_files_id.id,images.directus_files_id.title,images.directus_files_id.tags,images.directus_files_id.width,images.directus_files_id.height,url',
+		'status,title,category,style,location,images.directus_files_id.id,images.directus_files_id.title,images.directus_files_id.tags,images.directus_files_id.width,images.directus_files_id.height,url',
 	],
 })
-
+console.log(projectsReq)
 useHead({
 	titleTemplate: 'Architecture & Interior Design Portfolio | Rosen Kelly Conway of Summit NJ',
 	meta: [

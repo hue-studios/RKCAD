@@ -18,7 +18,7 @@ const showIntroAnimation = ref(true)
 
 const home = await readItem('home', 1, {
 	fields: [
-		'featured_images.directus_files_id,about_intro,team_intro,team_image,featured_profile.*,featured_project.title,featured_project.intro,featured_project.url,featured_project.category,featured_project.images.directus_files_id,featured_profile.featured_projects.project.title,featured_profile.featured_projects.project.url,featured_profile.featured_projects.image,featured_projects.title,featured_projects.category,featured_projects.style,featured_projects.url,featured_projects.images.directus_files_id.id,featured_projects.sort,featured_projects.status',
+		'featured_images.directus_files_id,about_intro,team_intro,team_image,featured_profile.*,featured_project.title,featured_project.intro,featured_project.url,featured_project.category,featured_project.images.directus_files_id,featured_profile.featured_projects.project.title,featured_profile.featured_projects.project.url,featured_profile.featured_projects.image,featured_projects.title,featured_projects.category,featured_projects.location,featured_projects.style,featured_projects.url,featured_projects.images.directus_files_id.id,featured_projects.sort,featured_projects.status',
 	],
 })
 

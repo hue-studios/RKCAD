@@ -65,6 +65,13 @@ const filteredSlides = computed(() => {
 						<LayoutRkc class="rkc-icon" />
 					</div>
 					<h2 class="work__card-title">{{ removeFirst(slide.title) }}</h2>
+					<h5 v-if="slide.location" class="hidden">
+						{{ slide.location }}
+						<span v-if="slide.category.length">
+							<span v-for="(category, index) in slide.category" :key="index">{{ category }}</span>
+						</span>
+						Project
+					</h5>
 				</nuxt-link>
 			</swiper-slide>
 		</swiper>

@@ -26,11 +26,24 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 </script>
 <template>
 	<swiper-container
-		thumbs-swiper=".thumb-swiper"
-		:centered-slides="true"
-		:space-between="20"
-		:centered-insuficient-slides="true"
-		class="flex items-center justify-center flex-row gallery-swiper"
+		style="
+			--swiper-navigation-color: var(--grey);
+			--swiper-pagination-color: var(--blue);
+			--swiper-pagination-bullet-width: 15px;
+			--swiper-pagination-bullet-height: 4px;
+			--swiper-pagination-bullet-border-radius: 3px;
+			--swiper-pagination-bottom: 4px;
+		"
+		class="z-50 gallerySwiper"
+		thumbs-swiper=".thumbSwiper"
+		:loop="true"
+		space-between="10"
+		:slides-per-view="1"
+		:pagination="{
+			enabled: true,
+			dynamicBullets: true,
+			clickable: true,
+		}"
 	>
 		<swiper-slide v-for="(slide, index) in images" :key="index" class="swiper-slide">
 			<NuxtImg
@@ -55,19 +68,16 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 	</swiper-container>
 
 	<swiper-container
+		class="thumbSwiper"
+		loop="true"
+		slides-per-view="auto"
+		free-mode="true"
+		watch-slides-progress="true"
 		:navigation="{
 			enabled: true,
 			nextEl: '#slideshowSwiperThumbs__next-btn',
 			prevEl: '#slideshowSwiperThumbs__prev-btn',
 		}"
-		watch-slides-progress
-		watch-slides-visibility
-		class="relative thumb-swiper"
-		:slides-per-view="5"
-		:centered-slides="false"
-		:centered-insuficient-slides="true"
-		:slide-to-clicked-slide="true"
-		@swiper="setThumbsSwiper"
 	>
 		<swiper-slide
 			v-for="(slide, index) in images"
@@ -98,22 +108,21 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 		id="slideshowSwiperThumbs__prev-btn"
 		class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 py-2 slideshowSwiperThumbs__nav"
 	>
-		<Icon name="ArrowLeft" class="mr-4 arrow-left-icon" />
+		<Icon name="ArrowLeft" class="mr-2 arrow-left-icon" />
 	</div>
 	<div
 		id="slideshowSwiperThumbs__next-btn"
 		class="flex items-center justify-center flex-row cursor-pointer px-2 md:px-4 py-2 slideshowSwiperThumbs__nav"
 	>
-		<Icon name="ArrowRight" class="mr-4 arrow-right-icon" />
+		<Icon name="ArrowRight" class="ml-2 arrow-right-icon" />
 	</div>
 </template>
 
 <style>
-.gallery-swiper {
+:root {
+}
+.gallerySwiper {
 	height: calc(100% - 110px);
-	/* background: rgba(0,0,0,0.025); */
-	/* -webkit-backdrop-filter: blur(4px) invert(0.015);
-  backdrop-filter: blur(4px) invert(0.015); */
 	@media (min-width: theme('screens.lg')) {
 		background: none;
 	}
@@ -131,41 +140,34 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 	}
 }
 
-.thumb-swiper {
+.thumbSwiper {
 	height: 100px;
 	margin: 10px 0px;
-
-	position: relative;
-
-	@media (min-width: theme('screens.lg')) {
-		/* align-items: center;
-    justify-content: center;
-    display: flex; */
-	}
-
-	.swiper-wrapper {
-		position: relative;
-
-		@media (min-width: theme('screens.lg')) {
-			/* align-items: center;
-    justify-content: center;
-    display: flex; */
-		}
-	}
-
 	.swiper-slide {
-		width: auto !important;
-		@apply px-2;
-
+		opacity: 0.6;
+		width: auto;
+		height: 100%;
+		@apply px-2 cursor-pointer transition-all duration-300 ease-in-out;
 		img {
 			height: 100px;
 			width: auto;
+			@apply transition-all duration-300 ease-in-out;
 		}
+		&:hover {
+			opacity: 1;
+			img {
+				transform: scale(1.1);
+			}
+		}
+	}
+
+	.swiper-slide-thumb-active {
+		opacity: 1;
 	}
 }
 
 .slideshowSwiperThumbs__nav {
-	bottom: 0px;
+	bottom: 20px;
 	z-index: 10;
 	height: 100px;
 	background: rgba(255, 255, 255, 0.75);
