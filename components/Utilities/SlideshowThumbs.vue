@@ -47,13 +47,11 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 		effect="creative"
 		:creativeEffect="{
 			prev: {
-				scale: 0,
-				opacity: 0.6,
-				translate: ['-20%', 0, -1],
+				opacity: 0.8,
+				translate: ['-100%', 0, -1],
 			},
 			next: {
-				scale: 0.7,
-				opacity: 1,
+				opacity: 0.8,
 				translate: ['100%', 0, 0],
 			},
 		}"
