@@ -61,6 +61,8 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 				v-if="slide.directus_files_id.id"
 				format="webp"
 				loading="lazy"
+				width="500"
+				height="755"
 				:title="'RKC Project: ' + title + ' Image ' + (index + 1)"
 				:srcset="
 					imageUrl +
@@ -73,6 +75,7 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 					slide.directus_files_id.id +
 					'?key=large 1920w'
 				"
+				:placeholder="[500, 750]"
 				:src="imageUrl + slide.directus_files_id.id + '?key=large'"
 				:alt="title + ' Image ' + (index + 1)"
 				class="shadow-lg"
@@ -102,6 +105,8 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 				v-if="slide.directus_files_id.id"
 				format="webp"
 				loading="lazy"
+				width="100"
+				height="100"
 				:title="title + ' - Rosen Kelly Conway Project'"
 				:srcset="
 					imageUrl +
@@ -114,6 +119,7 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 					slide.directus_files_id.id +
 					'?key=small 1920w'
 				"
+				:placeholder="[100, 100]"
 				:src="imageUrl + slide.directus_files_id.id + '?key=small'"
 				:alt="title + ' Image ' + (index + 1)"
 			/>

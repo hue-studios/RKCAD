@@ -55,6 +55,12 @@ title.value =
 
 useHead({
 	titleTemplate: title.value,
+	link: [
+		{
+			rel: 'canonical',
+			href: 'https://www.rkcad.com/interior-design-architecture-portfolio/' + params.url,
+		},
+	],
 	meta: [
 		{
 			hid: 'description',
@@ -80,6 +86,11 @@ useHead({
 			hid: 'og:description',
 			property: 'og:description',
 			content: description.value,
+		},
+		{
+			hid: 'og:type',
+			property: 'og:type',
+			content: 'website',
 		},
 	],
 })
@@ -114,12 +125,12 @@ onMounted(() => {
 		>
 			<h1 class="uppercase relative">
 				{{ removeFirst(project.title) }}
-				<span class="hidden">
+				<span class="opacity-0 text-[0px]">
 					<span v-for="(type, index) in project.category" :key="index">{{ type }}</span>
 					Project by Rosen Kelly Conway
 				</span>
 			</h1>
-			<h5 v-if="project.location" class="hidden">
+			<h5 v-if="project.location" class="opacity-0 text-[0px] absolute -top-[100%]">
 				{{ project.location }}
 				<span v-if="project.category.length">
 					<span v-for="(category, index) in project.category" :key="index">{{ category }}</span>
@@ -163,7 +174,7 @@ onMounted(() => {
 
 		<div class="flex w-full items-center flex-col justify-start tracking-wide my-20 project__content">
 			<h2 class="w-full mb-12">
-				<span class="hidden">
+				<span class="opacity-0 text-[0px] absolute -top-[100%]">
 					<span v-for="(category, index) in project.category" :key="index">{{ category }}</span>
 					Project
 				</span>
