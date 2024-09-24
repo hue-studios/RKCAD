@@ -234,8 +234,10 @@ onMounted(() => {
 		transition: all 0.5s var(--curve);
 		height: calc(100vh - 167px);
 		padding-bottom: 20px;
+		min-height: calc(375px + 167px);
 		@media (min-width: theme('screens.lg')) {
 			/* max-height: 800px; */
+			min-height: calc(500px + 167px);
 		}
 	}
 
@@ -324,7 +326,7 @@ onMounted(() => {
 	.credits__button.open {
 		opacity: 0;
 		width: 200px;
-		height: 100%;
+		height: calc(100% - 167px);
 
 		/* transition: all 0.4s 0.2s var(--curve); */
 		span {

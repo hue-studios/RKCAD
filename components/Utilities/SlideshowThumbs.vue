@@ -143,20 +143,24 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 <style>
 .gallerySwiper {
 	height: calc(100% - 110px);
-	min-height: 375px;
+	/* min-height: 375px; */
 	@media (min-width: theme('screens.lg')) {
 		background: none;
+		/* min-height: 500px; */
 	}
 	.swiper-slide {
 		align-items: center;
 		justify-content: center;
 		display: flex;
 		position: relative;
-
+		width: 100% !important;
 		img {
 			max-height: 100%;
 			max-width: 100%;
 			width: auto;
+
+			min-height: 100%;
+			@apply object-cover;
 		}
 	}
 }
