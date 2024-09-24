@@ -143,6 +143,7 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 <style>
 .gallerySwiper {
 	height: calc(100% - 110px);
+	min-height: 375px;
 	@media (min-width: theme('screens.lg')) {
 		background: none;
 	}
