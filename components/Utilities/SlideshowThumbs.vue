@@ -61,8 +61,8 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 				v-if="slide.directus_files_id.id"
 				format="webp"
 				loading="lazy"
-				width="500"
-				height="755"
+				:width="1920"
+				:height="1080"
 				:title="'RKC Project: ' + title + ' Image ' + (index + 1)"
 				:srcset="
 					imageUrl +
@@ -75,10 +75,10 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 					slide.directus_files_id.id +
 					'?key=large 1920w'
 				"
-				:placeholder="[500, 750]"
+				:placeholder="[1920, 1080]"
 				:src="imageUrl + slide.directus_files_id.id + '?key=large'"
 				:alt="title + ' Image ' + (index + 1)"
-				class="shadow-lg"
+				class="shadow-lg main-image"
 			/>
 		</swiper-slide>
 	</swiper-container>
@@ -143,24 +143,24 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 <style>
 .gallerySwiper {
 	height: calc(100% - 110px);
-	/* min-height: 375px; */
 	@media (min-width: theme('screens.lg')) {
 		background: none;
-		/* min-height: 500px; */
 	}
+
 	.swiper-slide {
 		align-items: center;
 		justify-content: center;
 		display: flex;
 		position: relative;
 		width: 100% !important;
-		img {
+
+		.main-image {
 			max-height: 100%;
 			max-width: 100%;
 			width: auto;
-
-			min-height: 100%;
-			@apply object-cover;
+			height: auto;
+			object-fit: contain;
+			object-position: center;
 		}
 	}
 }
@@ -203,7 +203,6 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 		height: 50px;
 		fill: black;
 		transition: 0.4s var(--curve);
-
 		height: 50px;
 		display: inline-block !important;
 
