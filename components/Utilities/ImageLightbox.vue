@@ -21,6 +21,7 @@ const scale = ref(1)
 const translateX = ref(0)
 const translateY = ref(0)
 const isDragging = ref(false)
+const isPinching = ref(false)
 const dragStart = ref({ x: 0, y: 0 })
 const lastTranslate = ref({ x: 0, y: 0 })
 const imageContainer = ref(null)
@@ -47,8 +48,11 @@ const imageStyle = computed(() => ({
 	transform: `scale(${scale.value}) translate(${translateX.value}px, ${translateY.value}px)`,
 	cursor: isZoomed.value ? 'grab' : 'zoom-in',
 	// Only apply zoom/pan transition when zoomed — otherwise let Vue's
-	// <Transition> slide classes control transform & opacity animations
-	...(isZoomed.value && { transition: isDragging.value ? 'none' : 'transform 0.3s ease' }),
+	// <Transition> slide classes control transform & opacity animations.
+	// Disable during drag/pinch so the transform tracks the gesture instantly.
+	...(isZoomed.value && {
+		transition: isDragging.value || isPinching.value ? 'none' : 'transform 0.3s ease',
+	}),
 }))
 
 function resetZoom() {
@@ -167,6 +171,7 @@ let isSwiping = false
 
 function onTouchStart(e) {
 	if (e.touches.length === 2) {
+		isPinching.value = true
 		lastPinchDist = getPinchDistance(e.touches)
 		pinchStartScale = scale.value
 		e.preventDefault()
@@ -216,6 +221,7 @@ function onTouchEnd(e) {
 	}
 	isSwiping = false
 	isDragging.value = false
+	isPinching.value = false
 	lastPinchDist = 0
 }
 
