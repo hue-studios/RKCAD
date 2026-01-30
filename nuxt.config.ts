@@ -144,15 +144,15 @@ export default defineNuxtConfig({
 	},
 
 	directus: {
-		url: 'https://admin.rkcad.com',
-		staticToken: '_TPaidTNn0j4p2GtUCUncNdqW8R8o11n',
+		url: process.env.DIRECTUS_URL || '',
+		staticToken: process.env.DIRECTUS_STATIC_TOKEN,
 	},
 
 	runtimeConfig: {
 		public: {
-			assetsUrl: 'https://admin.rkcad.com/assets/',
-			staticToken: '_TPaidTNn0j4p2GtUCUncNdqW8R8o11n',
-			adminUrl: 'https://admin.rkcad.com',
+			assetsUrl: process.env.DIRECTUS_URL + '/assets/',
+			staticToken: process.env.DIRECTUS_STATIC_TOKEN || '',
+			adminUrl: process.env.DIRECTUS_URL || '',
 			plausible: {
 				domain: 'rkcad.com',
 			},
