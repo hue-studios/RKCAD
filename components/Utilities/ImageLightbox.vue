@@ -21,6 +21,7 @@ const scale = ref(1)
 const translateX = ref(0)
 const translateY = ref(0)
 const isDragging = ref(false)
+const isPinching = ref(false)
 const dragStart = ref({ x: 0, y: 0 })
 const lastTranslate = ref({ x: 0, y: 0 })
 const imageContainer = ref(null)
@@ -46,7 +47,12 @@ const isZoomed = computed(() => scale.value > 1)
 const imageStyle = computed(() => ({
 	transform: `scale(${scale.value}) translate(${translateX.value}px, ${translateY.value}px)`,
 	cursor: isZoomed.value ? 'grab' : 'zoom-in',
-	transition: isDragging.value ? 'none' : 'transform 0.3s ease',
+	// Only apply zoom/pan transition when zoomed — otherwise let Vue's
+	// <Transition> slide classes control transform & opacity animations.
+	// Disable during drag/pinch so the transform tracks the gesture instantly.
+	...(isZoomed.value && {
+		transition: isDragging.value || isPinching.value ? 'none' : 'transform 0.3s ease',
+	}),
 }))
 
 function resetZoom() {
@@ -157,8 +163,15 @@ function getPinchDistance(touches) {
 	return Math.sqrt(dx * dx + dy * dy)
 }
 
+// Swipe navigation state
+const SWIPE_THRESHOLD = 50
+let swipeStartX = 0
+let swipeStartY = 0
+let isSwiping = false
+
 function onTouchStart(e) {
 	if (e.touches.length === 2) {
+		isPinching.value = true
 		lastPinchDist = getPinchDistance(e.touches)
 		pinchStartScale = scale.value
 		e.preventDefault()
@@ -166,6 +179,11 @@ function onTouchStart(e) {
 		isDragging.value = true
 		dragStart.value = { x: e.touches[0].clientX, y: e.touches[0].clientY }
 		lastTranslate.value = { x: translateX.value, y: translateY.value }
+	} else if (e.touches.length === 1 && !isZoomed.value) {
+		// Track swipe start for navigation
+		swipeStartX = e.touches[0].clientX
+		swipeStartY = e.touches[0].clientY
+		isSwiping = true
 	}
 }
 
@@ -187,8 +205,23 @@ function onTouchMove(e) {
 	}
 }
 
-function onTouchEnd() {
+function onTouchEnd(e) {
+	// Detect horizontal swipe for image navigation
+	if (isSwiping && e.changedTouches.length === 1) {
+		const dx = e.changedTouches[0].clientX - swipeStartX
+		const dy = e.changedTouches[0].clientY - swipeStartY
+		// Only navigate if horizontal distance exceeds threshold and is greater than vertical
+		if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+			if (dx < 0) {
+				goNext()
+			} else {
+				goPrev()
+			}
+		}
+	}
+	isSwiping = false
 	isDragging.value = false
+	isPinching.value = false
 	lastPinchDist = 0
 }
 
