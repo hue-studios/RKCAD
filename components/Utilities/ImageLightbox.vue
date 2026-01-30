@@ -282,7 +282,7 @@ onUnmounted(() => {
 					@touchend="onTouchEnd"
 					@dblclick="toggleZoom"
 				>
-					<Transition :name="slideTransitionName" mode="out-in">
+					<Transition :name="slideTransitionName">
 						<img
 							v-if="currentImage"
 							:key="currentIndex"
@@ -545,35 +545,43 @@ onUnmounted(() => {
 	opacity: 0;
 }
 
-/* Slide right (next image) — exits left, enters from right */
+/* Shared: position leaving image absolutely so both can overlap */
+.slide-right-leave-active,
+.slide-left-leave-active {
+	position: absolute;
+}
+
+/* Slide right (next image) — old exits left + fades, new enters from right + fades in */
 .slide-right-enter-active,
 .slide-right-leave-active {
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+		opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slide-right-enter-from {
 	opacity: 0;
-	transform: translateX(60px);
+	transform: translateX(120px);
 }
 
 .slide-right-leave-to {
 	opacity: 0;
-	transform: translateX(-60px);
+	transform: translateX(-120px);
 }
 
-/* Slide left (prev image) — exits right, enters from left */
+/* Slide left (prev image) — old exits right + fades, new enters from left + fades in */
 .slide-left-enter-active,
 .slide-left-leave-active {
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+		opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slide-left-enter-from {
 	opacity: 0;
-	transform: translateX(-60px);
+	transform: translateX(-120px);
 }
 
 .slide-left-leave-to {
 	opacity: 0;
-	transform: translateX(60px);
+	transform: translateX(120px);
 }
 </style>
