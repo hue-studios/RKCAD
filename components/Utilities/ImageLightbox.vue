@@ -25,6 +25,11 @@ const dragStart = ref({ x: 0, y: 0 })
 const lastTranslate = ref({ x: 0, y: 0 })
 const imageContainer = ref(null)
 
+// Transition state
+const isVisible = ref(false)
+const slideDirection = ref('right') // 'right' = next, 'left' = prev
+const isClosing = ref(false)
+
 const MIN_SCALE = 1
 const MAX_SCALE = 4
 const ZOOM_STEP = 0.5
@@ -78,23 +83,37 @@ function toggleZoom() {
 
 function goTo(index) {
 	resetZoom()
+	slideDirection.value = index > currentIndex.value ? 'right' : 'left'
 	currentIndex.value = index
 }
 
 function goPrev() {
 	if (props.images.length === 0) return
 	resetZoom()
+	slideDirection.value = 'left'
 	currentIndex.value = currentIndex.value === 0 ? props.images.length - 1 : currentIndex.value - 1
 }
 
 function goNext() {
 	if (props.images.length === 0) return
 	resetZoom()
+	slideDirection.value = 'right'
 	currentIndex.value = currentIndex.value === props.images.length - 1 ? 0 : currentIndex.value + 1
 }
 
+const slideTransitionName = computed(() => {
+	return slideDirection.value === 'right' ? 'slide-right' : 'slide-left'
+})
+
 function close() {
-	emit('close')
+	isClosing.value = true
+	isVisible.value = false
+}
+
+function onOverlayAfterLeave() {
+	if (isClosing.value) {
+		emit('close')
+	}
 }
 
 // Mouse drag for panning when zoomed
@@ -201,6 +220,9 @@ function onKeydown(e) {
 onMounted(() => {
 	document.addEventListener('keydown', onKeydown)
 	document.body.style.overflow = 'hidden'
+	nextTick(() => {
+		isVisible.value = true
+	})
 })
 
 onUnmounted(() => {
@@ -211,99 +233,104 @@ onUnmounted(() => {
 
 <template>
 	<Teleport to="body">
-		<div class="lightbox-overlay" @wheel.prevent="onWheel">
-			<!-- Backdrop -->
-			<div class="lightbox-backdrop" @click="close" />
+		<Transition name="lightbox-fade" @after-leave="onOverlayAfterLeave">
+			<div v-show="isVisible" class="lightbox-overlay" @wheel.prevent="onWheel">
+				<!-- Backdrop -->
+				<div class="lightbox-backdrop" @click="close" />
 
-			<!-- Top bar -->
-			<div class="lightbox-topbar">
-				<span class="lightbox-counter">
-					{{ currentIndex + 1 }} / {{ images.length }}
-				</span>
-				<div class="lightbox-controls">
+				<!-- Top bar -->
+				<div class="lightbox-topbar">
+					<span class="lightbox-counter">
+						{{ currentIndex + 1 }} / {{ images.length }}
+					</span>
+					<div class="lightbox-controls">
+						<button
+							class="lightbox-btn"
+							title="Zoom out (−)"
+							:disabled="scale <= MIN_SCALE"
+							@click="zoomOut"
+						>
+							<Icon name="heroicons:minus" class="lightbox-icon" />
+						</button>
+						<button
+							class="lightbox-btn"
+							title="Zoom in (+)"
+							:disabled="scale >= MAX_SCALE"
+							@click="zoomIn"
+						>
+							<Icon name="heroicons:plus" class="lightbox-icon" />
+						</button>
+						<button class="lightbox-btn" title="Reset zoom (0)" @click="resetZoom">
+							<Icon name="heroicons:arrows-pointing-out" class="lightbox-icon" />
+						</button>
+						<button class="lightbox-btn lightbox-btn--close" title="Close (Esc)" @click="close">
+							<Icon name="heroicons:x-mark" class="lightbox-icon" />
+						</button>
+					</div>
+				</div>
+
+				<!-- Main image area -->
+				<div
+					ref="imageContainer"
+					class="lightbox-image-area"
+					@pointerdown="onPointerDown"
+					@pointermove="onPointerMove"
+					@pointerup="onPointerUp"
+					@pointerleave="onPointerUp"
+					@touchstart="onTouchStart"
+					@touchmove="onTouchMove"
+					@touchend="onTouchEnd"
+					@dblclick="toggleZoom"
+				>
+					<Transition :name="slideTransitionName" mode="out-in">
+						<img
+							v-if="currentImage"
+							:key="currentIndex"
+							:src="imageUrl + currentImage.directus_files_id.id + '?key=large'"
+							:alt="title + ' Image ' + (currentIndex + 1)"
+							:style="imageStyle"
+							class="lightbox-image"
+							draggable="false"
+						/>
+					</Transition>
+				</div>
+
+				<!-- Navigation arrows -->
+				<button
+					v-if="images.length > 1 && !isZoomed"
+					class="lightbox-nav lightbox-nav--prev"
+					title="Previous image"
+					@click="goPrev"
+				>
+					<Icon name="heroicons:chevron-left" class="lightbox-nav-icon" />
+				</button>
+				<button
+					v-if="images.length > 1 && !isZoomed"
+					class="lightbox-nav lightbox-nav--next"
+					title="Next image"
+					@click="goNext"
+				>
+					<Icon name="heroicons:chevron-right" class="lightbox-nav-icon" />
+				</button>
+
+				<!-- Thumbnail strip -->
+				<div v-if="images.length > 1" class="lightbox-thumbstrip">
 					<button
-						class="lightbox-btn"
-						title="Zoom out (−)"
-						:disabled="scale <= MIN_SCALE"
-						@click="zoomOut"
+						v-for="(img, idx) in images"
+						:key="idx"
+						class="lightbox-thumb"
+						:class="{ 'lightbox-thumb--active': idx === currentIndex }"
+						@click="goTo(idx)"
 					>
-						<Icon name="heroicons:minus" class="lightbox-icon" />
-					</button>
-					<button
-						class="lightbox-btn"
-						title="Zoom in (+)"
-						:disabled="scale >= MAX_SCALE"
-						@click="zoomIn"
-					>
-						<Icon name="heroicons:plus" class="lightbox-icon" />
-					</button>
-					<button class="lightbox-btn" title="Reset zoom (0)" @click="resetZoom">
-						<Icon name="heroicons:arrows-pointing-out" class="lightbox-icon" />
-					</button>
-					<button class="lightbox-btn lightbox-btn--close" title="Close (Esc)" @click="close">
-						<Icon name="heroicons:x-mark" class="lightbox-icon" />
+						<img
+							:src="imageUrl + img.directus_files_id.id + '?key=small'"
+							:alt="title + ' Thumbnail ' + (idx + 1)"
+							draggable="false"
+						/>
 					</button>
 				</div>
 			</div>
-
-			<!-- Main image area -->
-			<div
-				ref="imageContainer"
-				class="lightbox-image-area"
-				@pointerdown="onPointerDown"
-				@pointermove="onPointerMove"
-				@pointerup="onPointerUp"
-				@pointerleave="onPointerUp"
-				@touchstart="onTouchStart"
-				@touchmove="onTouchMove"
-				@touchend="onTouchEnd"
-				@dblclick="toggleZoom"
-			>
-				<img
-					v-if="currentImage"
-					:src="imageUrl + currentImage.directus_files_id.id + '?key=large'"
-					:alt="title + ' Image ' + (currentIndex + 1)"
-					:style="imageStyle"
-					class="lightbox-image"
-					draggable="false"
-				/>
-			</div>
-
-			<!-- Navigation arrows -->
-			<button
-				v-if="images.length > 1 && !isZoomed"
-				class="lightbox-nav lightbox-nav--prev"
-				title="Previous image"
-				@click="goPrev"
-			>
-				<Icon name="heroicons:chevron-left" class="lightbox-nav-icon" />
-			</button>
-			<button
-				v-if="images.length > 1 && !isZoomed"
-				class="lightbox-nav lightbox-nav--next"
-				title="Next image"
-				@click="goNext"
-			>
-				<Icon name="heroicons:chevron-right" class="lightbox-nav-icon" />
-			</button>
-
-			<!-- Thumbnail strip -->
-			<div v-if="images.length > 1" class="lightbox-thumbstrip">
-				<button
-					v-for="(img, idx) in images"
-					:key="idx"
-					class="lightbox-thumb"
-					:class="{ 'lightbox-thumb--active': idx === currentIndex }"
-					@click="goTo(idx)"
-				>
-					<img
-						:src="imageUrl + img.directus_files_id.id + '?key=small'"
-						:alt="title + ' Thumbnail ' + (idx + 1)"
-						draggable="false"
-					/>
-				</button>
-			</div>
-		</div>
+		</Transition>
 	</Teleport>
 </template>
 
@@ -502,5 +529,51 @@ onUnmounted(() => {
 		max-width: 100vw;
 		max-height: calc(100vh - 160px);
 	}
+}
+
+/* Overlay fade in/out */
+.lightbox-fade-enter-active {
+	transition: opacity 0.3s ease;
+}
+
+.lightbox-fade-leave-active {
+	transition: opacity 0.25s ease;
+}
+
+.lightbox-fade-enter-from,
+.lightbox-fade-leave-to {
+	opacity: 0;
+}
+
+/* Slide right (next image) — exits left, enters from right */
+.slide-right-enter-active,
+.slide-right-leave-active {
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-right-enter-from {
+	opacity: 0;
+	transform: translateX(60px);
+}
+
+.slide-right-leave-to {
+	opacity: 0;
+	transform: translateX(-60px);
+}
+
+/* Slide left (prev image) — exits right, enters from left */
+.slide-left-enter-active,
+.slide-left-leave-active {
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-left-enter-from {
+	opacity: 0;
+	transform: translateX(-60px);
+}
+
+.slide-left-leave-to {
+	opacity: 0;
+	transform: translateX(60px);
 }
 </style>
