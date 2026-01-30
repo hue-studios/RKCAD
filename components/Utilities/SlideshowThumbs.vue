@@ -23,6 +23,18 @@ const images = computed(() => {
 })
 
 const imageUrl = 'https://admin.rkcad.com/assets/'
+
+const lightboxOpen = ref(false)
+const lightboxStartIndex = ref(0)
+
+function openLightbox(index) {
+	lightboxStartIndex.value = index
+	lightboxOpen.value = true
+}
+
+function closeLightbox() {
+	lightboxOpen.value = false
+}
 </script>
 <template>
 	<swiper-container
@@ -79,6 +91,7 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 				:src="imageUrl + slide.directus_files_id.id + '?key=large'"
 				:alt="title + ' Image ' + (index + 1)"
 				class="shadow-lg main-image"
+				@click="openLightbox(index)"
 			/>
 		</swiper-slide>
 	</swiper-container>
@@ -138,6 +151,14 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 	>
 		<Icon name="ArrowRight" class="ml-2 arrow-right-icon" />
 	</div>
+
+	<UtilitiesImageLightbox
+		v-if="lightboxOpen"
+		:images="images"
+		:start-index="lightboxStartIndex"
+		:title="title"
+		@close="closeLightbox"
+	/>
 </template>
 
 <style>
@@ -161,6 +182,7 @@ const imageUrl = 'https://admin.rkcad.com/assets/'
 			height: auto;
 			object-fit: contain;
 			object-position: center;
+			cursor: zoom-in;
 		}
 	}
 }
